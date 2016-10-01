@@ -1,0 +1,6 @@
+**/target/
+**/nbproject/
+/CinemApp/CinemApp-ear/src/main/application/META-INF/jboss-app.xml
+**/nb-configuration.xml
+**/lib
+CinemApp/CinemApp-ejb/src/main/resources/META-INF/jboss.xml
