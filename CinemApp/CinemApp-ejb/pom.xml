@@ -19,11 +19,6 @@
             <artifactId>CinemApp-ejb-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!--        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CinemApp-jpa-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CinemApp-jpa</artifactId>
