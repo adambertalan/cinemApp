@@ -31,7 +31,7 @@
         </property>
     </bean>
     
-     <jee:jndi-lookup id="myDataSource" jndi-name="java:/CinemAppJDNI"/>
+     <jee:jndi-lookup id="myDataSource" jndi-name="java:/CinemAppJNDI"/>
    
     <tx:annotation-driven />
     <tx:jta-transaction-manager />
