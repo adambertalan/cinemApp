@@ -2,6 +2,9 @@ package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.io.Serializable;
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -11,6 +14,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.mail.BodyPart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 
 @ManagedBean(name = "emailBean")
 @ViewScoped
@@ -53,12 +59,28 @@ public class EmailSenderBean implements Serializable {
         });
 
         try {
-
+            
+            QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
+            qrCodeGenerator.setQrCodeText(address);
+            qrCodeGenerator.createQRCode();
+            
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
             message.setSubject("Testing Subject");
-            message.setText("Tisztelt címzett!\n\nEz egy teszt üzenet:\n" + text);
+            
+            MimeMultipart multipart = new MimeMultipart("related");
+            BodyPart messageBodyPart = new MimeBodyPart();
+            String htmlText = "<H1>Tisztelt címzett!</H1><p>Emailünkben küldjük a foglaláshoz tartozó QR kódot</p><img src=\"cid:image\">";
+            messageBodyPart.setContent(htmlText,"text/html");
+            multipart.addBodyPart(messageBodyPart);
+            messageBodyPart = new MimeBodyPart();
+            DataSource fileDataSource = new FileDataSource(qrCodeGenerator.image);
+            messageBodyPart.setDataHandler(new DataHandler(fileDataSource));
+            messageBodyPart.setHeader("Content-ID", "<image>");
+            multipart.addBodyPart(messageBodyPart);
+            
+            message.setContent(multipart);
 
             Transport.send(message);
             
