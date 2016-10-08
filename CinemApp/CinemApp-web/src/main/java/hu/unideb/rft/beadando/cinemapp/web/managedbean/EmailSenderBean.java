@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.io.Serializable;
@@ -17,10 +12,6 @@ import javax.mail.internet.MimeMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-/**
- *
- * @author Levente
- */
 @ManagedBean(name = "emailBean")
 @ViewScoped
 public class EmailSenderBean implements Serializable {
@@ -54,8 +45,8 @@ public class EmailSenderBean implements Serializable {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
@@ -65,16 +56,12 @@ public class EmailSenderBean implements Serializable {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(address));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
             message.setSubject("Testing Subject");
-            message.setText("Tisztelt címzett!"
-                    + "\n\nEz egy teszt üzenet:\n"+ text);
+            message.setText("Tisztelt címzett!\n\nEz egy teszt üzenet:\n" + text);
 
             Transport.send(message);
-
-            System.out.println("Done");
-
+            
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
