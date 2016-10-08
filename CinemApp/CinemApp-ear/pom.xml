@@ -11,7 +11,7 @@
     <artifactId>CinemApp-ear</artifactId>
     <packaging>ear</packaging>
 
-    <name>${artifactId}</name>
+    <name>${project.artifactId}</name>
   
     <build>
         <plugins>

@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Project Name</title>
         <meta name="author" content="The Author"></meta>
@@ -44,6 +45,10 @@
                 <p>
                     <a href="https://github.com/TheCoder4eu/BootsFaces-examples/blob/master/src/main/webapp/jumbotron.xhtml" class="btn btn-lg btn-info">View Page Source »</a>
                 </p>
+                <p>Test</p>
+                <ui:repeat var="movie" value="#{movieBean.movies}" >
+                    <p>#{movie.name}</p>
+                </ui:repeat>
             </b:container>
 
         </b:jumbotron>
