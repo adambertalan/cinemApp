@@ -21,7 +21,7 @@
                 <version>2.10.1</version>
                 <configuration>
                     <finalName>CinemApp</finalName>
-                    <defaultJavaBundleDir>lib/</defaultJavaBundleDir>
+                    <defaultJavaBundleDir>lib</defaultJavaBundleDir>
                     <modules>
                         <webModule>
                             <groupId>hu.unideb.rft.beadando</groupId>
@@ -31,6 +31,7 @@
                         <ejbModule>
                             <groupId>hu.unideb.rft.beadando</groupId>
                             <artifactId>CinemApp-ejb</artifactId>
+                            <bundleFileName>CinemApp-ejb</bundleFileName>
                         </ejbModule>
                     </modules>
                 </configuration>
