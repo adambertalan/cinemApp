@@ -40,7 +40,7 @@
             <b:container>
                 <h1>Hello, world!</h1>
                 <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. 
-                   Use it as a starting point to create something more unique.
+                    Use it as a starting point to create something more unique.
                 </p>
                 <p>
                     <a href="https://github.com/TheCoder4eu/BootsFaces-examples/blob/master/src/main/webapp/jumbotron.xhtml" class="btn btn-lg btn-info">View Page Source »</a>
@@ -49,6 +49,16 @@
                 <ui:repeat var="movie" value="#{movieBean.movies}" >
                     <p>#{movie.name}</p>
                 </ui:repeat>
+
+                <h:form>
+                    <h:panelGrid>
+                        <h:outputLabel value="Címzett: " style="font-weight:bold" />
+                        <h:inputText value="#{emailBean.address}" style="color: black"/>
+                        <h:outputLabel value="Szöveg: " style="font-weight:bold" />
+                        <h:inputText value="#{emailBean.text}" style="color: black"/>
+                        <h:commandButton value="Küldés" action="#{emailBean.sendEmail()}"/>
+                    </h:panelGrid>
+                </h:form>
             </b:container>
 
         </b:jumbotron>
@@ -57,25 +67,25 @@
                 <b:column col-md="4">
                     <h2>Heading</h2>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
-                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
                     <p><b:button outcome="" value="View details »"/></p>
                 </b:column>
                 <b:column col-md="4">
                     <h2>Heading</h2>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
-                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
                     <p><b:button outcome="" value="View details »"/></p>
                 </b:column>
                 <b:column col-md="4">
                     <h2>Heading</h2>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
-                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
                     <p><b:button outcome="" value="View details »"/></p>
                 </b:column>
             </b:row>
             <hr/>
             <footer>
-            <p>© Company 2014</p>
+                <p>© Company 2014</p>
             </footer>
         </b:container>
 
