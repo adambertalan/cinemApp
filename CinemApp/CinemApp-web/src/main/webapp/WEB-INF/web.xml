@@ -54,6 +54,12 @@
         <welcome-file>index.jsf</welcome-file>
     </welcome-file-list>
     
+    <ejb-local-ref>
+		<ejb-ref-name>ejb.MovieService</ejb-ref-name>
+		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService</local>
+	</ejb-local-ref>
+    
+    
     <session-config>
         <session-timeout>
             30

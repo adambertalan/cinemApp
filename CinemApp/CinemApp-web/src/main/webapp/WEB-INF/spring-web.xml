@@ -21,10 +21,10 @@
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:component-scan base-package="hu.unideb.rft.beadando.cinemapp.web" />
-   
-    <import resource="classpath*:spring-ejb.xml" />
-    <import resource="classpath*:spring-jpa.xml" />
+    
+    <jee:local-slsb id="movieService" 
+    	jndi-name="ejb.MovieService"
+		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService" />
 
-    <tx:annotation-driven/>
 
 </beans>

@@ -17,12 +17,14 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>CinemApp-ejb-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CinemApp-ejb</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>${project.groupId}</groupId> -->
+<!--             <artifactId>CinemApp-ejb</artifactId> -->
+<!--             <version>${project.version}</version> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>

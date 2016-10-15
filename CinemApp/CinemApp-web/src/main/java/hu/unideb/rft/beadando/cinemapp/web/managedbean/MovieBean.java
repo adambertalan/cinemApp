@@ -5,50 +5,43 @@
 */
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
-import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
-import hu.unideb.rft.beadando.cinemapp.ejb.api.vo.MovieVo;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.jsf.FacesContextUtils;
 
-//@Component
+import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
+
 @ManagedBean(name="movieBean")
-@ViewScoped
-
-//@Component
-//@ManagedBean(name="movieBean")
-//@SessionScoped
-//@Component
-//@Scope(value="request")
-public class MovieBean implements Serializable{
+@SessionScoped
+public class MovieBean {
     
-//    @ManagedProperty("#{movieService}")
-//    @Autowired
-    @Autowired
-//    @ManagedProperty(value = "#{movieService}")
-    MovieService movieService;
+    @EJB
+    private MovieService movieService;
 
-    public MovieService getMovieService() {
+    public MovieService getMovieService() {	
         return movieService;
     }
-
-//    public void setMovieService(MovieService movieService) {
-//        this.movieService = movieService;
-//    }
     
-    private List<MovieVo> movies;
+	public void setMovieService(MovieService movieService) {
+		this.movieService = movieService;
+	}
     
-    public List<MovieVo> getMovies() {
+    private List<Movie> movies;
+    
+    public List<Movie> getMovies() {
         return movies;
     }
     
-    public void setMovies(List<MovieVo> movies) {
+
+    
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
     
@@ -58,6 +51,8 @@ public class MovieBean implements Serializable{
             .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
             .getAutowireCapableBeanFactory().autowireBean(this);
         movies = movieService.findAllMovies();
+        System.out.println("Movies :" + movies);
     }
+
     
 }

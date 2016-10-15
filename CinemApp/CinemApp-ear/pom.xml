@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    
-    <parent>
-        <groupId>hu.unideb.rft.beadando</groupId>
-        <artifactId>CinemApp</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>CinemApp-ear</artifactId>
-    <packaging>ear</packaging>
+	<parent>
+		<groupId>hu.unideb.rft.beadando</groupId>
+		<artifactId>CinemApp</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-    <name>${project.artifactId}</name>
-  
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ear-plugin</artifactId>
-                <version>2.10.1</version>
-                <configuration>
-                    <finalName>CinemApp</finalName>
-                    <defaultJavaBundleDir>lib</defaultJavaBundleDir>
-                    <modules>
-                        <webModule>
-                            <groupId>hu.unideb.rft.beadando</groupId>
-                            <artifactId>CinemApp-web</artifactId>
-                            <contextRoot>/CinemApp</contextRoot>
-                        </webModule>
-                        <ejbModule>
-                            <groupId>hu.unideb.rft.beadando</groupId>
-                            <artifactId>CinemApp-ejb</artifactId>
-                            <bundleFileName>CinemApp-ejb</bundleFileName>
-                        </ejbModule>
-                    </modules>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CinemApp-ejb</artifactId>
-            <version>${project.version}</version>
-            <type>ejb</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CinemApp-web</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
-        </dependency>
-    </dependencies>
+	<artifactId>CinemApp-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<name>${project.artifactId}</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>CinemApp-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>CinemApp-ejb-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>CinemApp-web</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>CinemApp-jpa</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<version>7</version>
+					<finalName>CinemApp</finalName>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<fileNameMapping>no-version</fileNameMapping>
+<!-- 					<modules> -->
+<!-- 						<webModule> -->
+<!-- 							<groupId>hu.unideb.rft.beadando</groupId> -->
+<!-- 							<artifactId>CinemApp-web</artifactId> -->
+<!-- 							<contextRoot>/CinemApp</contextRoot> -->
+<!-- 						</webModule> -->
+<!-- 						<ejbModule> -->
+<!-- 							<groupId>hu.unideb.rft.beadando</groupId> -->
+<!-- 							<artifactId>CinemApp-ejb</artifactId> -->
+<!-- 						</ejbModule> -->
+<!-- 					</modules> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

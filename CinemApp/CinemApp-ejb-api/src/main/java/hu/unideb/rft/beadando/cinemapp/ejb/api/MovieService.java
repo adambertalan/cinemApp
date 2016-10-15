@@ -1,9 +1,13 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.api;
 
-import hu.unideb.rft.beadando.cinemapp.ejb.api.vo.MovieVo;
 import java.util.List;
 
+import javax.ejb.Local;
+
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
+
+@Local
 public interface MovieService {
-    
-    List<MovieVo> findAllMovies();
+
+	public List<Movie> findAllMovies();
 }

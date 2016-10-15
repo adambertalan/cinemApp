@@ -1,34 +1,30 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.impl;
 
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
+
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
-import hu.unideb.rft.beadando.cinemapp.ejb.api.vo.MovieVo;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.MovieRepository;
-import java.util.ArrayList;
-import java.util.List;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Stateless
+@Transactional(value = TxType.REQUIRED)
+@Interceptors({ SpringBeanAutowiringInterceptor.class })
 public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
     
-    @Override
-    public List<MovieVo> findAllMovies() {
+    public List<Movie> findAllMovies() {
         List<Movie> allMovie = movieRepository.findAll();
-        List<MovieVo> allMovieVo = new ArrayList<>();
-        
-        ModelMapper mapper = new ModelMapper();
-        for (Movie movie : allMovie) {
-            allMovieVo.add( mapper.map(movie, MovieVo.class));
-        }
-        return allMovieVo;
+        return allMovie;
     }
     
 }
