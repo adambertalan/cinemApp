@@ -1,13 +1,13 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
-/**
- * Created by root on 2016. 10. 17..
- */
-public class Seat extends BaseName{
+import javax.persistence.Entity;
+
+@Entity
+public class Seat extends BaseName {
 
     private boolean occupied;
-    private Integer row;
-    private Integer column;
+    private Integer seatRow;
+    private Integer seatColumn;
 
     public boolean isOccupied() {
         return occupied;
@@ -17,34 +17,20 @@ public class Seat extends BaseName{
         this.occupied = occupied;
     }
 
-    public Integer getRow() {
-        return row;
-    }
+	public Integer getSeatRow() {
+		return seatRow;
+	}
 
-    public void setRow(Integer row) {
-        this.row = row;
-    }
+	public void setSeatRow(Integer seatRow) {
+		this.seatRow = seatRow;
+	}
 
-    public Integer getColumn() {
-        return column;
-    }
+	public Integer getSeatColumn() {
+		return seatColumn;
+	}
 
-    public void setColumn(Integer column) {
-        this.column = column;
-    }
+	public void setSeatColumn(Integer seatColumn) {
+		this.seatColumn = seatColumn;
+	}
 
-    @Override
-    public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return super.equals(object); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
-    }
 }

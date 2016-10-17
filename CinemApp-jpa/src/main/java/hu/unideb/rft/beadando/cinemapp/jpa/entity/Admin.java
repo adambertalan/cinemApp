@@ -1,11 +1,9 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
 
-/**
- * Created by root on 2016. 10. 17..
- */
-public class Admin extends BaseName{
+@Entity
+public class Admin extends BaseName {
 
     private String username;
     private String password;
@@ -24,20 +22,5 @@ public class Admin extends BaseName{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return super.equals(object); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 }
