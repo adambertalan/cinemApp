@@ -8,3 +8,5 @@ CinemApp/CinemApp-ejb/src/main/resources/META-INF/jboss.xml
 **/.settings
 **/.classpath
 **/.metadata/
+.idea
+*/*.iml
