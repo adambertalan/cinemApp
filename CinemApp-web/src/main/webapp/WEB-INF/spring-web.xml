@@ -26,5 +26,8 @@
     	jndi-name="ejb.MovieService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService" />
 
+    <jee:local-slsb id="loginService" 
+    	jndi-name="ejb.LoginService"
+		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService" />
 
 </beans>

@@ -59,6 +59,10 @@
 		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService</local>
 	</ejb-local-ref>
     
+    <ejb-local-ref>
+		<ejb-ref-name>ejb.LoginService</ejb-ref-name>
+		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService</local>
+	</ejb-local-ref>
     
     <session-config>
         <session-timeout>

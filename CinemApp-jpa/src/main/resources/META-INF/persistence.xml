@@ -5,15 +5,23 @@
         <jta-data-source>java:jboss/datasources/CinemAppDS</jta-data-source>
     
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Admin</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Rating</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Theatre</class>
     
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/CinemAppDB"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="adamtakeow"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+<!--             <property name="javax.persistence.schema-generation.database.action" value="create"/> -->
             <property name="hibernate.transaction.jta.platform"
                       value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
 
         </properties>
     </persistence-unit>
