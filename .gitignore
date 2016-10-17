@@ -10,3 +10,4 @@ CinemApp/CinemApp-ejb/src/main/resources/META-INF/jboss.xml
 **/.metadata/
 .idea
 *.iml
+out/
