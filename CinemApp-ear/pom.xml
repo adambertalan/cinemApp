@@ -48,7 +48,7 @@
 					<version>7</version>
 					<finalName>CinemApp</finalName>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<fileNameMapping>no-version</fileNameMapping>
+					<fileNameMapping>standard</fileNameMapping>
 <!-- 					<modules> -->
 <!-- 						<webModule> -->
 <!-- 							<groupId>hu.unideb.rft.beadando</groupId> -->
