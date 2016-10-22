@@ -1,5 +1,6 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +12,7 @@ import hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService;
 
 @ManagedBean(name = "login")
 @SessionScoped
-public class Login {
+public class LoginBean {
 	
 	@EJB
 	private LoginService loginService;
@@ -19,6 +20,8 @@ public class Login {
 	private String username;
 	private String password;
 	private String message;
+	
+	private Boolean loggedIn;
 
 	public String getUsername() {
 		return username;
@@ -43,12 +46,19 @@ public class Login {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	@PostConstruct
+	public void init() {
+		this.loggedIn = false;
+	}
 
 	public String loginUser(){
 		boolean valid = loginService.validate(username, password);
 		if (valid) {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 			session.setAttribute("username", username);
+			System.out.println("Login Success");
+			loggedIn = true;
 			return "admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
@@ -56,6 +66,8 @@ public class Login {
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Incorrect Username and Passowrd",
 							"Please enter correct username and Password"));
+			System.out.println("Login Failed");
+			loggedIn = false;
 			return "login";
 		}
 	}
@@ -73,5 +85,13 @@ public class Login {
 
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
+	}
+
+	public Boolean getLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(Boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 }

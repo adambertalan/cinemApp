@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<!--       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
+    <h:head>
+        <title>Sign In Template for BootsFaces</title>
+        <meta name="author" content="Riccardo Massera"></meta>
+    </h:head>
+    <h:body style="padding-top: 60px; background-color: #add;">
+        <b:container>
+            <h:form styleClass="form-signin" prependId="false">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <b:inputText id="username" placeholder="username" value="#{login.username}">
+                    <f:facet name="prepend">
+                        <b:icon name="user" />
+                    </f:facet>
+                </b:inputText>
+                <b:inputText id="password" placeholder="password" type="password" value="#{login.password}">
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key" />
+                    </f:facet>
+                </b:inputText>
+                <b:selectBooleanCheckbox value="true" caption="remember me"/>
+                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in"/>
+            </h:form>
+        </b:container>
+    </h:body>
+</html>
