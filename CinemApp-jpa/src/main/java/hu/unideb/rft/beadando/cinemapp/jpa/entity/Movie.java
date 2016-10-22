@@ -1,6 +1,10 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Movie extends BaseName {
@@ -9,10 +13,21 @@ public class Movie extends BaseName {
     
     private Integer ageLimit;
 
-    //In secundums or.. we'll decide.
+    // Hossz percben
     private Integer length;
+    
+    // film kezdete
+    private Timestamp startTime;
+    // film vége
+    private Timestamp endTime;
+    
+    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    private Genre genre;
+    
+    // melyik teremben adják
+    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    private Theatre theatre;
 
-//    private List<String> producers;
 
     public Integer getLength() {
         return length;
@@ -21,14 +36,6 @@ public class Movie extends BaseName {
     public void setLength(Integer length) {
         this.length = length;
     }
-
-//    public List<String> getProducers() {
-//        return producers;
-//    }
-//
-//    public void setProducers(List<String> producers) {
-//        this.producers = producers;
-//    }
 
     public Integer getRating() {
         return rating;
@@ -44,5 +51,37 @@ public class Movie extends BaseName {
 
     public void setAgeLimit(Integer ageLimit) {
         this.ageLimit = ageLimit;
-    }    
+    }
+
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	public Theatre getTheatre() {
+		return theatre;
+	}
+
+	public void setTheatre(Theatre theatre) {
+		this.theatre = theatre;
+	}    
 }

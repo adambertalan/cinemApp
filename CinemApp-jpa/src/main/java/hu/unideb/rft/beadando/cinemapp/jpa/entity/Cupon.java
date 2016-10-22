@@ -1,23 +1,28 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 public class Cupon extends BaseName {
 
-    //Maybe create an enum for this later..
-    private Integer type;
+	@Enumerated(EnumType.STRING)
+    private CuponType type;
+    
     private boolean used;
-    private Date startOfValidity;
-    private Date endOfValidity;
+    
+    private Timestamp startOfValidity;
+    
+    private Timestamp endOfValidity;
 
-    public Integer getType() {
+    public CuponType getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(CuponType type) {
         this.type = type;
     }
 
@@ -29,20 +34,19 @@ public class Cupon extends BaseName {
         this.used = used;
     }
 
-    public Date getStartOfValidity() {
-        return startOfValidity;
-    }
+	public Timestamp getStartOfValidity() {
+		return startOfValidity;
+	}
 
-    public void setStartOfValidity(Date startOfValidity) {
-        this.startOfValidity = startOfValidity;
-    }
+	public void setStartOfValidity(Timestamp startOfValidity) {
+		this.startOfValidity = startOfValidity;
+	}
 
-    public Date getEndOfValidity() {
-        return endOfValidity;
-    }
+	public Timestamp getEndOfValidity() {
+		return endOfValidity;
+	}
 
-    public void setEndOfValidity(Date endOfValidity) {
-        this.endOfValidity = endOfValidity;
-    }
-
+	public void setEndOfValidity(Timestamp endOfValidity) {
+		this.endOfValidity = endOfValidity;
+	}
 }
