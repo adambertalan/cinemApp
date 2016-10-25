@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>CinemApp - Főoldal</title>
+        <meta name="author" content=""></meta>
+        <link href="styles/style.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body styleClass="bodystyle">
+        <b:navBar brand="CinemApp" brandHref="#" fixed="top" brandImg="images/logo.png" brandImgStyle="height: 25px" style="background: #00494c;">
+            <b:navbarLinks>
+                <b:navLink value="FŐOLDAL" href="index.jsf"></b:navLink>
+                <b:navLink value="FILMEK" href="filmek.jsf"></b:navLink>
+                <b:navLink value="GYIK" href="gyik.jsf"></b:navLink>
+                <b:navLink value="KAPCSOLAT" href="kapcsolat.jsf"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+        <b:jumbotron styleClass="content">
+            <b:container styleClass="content">
+                <h1 style="color: white;">Üdvözöl a CinemApp</h1>
+                <b:carousel class="carousel">
+                    <b:carouselItem>
+                        <div id="slide">
+                            <img class="slideimg" src="images/masterminds.jpg" />
+                            <img class="slideimg" src="images/inferno.jpg" />
+                        </div>
+                    </b:carouselItem>
+                    <b:carouselItem >
+                        <div id="slide">
+                            <img class="slideimg" src="images/snowden.jpg" />
+                            <img class="slideimg" src="images/stbeyond.jpg" />
+                        </div>
+                    </b:carouselItem>
+                </b:carousel>
+            </b:container>
+        </b:jumbotron>
+        <footer>
+            <div style="text-align: center;">
+                <p style="color:white;">© 2016 by FourFire Team</p>
+            </div>
+        </footer>
+    </h:body>
+</html>

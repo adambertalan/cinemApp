@@ -3,9 +3,10 @@ package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Theatre extends BaseName {
+public class Theatre extends BaseId {
 
     private Integer theatreNumber;
+    
     private Integer capacity;
 
     public Integer getTheatreNumber() {
