@@ -12,6 +12,8 @@ public class Movie extends BaseName {
     private Integer rating;
     
     private Integer ageLimit;
+    
+    private String description;
 
     // Hossz percben
     private Integer length;
@@ -83,5 +85,13 @@ public class Movie extends BaseName {
 
 	public void setTheatre(Theatre theatre) {
 		this.theatre = theatre;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}    
 }

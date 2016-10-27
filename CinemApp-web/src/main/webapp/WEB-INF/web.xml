@@ -1,83 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
             /WEB-INF/spring-web.xml
         </param-value>
-    </context-param>
-    
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>hu.unideb.rft.beadando.cinemapp.web.filter.LoginFilter</filter-class>
-    </filter>
-    
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/secured/*</url-pattern>
-    </filter-mapping>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener>
-    
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Production</param-value>
-    </context-param>
-    
-    <!-- The BootsFaces_THEME context-param controls the loading of the Themes -->
-    <!-- The default is Bootstrap, the valid values are a Bootswach Theme name (lowercase) or "custom".
-    If custom is chosen, you will have to provide your custom CSS in the "other" folder. -->
-    <context-param>
-        <param-name>BootsFaces_THEME</param-name>
-        <param-value>darkly</param-value>
-    </context-param>
-    <!-- The BootsFaces_USETHEME context-param controls the loading of the bootstrap-theme.css -->
-    <!-- The default is false, when set to true the bootstrap-theme.css will be loaded -->
-    <context-param>
-        <param-name>BootsFaces_USETHEME</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
-        <param-value>false</param-value>
-    </context-param>
-    
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>Faces Servlet</servlet-name>
-    	<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-    <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
-    </welcome-file-list>
-    
-    <ejb-local-ref>
-		<ejb-ref-name>ejb.MovieService</ejb-ref-name>
-		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService</local>
-	</ejb-local-ref>
-    
-    <ejb-local-ref>
-		<ejb-ref-name>ejb.LoginService</ejb-ref-name>
-		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService</local>
-	</ejb-local-ref>
-    
-    <session-config>
-        <session-timeout>
-            1
-        </session-timeout>
-    </session-config>
+  </context-param>
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>hu.unideb.rft.beadando.cinemapp.web.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/secured/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Production</param-value>
+  </context-param>
+  <context-param>
+    <param-name>BootsFaces_THEME</param-name>
+    <param-value>darkly</param-value>
+  </context-param>
+  <context-param>
+    <param-name>BootsFaces_USETHEME</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
+  <ejb-local-ref>
+    <ejb-ref-name>ejb.MovieService</ejb-ref-name>
+    <local>hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService</local>
+  </ejb-local-ref>
+  <ejb-local-ref>
+    <ejb-ref-name>ejb.LoginService</ejb-ref-name>
+    <local>hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService</local>
+  </ejb-local-ref>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
 </web-app>
