@@ -11,6 +11,8 @@ public class Movie extends BaseName {
    
     private Integer rating;
     
+    private String movieCode;
+    
     private Integer ageLimit;
     
     private String description;
@@ -18,17 +20,8 @@ public class Movie extends BaseName {
     // Hossz percben
     private Integer length;
     
-    // film kezdete
-    private Timestamp startTime;
-    // film vége
-    private Timestamp endTime;
-    
     @ManyToOne(fetch=FetchType.LAZY, optional=false)
     private Genre genre;
-    
-    // melyik teremben adják
-    @ManyToOne(fetch=FetchType.LAZY, optional=false)
-    private Theatre theatre;
 
 
     public Integer getLength() {
@@ -55,22 +48,6 @@ public class Movie extends BaseName {
         this.ageLimit = ageLimit;
     }
 
-	public Timestamp getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
-	}
-
-	public Timestamp getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
-	}
-
 	public Genre getGenre() {
 		return genre;
 	}
@@ -79,19 +56,19 @@ public class Movie extends BaseName {
 		this.genre = genre;
 	}
 
-	public Theatre getTheatre() {
-		return theatre;
-	}
-
-	public void setTheatre(Theatre theatre) {
-		this.theatre = theatre;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getMovieCode() {
+		return movieCode;
+	}
+
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
 	}    
 }

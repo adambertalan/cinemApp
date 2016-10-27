@@ -11,7 +11,7 @@ public class Appointment extends BaseId {
 	private Guest guest;
 	
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
-	private Movie movie;
+	private MovieShow movieShow;
 	
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	private Seat seat;
@@ -24,12 +24,12 @@ public class Appointment extends BaseId {
 		this.guest = guest;
 	}
 
-	public Movie getMovie() {
-		return movie;
+	public MovieShow getMovieShow() {
+		return movieShow;
 	}
 
-	public void setMovie(Movie movie) {
-		this.movie = movie;
+	public void setMovieShow(MovieShow movieShow) {
+		this.movieShow = movieShow;
 	}
 
 	public Seat getSeat() {
