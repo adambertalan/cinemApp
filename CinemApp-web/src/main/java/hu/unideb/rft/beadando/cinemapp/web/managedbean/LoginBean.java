@@ -1,10 +1,13 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +15,7 @@ import hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService;
 
 @ManagedBean(name = "login")
 @SessionScoped
-public class LoginBean {
+public class LoginBean{
 	
 	@EJB
 	private LoginService loginService;
@@ -52,13 +55,15 @@ public class LoginBean {
 		this.loggedIn = false;
 	}
 
-	public String loginUser(){
+	public String loginUser() throws IOException{
 		boolean valid = loginService.validate(username, password);
 		if (valid) {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 			session.setAttribute("username", username);
 			System.out.println("Login Success");
 			loggedIn = true;
+			ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+			ctx.redirect("./index.xhtml");
 			return "admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
@@ -68,6 +73,9 @@ public class LoginBean {
 							"Please enter correct username and Password"));
 			System.out.println("Login Failed");
 			loggedIn = false;
+			FacesContext fCtx = FacesContext.getCurrentInstance();
+			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Incorrect username or password!", "Your login skills are bad so you should feel bad..");
+			fCtx.addMessage("password", fm);
 			return "login";
 		}
 	}
