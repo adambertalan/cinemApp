@@ -24,9 +24,9 @@
                         <b:iconAwesome name="key" />
                     </f:facet>
                 </b:inputText>
+                <b:message for="password"/>
                 <b:selectBooleanCheckbox value="true" caption="remember me"/>
-                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in"/>
-                <b:label text="#{login.loggedIn}"></b:label>
+                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in"/>                
             </h:form>
         </b:container>
     </h:body>
