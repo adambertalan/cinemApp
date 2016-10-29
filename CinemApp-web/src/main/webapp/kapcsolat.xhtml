@@ -11,11 +11,15 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>CinemApp - Főoldal</title>
+        <title>CinemApp - Kapcsolat</title>
         <meta name="author" content=""></meta>
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
     </h:head>
+    
+    <!--body-->
     <h:body styleClass="bodystyle">
+        
+        <!--header-->
         <b:navBar brand="CinemApp" brandHref="#" fixed="top" brandImg="images/logo.png" brandImgStyle="height: 25px" style="background: #00494c;">
             <b:navbarLinks>
                 <b:navLink value="FŐOLDAL" href="index.jsf"></b:navLink>
@@ -24,10 +28,14 @@ and open the template in the editor.
                 <b:navLink value="KAPCSOLAT" href="kapcsolat.jsf"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
+        
+        <!--content-->
         <b:jumbotron styleClass="content">
             <b:container styleClass="content">
                 <h1 style="color: white;">Kapcsolat</h1>
                 <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+                    
+                    <!--map and addresses-->
                     <b:row>
                         <b:column col-md="8">
                             <div style="margin-top: 10px; text-align: center; min-height: 400px;">
@@ -50,6 +58,9 @@ and open the template in the editor.
                             </p>
                         </b:column>
                     </b:row>
+                    
+                    <!--TODO - elérni, hogy gombnyomásra emailt küldjünk az email címünkkel az email címünkre, tartalmazva ezeket az adatokat (cinemapp.fft@gmail.com)-->
+                    <!--TODO - elérni, hogy validáljon valamilyen szinten mindent amit beírnak, és ha valami nincs megadva, dobjon egy alertet-->
                     <b:row style="margin-top: 30px;">
                         <h2 style="text-align: center;">Írj Nekünk</h2>
                         <b:column>
@@ -57,15 +68,13 @@ and open the template in the editor.
                             <b:inputTextarea rows="1" id="email" value="Email" required="true"  />
                             <b:inputTextarea rows="1" id="subject" value="Tárgy" required="true"  />
                             <b:inputTextarea rows="4" id="message" value="Üzenet" required="true" />
-                            <b:message for="name"/>
-                            <b:message for="email"/>
-                            <b:message for="subject"/>
-                            <b:message for="message"/>
                         </b:column>
                     </b:row>
                 </b:column>
             </b:container>
         </b:jumbotron>
+        
+        <!--footer-->
         <footer>
             <div style="text-align: center;">
                 <p style="color:white;">© 2016 by FourFire Team</p>

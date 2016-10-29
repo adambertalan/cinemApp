@@ -10,11 +10,15 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>CinemApp - Főoldal</title>
+        <title>CinemApp - GYIK</title>
         <meta name="author" content=""></meta>
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
     </h:head>
+    
+    <!--body-->
     <h:body styleClass="bodystyle">
+        
+        <!--header-->
         <b:navBar brand="CinemApp" brandHref="#" fixed="top" brandImg="images/logo.png" brandImgStyle="height: 25px" style="background: #00494c;">
             <b:navbarLinks>
                 <b:navLink value="FŐOLDAL" href="index.jsf"></b:navLink>
@@ -23,16 +27,22 @@ and open the template in the editor.
                 <b:navLink value="KAPCSOLAT" href="kapcsolat.jsf"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
+        
+        <!--content-->
         <b:jumbotron styleClass="content">
             <b:container styleClass="content">
                 <h1 style="color: white;">Gyakran Ismételt Kérdések</h1>
                 <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c; padding: 10px;">
-                    <b:panel class="panel" look="success" title="Item 1">Content 1</b:panel>
+                    <!--TODO - létrehozni az adatbázisban egy gyik táblát kérdésekkel és válaszokkal, és ahhoz lekérdező osztályokat, stb.-->
+                    <!--TODO - lekérdezni az adatbázisból a kérdéseket (title) és válaszokat (content)-->
+                    <b:panel class="panel" look="success" title="Item 1" >Content 1</b:panel>
                     <b:panel class="panel" look="success" title="Item 2">Content 2</b:panel>
                     <b:panel class="panel" look="success" title="Item 3">Content 3</b:panel>
                 </b:column>
             </b:container>
         </b:jumbotron>
+        
+        <!--footer-->
         <footer>
             <div style="text-align: center;">
                 <p style="color:white;">© 2016 by FourFire Team</p>

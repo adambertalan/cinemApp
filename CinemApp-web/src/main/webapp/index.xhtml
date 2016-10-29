@@ -17,7 +17,11 @@ logomakr.com/1XREUq
         <meta name="author"></meta>
         <link href="styles/style.css" rel="stylesheet" type="text/css" />
     </h:head>
+    
+    <!--body-->
     <h:body styleClass="bodystyle">
+        
+        <!--header-->
         <b:navBar brand="CinemApp" brandHref="#" fixed="top"
                   brandImg="images/logo.png" brandImgStyle="height: 25px"
                   style="background: #00494c;">
@@ -27,13 +31,15 @@ logomakr.com/1XREUq
                 <b:navLink value="GYIK" href="gyik.jsf"></b:navLink>
                 <b:navLink value="KAPCSOLAT" href="kapcsolat.jsf"></b:navLink>
             </b:navbarLinks>
-
         </b:navBar>
+        
         <!-- TODO ezzel fogunk navigálni a loginra -->
         <h:form class="loginform">
             <b:commandButton action="login" value="Login" look="success"
                              icon="chevron-right" iconAlign="right" />
         </h:form>
+        
+        <!--content-->
         <b:jumbotron styleClass="content">
             <b:container styleClass="content">
                 <h1 style="color: white;">Üdvözöl a CinemApp</h1>
@@ -53,6 +59,8 @@ logomakr.com/1XREUq
                 </b:carousel>
             </b:container>
         </b:jumbotron>
+        
+        <!--footer-->
         <footer>
             <div style="text-align: center;">
                 <p style="color: white;">© 2016 by FourFire Team</p>

@@ -10,11 +10,15 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>CinemApp - Főoldal</title>
+        <title>CinemApp - Filmek</title>
         <meta name="author" content=""></meta>
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
     </h:head>
+    
+    <!--body-->
     <h:body styleClass="bodystyle">
+        
+        <!--header-->
         <b:navBar brand="CinemApp" brandHref="#" fixed="top" brandImg="images/logo.png" brandImgStyle="height: 25px" style="background: #00494c;">
             <b:navbarLinks>
                 <b:navLink value="FŐOLDAL" href="index.jsf"></b:navLink>
@@ -23,10 +27,15 @@ and open the template in the editor.
                 <b:navLink value="KAPCSOLAT" href="kapcsolat.jsf"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
+        
+        <!--content-->
         <b:jumbotron styleClass="content">
             <b:container styleClass="content">
                 <h1 style="color: white;">Filmek</h1>
                 <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+                    
+                    <!--films list in an table-->
+                    <!--TODO - filmek listázása adatbázisból-->
                     <b:row>
                         <b:column col-md="6">
                             <div style="text-align: center;">
