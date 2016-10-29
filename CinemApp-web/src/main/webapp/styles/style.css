@@ -10,7 +10,7 @@ and open the template in the editor.
 
 .bodystyle{
     /*background-color: #7ebaba;*/
-    background: #ACD4B5; 
+    background: #ACD4B5;
     padding-top: 50px; 
     padding-bottom: 20px;
 }
@@ -21,6 +21,14 @@ and open the template in the editor.
 
 b:navbar{
     background-color: #00494c;
+}
+
+.loginform{
+    display: block;
+    background: #68BB98; 
+    right: 0;
+    padding: 5px;
+    text-align: right;
 }
 
 footer{
@@ -35,12 +43,15 @@ footer{
 }
 
 .content{
+    display: block;
+    padding: 0;
     background: #68BB98; 
     background: -webkit-linear-gradient(#68BB98,#ACD4B5);
     background: -o-linear-gradient(#68BB98,#ACD4B5); 
     background: -moz-linear-gradient(#68BB98,#ACD4B5); 
     background: linear-gradient(#68BB98,#ACD4B5);
-    width: 100%
+    width: 100%;    
+    height: 100%;
 }
 
 .navbar{
@@ -68,6 +79,13 @@ footer{
 
 #slide{
     text-align: center;
+}
+
+.panel{
+    width: 90%;
+    margin: auto;
+    background: #e9ffff;
+    background-color: #e9ffff;
 }
 
 h1{

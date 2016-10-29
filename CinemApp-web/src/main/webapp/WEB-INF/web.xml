@@ -26,7 +26,7 @@
   </context-param>
   <context-param>
     <param-name>BootsFaces_THEME</param-name>
-    <param-value>darkly</param-value>
+    <param-value>flatly</param-value>
   </context-param>
   <context-param>
     <param-name>BootsFaces_USETHEME</param-name>
