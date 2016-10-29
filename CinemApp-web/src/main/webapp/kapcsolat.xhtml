@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>CinemApp - Főoldal</title>
         <meta name="author" content=""></meta>
@@ -25,21 +26,44 @@ and open the template in the editor.
         </b:navBar>
         <b:jumbotron styleClass="content">
             <b:container styleClass="content">
-                <h1 style="color: white;">Üdvözöl a CinemApp</h1>
-                <b:carousel class="carousel">
-                    <b:carouselItem>
-                        <div id="slide">
-                            <img class="slideimg" src="images/masterminds.jpg" />
-                            <img class="slideimg" src="images/inferno.jpg" />
-                        </div>
-                    </b:carouselItem>
-                    <b:carouselItem >
-                        <div id="slide">
-                            <img class="slideimg" src="images/snowden.jpg" />
-                            <img class="slideimg" src="images/stbeyond.jpg" />
-                        </div>
-                    </b:carouselItem>
-                </b:carousel>
+                <h1 style="color: white;">Kapcsolat</h1>
+                <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+                    <b:row>
+                        <b:column col-md="8">
+                            <div style="margin-top: 10px; text-align: center; min-height: 400px;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.884412503494!2d21.631034768645723!3d47.542723287465606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8426ebc782bcb06b!2sDebreceni+Egyetem+Informatikai+Kar!5e0!3m2!1shu!2shu!4v1477749859235" 
+                                        width="100%" height="400px" frameborder="0" style="max-width: 640px; max-height: 400px; margin: auto; border-width: 1px; border-color: #00494c;" allowfullscreen="true"></iframe>
+                            </div>
+                        </b:column>
+                        <b:column col-md="4">
+                            <div style="text-align: center; margin-bottom: 20px;margin-top: 10px;">
+                                <h2>CinemApp</h2>
+                            </div>
+                            <p style="margin: auto; text-align: center">
+                                4028 Debrecen<br/>
+                                Kassai út 26.<br/>
+                            </p>
+                            <p style="margin: auto; text-align: center">
+                                cinemapp.fft@gmail.com<br/>
+                                Tel: 01-23-456-7891<br/>
+                                Fax: 01-23-456-7891
+                            </p>
+                        </b:column>
+                    </b:row>
+                    <b:row style="margin-top: 30px;">
+                        <h2 style="text-align: center;">Írj Nekünk</h2>
+                        <b:column>
+                            <b:inputTextarea rows="1" id="name" value="Név" required="true" />
+                            <b:inputTextarea rows="1" id="email" value="Email" required="true"  />
+                            <b:inputTextarea rows="1" id="subject" value="Tárgy" required="true"  />
+                            <b:inputTextarea rows="4" id="message" value="Üzenet" required="true" />
+                            <b:message for="name"/>
+                            <b:message for="email"/>
+                            <b:message for="subject"/>
+                            <b:message for="message"/>
+                        </b:column>
+                    </b:row>
+                </b:column>
             </b:container>
         </b:jumbotron>
         <footer>
