@@ -5,6 +5,7 @@
         <jta-data-source>java:jboss/datasources/CinemAppDS</jta-data-source>
     
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie</class>
+        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Admin</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon</class>

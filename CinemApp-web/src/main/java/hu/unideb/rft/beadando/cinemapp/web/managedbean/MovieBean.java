@@ -39,14 +39,13 @@ public class MovieBean {
         return movies;
     }
     
-
-    
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
     
     @PostConstruct
     public void init() {
+    	System.out.println("called");
         FacesContextUtils
             .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
             .getAutowireCapableBeanFactory().autowireBean(this);

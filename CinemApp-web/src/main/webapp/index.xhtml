@@ -8,63 +8,73 @@ logomakr.com/1XREUq
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>CinemApp - Főoldal</title>
-        <meta name="author"></meta>
-        <link href="styles/style.css" rel="stylesheet" type="text/css" />
-    </h:head>
-    
-    <!--body-->
-    <h:body styleClass="bodystyle">
-        
-        <!--header-->
-        <b:navBar brand="CinemApp" brandHref="#" fixed="top"
-                  brandImg="images/logo.png" brandImgStyle="height: 25px"
-                  style="background: #00494c;">
-            <b:navbarLinks>
-                <b:navLink value="FŐOLDAL" href="index.jsf"></b:navLink>
-                <b:navLink value="FILMEK" href="filmek.jsf"></b:navLink>
-                <b:navLink value="GYIK" href="gyik.jsf"></b:navLink>
-                <b:navLink value="KAPCSOLAT" href="kapcsolat.jsf"></b:navLink>
-            </b:navbarLinks>
-        </b:navBar>
-        
-        <!-- TODO ezzel fogunk navigálni a loginra -->
-        <h:form class="loginform">
-            <b:commandButton action="login" value="Login" look="success"
-                             icon="chevron-right" iconAlign="right" />
-        </h:form>
-        
-        <!--content-->
-        <b:jumbotron styleClass="content">
-            <b:container styleClass="content">
-                <h1 style="color: white;">Üdvözöl a CinemApp</h1>
-                <b:carousel class="carousel">
-                    <b:carouselItem>
-                        <div id="slide">
-                            <img class="slideimg" src="images/masterminds.jpg" />
-                            <img class="slideimg" src="images/inferno.jpg" />
-                        </div>
-                    </b:carouselItem>
-                    <b:carouselItem>
-                        <div id="slide">
-                            <img class="slideimg" src="images/snowden.jpg" />
-                            <img class="slideimg" src="images/stbeyond.jpg" />
-                        </div>
-                    </b:carouselItem>
-                </b:carousel>
-            </b:container>
-        </b:jumbotron>
-        
-        <!--footer-->
-        <footer>
-            <div style="text-align: center;">
-                <p style="color: white;">© 2016 by FourFire Team</p>
-            </div>
-        </footer>
-    </h:body>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>CinemApp - Főoldal</title>
+	<meta name="author"></meta>
+	<link href="styles/style.css" rel="stylesheet" type="text/css" />
+</h:head>
+
+<!--body-->
+<h:body styleClass="bodystyle">
+
+	<!--header-->
+	<b:navBar brand="CinemApp" brandHref="index.xhtml" fixed="top"
+		brandImg="images/logo.png" brandImgStyle="height: 25px"
+		style="background: #00494c;">
+		<b:navbarLinks>
+			<b:navLink value="FŐOLDAL" href="index.xhtml"></b:navLink>
+			<b:navLink value="FILMEK" href="filmek.xhtml"></b:navLink>
+			<b:navLink value="GYIK" href="gyik.xhtml"></b:navLink>
+			<b:navLink value="KAPCSOLAT" href="kapcsolat.xhtml"></b:navLink>
+		</b:navbarLinks>
+		<!-- TODO ezzel fogunk navigálni a loginra -->
+		<h:form styleClass="navbar-form navbar-right">
+			<b:commandButton action="login" value="Login" look="success"
+				icon="chevron-right" iconAlign="right" />
+		</h:form>
+		<h:form styleClass="navbar-form navbar-right"
+			rendered="#{login.loggedIn}">
+			<b:commandButton action="#{login.logout}" value="Logout"
+				look="success" icon="chevron-right" iconAlign="right" />
+		</h:form>
+	</b:navBar>
+
+
+
+
+
+	<!--content-->
+	<b:jumbotron styleClass="content">
+		<b:container styleClass="content">
+			<h1 style="color: white;">Üdvözöl a CinemApp</h1>
+			<b:carousel class="carousel">
+				<b:carouselItem>
+					<div id="slide">
+						<img class="slideimg" src="images/masterminds.jpg" /> <img
+							class="slideimg" src="images/inferno.jpg" />
+					</div>
+				</b:carouselItem>
+				<b:carouselItem>
+					<div id="slide">
+						<img class="slideimg" src="images/snowden.jpg" /> <img
+							class="slideimg" src="images/stbeyond.jpg" />
+					</div>
+				</b:carouselItem>
+			</b:carousel>
+		</b:container>
+	</b:jumbotron>
+
+	<!--footer-->
+	<footer>
+		<div style="text-align: center;">
+			<p style="color: white;">© 2016 by FourFire Team</p>
+		</div>
+	</footer>
+</h:body>
 </html>

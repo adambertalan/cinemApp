@@ -37,6 +37,17 @@
 			<artifactId>CinemApp-jpa</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.richfaces</groupId> -->
+<!-- 			<artifactId>richfaces</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.richfaces</groupId> -->
+<!-- 			<artifactId>richfaces-push-depchain</artifactId> -->
+<!-- 			<type>pom</type> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -49,17 +60,17 @@
 					<finalName>CinemApp</finalName>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
 					<fileNameMapping>standard</fileNameMapping>
-<!-- 					<modules> -->
-<!-- 						<webModule> -->
-<!-- 							<groupId>hu.unideb.rft.beadando</groupId> -->
-<!-- 							<artifactId>CinemApp-web</artifactId> -->
-<!-- 							<contextRoot>/CinemApp</contextRoot> -->
-<!-- 						</webModule> -->
-<!-- 						<ejbModule> -->
-<!-- 							<groupId>hu.unideb.rft.beadando</groupId> -->
-<!-- 							<artifactId>CinemApp-ejb</artifactId> -->
-<!-- 						</ejbModule> -->
-<!-- 					</modules> -->
+					<!-- <modules> -->
+					<!-- <webModule> -->
+					<!-- <groupId>hu.unideb.rft.beadando</groupId> -->
+					<!-- <artifactId>CinemApp-web</artifactId> -->
+					<!-- <contextRoot>/CinemApp</contextRoot> -->
+					<!-- </webModule> -->
+					<!-- <ejbModule> -->
+					<!-- <groupId>hu.unideb.rft.beadando</groupId> -->
+					<!-- <artifactId>CinemApp-ejb</artifactId> -->
+					<!-- </ejbModule> -->
+					<!-- </modules> -->
 				</configuration>
 			</plugin>
 		</plugins>

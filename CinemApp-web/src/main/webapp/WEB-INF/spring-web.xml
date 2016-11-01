@@ -30,6 +30,10 @@
     	jndi-name="ejb.LoginService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService" />
 		
+	<jee:local-slsb id="bookSeatService" 
+    	jndi-name="ejb.BookSeatService"
+		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService" />
+		
 	<tx:annotation-driven />
     <tx:jta-transaction-manager />
 

@@ -1,66 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
             /WEB-INF/spring-web.xml
         </param-value>
-  </context-param>
-  <filter>
-    <filter-name>LoginFilter</filter-name>
-    <filter-class>hu.unideb.rft.beadando.cinemapp.web.filter.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LoginFilter</filter-name>
-    <url-pattern>/secured/*</url-pattern>
-  </filter-mapping>
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <listener>
-    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-  </listener>
-  <context-param>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Production</param-value>
-  </context-param>
-  <context-param>
-    <param-name>BootsFaces_THEME</param-name>
-    <param-value>flatly</param-value>
-  </context-param>
-  <context-param>
-    <param-name>BootsFaces_USETHEME</param-name>
-    <param-value>true</param-value>
-  </context-param>
-  <context-param>
-    <param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
-    <param-value>false</param-value>
-  </context-param>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
-  </welcome-file-list>
-  <ejb-local-ref>
-    <ejb-ref-name>ejb.MovieService</ejb-ref-name>
-    <local>hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService</local>
-  </ejb-local-ref>
-  <ejb-local-ref>
-    <ejb-ref-name>ejb.LoginService</ejb-ref-name>
-    <local>hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService</local>
-  </ejb-local-ref>
-  <session-config>
-    <session-timeout>30</session-timeout>
-  </session-config>
+	</context-param>
+
+<!-- login filter -->
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>hu.unideb.rft.beadando.cinemapp.web.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/secured/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Production</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BootsFaces_THEME</param-name>
+		<param-value>flatly</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BootsFaces_USETHEME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+<!-- 	<context-param> -->
+<!-- 		<param-name>org.richfaces.push.jms.disable</param-name> -->
+<!-- 		<param-value>true</param-value> -->
+<!-- 	</context-param> -->
+
+<!-- 	<context-param> -->
+<!-- 		<param-name>org.atmosphere.useBlocking</param-name> -->
+<!-- 		<param-value>true</param-value> -->
+<!-- 	</context-param> -->
+
+ <!-- Resource Servlet - serves static resources and resources for specific components -->
+    <servlet>
+        <servlet-name>Resource Servlet</servlet-name>
+        <servlet-class>org.richfaces.webapp.ResourceServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resource Servlet</servlet-name>
+        <url-pattern>/org.richfaces.resources/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Resource Mapping - resources will be served compressed and packed in production -->
+    <context-param>
+        <param-name>org.richfaces.resourceMapping.enabled</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+	<!-- Push Servlet - listens for user sessions -->
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>Push Servlet</servlet-name> -->
+<!-- 		<servlet-class>org.richfaces.webapp.PushServlet</servlet-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name> -->
+<!-- 			<param-value>org.atmosphere.cache.UUIDBroadcasterCache</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<load-on-startup>1</load-on-startup> -->
+<!-- 		<async-supported>true</async-supported> -->
+<!-- 	</servlet> -->
+
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>Push Servlet</servlet-name> -->
+<!-- 		<url-pattern>/__richfaces_push</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+
+	<!-- setups servlet-mapping in RichFaces configuration -->
+<!-- 	<context-param> -->
+<!-- 		<param-name>org.richfaces.push.handlerMapping</param-name> -->
+<!-- 		<param-value>/__richfaces_push</param-value> -->
+<!-- 	</context-param> -->
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+
+	<ejb-local-ref>
+		<ejb-ref-name>ejb.BookSeatService</ejb-ref-name>
+		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService</local>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb.MovieService</ejb-ref-name>
+		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService</local>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb.LoginService</ejb-ref-name>
+		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService</local>
+	</ejb-local-ref>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 </web-app>

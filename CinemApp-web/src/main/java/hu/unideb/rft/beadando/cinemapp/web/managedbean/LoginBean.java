@@ -63,15 +63,15 @@ public class LoginBean{
 			System.out.println("Login Success");
 			loggedIn = true;
 			ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
-			ctx.redirect("./index.xhtml");
-			return "admin";
+//			ctx.redirect("./index.xhtml");
+			return "index";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Incorrect Username and Passowrd",
 							"Please enter correct username and Password"));
-			System.out.println("Login Failed");
+			System.out.println("Login Failed!!!!!");
 			loggedIn = false;
 			FacesContext fCtx = FacesContext.getCurrentInstance();
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Incorrect username or password!", "Your login skills are bad so you should feel bad..");
@@ -84,7 +84,9 @@ public class LoginBean{
 	public String logout() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.invalidate();
-		return "login";
+		System.out.println("logout successful");
+		loggedIn = false;
+		return "index";
 	}
 
 	public LoginService getLoginService() {
