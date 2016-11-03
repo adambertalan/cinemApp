@@ -86,6 +86,21 @@ footer{
     margin: auto;
 }
 
+.menulink{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: large;
+    color: white;
+}
+
+.menulink:hover{
+    color: #68BB98;
+}
+
+.menulink:visited{
+    color: white;
+}
+
 h1{
     text-align: center;
 }
