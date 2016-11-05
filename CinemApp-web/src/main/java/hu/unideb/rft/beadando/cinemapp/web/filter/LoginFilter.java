@@ -1,6 +1,7 @@
 package hu.unideb.rft.beadando.cinemapp.web.filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,20 +18,17 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+
 		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("login");
         
 		if (loginBean == null || !loginBean.getLoggedIn()) {

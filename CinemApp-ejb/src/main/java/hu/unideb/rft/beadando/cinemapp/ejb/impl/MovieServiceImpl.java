@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Genre;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
+import hu.unideb.rft.beadando.cinemapp.jpa.repository.GenreRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.MovieRepository;
 
 @Stateless
@@ -22,9 +24,35 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
     
+    @Autowired
+    private GenreRepository genreRepository;
+    
     public List<Movie> findAllMovies() {
         List<Movie> allMovie = movieRepository.findAll();
         return allMovie;
     }
+
+	@Override
+	public void createMovie(String movieName, String movieCode, Integer ageLimit, String description, Integer length,
+			Long genreId) {
+		Movie movie = new Movie();
+		movie.setName(movieName);
+		movie.setAgeLimit(ageLimit);
+		movie.setDescription(description);
+		movie.setLength(length);
+		movie.setMovieCode(movieCode);
+		movie.setRating(0);
+		
+		Genre genre = genreRepository.findOne(genreId);
+		
+		movie.setGenre(genre);
+		
+		movieRepository.save(movie);
+	}
+
+	@Override
+	public void deleteMovie(Long movieId) {
+		movieRepository.delete(movieId);		
+	}
     
 }

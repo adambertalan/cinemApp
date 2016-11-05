@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:jee="http://www.springframework.org/schema/jee"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util.xsd
@@ -20,21 +17,21 @@
 	http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <context:component-scan base-package="hu.unideb.rft.beadando.cinemapp.web" />
-    
-    <jee:local-slsb id="movieService" 
-    	jndi-name="ejb.MovieService"
+	<context:component-scan base-package="hu.unideb.rft.beadando.cinemapp.web" />
+
+	<jee:local-slsb id="movieService" jndi-name="ejb.MovieService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService" />
 
-    <jee:local-slsb id="loginService" 
-    	jndi-name="ejb.LoginService"
+	<jee:local-slsb id="loginService" jndi-name="ejb.LoginService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService" />
-		
-	<jee:local-slsb id="bookSeatService" 
-    	jndi-name="ejb.BookSeatService"
+
+	<jee:local-slsb id="bookSeatService" jndi-name="ejb.BookSeatService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService" />
-		
+
+	<jee:local-slsb id="genreService" jndi-name="ejb.GenreService"
+		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.GenreService" />
+
 	<tx:annotation-driven />
-    <tx:jta-transaction-manager />
+	<tx:jta-transaction-manager />
 
 </beans>

@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.web.jsf.FacesContextUtils;
@@ -18,40 +18,125 @@ import org.springframework.web.jsf.FacesContextUtils;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 
-@ManagedBean(name="movieBean")
-@SessionScoped
+@ManagedBean(name = "movieBean")
+@RequestScoped
 public class MovieBean {
-    
-    @EJB
-    private MovieService movieService;
 
-    public MovieService getMovieService() {	
-        return movieService;
-    }
-    
+	@EJB
+	private MovieService movieService;
+	
+	private Long selectedMovieId;
+
+	private String movieName;
+	private String movieCode;
+	private String movieDescription;
+	private Integer movieAgeLimit;
+	private Long movieGenreId;
+	private Integer movieLength;
+
+	private List<Movie> movies;
+
+	@PostConstruct
+	public void init() {
+		System.out.println("called");
+		FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
+				.getAutowireCapableBeanFactory().autowireBean(this);
+		movies = movieService.findAllMovies();
+		System.out.println("Movies :" + movies);
+	}
+	
+	public void addNewMovie(){
+		System.out.println(movieName);
+		System.out.println(movieCode);
+		System.out.println(movieDescription);
+		System.out.println(movieAgeLimit);
+		System.out.println(movieGenreId);
+		System.out.println(movieLength);
+		
+		movieService.createMovie(movieName, movieCode, movieAgeLimit, movieDescription, movieLength, movieGenreId);
+		
+		this.movieName = null;
+		this.movieCode = null;
+		this.movieDescription = null;
+		this.movieAgeLimit = null;
+		this.movieLength = null;
+		this.movieGenreId = 1L;
+	}
+	
+	public void deleteMovie(){
+		movieService.deleteMovie(selectedMovieId);
+	}
+
+	public MovieService getMovieService() {
+		return movieService;
+	}
+
 	public void setMovieService(MovieService movieService) {
 		this.movieService = movieService;
 	}
-    
-    private List<Movie> movies;
-    
-    public List<Movie> getMovies() {
-        return movies;
-    }
-    
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
-    
-    @PostConstruct
-    public void init() {
-    	System.out.println("called");
-        FacesContextUtils
-            .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
-            .getAutowireCapableBeanFactory().autowireBean(this);
-        movies = movieService.findAllMovies();
-        System.out.println("Movies :" + movies);
-    }
 
-    
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	public String getMovieCode() {
+		return movieCode;
+	}
+
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
+	}
+
+	public String getMovieDescription() {
+		return movieDescription;
+	}
+
+	public void setMovieDescription(String movieDescription) {
+		this.movieDescription = movieDescription;
+	}
+
+	public Integer getMovieAgeLimit() {
+		return movieAgeLimit;
+	}
+
+	public void setMovieAgeLimit(Integer movieAgeLimit) {
+		this.movieAgeLimit = movieAgeLimit;
+	}
+
+	public Long getMovieGenreId() {
+		return movieGenreId;
+	}
+
+	public void setMovieGenreId(Long movieGenreId) {
+		this.movieGenreId = movieGenreId;
+	}
+
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
+	}
+
+	public Integer getMovieLength() {
+		return movieLength;
+	}
+
+	public void setMovieLength(Integer movieLength) {
+		this.movieLength = movieLength;
+	}
+
+	public Long getSelectedMovieId() {
+		return selectedMovieId;
+	}
+
+	public void setSelectedMovieId(Long selectedMovieId) {
+		this.selectedMovieId = selectedMovieId;
+	}
+
 }
