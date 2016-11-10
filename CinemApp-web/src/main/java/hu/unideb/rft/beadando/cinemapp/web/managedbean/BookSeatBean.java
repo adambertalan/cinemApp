@@ -4,9 +4,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
-import org.springframework.web.jsf.FacesContextUtils;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
 
@@ -21,9 +18,9 @@ public class BookSeatBean {
 	
 	@PostConstruct
     public void init() {
-        FacesContextUtils
-            .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
-            .getAutowireCapableBeanFactory().autowireBean(this);
+//        FacesContextUtils
+//            .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
+//            .getAutowireCapableBeanFactory().autowireBean(this);
         occupied = bookSeatService.isSeatOccupied(1, 1, 1L);
         System.out.println(occupied);
     }

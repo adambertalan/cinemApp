@@ -9,11 +9,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService;
-import hu.unideb.rft.beadando.cinemapp.web.filter.LoginFilter;
 
 @ManagedBean(name = "login")
 @SessionScoped

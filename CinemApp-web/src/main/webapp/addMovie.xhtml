@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<h3>Film hozzáadása</h3>
+		<h:form>
+			<b:inputText label="Film neve" placeholder="Film neve"
+				required="true" render-label="true" value="#{movieBean.movieName}">
+			</b:inputText>
+
+			<b:inputText label="Film kód" placeholder="Film kód" required="true"
+				render-label="true" value="#{movieBean.movieCode}">
+			</b:inputText>
+
+			<b:inputText label="Korhatár" placeholder="Korhatár"
+				value="#{movieBean.movieAgeLimit}">
+			</b:inputText>
+
+			<b:inputText label="Hossz" required="true" placeholder="Hossz"
+				value="#{movieBean.movieLength}">
+			</b:inputText>
+
+			<h:outputLabel value="Műfaj" for="genreID" />
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{movieBean.movieGenreId}" id="genreID">
+				<f:selectItems value="#{genreBean.genres}" var="genre"
+					itemValue="#{genre.id}" itemLabel="#{genre.name}" />
+			</b:selectOneMenu>
+
+			<b:inputTextarea label="Leírás" value="#{movieBean.movieDescription}">
+			</b:inputTextarea>
+
+			<b:commandButton update="@form" value="Hozzáadás"
+				action="#{movieBean.addNewMovie}"></b:commandButton>
+		</h:form>
+	</ui:composition>
+</body>
+</html>
