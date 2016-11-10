@@ -10,31 +10,37 @@
             <from-action>#{navigationController.processHome}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.processMovies}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/filmek.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.processContact}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/kapcsolat.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.processGYIK}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/gyik.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
          <navigation-case>
             <from-action>#{navigationController.processAdmin}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/secured/adminpage.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.processLogin}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
    
