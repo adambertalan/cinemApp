@@ -33,7 +33,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
 	@Override
-	public void createMovie(String movieName, String movieCode, Integer ageLimit, String description, Integer length,
+	public Movie createMovie(String movieName, String movieCode, Integer ageLimit, String description, Integer length,
 			Long genreId) {
 		Movie movie = new Movie();
 		movie.setName(movieName);
@@ -48,11 +48,29 @@ public class MovieServiceImpl implements MovieService {
 		movie.setGenre(genre);
 		
 		movieRepository.save(movie);
+		return movie;
 	}
 
 	@Override
 	public void deleteMovie(Long movieId) {
 		movieRepository.delete(movieId);		
 	}
+
+	@Override
+	public void editMovie(Long movideId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public MovieRepository getMovieRepository() {
+		return movieRepository;
+	}
+
+	@Override
+	public GenreRepository getGenreRepository() {
+		return genreRepository;
+	}
+	
+	
     
 }

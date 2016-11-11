@@ -24,7 +24,7 @@ public class MovieBean {
 
 	@EJB
 	private MovieService movieService;
-	
+
 	private Long selectedMovieId;
 
 	private String movieName;
@@ -33,7 +33,10 @@ public class MovieBean {
 	private Integer movieAgeLimit;
 	private Long movieGenreId;
 	private Integer movieLength;
+	
 
+	private static Long movieToBeEditedID = null;
+	
 	private List<Movie> movies;
 
 	@PostConstruct
@@ -44,8 +47,8 @@ public class MovieBean {
 		movies = movieService.findAllMovies();
 		System.out.println("Movies :" + movies);
 	}
-	
-	public void addNewMovie(){
+
+	public void addNewMovie() {
 		System.out.println(movieName);
 		System.out.println(movieCode);
 		System.out.println(movieDescription);
@@ -53,8 +56,30 @@ public class MovieBean {
 		System.out.println(movieGenreId);
 		System.out.println(movieLength);
 		
-		movieService.createMovie(movieName, movieCode, movieAgeLimit, movieDescription, movieLength, movieGenreId);
-		
+		if(movieToBeEditedID == null){
+			addMovie();
+		}else{
+			Movie editedMovie = movieService.getMovieRepository().findMovieById(movieToBeEditedID);
+			if(editedMovie == null){
+				addMovie();
+				clearTextFields();
+				return;
+			}
+			editedMovie.setName(movieName);
+			editedMovie.setMovieCode(movieCode);
+			editedMovie.setDescription(movieDescription);
+			editedMovie.setAgeLimit(movieAgeLimit);
+			editedMovie.setGenre(movieService.getGenreRepository().findOne(movieGenreId));
+			editedMovie.setLength(movieLength);
+			movieService.getMovieRepository().save(editedMovie);
+			movies = movieService.findAllMovies();
+			movieToBeEditedID = null;
+		}
+
+		clearTextFields();
+	}
+	
+	private void clearTextFields(){
 		this.movieName = null;
 		this.movieCode = null;
 		this.movieDescription = null;
@@ -63,8 +88,31 @@ public class MovieBean {
 		this.movieGenreId = 1L;
 	}
 	
-	public void deleteMovie(){
+	private void addMovie(){
+		Movie movie = movieService.createMovie(movieName, movieCode, movieAgeLimit, movieDescription, movieLength,
+				movieGenreId);
+		movies.add(movie);
+	}
+
+	public void editMovie() {
+		
+			Movie selectedMovie = movieService.getMovieRepository().findMovieById(selectedMovieId);
+			if(selectedMovie != null){
+				movieName = selectedMovie.getName();
+				movieCode = selectedMovie.getMovieCode();
+				movieAgeLimit = selectedMovie.getAgeLimit();
+				movieLength = selectedMovie.getLength();
+				movieGenreId = selectedMovie.getGenre().getId();
+				movieDescription = selectedMovie.getDescription();
+				movieToBeEditedID = selectedMovieId;
+			}
+	}
+
+	public void deleteMovie() {
+		
 		movieService.deleteMovie(selectedMovieId);
+		movies = movieService.findAllMovies();
+
 	}
 
 	public MovieService getMovieService() {
@@ -138,5 +186,5 @@ public class MovieBean {
 	public void setSelectedMovieId(Long selectedMovieId) {
 		this.selectedMovieId = selectedMovieId;
 	}
-
+	
 }

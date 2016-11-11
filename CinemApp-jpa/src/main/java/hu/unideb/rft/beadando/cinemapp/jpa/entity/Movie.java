@@ -20,7 +20,7 @@ public class Movie extends BaseName {
     // Hossz percben
     private Integer length;
     
-    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    @ManyToOne(fetch=FetchType.EAGER, optional=false)
     private Genre genre;
 
 
