@@ -26,9 +26,9 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="myDataSource"/>
-        <property name="loadTimeWeaver">
-            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
-        </property>
+<!--         <property name="loadTimeWeaver"> -->
+<!--             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/> -->
+<!--         </property> -->
     </bean>
     
      <jee:jndi-lookup id="myDataSource" jndi-name="java:jboss/datasources/CinemAppDS"/>

@@ -7,159 +7,74 @@
 	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>CinemApp - Admin oldal</title>
-	<meta name="author" content=""></meta>
-	<link href="styles/style.css" rel="stylesheet" type="text/css" />
-</h:head>
-<!-- Add 50px padding top to the body for the navbar -->
+
 <h:body styleClass="bodystyle">
-	<b:navBar brand="CinemApp" brandHref="index.xhtml" fixed="top"
-		brandImg="images/logo.png" brandImgStyle="height: 25px"
-		style="background: #00494c;">
-		<h:form styleClass="navbar-form navbar-left">
-			<b:commandButton look="success" value="FŐOLDAL"
-				action="#{navigationController.processHome}" />
-		</h:form>
-		<h:form styleClass="navbar-form navbar-left">
-			<b:commandButton look="success" value="FILMEK"
-				action="#{navigationController.processMovies}" />
-		</h:form>
-		<h:form styleClass="navbar-form navbar-left">
-			<b:commandButton look="success" value="GYIK"
-				action="#{navigationController.processGYIK}" />
-		</h:form>
-		<h:form styleClass="navbar-form navbar-left">
-			<b:commandButton look="success" value="KAPCSOLAT"
-				action="#{navigationController.processContact}" />
-		</h:form>
-		<c:if test="#{login.loggedIn}">
-			<h:form styleClass="navbar-form navbar-left">
-				<b:commandButton look="success" value="Admin"
-					action="#{navigationController.processAdmin}" />
-			</h:form>
-		</c:if>
+	<ui:composition template="/templates/securedLayout.xhtml">
+		<ui:define name="content">
+			<b:jumbotron styleClass="content">
+				<b:container styleClass="content">
 
-		<!-- TODO ezzel fogunk navigálni a loginra -->
-		<h:form styleClass="navbar-form navbar-right">
-			<b:commandButton action="#{navigationController.processLogin}"
-				value="Login" look="success" icon="chevron-right" iconAlign="right" />
-		</h:form>
-		<h:form styleClass="navbar-form navbar-right"
-			rendered="#{login.loggedIn}">
-			<b:commandButton action="#{login.logout}" value="Logout"
-				look="success" icon="chevron-right" iconAlign="right" />
-		</h:form>
-	</b:navBar>
-	<b:jumbotron styleClass="content">
-		<b:container styleClass="content">
+					<b:tabView pills="true"
+						contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
+						<b:tab title="Film műveletek">
+						
+							<ui:include src="/movieOperations.xhtml" />
 
-			<b:tabView pills="true"
-				contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
-				<b:tab title="Film műveletek">
-					
-					<h3>Filmek hozzáadása/módosítása</h3>
-					<h:form>
-						<b:inputText label="Film neve" placeholder="Film neve"
-							required="true" render-label="true"
-							value="#{movieBean.movieName}">
-						</b:inputText>
-
-						<b:inputText label="Film kód" placeholder="Film kód"
-							required="true" render-label="true"
-							value="#{movieBean.movieCode}">
-						</b:inputText>
-
-						<b:inputText label="Korhatár" placeholder="Korhatár"
-							value="#{movieBean.movieAgeLimit}">
-						</b:inputText>
-
-						<b:inputText label="Hossz" required="true" placeholder="Hossz"
-							value="#{movieBean.movieLength}">
-						</b:inputText>
-
-						<h:outputLabel value="Műfaj" for="genreID" />
-						<b:selectOneMenu required="true" render-label="true"
-							value="#{movieBean.movieGenreId}" id="genreID">
-							<f:selectItems value="#{genreBean.genres}" var="genre"
-								itemValue="#{genre.id}" itemLabel="#{genre.name}" />
-						</b:selectOneMenu>
-
-						<b:inputTextarea label="Leírás"
-							value="#{movieBean.movieDescription}">
-						</b:inputTextarea>
-
-						<b:commandButton update="@form moviesForm" value="Mentés"
-							action="#{movieBean.addNewMovie}"></b:commandButton>
-					</h:form>
-					
-					<h3 >Filmek szerkeztése</h3>
-					<h:form id="moviesForm" >
-						<h:outputLabel  value="Filmek" for="movieID" />
-						<b:selectOneMenu value="#{movieBean.selectedMovieId}" id="movieID">
-							<f:selectItems value="#{movieBean.movies}" var="movie"
-								itemValue="#{movie.id}" itemLabel="#{movie.name}"/>
-							
-						</b:selectOneMenu>
-						<b:commandButton value="Módisítás" action="#{movieBean.editMovie}"></b:commandButton>
-						<b:commandButton value="Törlés" action="#{movieBean.deleteMovie}" update="movieID" ></b:commandButton>
-					</h:form>
-					
-				</b:tab>
-				<b:tab title="Vetítés műveletek">
-					<h3>Vetítés hozzáadása</h3>
-					<h:form>
-					<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-					</h:form>
-					<h3>Vetítés törlése</h3>
-					<h:form>
-					<b:commandButton value="Törlés" action="#"></b:commandButton>
-					</h:form>
-				</b:tab>
-				<b:tab title="Műfaj műveletek">
-					<h3>Műfaj hozzáadása</h3>
-					<h:form>
-					<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-					</h:form>
-					<h3>Műfaj törlése</h3>
-					<h:form>
-					<b:commandButton value="Törlés" action="#"></b:commandButton>
-					</h:form>
-				</b:tab>
-				<b:tab title="Vetítés műveletek">
-					<h3>Vetítés hozzáadása</h3>
-					<h:form>
-					<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-					</h:form>
-					<h3>Vetítés törlése</h3>
-					<h:form>
-					<b:commandButton value="Törlés" action="#"></b:commandButton>
-					</h:form>
-				</b:tab>
-				<b:tab title="Kupon műveletek">
-					<h3>Kupon hozzáadása</h3>
-					<h:form>
-					<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-					</h:form>
-					<h3>Kupon törlése</h3>
-					<h:form>
-					<b:commandButton value="Törlés" action="#"></b:commandButton>
-					</h:form>
-				</b:tab>
-				<b:tab title="Foglalás műveletek">
-					<h3>Foglalás hozzáadása</h3>
-					<h:form>
-					<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-					</h:form>
-					<h3>Foglalás törlése</h3>
-					<h:form>
-					<b:commandButton value="Törlés" action="#"></b:commandButton>
-					</h:form>
-				</b:tab>
-			</b:tabView>
-
-
-		</b:container>
-	</b:jumbotron>
+						</b:tab>
+						<b:tab title="Vetítés műveletek">
+							<h3>Vetítés hozzáadása</h3>
+							<h:form>
+								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+							</h:form>
+							<h3>Vetítés törlése</h3>
+							<h:form>
+								<b:commandButton value="Törlés" action="#"></b:commandButton>
+							</h:form>
+						</b:tab>
+						<b:tab title="Műfaj műveletek">
+							<h3>Műfaj hozzáadása</h3>
+							<h:form>
+								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+							</h:form>
+							<h3>Műfaj törlése</h3>
+							<h:form>
+								<b:commandButton value="Törlés" action="#"></b:commandButton>
+							</h:form>
+						</b:tab>
+						<b:tab title="Vetítés műveletek">
+							<h3>Vetítés hozzáadása</h3>
+							<h:form>
+								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+							</h:form>
+							<h3>Vetítés törlése</h3>
+							<h:form>
+								<b:commandButton value="Törlés" action="#"></b:commandButton>
+							</h:form>
+						</b:tab>
+						<b:tab title="Kupon műveletek">
+							<h3>Kupon hozzáadása</h3>
+							<h:form>
+								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+							</h:form>
+							<h3>Kupon törlése</h3>
+							<h:form>
+								<b:commandButton value="Törlés" action="#"></b:commandButton>
+							</h:form>
+						</b:tab>
+						<b:tab title="Foglalás műveletek">
+							<h3>Foglalás hozzáadása</h3>
+							<h:form>
+								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+							</h:form>
+							<h3>Foglalás törlése</h3>
+							<h:form>
+								<b:commandButton value="Törlés" action="#"></b:commandButton>
+							</h:form>
+						</b:tab>
+					</b:tabView>
+				</b:container>
+			</b:jumbotron>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

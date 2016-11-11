@@ -10,16 +10,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-
-import org.springframework.web.jsf.FacesContextUtils;
+import javax.faces.bean.ViewScoped;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 
 @ManagedBean(name = "movieBean")
-@RequestScoped
+@ViewScoped
 public class MovieBean {
 
 	@EJB
@@ -42,8 +39,8 @@ public class MovieBean {
 	@PostConstruct
 	public void init() {
 		System.out.println("called");
-		FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
-				.getAutowireCapableBeanFactory().autowireBean(this);
+//		FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
+//				.getAutowireCapableBeanFactory().autowireBean(this);
 		movies = movieService.findAllMovies();
 		System.out.println("Movies :" + movies);
 	}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<body>
+		<ui:composition>
+			<b:navBar brand="CinemApp" brandHref="/index.xhtml" fixed="top"
+				brandImg="../resources/images/logo.png" brandImgStyle="height: 25px"
+				style="background: #00494c;">
+				
+				<h:form styleClass="navbar-form navbar-left">
+					<b:commandButton look="success" value="FŐOLDAL"
+						action="#{navigationController.processHome}" />
+				</h:form>
+				<h:form styleClass="navbar-form navbar-left">
+					<b:commandButton look="success" value="FILMEK"
+						action="#{navigationController.processMovies}" />
+				</h:form>
+				<h:form styleClass="navbar-form navbar-left">
+					<b:commandButton look="success" value="GYIK"
+						action="#{navigationController.processGYIK}" />
+				</h:form>
+				<h:form styleClass="navbar-form navbar-left">
+					<b:commandButton look="success" value="KAPCSOLAT"
+						action="#{navigationController.processContact}" />
+				</h:form>
+				<c:if test="#{login.loggedIn}">
+					<h:form styleClass="navbar-form navbar-left">
+						<b:commandButton look="success" value="Admin"
+							action="#{navigationController.processAdmin}" />
+					</h:form>
+				</c:if>
+	
+				<h:form styleClass="navbar-form navbar-right">
+					<b:commandButton action="#{navigationController.processLogin}"
+						value="Login" look="success" icon="chevron-right" iconAlign="right" />
+				</h:form>
+				<h:form styleClass="navbar-form navbar-right"
+					rendered="#{login.loggedIn}">
+					<b:commandButton action="#{login.logout}" value="Logout"
+						look="success" icon="chevron-right" iconAlign="right" />
+				</h:form>
+			</b:navBar>
+		</ui:composition>
+	</body>
+</html>
