@@ -41,16 +41,6 @@
 								<b:commandButton value="Törlés" action="#"></b:commandButton>
 							</h:form>
 						</b:tab>
-						<b:tab title="Vetítés műveletek">
-							<h3>Vetítés hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Vetítés törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
-						</b:tab>
 						<b:tab title="Kupon műveletek">
 							<h3>Kupon hozzáadása</h3>
 							<h:form>
@@ -62,14 +52,9 @@
 							</h:form>
 						</b:tab>
 						<b:tab title="Foglalás műveletek">
-							<h3>Foglalás hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Foglalás törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
+							
+							<ui:include src="/appointmentOperations.xhtml"/>
+							
 						</b:tab>
 					</b:tabView>
 				</b:container>

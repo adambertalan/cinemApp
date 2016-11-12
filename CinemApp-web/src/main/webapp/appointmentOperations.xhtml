@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<h3>Foglalások hozzáadása/módosítása</h3>
+		<h:form>
+			<h:outputLabel value="Vendég" for="guestID" />
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{appointmentBean.appointmentGuestId}" id="guestID">
+				<f:selectItems value="#{guestBean.guests}" var="guest"
+					itemValue="#{guest.id}" itemLabel="#{guest.name}" />
+			</b:selectOneMenu>
+
+			<h:outputLabel value="Vetítés" for="movieShowID" />
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{appointmentBean.appointmentMovieShowId}" id="movieShowID">
+				<f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
+					itemValue="#{movieShow.id}" itemLabel="#{movieShow.name}" />
+			</b:selectOneMenu>
+
+			<h:outputLabel value="Ülés" for="seatID" />
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{appointmentBean.appointmentSeatId}" id="seatID">
+				<f:selectItems value="#{seatBean.seats}" var="seat"
+					itemValue="#{seat.id}" itemLabel="#{seat.name}" />
+			</b:selectOneMenu>
+
+			<b:commandButton update="@form reservationsForm" value="Mentés"
+				action="#{appointmentBean.addNewAppointment}"></b:commandButton>
+		</h:form>
+
+		<h3>Foglalások szerkeztése</h3>
+		<h:form id="reservationsForm">
+			<h:outputLabel value="Foglalások" for="reservationID" />
+			<b:selectOneMenu value="#{appointmentBean.selectedAppointmentId}"
+				id="reservationID">
+				<f:selectItems value="#{appointmentBean.appointments}"
+					var="appointment" itemValue="#{appointment.id}"
+					itemLabel="#{appointment.name}" />
+
+			</b:selectOneMenu>
+			<b:commandButton value="Módisítás"
+				action="#{appointmentBean.editAppointment}"></b:commandButton>
+			<b:commandButton value="Törlés"
+				action="#{appointmentBean.deleteAppointment}" update="reservationID"></b:commandButton>
+		</h:form>
+	</ui:composition>
+</body>
+</html>
