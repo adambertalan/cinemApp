@@ -1,80 +1,77 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:body styleClass="bodystyle">
-	<ui:composition template="/templates/securedLayout.xhtml">
-		<ui:define name="content">
-			<b:jumbotron styleClass="content">
-				<b:container styleClass="content">
+    <h:body styleClass="bodystyle">
+        <ui:composition template="/templates/securedLayout.xhtml">
+            <ui:define name="content">
+                <b:jumbotron styleClass="content">
+                    <b:container styleClass="content">
 
-					<b:tabView pills="true"
-						contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px">
-						<b:tab title="Film műveletek">
-						
-							<ui:include src="/movieOperations.xhtml" />
-
-						</b:tab>
-						<b:tab title="Vetítés műveletek">
-							<h3>Vetítés hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Vetítés törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
-						</b:tab>
-						<b:tab title="Műfaj műveletek">
-							<h3>Műfaj hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Műfaj törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
-						</b:tab>
-						<b:tab title="Vetítés műveletek">
-							<h3>Vetítés hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Vetítés törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
-						</b:tab>
-						<b:tab title="Kupon műveletek">
-							<h3>Kupon hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Kupon törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
-						</b:tab>
-						<b:tab title="Foglalás műveletek">
-							<h3>Foglalás hozzáadása</h3>
-							<h:form>
-								<b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-							</h:form>
-							<h3>Foglalás törlése</h3>
-							<h:form>
-								<b:commandButton value="Törlés" action="#"></b:commandButton>
-							</h:form>
-						</b:tab>
-					</b:tabView>
-				</b:container>
-			</b:jumbotron>
-		</ui:define>
-	</ui:composition>
-</h:body>
+                        <b:tabView pills="true" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
+                            <b:tab title="Film műveletek" style="background: white;">
+                                <ui:include src="/movieOperations.xhtml" />
+                            </b:tab>
+                            <b:tab title="Vetítés műveletek">
+                                <h3>Vetítés hozzáadása</h3>
+                                <h:form>
+                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+                                </h:form>
+                                <h3>Vetítés törlése</h3>
+                                <h:form>
+                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
+                                </h:form>
+                            </b:tab>
+                            <b:tab title="Műfaj műveletek">
+                                <h3>Műfaj hozzáadása</h3>
+                                <h:form>
+                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+                                </h:form>
+                                <h3>Műfaj törlése</h3>
+                                <h:form>
+                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
+                                </h:form>
+                            </b:tab>
+                            <b:tab title="Vetítés műveletek">
+                                <h3>Vetítés hozzáadása</h3>
+                                <h:form>
+                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+                                </h:form>
+                                <h3>Vetítés törlése</h3>
+                                <h:form>
+                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
+                                </h:form>
+                            </b:tab>
+                            <b:tab title="Kupon műveletek">
+                                <h3>Kupon hozzáadása</h3>
+                                <h:form>
+                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+                                </h:form>
+                                <h3>Kupon törlése</h3>
+                                <h:form>
+                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
+                                </h:form>
+                            </b:tab>
+                            <b:tab title="Foglalás műveletek">
+                                <h3>Foglalás hozzáadása</h3>
+                                <h:form>
+                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+                                </h:form>
+                                <h3>Foglalás törlése</h3>
+                                <h:form>
+                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
+                                </h:form>
+                            </b:tab>
+                        </b:tabView>
+                    </b:container>
+                </b:jumbotron>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>
