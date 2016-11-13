@@ -10,7 +10,8 @@ var webSocket;
 				return;
 			}
 			// Create a new instance of the websocket
-			webSocket = new WebSocket("ws://localhost:8080/CinemApp-web/cinemappWS");
+			var host = window.location.host;
+			webSocket = new WebSocket("ws://" + host + "/CinemApp-web/cinemappWS");
 
 
 			webSocket.onopen = function(event) {
