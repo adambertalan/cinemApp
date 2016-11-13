@@ -11,6 +11,6 @@ import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-	  public Appointment findMovieById( Long appointmentId );
+	  public Appointment findAppointmentById( Long appointmentId );
 	  
 }

@@ -28,4 +28,17 @@ public class GuestServiceImpl implements GuestService {
 		return allGuests;
 	}
 
+	@Override
+	public Guest createGuest(String name, String email, String phoneNumber, Integer zip) {
+		Guest guest = new Guest();
+		guest.setName(name);
+		guest.setEmail(email);
+		guest.setPhoneNumber(phoneNumber);
+		guest.setZip(zip);
+		guest.setCupon(null);
+		
+		guestRepository.save(guest);
+		return guest;
+	}
+
 }

@@ -11,29 +11,36 @@
 	<ui:composition>
 		<h3>Foglalások hozzáadása/módosítása</h3>
 		<h:form>
-			<h:outputLabel value="Vendég" for="guestID" />
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{appointmentBean.appointmentGuestId}" id="guestID">
-				<f:selectItems value="#{guestBean.guests}" var="guest"
-					itemValue="#{guest.id}" itemLabel="#{guest.name}" />
-			</b:selectOneMenu>
+			<b:inputText label="Vendég neve" placeholder="Vendég neve"
+				required="true" render-label="true" value="#{appointmentBean.appointmentGuestName}"/>
 
+			<b:inputText label="E-mail cím" placeholder="E-amil cím"
+				required="true" render-label="true" value="#{appointmentBean.appointmentGuestEmail}"/>
+
+			<b:inputText label="Telefonszám" placeholder="Telefonszám"
+				required="true" render-label="true" value="#{appointmentBean.appointmentGuestPhoneNumber}"/>
+
+			<b:inputText label="Irányítószám" placecholder="Irányítószám"
+				render-label="true" value="#{appointmentBean.appointemntGuestZip}"/>
+				
+			
+		
 			<h:outputLabel value="Vetítés" for="movieShowID" />
 			<b:selectOneMenu required="true" render-label="true"
 				value="#{appointmentBean.appointmentMovieShowId}" id="movieShowID">
 				<f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
-					itemValue="#{movieShow.id}" itemLabel="#{movieShow.name}" />
+					itemValue="#{movieShow.id}" itemLabel="#{movieShow.id}" />
 			</b:selectOneMenu>
 
 			<h:outputLabel value="Ülés" for="seatID" />
 			<b:selectOneMenu required="true" render-label="true"
 				value="#{appointmentBean.appointmentSeatId}" id="seatID">
 				<f:selectItems value="#{seatBean.seats}" var="seat"
-					itemValue="#{seat.id}" itemLabel="#{seat.name}" />
+					itemValue="#{seat.id}" itemLabel="#{seat.id}" />
 			</b:selectOneMenu>
 
 			<b:commandButton update="@form reservationsForm" value="Mentés"
-				action="#{appointmentBean.addNewAppointment}"></b:commandButton>
+				action="#{appointmentBean.addNewOrEditAppointment}"></b:commandButton>
 		</h:form>
 
 		<h3>Foglalások szerkeztése</h3>
@@ -43,7 +50,7 @@
 				id="reservationID">
 				<f:selectItems value="#{appointmentBean.appointments}"
 					var="appointment" itemValue="#{appointment.id}"
-					itemLabel="#{appointment.name}" />
+					itemLabel="#{appointment.id}" />
 
 			</b:selectOneMenu>
 			<b:commandButton value="Módisítás"

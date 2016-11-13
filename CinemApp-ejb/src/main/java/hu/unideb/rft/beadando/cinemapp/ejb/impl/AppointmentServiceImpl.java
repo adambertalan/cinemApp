@@ -66,9 +66,25 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public void editAppointment(Long appointmentId) {
-		// TODO Auto-generated method stub
-		
+	public AppointmentRepository getAppointmentRepository() {
+		return appointmentRepository;
 	}
+
+	@Override
+	public MovieShowRepository getMovieShowRepository() {
+		return movieShowRepository;
+	}
+
+	@Override
+	public SeatRepository getSeatRepository() {
+		return seatRepository;
+	}
+
+	@Override
+	public GuestRepository getGuestRepository() {
+		return guestRepository;
+	}
+	
+	
 
 }
