@@ -45,7 +45,7 @@ public class MovieBean {
 		System.out.println("Movies :" + movies);
 	}
 
-	public void addNewMovie() {
+	public void addNewOrEditMovie() {
 		System.out.println(movieName);
 		System.out.println(movieCode);
 		System.out.println(movieDescription);
@@ -54,11 +54,11 @@ public class MovieBean {
 		System.out.println(movieLength);
 		
 		if(movieToBeEditedID == null){
-			addMovie();
+			addNewMovie();
 		}else{
 			Movie editedMovie = movieService.getMovieRepository().findMovieById(movieToBeEditedID);
 			if(editedMovie == null){
-				addMovie();
+				addNewMovie();
 				clearTextFields();
 				return;
 			}
@@ -85,7 +85,7 @@ public class MovieBean {
 		this.movieGenreId = 1L;
 	}
 	
-	private void addMovie(){
+	private void addNewMovie(){
 		Movie movie = movieService.createMovie(movieName, movieCode, movieAgeLimit, movieDescription, movieLength,
 				movieGenreId);
 		movies.add(movie);
