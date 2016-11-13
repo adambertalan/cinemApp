@@ -12,41 +12,42 @@
 	<packaging>war</packaging>
 
 	<name>${project.artifactId}</name>
-	
+
 	<repositories>
-<!--         You should seriously consider using a repository manager or declare repositories in your settings.xml. -->
-<!--            See http://www.sonatype.com/people/2009/02/why-putting-repositories-in-your-poms-is-a-bad-idea/   -->
-        <repository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+		<!-- You should seriously consider using a repository manager or declare 
+			repositories in your settings.xml. -->
+		<!-- See http://www.sonatype.com/people/2009/02/why-putting-repositories-in-your-poms-is-a-bad-idea/ -->
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -61,6 +62,13 @@
 		<!-- <version>${project.version}</version> -->
 		<!-- <scope>provided</scope> -->
 		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -85,32 +93,32 @@
 			<groupId>net.bootsfaces</groupId>
 			<artifactId>bootsfaces</artifactId>
 		</dependency>
-		
+
 		<!-- richfaces -->
-		<dependency>
-				<groupId>org.richfaces</groupId>
-				<artifactId>richfaces-cache-bom</artifactId>
-				<type>pom</type>
-				<version>4.5.17.Final</version>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces</groupId>
-				<artifactId>richfaces-build</artifactId>
-				<type>pom</type>
-				<version>4.5.17.Final</version>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.atmosphere</groupId>
-				<artifactId>atmosphere-runtime</artifactId>
-				<version>2.4.7</version>
-			</dependency>
-			<dependency>
-				<groupId>org.richfaces</groupId>
-				<artifactId>richfaces</artifactId>
-				<version>4.5.17.Final</version>
-			</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.richfaces</groupId> -->
+		<!-- <artifactId>richfaces-cache-bom</artifactId> -->
+		<!-- <type>pom</type> -->
+		<!-- <version>4.5.17.Final</version> -->
+		<!-- <scope>import</scope> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.richfaces</groupId> -->
+		<!-- <artifactId>richfaces-build</artifactId> -->
+		<!-- <type>pom</type> -->
+		<!-- <version>4.5.17.Final</version> -->
+		<!-- <scope>import</scope> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.atmosphere</groupId> -->
+		<!-- <artifactId>atmosphere-runtime</artifactId> -->
+		<!-- <version>2.4.7</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.richfaces</groupId> -->
+		<!-- <artifactId>richfaces</artifactId> -->
+		<!-- <version>4.5.17.Final</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -172,7 +180,6 @@
 			<artifactId>javase</artifactId>
 			<version>2.2</version>
 		</dependency>
-
 
 	</dependencies>
 

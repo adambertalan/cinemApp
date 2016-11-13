@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import hu.unideb.rft.beadando.cinemapp.jpa.entity.Genre;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Theatre;
 
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
-public interface GenreRepository extends JpaRepository<Genre, Long> {
+public interface TheatreRepository extends JpaRepository<Theatre, Long> {
 
+	
 }

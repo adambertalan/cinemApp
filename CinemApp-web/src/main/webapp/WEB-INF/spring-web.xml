@@ -31,6 +31,9 @@
 	<jee:local-slsb id="genreService" jndi-name="ejb.GenreService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.GenreService" />
 
+	<jee:local-slsb id="theatreService" jndi-name="ejb.TheatreService"
+		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService" />
+
 	<tx:annotation-driven />
 	<tx:jta-transaction-manager />
 
