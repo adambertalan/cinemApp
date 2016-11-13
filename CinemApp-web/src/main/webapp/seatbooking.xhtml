@@ -14,15 +14,15 @@
 
 	<h:form id="form">
 		<table>
-			<ui:repeat value="#{bookSeat.seats}" var="seatList"
+			<ui:repeat value="#{bookSeatBean.seats}" var="seatList"
 				varStatus="status">
 				<tr>
 					<ui:repeat value="#{seatList}" var="seat">
 						<td><b:commandButton
 								value="(#{seat.seatRow},#{seat.seatColumn})"
-								style="background-color: #{seat.occupied ? bookSeat.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
+								style="background-color: #{seat.occupied ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
 								immediate="true"
-								onclick="ajax:bookSeat.occupy(seat.seatRow, seat.seatColumn);javascript:send();"
+								onclick="ajax:bookSeatBean.occupy(seat.seatRow, seat.seatColumn);javascript:send();"
 								ajax="true" update="@form" /></td>
 					</ui:repeat>
 				</tr>
@@ -31,7 +31,7 @@
 		<b:commandButton id="upbutton"
 						value="Update"
 						immediate="true"
-						onclick="ajax:bookSeat.update()"
+						onclick="ajax:bookSeatBean.update()"
 						ajax="true"
 						style="display: none;"
 						update="@form"
@@ -39,14 +39,14 @@
 		<b:commandButton id="downbutton"
 						value="Delete"
 						immediate="true"
-						onclick="ajax:bookSeat.delete();"
+						onclick="ajax:bookSeatBean.delete();"
 						ajax="true"
 						
 						update="@form"
 			 			/>
 		<b:commandButton id="accept"
 						value="Véglegesít"
-						action="#{bookSeat.save}"
+						action="#{bookSeatBean.save}"
 			 			/>
 	</h:form>
 

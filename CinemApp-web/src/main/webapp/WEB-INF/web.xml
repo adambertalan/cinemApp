@@ -61,12 +61,15 @@
 		<url-pattern>/secured/*</url-pattern>
 	</filter-mapping>
 
-<!-- 	<context-param> -->
-<!-- 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name> -->
-<!-- 		<param-value>client</param-value> -->
-<!-- 	</context-param> -->
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>client</param-value>
+	</context-param>
 
 	<!--Listeners -->
+	<listener>
+		<listener-class>hu.unideb.rft.beadando.cinemapp.web.filter.MySessionListener</listener-class>
+	</listener>
 	<!-- <listener> -->
 	<!-- <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
 	<!-- </listener> -->

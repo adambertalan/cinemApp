@@ -9,18 +9,18 @@ import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
-@ManagedBean(name = "bookSeat")
-@Named
+@ManagedBean
 @SessionScoped
-public class BookSeatBean implements Serializable {
+public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
-	private static final long serialVersionUID = -5685496427451863375L;
+	private static final long serialVersionUID = 1L;
 
 	@EJB
 	private BookSeatService bookSeatService;
@@ -163,5 +163,17 @@ public class BookSeatBean implements Serializable {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		System.out.println("ValueBOUND " + this.toString());
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		System.out.println("Value-UN-BOUND " + this.toString());
+		this.destroy();
+		
 	}
 }
