@@ -14,20 +14,13 @@
                 <b:jumbotron styleClass="content">
                     <b:container styleClass="content">
                         <b:tabView pills="true" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
-                            <b:tab title="Film műveletek" style="background: white;">
+                            <b:tab title="Film műveletek" class="tab">
                                 <ui:include src="/movieOperations.xhtml" />
                             </b:tab>
-                            <b:tab title="Vetítés műveletek">
-                                <h3>Vetítés hozzáadása</h3>
-                                <h:form>
-                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-                                </h:form>
-                                <h3>Vetítés törlése</h3>
-                                <h:form>
-                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
-                                </h:form>
+                            <b:tab title="Vetítés műveletek" class="tab">
+                                <ui:include src="/movieShowOperations.xhtml" />
                             </b:tab>
-                            <b:tab title="Műfaj műveletek">
+                            <b:tab title="Műfaj műveletek" class="tab">
                                 <h3>Műfaj hozzáadása</h3>
                                 <h:form>
                                     <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
@@ -37,17 +30,7 @@
                                     <b:commandButton value="Törlés" action="#"></b:commandButton>
                                 </h:form>
                             </b:tab>
-                            <b:tab title="Vetítés műveletek">
-                                <h3>Vetítés hozzáadása</h3>
-                                <h:form>
-                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-                                </h:form>
-                                <h3>Vetítés törlése</h3>
-                                <h:form>
-                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
-                                </h:form>
-                            </b:tab>
-                            <b:tab title="Kupon műveletek">
+                            <b:tab title="Kupon műveletek" class="tab">
                                 <h3>Kupon hozzáadása</h3>
                                 <h:form>
                                     <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
@@ -57,11 +40,9 @@
                                     <b:commandButton value="Törlés" action="#"></b:commandButton>
                                 </h:form>
                             </b:tab>
-                            <b:tab title="Foglalás műveletek">
-							
-							<ui:include src="/appointmentOperations.xhtml"/>
-							
-						</b:tab>
+                            <b:tab title="Foglalás műveletek" class="tab">
+                                <ui:include src="/appointmentOperations.xhtml"/>
+                            </b:tab>
                         </b:tabView>
                     </b:container>
                 </b:jumbotron>

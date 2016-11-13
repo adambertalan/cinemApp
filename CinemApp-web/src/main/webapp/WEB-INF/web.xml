@@ -14,10 +14,10 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Production</param-value>
     </context-param>
-<!--     <context-param> -->
-<!--         <param-name>contextConfigLocation</param-name> -->
-<!--         <param-value>/WEB-INF/spring-web.xml</param-value> -->
-<!--     </context-param> -->
+    <!--     <context-param> -->
+    <!--         <param-name>contextConfigLocation</param-name> -->
+    <!--         <param-value>/WEB-INF/spring-web.xml</param-value> -->
+    <!--     </context-param> -->
     <context-param>
         <param-name>BootsFaces_THEME</param-name>
         <param-value>flatly</param-value>
@@ -28,7 +28,7 @@
     </context-param>
     <context-param>
         <param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
-        <param-value>false</param-value>
+        <param-value>true</param-value>
     </context-param>
     
     <!--Welcome page-->
@@ -62,12 +62,12 @@
     </filter-mapping>
     
     <!--Listeners-->
-<!--     <listener> -->
-<!--         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
-<!--     </listener> -->
-<!--     <listener> -->
-<!--         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> -->
-<!--     </listener> -->
+    <!--     <listener> -->
+    <!--         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
+    <!--     </listener> -->
+    <!--     <listener> -->
+    <!--         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> -->
+    <!--     </listener> -->
     
     <!--Services-->
     <ejb-local-ref>
@@ -82,7 +82,7 @@
         <ejb-ref-name>ejb.LoginService</ejb-ref-name>
         <local>hu.unideb.rft.beadando.cinemapp.ejb.api.LoginService</local>
     </ejb-local-ref>
-     <ejb-local-ref>
+    <ejb-local-ref>
         <ejb-ref-name>ejb.GenreService</ejb-ref-name>
         <local>hu.unideb.rft.beadando.cinemapp.ejb.api.GenreService</local>
     </ejb-local-ref>

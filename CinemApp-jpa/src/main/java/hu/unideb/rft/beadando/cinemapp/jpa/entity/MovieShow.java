@@ -15,11 +15,11 @@ public class MovieShow extends BaseId {
     private Timestamp endTime;
     
     // melyik film
-    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    @ManyToOne(fetch=FetchType.EAGER, optional=false)
     private Movie movie;
     
     // hol
-    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    @ManyToOne(fetch=FetchType.EAGER, optional=false)
     private Theatre theatre;
 
 	public Timestamp getStartTime() {
