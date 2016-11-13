@@ -7,13 +7,13 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Appointment extends BaseId {
 
-	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private Guest guest;
 	
-	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private MovieShow movieShow;
 	
-	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private Seat seat;
 
 	public Guest getGuest() {

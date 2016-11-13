@@ -14,6 +14,8 @@ import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public interface SeatRepository extends JpaRepository<Seat, Long> {
+	
+	public Seat findSeatById(Long seatId);
 
 	@Query("select seat.occupied from Seat seat join seat.theatre theatre where seat.seatRow = ?1 and seat.seatColumn = ?2 and theatre.id = ?3")
 	public Boolean isSeatOccupied(Integer seatRow, Integer seatColumn, Long theatreId);

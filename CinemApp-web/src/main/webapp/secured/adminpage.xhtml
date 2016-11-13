@@ -13,7 +13,6 @@
             <ui:define name="content">
                 <b:jumbotron styleClass="content">
                     <b:container styleClass="content">
-
                         <b:tabView pills="true" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
                             <b:tab title="Film műveletek" style="background: white;">
                                 <ui:include src="/movieOperations.xhtml" />
@@ -59,15 +58,10 @@
                                 </h:form>
                             </b:tab>
                             <b:tab title="Foglalás műveletek">
-                                <h3>Foglalás hozzáadása</h3>
-                                <h:form>
-                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-                                </h:form>
-                                <h3>Foglalás törlése</h3>
-                                <h:form>
-                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
-                                </h:form>
-                            </b:tab>
+							
+							<ui:include src="/appointmentOperations.xhtml"/>
+							
+						</b:tab>
                         </b:tabView>
                     </b:container>
                 </b:jumbotron>
