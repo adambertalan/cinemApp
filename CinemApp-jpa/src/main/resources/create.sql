@@ -1,9 +1,9 @@
 -- Mozitermek
-INSERT INTO public.theatre(id, capacity, theatrenumber) VALUES (1, 60, 1); -- 6 sor 10 oszlop
-INSERT INTO public.theatre(id, capacity, theatrenumber) VALUES (2, 55, 2); -- 5 sor 11 oszlop
-INSERT INTO public.theatre(id, capacity, theatrenumber) VALUES (3, 88, 3); -- 8 sor 11 oszlop
-INSERT INTO public.theatre(id, capacity, theatrenumber) VALUES (4, 55, 4); -- 5 sor 11 oszlop
-INSERT INTO public.theatre(id, capacity, theatrenumber) VALUES (5, 84, 5); -- 7 sor 12 oszlop
+INSERT INTO public.theatre(id, capacity, theatrenumber, rownumber, colnumber) VALUES (1, 36, 1, 6, 6); -- 6 sor 6 oszlop
+INSERT INTO public.theatre(id, capacity, theatrenumber, rownumber, colnumber) VALUES (2, 55, 2, 5, 11); -- 5 sor 11 oszlop
+INSERT INTO public.theatre(id, capacity, theatrenumber, rownumber, colnumber) VALUES (3, 88, 3, 8, 11); -- 8 sor 11 oszlop
+INSERT INTO public.theatre(id, capacity, theatrenumber, rownumber, colnumber) VALUES (4, 55, 4, 5, 11); -- 5 sor 11 oszlop
+INSERT INTO public.theatre(id, capacity, theatrenumber, rownumber, colnumber) VALUES (5, 84, 5, 7, 12); -- 7 sor 12 oszlop
 
 -- Ülőhelyek ( az első moziteremé )
 -- 1. sor 
