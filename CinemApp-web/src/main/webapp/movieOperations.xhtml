@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<body>
-	<ui:composition>
-		<h3>Filmek hozzáadása/módosítása</h3>
-		<h:form>
-			<b:inputText label="Film neve" placeholder="Film neve"
-				required="true" render-label="true" value="#{movieBean.movieName}">
-			</b:inputText>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <body>
+        <ui:composition>
+            <h3>Filmek hozzáadása/módosítása</h3>
+            <h:form>
+                <b:inputText label="Film neve" placeholder="Film neve"
+                             required="true" render-label="true" value="#{movieBean.movieName}">
+                </b:inputText>
 
-			<b:inputText label="Film kód" placeholder="Film kód" required="true"
-				render-label="true" value="#{movieBean.movieCode}">
-			</b:inputText>
+                <b:inputText label="Film kód" placeholder="Film kód" required="true"
+                             render-label="true" value="#{movieBean.movieCode}">
+                </b:inputText>
 
-			<b:inputText label="Korhatár" placeholder="Korhatár"
-				value="#{movieBean.movieAgeLimit}">
-			</b:inputText>
+                <b:inputText label="Korhatár" placeholder="Korhatár"
+                             value="#{movieBean.movieAgeLimit}">
+                </b:inputText>
 
-			<b:inputText label="Hossz" required="true" placeholder="Hossz"
-				value="#{movieBean.movieLength}">
-			</b:inputText>
+                <b:inputText label="Hossz" required="true" placeholder="Hossz"
+                             value="#{movieBean.movieLength}">
+                </b:inputText>
 
-			<h:outputLabel value="Műfaj" for="genreID" />
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{movieBean.movieGenreId}" id="genreID">
-				<f:selectItems value="#{genreBean.genres}" var="genre"
-					itemValue="#{genre.id}" itemLabel="#{genre.name}" />
-			</b:selectOneMenu>
+                <h:outputLabel value="Műfaj" for="genreID" />
+                <b:selectOneMenu required="true" render-label="true"
+                                 value="#{movieBean.movieGenreId}" id="genreID">
+                    <f:selectItems value="#{genreBean.genres}" var="genre"
+                                   itemValue="#{genre.id}" itemLabel="#{genre.name}" />
+                </b:selectOneMenu>
 
-			<b:inputTextarea label="Leírás" value="#{movieBean.movieDescription}">
-			</b:inputTextarea>
+                <b:inputTextarea label="Leírás" value="#{movieBean.movieDescription}">
+                </b:inputTextarea>
 
-			<b:commandButton update="@form moviesForm" value="Mentés"
-				action="#{movieBean.addNewOrEditMovie}"></b:commandButton>
-		</h:form>
+                <h:outputLabel value="Plakát"/>
 
-		<h3>Filmek szerkeztése</h3>
-		<h:form id="moviesForm">
-			<h:outputLabel value="Filmek" for="movieID" />
-			<b:selectOneMenu value="#{movieBean.selectedMovieId}" id="movieID">
-				<f:selectItems value="#{movieBean.movies}" var="movie"
-					itemValue="#{movie.id}" itemLabel="#{movie.name}" />
+                <b:commandButton update="@form moviesForm" value="Mentés"
+                                 action="#{movieBean.addNewOrEditMovie}"></b:commandButton>
+            </h:form>
 
-			</b:selectOneMenu>
-			<b:commandButton value="Módisítás" action="#{movieBean.editMovie}"></b:commandButton>
-			<b:commandButton value="Törlés" action="#{movieBean.deleteMovie}"
-				update="movieID"></b:commandButton>
-		</h:form>
-	</ui:composition>
-</body>
+            <h3>Plakát feltöltése</h3>
+            <h:form enctype="multipart/form-data">
+                <h:outputLabel value="Filmek" for="movieID" />
+                <b:selectOneMenu value="#{movieBean.selectedMovieId}" id="movieID">
+                    <f:selectItems value="#{movieBean.movies}" var="movie"
+                                   itemValue="#{movie.id}" itemLabel="#{movie.name}" />
+                </b:selectOneMenu>
+                
+                <h:inputFile required="true" value="#{movieBean.file}"/>
+                <h:commandButton value="Feltölt" action="#{movieBean.upload}"/>
+            </h:form>
+            <h3>Filmek szerkeztése</h3>
+            <h:form id="moviesForm">
+                <h:outputLabel value="Filmek" for="movieID" />
+                <b:selectOneMenu value="#{movieBean.selectedMovieId}" id="movieID">
+                    <f:selectItems value="#{movieBean.movies}" var="movie"
+                                   itemValue="#{movie.id}" itemLabel="#{movie.name}" />
+                </b:selectOneMenu>
+                <b:commandButton value="Módisítás" action="#{movieBean.editMovie}"></b:commandButton>
+                <b:commandButton value="Törlés" action="#{movieBean.deleteMovie}"
+                                 update="movieID"></b:commandButton>
+            </h:form>
+        </ui:composition>
+    </body>
+>>>>>>> master
 </html>
