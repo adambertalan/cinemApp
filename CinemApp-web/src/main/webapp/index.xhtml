@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core"
-	  xmlns:b="http://bootsfaces.net/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:rich="http://richfaces.org/rich"
-	  xmlns:a4j="http://richfaces.org/a4j" 
-	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<h:body styleClass="bodystyle">
+    <h:body styleClass="bodystyle">
 
-	<ui:composition template="/templates/masterLayout.xhtml">
-		<ui:define name="content">
-			
-			<b:jumbotron styleClass="content">
-				<b:container styleClass="content">
-					<h1 style="color: white;">Üdvözöl a CinemApp</h1>
-					<b:carousel class="carousel">
-						<b:carouselItem>
-							<div id="slide">
-								<h:graphicImage styleClass="slideimg" library="images" name="masterminds.jpg" />
-								<h:graphicImage styleClass="slideimg" library="images" name="inferno.jpg" />
-							</div>
-						</b:carouselItem>
-						<b:carouselItem>
-							<div id="slide">
-								<h:graphicImage styleClass="slideimg" library="images" name="snowden.jpg" />
-								<h:graphicImage styleClass="slideimg" library="images" name="stbeyond.jpg" />
-							</div>
-						</b:carouselItem>
-					</b:carousel>
-				</b:container>
-			</b:jumbotron>
-			
-		</ui:define>
-	</ui:composition>
-</h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="content">
+
+                <b:jumbotron styleClass="content">
+                    <b:container styleClass="content">
+                        <h1 style="color: white;">Üdvözöl a CinemApp</h1>
+                        <b:carousel class="carousel">
+                            <c:forEach items="#{movieBean.moviesList}" var="movies">
+                                <b:carouselItem>
+                                    <div id="slide">
+                                        <h:graphicImage styleClass="slideimg" library="images" name="#{movies.movie1.movieCode}" />
+                                        <h:graphicImage styleClass="slideimg" library="images" name="#{movies.movie2.movieCode}" />
+                                    </div>
+                                </b:carouselItem>
+                            </c:forEach>
+                        </b:carousel>
+                    </b:container>
+                </b:jumbotron>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

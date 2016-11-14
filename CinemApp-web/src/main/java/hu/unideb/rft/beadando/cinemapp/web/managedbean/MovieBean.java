@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.http.Part;
@@ -38,6 +39,7 @@ public class MovieBean {
     private static Long movieToBeEditedID = null;
 
     private List<Movie> movies;
+    private List<TwoMovie> moviesList = new ArrayList<>();
 
     private Part file;
 
@@ -77,6 +79,20 @@ public class MovieBean {
 //				.getAutowireCapableBeanFactory().autowireBean(this);
 
         movies = movieService.findAllMovies();
+        int size = movies.size();
+        List<Movie> movies2 = new ArrayList<>();
+        movies2.addAll(movies);
+        for (int i = 0; i < size / 2; i++) {
+
+            if (size % 2 == 0) {
+                moviesList.add(new TwoMovie(movies2.remove(0), movies2.remove(0)));
+            } else if (i < size / 2) {
+                moviesList.add(new TwoMovie(movies2.remove(0), movies2.remove(0)));
+            } else {
+                moviesList.add(new TwoMovie(movies2.remove(0), null));
+            }
+
+        }
         System.out.println("Movies :" + movies);
     }
 
@@ -145,6 +161,14 @@ public class MovieBean {
         movieService.deleteMovie(selectedMovieId);
         movies = movieService.findAllMovies();
 
+    }
+
+    public List<TwoMovie> getMoviesList() {
+        return moviesList;
+    }
+
+    public void setMoviesList(List<TwoMovie> moviesList) {
+        this.moviesList = moviesList;
     }
 
     public MovieService getMovieService() {
