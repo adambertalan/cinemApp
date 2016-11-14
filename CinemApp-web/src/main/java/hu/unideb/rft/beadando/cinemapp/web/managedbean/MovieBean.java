@@ -52,8 +52,12 @@ public class MovieBean {
             }
         }
         String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources\\images\\");
-
-        return path + "/" + movieCode + "." + extension;
+        
+        Movie editedMovie = movieService.getMovieRepository().findMovieById(selectedMovieId);
+            editedMovie.setMovieCode(movieCode + "." + extension);
+            movieService.getMovieRepository().save(editedMovie);
+        
+        return path + "/" + movieCode;
     }
 
     public String upload() throws IOException {
