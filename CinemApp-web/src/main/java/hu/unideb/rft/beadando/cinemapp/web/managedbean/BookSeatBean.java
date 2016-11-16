@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
-import hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @ManagedBean
@@ -24,9 +22,6 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	@EJB
 	private BookSeatService bookSeatService;
-
-	@EJB
-	private TheatreService theatreService;
 
 	private static List<List<Seat>> seats;
 	

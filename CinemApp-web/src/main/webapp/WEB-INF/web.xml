@@ -63,10 +63,7 @@
    </filter-mapping>
    
    <!--Listeners -->
-    <listener>
-        <listener-class>hu.unideb.rft.beadando.cinemapp.web.filter.MySessionListener</listener-class>
-    </listener>
-    
+       
     <!--Services -->
     <ejb-local-ref>
         <ejb-ref-name>ejb.BookSeatService</ejb-ref-name>
