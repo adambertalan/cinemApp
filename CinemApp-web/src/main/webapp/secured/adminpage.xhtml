@@ -21,14 +21,7 @@
                                 <ui:include src="/movieShowOperations.xhtml" />
                             </b:tab>
                             <b:tab title="Műfaj műveletek" class="tab">
-                                <h3>Műfaj hozzáadása</h3>
-                                <h:form>
-                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
-                                </h:form>
-                                <h3>Műfaj törlése</h3>
-                                <h:form>
-                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
-                                </h:form>
+                                <ui:include src="/genreOperations.xhtml"></ui:include>
                             </b:tab>
                             <b:tab title="Kupon műveletek" class="tab">
                                 <h3>Kupon hozzáadása</h3>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<h3>Műfajok hozzáadása/módosítása</h3>
+		<h:form>
+			<b:inputText label="Műfaj neve" placeholder="Műfaj neve"
+				required="true" render-label="true" value="#{genreBean.genreName}"/>
+			<b:commandButton value="Mentés" update="@form genresForm" action="#{genreBean.addNewOrEditGenre}" />
+		</h:form>
+		<h3>Műfajok szerkeztése</h3>
+		<h:form id="genresForm">
+			<h:outputLabel value="Filmek" for="genreID"/>
+			<b:selectOneMenu value="#{genreBean.selectedGenreId}" id="genreID">
+				<f:selectItems value="#{genreBean.genres}" var="genre"
+					itemValue="#{genre.id}" itemLabel="#{genre.name}"/>
+			</b:selectOneMenu>
+			<b:commandButton value="Módosítás" action="#{genreBean.editGenre}"/>
+			<b:commandButton value="Törlés" update="genresForm" action="#{genreBean.deleteGenre}"/>
+		</h:form>
+	</ui:composition>
+</body>
+</html>
