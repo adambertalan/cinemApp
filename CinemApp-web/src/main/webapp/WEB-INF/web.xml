@@ -8,7 +8,7 @@
    
    <!--Basic configs-->
    <session-config>
-        <session-timeout>1</session-timeout>
+        <session-timeout>5</session-timeout>
    </session-config>
    <context-param>
        <param-name>javax.faces.PROJECT_STAGE</param-name>

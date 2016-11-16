@@ -52,6 +52,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 
 	@Override
 	public void saveReservation(List<Seat> reservedSeats) {
+		System.out.println("BookSeatServiceImpl saving reservations");
 		seatRepository.save(reservedSeats);
 	}
 

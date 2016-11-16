@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -22,7 +21,7 @@
 								value="(#{seat.seatRow},#{seat.seatColumn})"
 								style="background-color: #{seat.occupied ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
 								immediate="true"
-								onclick="ajax:bookSeatBean.occupy(seat.seatRow, seat.seatColumn);javascript:send();"
+								onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send();"
 								ajax="true" update="@form" /></td>
 					</ui:repeat>
 				</tr>
@@ -37,15 +36,14 @@
 						update="@form"
 			 			/>
 		<b:commandButton id="downbutton"
-						value="Delete"
+						value="Foglalások Törlése"
 						immediate="true"
 						onclick="ajax:bookSeatBean.delete();"
 						ajax="true"
-						
 						update="@form"
 			 			/>
 		<b:commandButton id="accept"
-						value="Véglegesít"
+						value="Foglalások Véglegesítése"
 						action="#{bookSeatBean.save}"
 			 			/>
 	</h:form>
