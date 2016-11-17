@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
+import java.util.List;
 
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
@@ -13,4 +14,5 @@ public interface MovieShowRepository extends JpaRepository<MovieShow, Long> {
 	
 	public MovieShow findMovieShowById( Long movieShowId );
 
+        public List<MovieShow> findByMovieId( Long movieId );
 }

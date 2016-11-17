@@ -64,7 +64,7 @@ footer{
     margin-right: auto;
     height: auto;
     width: auto;
-    max-height: 400px;
+    max-height: 500px;
 }
 
 #slide{
@@ -102,4 +102,19 @@ h1{
 #adminbutton{
     margin: 5px;
     background-color: #18bc9c;
+}
+
+.indexmoviesdiv{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.indexmovies{
+    display: inline-block;
+    margin: 5px;
+    height: auto;
+    width: auto;
+    max-height: 500px;
 }

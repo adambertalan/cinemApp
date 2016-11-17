@@ -33,4 +33,5 @@ public class NavigationController implements Serializable {
     public String processAdmin() {
         return "page";
     }
+    
 }

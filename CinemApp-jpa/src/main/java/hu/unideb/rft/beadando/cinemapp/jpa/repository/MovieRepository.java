@@ -15,5 +15,5 @@ public interface MovieRepository extends JpaRepository<Movie,Long>{
     
     public Movie findMovieById( Long movieId );
     
-    
+    public Movie findByMovieCode( String movieCode );
 }
