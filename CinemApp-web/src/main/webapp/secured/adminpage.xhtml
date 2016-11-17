@@ -22,15 +22,8 @@
                             <b:tab title="Műfaj műveletek">
                                 <ui:include src="/genreOperations.xhtml"></ui:include>
                             </b:tab>
-                            <b:tab title="Kupon műveletek">
-                                <h3>Kupon hozzáadása</h3>
-                                <h:form>
-                                    <b:commandButton update="@form" value="Hozzáadás" action="#" style="margin: 5px; background-color: #18bc9c;"/>
-                                </h:form>
-                                <h3>Kupon törlése</h3>
-                                <h:form>
-                                    <b:commandButton value="Törlés" action="#" style="margin: 5px; background-color: #18bc9c;"/>
-                                </h:form>
+                            <b:tab title="Kupon műveletek" class="tab">
+                                <ui:include src="/cuponOperations.xhtml"/>
                             </b:tab>
                             <b:tab title="Foglalás műveletek">
                                 <ui:include src="/appointmentOperations.xhtml"/>

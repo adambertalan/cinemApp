@@ -56,7 +56,7 @@ public class AppointmentBean {
 			Appointment editedAppointment = appointmentService.getAppointmentRepository().findAppointmentById(appointmentToBeEditedId);
 			if(editedAppointment == null){
 				addNewAppointment();
-				clearTextFields();
+				clearFields();
 				return;
 			}
 			Guest editedGuest = appointmentService.getGuestRepository().findGuestById(editedAppointment.getGuest().getId());
@@ -73,11 +73,11 @@ public class AppointmentBean {
 			appointmentToBeEditedId = null;
 		}
 
-		clearTextFields();
+		clearFields();
 
 	}
 	
-	private void clearTextFields(){
+	private void clearFields(){
 		this.appointmentGuestName = null;
 		this.appointmentGuestEmail = null;
 		this.appointmentGuestPhoneNumber = null;

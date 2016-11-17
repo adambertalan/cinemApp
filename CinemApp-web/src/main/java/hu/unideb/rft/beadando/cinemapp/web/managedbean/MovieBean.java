@@ -123,7 +123,7 @@ public class MovieBean {
             Movie editedMovie = movieService.getMovieRepository().findMovieById(movieToBeEditedID);
             if (editedMovie == null) {
                 addNewMovie();
-                clearTextFields();
+                clearFields();
                 return;
             }
             editedMovie.setName(movieName);
@@ -137,10 +137,10 @@ public class MovieBean {
             movieToBeEditedID = null;
         }
 
-        clearTextFields();
+        clearFields();
     }
 
-    private void clearTextFields() {
+    private void clearFields() {
         this.movieName = null;
         this.movieCode = null;
         this.movieDescription = null;
