@@ -12,29 +12,29 @@
 		<h3>Kuponok hozzáadása/módosítása</h3>
 		<h:form>
 			<b:inputText label="Kupon neve" placeholder="Kupon neve"
-				required="true" render-label="true" value="#{genreBean.genreName}" />
+				required="true" render-label="true" value="#{cuponBean.cuponName}" />
 			<butter:calendar style="width: 90%;"
-				value="#{movieShowBean.startDate}" rendered="true" required="true"
+				value="#{cuponBean.startDate}" rendered="true" required="true"
 				pickDate="true" pickTime="true" placeholder="Érvénnyesség kezdete"
 				sideBySide="true" />
 			<butter:calendar style="width: 90%;"
-				value="#{movieShowBean.startDate}" rendered="true" required="true"
+				value="#{cuponBean.endDate}" rendered="true" required="true"
 				pickDate="true" pickTime="true" placeholder="Lejárat ideje"
 				sideBySide="true" />
 					
 			<b:commandButton value="Mentés" update="@form cuponsForm"
-				action="#{genreBean.addNewOrEditGenre}" />
+				action="#{cuponBean.addNewCupon}" />
 		</h:form>
 		<h3>Kuponok szerkeztése</h3>
 		<h:form id="cuponsForm">
 			<h:outputLabel value="Kuponok" for="cuponID" />
-			<b:selectOneMenu value="#{genreBean.selectedGenreId}" id="cuponID">
-				<f:selectItems value="#{genreBean.genres}" var="genre"
-					itemValue="#{genre.id}" itemLabel="#{genre.name}" />
+			<b:selectOneMenu value="#{cuponBean.selectedCuponId}" id="cuponID">
+				<f:selectItems value="#{cuponBean.cupons}" var="cupon"
+					itemValue="#{cupon.id}" itemLabel="#{cupon.name}" />
 			</b:selectOneMenu>
-			<b:commandButton value="Módosítás" action="#{genreBean.editGenre}" />
+			<b:commandButton value="Módosítás" action="#{cuponBean.editCupon}" />
 			<b:commandButton value="Törlés" update="cuponsForm"
-				action="#{genreBean.deleteGenre}" />
+				action="#{cuponBean.deleteCupon}" />
 		</h:form>
 	</ui:composition>
 </body>

@@ -64,7 +64,7 @@ public class MovieShowBean {
             MovieShow editedMovieShow = movieShowService.getMovieShowRepository().findMovieShowById(movieShowToBeEditedID);
             if (editedMovieShow == null) {
                 addNewMovieShow();
-                clearTextFields();
+                clearFields();
                 return;
             }
             editedMovieShow.setStartTime(startTime);
@@ -76,10 +76,10 @@ public class MovieShowBean {
             movieShowToBeEditedID = null;
         }
 
-        clearTextFields();
+        clearFields();
     }
 
-    private void clearTextFields() {
+    private void clearFields() {
         this.startTime = null;
         this.endTime = null;
         this.movieId = 1L;
