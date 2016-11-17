@@ -25,9 +25,6 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 	
 	@Query("select seat from Seat seat join seat.theatre theatre where theatre.id = ?1 and seat.seatRow = ?2 order by seat.seatColumn")
 	public List<Seat> findAllSeatsOfRowInTheatre( Long theatreId, Integer row);
-	
-	@Query("select seat from Seat seat join seat.theatre theatre where theatre.id = ?1 and seat.seatColumn = ?2")
-	public List<Seat> findAllSeatsOfColumnInTheatre( Long theatreId, Integer col);
 
 	// @Query("select seat.occupied from Seat seat join seat.theatre theatre
 	// where seat.seatRow = ?1 and seat.seatColumn = ?2 and theatre = ?3")

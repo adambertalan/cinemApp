@@ -53,7 +53,6 @@
         <dependency>
             <groupId>de.larmic.butterfaces</groupId>
             <artifactId>components</artifactId>
-            <version>2.1.10</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -61,17 +60,9 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>${project.groupId}</groupId> -->
-        <!-- <artifactId>CinemApp-ejb</artifactId> -->
-        <!-- <version>${project.version}</version> -->
-        <!-- <scope>provided</scope> -->
-        <!-- </dependency> -->
-
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
-            <version>2.5.1</version>
         </dependency>
 
         <dependency>
@@ -98,33 +89,6 @@
             <groupId>net.bootsfaces</groupId>
             <artifactId>bootsfaces</artifactId>
         </dependency>
-
-        <!-- richfaces -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.richfaces</groupId> -->
-        <!-- <artifactId>richfaces-cache-bom</artifactId> -->
-        <!-- <type>pom</type> -->
-        <!-- <version>4.5.17.Final</version> -->
-        <!-- <scope>import</scope> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.richfaces</groupId> -->
-        <!-- <artifactId>richfaces-build</artifactId> -->
-        <!-- <type>pom</type> -->
-        <!-- <version>4.5.17.Final</version> -->
-        <!-- <scope>import</scope> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.atmosphere</groupId> -->
-        <!-- <artifactId>atmosphere-runtime</artifactId> -->
-        <!-- <version>2.4.7</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.richfaces</groupId> -->
-        <!-- <artifactId>richfaces</artifactId> -->
-        <!-- <version>4.5.17.Final</version> -->
-        <!-- </dependency> -->
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

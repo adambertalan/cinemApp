@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
-import hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @ManagedBean
@@ -25,37 +23,15 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	@EJB
 	private BookSeatService bookSeatService;
 
-	@EJB
-	private TheatreService theatreService;
-	
-	private String color = "red";
-
 	private static List<List<Seat>> seats;
 	
 	private List<Seat> selectedSeats;
 	
 	public void update(){
-		System.out.println("SIKER");
-	}
-	
-	public boolean contains( Seat seat ){
-		return selectedSeats.contains(seat);
-	}
-	
-	public String whatColor( Seat seat ){
-		if( seat.isOccupied() ){
-			if( this.selectedSeats.contains(seat) ){
-				return "orange";
-			} else {
-				return "red";
-			}
-		} else {
-			return "green";
-		}
+		System.out.println("UPDATED");
 	}
 	
 	// törli az általam kijelölt helyeet
-	// TODO átnevezni
 	public void delete(){
 		System.out.println("OCCUPY not COMMITTED! DELETING");
 		for( Seat seat : selectedSeats ){
@@ -65,7 +41,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	}
 
 	// TODO átnevezni, mert nem csak foglalni lehet vele
-	public void occupy(Integer row, Integer col) throws Exception {
+	public void occupyOrFree(Integer row, Integer col) throws Exception {
 		
 		for (List<Seat> seatList : seats) {
 			for (Seat seat : seatList) {
@@ -99,9 +75,16 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	}
 	
 	public String save() {
-		if( selectedSeats != null){
+		System.out.println("Saving");
+		if( selectedSeats != null && !selectedSeats.isEmpty() ){
+			// elmenteni
 			this.bookSeatService.saveReservation(selectedSeats);
-			return "index";
+			// törölni a foglalásokat
+			this.selectedSeats.clear();
+			System.out.println("Querying after saving");
+			// frissíteni az adatbázisból
+			this.seats = bookSeatService.findAllSeatsOfTheatre(1L);
+			return "index?faces-redirect=true";
 		}
 		System.out.println("No selected seats!");
 		return null;
@@ -125,8 +108,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		// új foglalások
 		this.selectedSeats = new ArrayList<>();
 	}
-
-	@PreDestroy
+	
 	public void destroy() {
 		System.out.println("BookSeatBean DESTROY");
 		// ha maradt beragadt foglalása, akkor azt törölni.
@@ -157,14 +139,6 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		this.selectedSeats = selectedSeats;
 	}
 
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
 	@Override
 	public void valueBound(HttpSessionBindingEvent event) {
 		System.out.println("ValueBOUND " + this.toString());
@@ -174,6 +148,5 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	public void valueUnbound(HttpSessionBindingEvent event) {
 		System.out.println("Value-UN-BOUND " + this.toString());
 		this.destroy();
-		
 	}
 }
