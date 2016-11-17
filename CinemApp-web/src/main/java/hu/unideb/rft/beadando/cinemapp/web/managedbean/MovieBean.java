@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.faces.context.FacesContext;
@@ -51,7 +52,7 @@ public class MovieBean {
                 extension = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1).substring(filename.lastIndexOf(".") + 1);
             }
         }
-        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources\\images\\");
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources"+File.separator+"images");
 
         if (movieCode.contains(".")) {
             movieCode = movieCode.substring(0, movieCode.lastIndexOf("."));
@@ -63,9 +64,9 @@ public class MovieBean {
         editedMovie.setMovieCode(movieCode);
         movieService.getMovieRepository().save(editedMovie);
 
-        System.out.println(path + "/" + movieCode);
+        System.out.println(path + File.separator + movieCode);
 
-        return path + "/" + movieCode;
+        return path + File.separator + movieCode;
     }
 
     public String upload() throws IOException {

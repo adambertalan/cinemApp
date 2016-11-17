@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:body styleClass="bodystyle">
+    <h:body styleClass="bodystyle">
 
-	<ui:composition template="/templates/masterLayout.xhtml">
-		<ui:define name="content">
-			<b:jumbotron styleClass="content">
-				<b:container styleClass="content">
-					<h1 style="color: white;">Gyakran Ismételt Kérdések</h1>
-					<b:column
-						style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c; padding: 10px;">
-						<!--TODO - létrehozni az adatbázisban egy gyik táblát kérdésekkel és válaszokkal, és ahhoz lekérdező osztályokat, stb.-->
-						<!--TODO - lekérdezni az adatbázisból a kérdéseket (title) és válaszokat (content)-->
-						<b:panel class="panel" look="success" title="Item 1">Content 1</b:panel>
-						<b:panel class="panel" look="success" title="Item 2">Content 2</b:panel>
-						<b:panel class="panel" look="success" title="Item 3">Content 3</b:panel>
-					</b:column>
-				</b:container>
-			</b:jumbotron>
-		</ui:define>
-	</ui:composition>
-</h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="content">
+                <b:jumbotron styleClass="content">
+                    <b:container styleClass="content">
+                        <h1 style="color: white;">Gyakran Ismételt Kérdések</h1>
+                        <b:column
+                            style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c; padding: 10px;">
+                            <!--TODO - létrehozni az adatbázisban egy gyik táblát kérdésekkel és válaszokkal, és ahhoz lekérdező osztályokat, stb.-->
+                            <!--TODO - lekérdezni az adatbázisból a kérdéseket (title) és válaszokat (content)-->
+                            <b:panel class="panel" look="success" title="Item 1">Content 1</b:panel>
+                            <b:panel class="panel" look="success" title="Item 2">Content 2</b:panel>
+                            <b:panel class="panel" look="success" title="Item 3">Content 3</b:panel>
+                        </b:column>
+                    </b:container>
+                </b:jumbotron>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

@@ -47,7 +47,7 @@
                     <f:selectItems value="#{movieBean.movies}" var="movie"
                                    itemValue="#{movie.id}" itemLabel="#{movie.name}" />
                 </b:selectOneMenu>
-                
+
                 <h:inputFile required="true" value="#{movieBean.file}"/>
                 <h:commandButton value="Feltölt" action="#{movieBean.upload}"/>
             </h:form>
