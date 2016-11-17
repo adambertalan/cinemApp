@@ -36,11 +36,6 @@ public class GenreServiceImpl implements GenreService {
 	public Genre createGenre(String name) {
 		Genre genre = new Genre();
 		genre.setName(name);
-		List<Genre> genres = findAllGenre();
-		for(Genre g : genres){
-			System.out.println(g.getId());
-		}
-		System.out.println("new ID: " + genre.getId());
 		genreRepository.save(genre);
 		return genre;
 	}
