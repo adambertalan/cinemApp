@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:butter="http://butterfaces.org/components">
+<body>
+	<ui:composition>
+		<h3>Kuponok hozzáadása/módosítása</h3>
+		<h:form>
+			<b:inputText label="Kupon neve" placeholder="Kupon neve"
+				required="true" render-label="true" value="#{genreBean.genreName}" />
+			<butter:calendar style="width: 90%;"
+				value="#{movieShowBean.startDate}" rendered="true" required="true"
+				pickDate="true" pickTime="true" placeholder="Érvénnyesség kezdete"
+				sideBySide="true" />
+			<butter:calendar style="width: 90%;"
+				value="#{movieShowBean.startDate}" rendered="true" required="true"
+				pickDate="true" pickTime="true" placeholder="Lejárat ideje"
+				sideBySide="true" />
+					
+			<b:commandButton value="Mentés" update="@form cuponsForm"
+				action="#{genreBean.addNewOrEditGenre}" />
+		</h:form>
+		<h3>Kuponok szerkeztése</h3>
+		<h:form id="cuponsForm">
+			<h:outputLabel value="Kuponok" for="cuponID" />
+			<b:selectOneMenu value="#{genreBean.selectedGenreId}" id="cuponID">
+				<f:selectItems value="#{genreBean.genres}" var="genre"
+					itemValue="#{genre.id}" itemLabel="#{genre.name}" />
+			</b:selectOneMenu>
+			<b:commandButton value="Módosítás" action="#{genreBean.editGenre}" />
+			<b:commandButton value="Törlés" update="cuponsForm"
+				action="#{genreBean.deleteGenre}" />
+		</h:form>
+	</ui:composition>
+</body>
+</html>
