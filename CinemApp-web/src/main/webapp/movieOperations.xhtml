@@ -37,7 +37,7 @@
                 </b:inputTextarea>
 
                 <b:commandButton update="@form moviesForm uploadForm" value="Mentés"
-                                 action="#{movieBean.addNewOrEditMovie}"></b:commandButton>
+                                 action="#{movieBean.addNewOrEditMovie}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
 
             <h3>Plakát feltöltése</h3>
@@ -47,9 +47,9 @@
                     <f:selectItems value="#{movieBean.movies}" var="movie"
                                    itemValue="#{movie.id}" itemLabel="#{movie.name}" />
                 </b:selectOneMenu>
-                
-                <h:inputFile required="true" value="#{movieBean.file}"/>
-                <h:commandButton value="Feltölt" action="#{movieBean.upload}"/>
+
+                <h:inputFile style="padding: 5px;" required="true" value="#{movieBean.file}"/>
+                <b:commandButton value="Feltölt" action="#{movieBean.upload}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
             <h3>Filmek szerkeztése</h3>
             <h:form id="moviesForm">
@@ -58,9 +58,9 @@
                     <f:selectItems value="#{movieBean.movies}" var="movie"
                                    itemValue="#{movie.id}" itemLabel="#{movie.name}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módisítás" action="#{movieBean.editMovie}"></b:commandButton>
+                <b:commandButton value="Módisítás" action="#{movieBean.editMovie}" style="margin: 5px; background-color: #18bc9c;"/>
                 <b:commandButton value="Törlés" action="#{movieBean.deleteMovie}"
-                                 update="movieID"></b:commandButton>
+                                 update="movieID" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>
     </body>

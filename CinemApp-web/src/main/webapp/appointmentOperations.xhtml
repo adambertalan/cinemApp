@@ -1,63 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<body>
-	<ui:composition>
-		<h3>Foglalások hozzáadása/módosítása</h3>
-		<h:form>
-			<b:inputText label="Vendég neve" placeholder="Vendég neve"
-				required="true" render-label="true" value="#{appointmentBean.appointmentGuestName}"/>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <body>
+        <ui:composition>
+            <h3>Foglalások hozzáadása/módosítása</h3>
+            <h:form>
+                <b:inputText label="Vendég neve" placeholder="Vendég neve"
+                             required="true" render-label="true" value="#{appointmentBean.appointmentGuestName}"/>
 
-			<b:inputText label="E-mail cím" placeholder="E-amil cím"
-				required="true" render-label="true" value="#{appointmentBean.appointmentGuestEmail}"/>
+                <b:inputText label="E-mail cím" placeholder="E-amil cím"
+                             required="true" render-label="true" value="#{appointmentBean.appointmentGuestEmail}"/>
 
-			<b:inputText label="Telefonszám" placeholder="Telefonszám"
-				required="true" render-label="true" value="#{appointmentBean.appointmentGuestPhoneNumber}"/>
+                <b:inputText label="Telefonszám" placeholder="Telefonszám"
+                             required="true" render-label="true" value="#{appointmentBean.appointmentGuestPhoneNumber}"/>
 
-			<b:inputText label="Irányítószám" placecholder="Irányítószám"
-				render-label="true" value="#{appointmentBean.appointemntGuestZip}"/>
-				
-			
-		
-			<h:outputLabel value="Vetítés" for="movieShowID" />
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{appointmentBean.appointmentMovieShowId}" id="movieShowID">
-				<f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
-					itemValue="#{movieShow.id}" itemLabel="#{movieShow.id}" />
-			</b:selectOneMenu>
+                <b:inputText label="Irányítószám" placeholder="Irányítószám"
+                             render-label="true" value="#{appointmentBean.appointemntGuestZip}"/>
 
-			<h:outputLabel value="Ülés" for="seatID" />
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{appointmentBean.appointmentSeatId}" id="seatID">
-				<f:selectItems value="#{seatBean.seats}" var="seat"
-					itemValue="#{seat.id}" itemLabel="#{seat.id}" />
-			</b:selectOneMenu>
 
-			<b:commandButton update="@form reservationsForm" value="Mentés"
-				action="#{appointmentBean.addNewOrEditAppointment}"></b:commandButton>
-		</h:form>
 
-		<h3>Foglalások szerkeztése</h3>
-		<h:form id="reservationsForm">
-			<h:outputLabel value="Foglalások" for="reservationID" />
-			<b:selectOneMenu value="#{appointmentBean.selectedAppointmentId}"
-				id="reservationID">
-				<f:selectItems value="#{appointmentBean.appointments}"
-					var="appointment" itemValue="#{appointment.id}"
-					itemLabel="#{appointment.id}" />
+                <h:outputLabel value="Vetítés" for="movieShowID" />
+                <b:selectOneMenu required="true" render-label="true"
+                                 value="#{appointmentBean.appointmentMovieShowId}" id="movieShowID">
+                    <f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
+                                   itemValue="#{movieShow.id}" itemLabel="#{movieShow.id}" />
+                </b:selectOneMenu>
 
-			</b:selectOneMenu>
-			<b:commandButton value="Módisítás"
-				action="#{appointmentBean.editAppointment}"></b:commandButton>
-			<b:commandButton value="Törlés"
-				action="#{appointmentBean.deleteAppointment}" update="reservationID"></b:commandButton>
-		</h:form>
-	</ui:composition>
-</body>
+                <h:outputLabel value="Ülés" for="seatID" />
+                <b:selectOneMenu required="true" render-label="true"
+                                 value="#{appointmentBean.appointmentSeatId}" id="seatID">
+                    <f:selectItems value="#{seatBean.seats}" var="seat"
+                                   itemValue="#{seat.id}" itemLabel="#{seat.id}" />
+                </b:selectOneMenu>
+
+                <b:commandButton update="@form reservationsForm" value="Mentés"
+                                 action="#{appointmentBean.addNewOrEditAppointment}" style="margin: 5px; background-color: #18bc9c;"/>
+            </h:form>
+
+            <h3>Foglalások szerkeztése</h3>
+            <h:form id="reservationsForm">
+                <h:outputLabel value="Foglalások" for="reservationID" />
+                <b:selectOneMenu value="#{appointmentBean.selectedAppointmentId}"
+                                 id="reservationID">
+                    <f:selectItems value="#{appointmentBean.appointments}"
+                                   var="appointment" itemValue="#{appointment.id}"
+                                   itemLabel="#{appointment.id}" />
+
+                </b:selectOneMenu>
+                <b:commandButton value="Módisítás"
+                                 action="#{appointmentBean.editAppointment}" style="margin: 5px; background-color: #18bc9c;"/>
+                <b:commandButton value="Törlés"
+                                 action="#{appointmentBean.deleteAppointment}" update="reservationID" style="margin: 5px; background-color: #18bc9c;"/>
+            </h:form>
+        </ui:composition>
+    </body>
 </html>

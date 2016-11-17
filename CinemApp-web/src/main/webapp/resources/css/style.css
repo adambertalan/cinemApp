@@ -1,13 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2016.10.22., 13:51:12
-    Author     : Levente
-*/
-
 .bodystyle{
     /*background-color: #7ebaba;*/
     background: #ACD4B5;
@@ -103,4 +93,13 @@ footer{
 
 h1{
     text-align: center;
+}
+
+.nav-tabs > li > a{
+    background-color: #e1e1e1;
+}
+
+#adminbutton{
+    margin: 5px;
+    background-color: #18bc9c;
 }

@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -13,20 +12,20 @@
             <ui:define name="content">
                 <b:jumbotron styleClass="content">
                     <b:container styleClass="content">
-                        <b:tabView pills="true" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
-                            <b:tab title="Film műveletek" class="tab">
+                        <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
+                            <b:tab title="Film műveletek">
                                 <ui:include src="/movieOperations.xhtml" />
                             </b:tab>
-                            <b:tab title="Vetítés műveletek" class="tab">
+                            <b:tab title="Vetítés műveletek">
                                 <ui:include src="/movieShowOperations.xhtml" />
                             </b:tab>
-                            <b:tab title="Műfaj műveletek" class="tab">
+                            <b:tab title="Műfaj műveletek">
                                 <ui:include src="/genreOperations.xhtml"></ui:include>
                             </b:tab>
                             <b:tab title="Kupon műveletek" class="tab">
                                 <ui:include src="/cuponOperations.xhtml"/>
                             </b:tab>
-                            <b:tab title="Foglalás műveletek" class="tab">
+                            <b:tab title="Foglalás műveletek">
                                 <ui:include src="/appointmentOperations.xhtml"/>
                             </b:tab>
                         </b:tabView>
