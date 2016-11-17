@@ -94,3 +94,12 @@ footer{
 h1{
     text-align: center;
 }
+
+.nav-tabs > li > a{
+    background-color: #e1e1e1;
+}
+
+#adminbutton{
+    margin: 5px;
+    background-color: #18bc9c;
+}

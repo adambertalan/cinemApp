@@ -39,7 +39,7 @@
                 </b:selectOneMenu>
 
                 <b:commandButton update="@form reservationsForm" value="Mentés"
-                                 action="#{appointmentBean.addNewOrEditAppointment}"></b:commandButton>
+                                 action="#{appointmentBean.addNewOrEditAppointment}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
 
             <h3>Foglalások szerkeztése</h3>
@@ -53,9 +53,9 @@
 
                 </b:selectOneMenu>
                 <b:commandButton value="Módisítás"
-                                 action="#{appointmentBean.editAppointment}"></b:commandButton>
+                                 action="#{appointmentBean.editAppointment}" style="margin: 5px; background-color: #18bc9c;"/>
                 <b:commandButton value="Törlés"
-                                 action="#{appointmentBean.deleteAppointment}" update="reservationID"></b:commandButton>
+                                 action="#{appointmentBean.deleteAppointment}" update="reservationID" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>
     </body>

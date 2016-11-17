@@ -28,7 +28,7 @@
                 <butter:calendar style="width: 90%;" value="#{movieShowBean.startDate}" rendered="true" required="true" pickDate="true" pickTime="true" placeholder="Kezdési idő" sideBySide="true"/>
 
                 <b:commandButton update="@form movieShowsForm" value="Mentés"
-                                 action="#{movieShowBean.addNewOrEditMovieShow}"></b:commandButton>
+                                 action="#{movieShowBean.addNewOrEditMovieShow}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
 
             <h3>Vetítések szerkeztése</h3>
@@ -38,9 +38,9 @@
                     <f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
                                    itemValue="#{movieShow.id}" itemLabel="#{movieShowBean.getMovieShowName(movieShow)}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módisítás" action="#{movieShowBean.editMovie}"></b:commandButton>
+                <b:commandButton value="Módisítás" action="#{movieShowBean.editMovie}" style="margin: 5px; background-color: #18bc9c;"/>
                 <b:commandButton value="Törlés" action="#{movieShowBean.deleteMovieShow}"
-                                 update="movieShowID"></b:commandButton>
+                                 update="movieShowID" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>
     </body>

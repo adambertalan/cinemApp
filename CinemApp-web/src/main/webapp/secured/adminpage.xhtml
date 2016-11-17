@@ -12,27 +12,27 @@
             <ui:define name="content">
                 <b:jumbotron styleClass="content">
                     <b:container styleClass="content">
-                        <b:tabView pills="true" contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
-                            <b:tab title="Film műveletek" class="tab">
+                        <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
+                            <b:tab title="Film műveletek">
                                 <ui:include src="/movieOperations.xhtml" />
                             </b:tab>
-                            <b:tab title="Vetítés műveletek" class="tab">
+                            <b:tab title="Vetítés műveletek">
                                 <ui:include src="/movieShowOperations.xhtml" />
                             </b:tab>
-                            <b:tab title="Műfaj műveletek" class="tab">
+                            <b:tab title="Műfaj műveletek">
                                 <ui:include src="/genreOperations.xhtml"></ui:include>
                             </b:tab>
-                            <b:tab title="Kupon műveletek" class="tab">
+                            <b:tab title="Kupon műveletek">
                                 <h3>Kupon hozzáadása</h3>
                                 <h:form>
-                                    <b:commandButton update="@form" value="Hozzáadás" action="#"></b:commandButton>
+                                    <b:commandButton update="@form" value="Hozzáadás" action="#" style="margin: 5px; background-color: #18bc9c;"/>
                                 </h:form>
                                 <h3>Kupon törlése</h3>
                                 <h:form>
-                                    <b:commandButton value="Törlés" action="#"></b:commandButton>
+                                    <b:commandButton value="Törlés" action="#" style="margin: 5px; background-color: #18bc9c;"/>
                                 </h:form>
                             </b:tab>
-                            <b:tab title="Foglalás műveletek" class="tab">
+                            <b:tab title="Foglalás műveletek">
                                 <ui:include src="/appointmentOperations.xhtml"/>
                             </b:tab>
                         </b:tabView>

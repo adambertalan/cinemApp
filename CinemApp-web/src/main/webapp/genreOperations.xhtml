@@ -16,7 +16,7 @@
 
 
                 <b:commandButton value="Mentés" update="@form genresForm"
-                                 action="#{genreBean.addNewOrEditGenre}" />
+                                 action="#{genreBean.addNewOrEditGenre}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
             <h3>Műfajok szerkeztése</h3>
             <h:form id="genresForm">
@@ -25,9 +25,9 @@
                     <f:selectItems value="#{genreBean.genres}" var="genre"
                                    itemValue="#{genre.id}" itemLabel="#{genre.name}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módosítás" action="#{genreBean.editGenre}" />
+                <b:commandButton value="Módosítás" action="#{genreBean.editGenre}" style="margin: 5px; background-color: #18bc9c;"/>
                 <b:commandButton value="Törlés" update="genresForm"
-                                 action="#{genreBean.deleteGenre}" />
+                                 action="#{genreBean.deleteGenre}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>
     </body>
