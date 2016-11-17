@@ -52,11 +52,19 @@ public class MovieBean {
             }
         }
         String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources\\images\\");
-        
+
+        if (movieCode.contains(".")) {
+            movieCode = movieCode.substring(0, movieCode.lastIndexOf("."));
+        } else {
+            movieCode = movieCode + "." + extension;
+        }
+
         Movie editedMovie = movieService.getMovieRepository().findMovieById(selectedMovieId);
-            editedMovie.setMovieCode(movieCode + "." + extension);
-            movieService.getMovieRepository().save(editedMovie);
-        
+        editedMovie.setMovieCode(movieCode);
+        movieService.getMovieRepository().save(editedMovie);
+
+        System.out.println(path + "/" + movieCode);
+
         return path + "/" + movieCode;
     }
 
@@ -71,7 +79,7 @@ public class MovieBean {
             movieDescription = selectedMovie.getDescription();
             movieToBeEditedID = selectedMovieId;
         }
-        System.out.println(getFileNameWithPath(file));
+
         file.write(getFileNameWithPath(file));
         return "success";
     }
