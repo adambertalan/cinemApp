@@ -5,15 +5,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
 
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
-public interface MovieRepository extends JpaRepository<Movie,Long>{
+public interface CuponRepository extends JpaRepository<Cupon, Long> {
+	
+	public Cupon findCuponByName(String name);
+	
+	public Cupon findCuponById(Long id);
 
-    public Movie findMovieByName( String movieName );
-    
-    public Movie findMovieById( Long movieId );
-    
-    public Movie findByMovieCode( String movieCode );
 }

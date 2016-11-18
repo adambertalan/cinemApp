@@ -41,7 +41,7 @@ public class GenreBean {
 			Genre editedGenre = genreService.getGenreRepository().findOne(genreToBeEditedId);
 			if(editedGenre == null){
 				addNewGenre();
-				clearTextFields();
+				clearFields();
 				return;
 			}
 			editedGenre.setName(genreName);
@@ -50,10 +50,10 @@ public class GenreBean {
 			genreToBeEditedId = null;
 		}
 		
-		clearTextFields();
+		clearFields();
 	}
 	
-	private void clearTextFields(){
+	private void clearFields(){
 		this.genreName = null;
 	}
 	

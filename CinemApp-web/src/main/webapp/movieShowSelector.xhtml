@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:body styleClass="bodystyle">
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="content">
+                <b:jumbotron styleClass="content">
+                    <b:container styleClass="content">
+                        <h1 style="color: white;">Filmek</h1>
+                        <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+
+                            <h:graphicImage styleClass="indexmovies" library="images" name="#{movieShowSelectorBean.selectedMovie.movieCode}"/>
+
+                            <h:outputLabel value="Cím: #{movieShowSelectorBean.selectedMovie.name}"/><br/>
+                            <h:outputLabel value="Műfaj: #{movieShowSelectorBean.selectedMovie.genre.name}"/><br/>
+                            <h:outputLabel value="Korhatár: #{movieShowSelectorBean.selectedMovie.ageLimit}"/><br/>
+                            <h:outputLabel value="Hossz: #{movieShowSelectorBean.selectedMovie.length} perc"/><br/>
+                            <h:outputLabel value="Leírás: #{movieShowSelectorBean.selectedMovie.description}"/><br/>
+
+                            <h:outputLabel value="Vetítések" for="movieShowID" />
+                            <b:selectOneMenu value="#{movieShowSelectorBean.selectedMovieShowId}" id="movieShowID">
+                                <f:selectItems value="#{movieShowSelectorBean.movieShows}" var="movieShow"
+                                               itemValue="#{movieShow.id}" itemLabel="#{movieShowSelectorBean.getMovieShowName(movieShow)}" />
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:container>
+                </b:jumbotron>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
