@@ -21,9 +21,13 @@
 				value="#{cuponBean.endDate}" rendered="true" required="true"
 				pickDate="true" pickTime="true" placeholder="Lejárat ideje"
 				sideBySide="true" />
-					
+			<h:outputLabel value="Kupon típus" for="cuponTypeID"/>
+			<b:selectOneMenu value="#{cuponBean.cuponType}" id="cuponTypeID">
+				<f:selectItems value="#{cuponBean.cuponTypes}" var="cuponType"
+					itemValue="#{cuponType}" itemLabel="#{cuponType}"/>
+			</b:selectOneMenu>
 			<b:commandButton value="Mentés" update="@form cuponsForm"
-				action="#{cuponBean.addNewCupon}" />
+				action="#{cuponBean.addNewOrEditCupon}" />
 		</h:form>
 		<h3>Kuponok szerkeztése</h3>
 		<h:form id="cuponsForm">

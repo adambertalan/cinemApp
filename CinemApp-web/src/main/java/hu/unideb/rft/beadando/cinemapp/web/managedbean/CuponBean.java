@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.CuponType;
 
 @ManagedBean(name ="cuponBean")
 @ViewScoped
@@ -33,9 +34,16 @@ public class CuponBean {
 	private Timestamp startOfValidity;
 	private Timestamp endOfValidity;
 	
+	private CuponType cuponType;
+	
+	private static Long cuponToBeEditedId = null;
+	
+	private List<CuponType> cuponTypes; 
+	
 	@PostConstruct
 	public void init(){
 		cupons = cuponsService.findAllCupon();
+		cuponTypes = cuponsService.findAllCuponType();
 		System.out.println("Cupons: " + cupons);
 	}
 	
@@ -52,15 +60,36 @@ public class CuponBean {
         //setStartTime(Timestamp.from(startDate.toInstant()));
     }
 
-	public void addNewCupon() throws ParseException{
+	public void addNewOrEditCupon() throws ParseException{
 		calculateTime();
 		System.out.println(cuponName);
 		System.out.println(startOfValidity);
 		System.out.println(endOfValidity);
-		cuponsService.createCupon(cuponName, startOfValidity, endOfValidity);
-		cupons = cuponsService.findAllCupon();
+		System.out.println(cuponType);
+		if(cuponToBeEditedId == null){
+			addNewCupon();
+		}else{
+			Cupon editedCupon = cuponsService.getCuponRepository().findOne(cuponToBeEditedId);
+			if(editedCupon == null){
+				addNewCupon();
+				clearFields();
+				return;
+			}
+			editedCupon.setName(cuponName);
+			editedCupon.setStartOfValidity(startOfValidity);
+			editedCupon.setEndOfValidity(endOfValidity);
+			editedCupon.setType(cuponType);
+			cuponsService.getCuponRepository().save(editedCupon);
+			cupons = cuponsService.findAllCupon();
+			cuponToBeEditedId = null;
+		}
 		
 		clearFields();
+	}
+	
+	private void addNewCupon(){
+		cuponsService.createCupon(cuponName, startOfValidity, endOfValidity, cuponType);
+		cupons = cuponsService.findAllCupon();
 	}
 	
 	public void clearFields(){
@@ -69,10 +98,21 @@ public class CuponBean {
 		this.endOfValidity = null;
 		this.startDate = null;
 		this.endDate = null;
+		this.cuponType = CuponType.FREE_MOVIE;
 	}
 	
 	public void editCupon(){
-		
+		Cupon cupon = cuponsService.getCuponRepository().findCuponById(selectedCuponId);
+		if(cupon != null){
+			cuponName = cupon.getName();
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm a",Locale.US);
+			
+			startDate = formatter.format(cupon.getStartOfValidity());
+			endDate = formatter.format(cupon.getEndOfValidity());
+			cuponType = cupon.getType();
+			cuponToBeEditedId = selectedCuponId;
+		}
 	}
 	
 	public void deleteCupon(){
@@ -136,6 +176,22 @@ public class CuponBean {
 
 	public void setEndOfValidity(Timestamp endOfValidity) {
 		this.endOfValidity = endOfValidity;
+	}
+
+	public CuponType getCuponType() {
+		return cuponType;
+	}
+
+	public void setCuponType(CuponType cuponType) {
+		this.cuponType = cuponType;
+	}
+
+	public List<CuponType> getCuponTypes() {
+		return cuponTypes;
+	}
+
+	public void setCuponTypes(List<CuponType> cuponTypes) {
+		this.cuponTypes = cuponTypes;
 	}
 	
 	

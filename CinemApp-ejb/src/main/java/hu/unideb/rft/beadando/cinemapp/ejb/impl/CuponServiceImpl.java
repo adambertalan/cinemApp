@@ -1,6 +1,7 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -13,6 +14,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.CuponType;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.CuponRepository;
 
 @Stateless
@@ -30,11 +32,13 @@ public class CuponServiceImpl implements CuponService {
 	}
 
 	@Override
-	public Cupon createCupon(String name, Timestamp startOfValidity, Timestamp endOfValidity) {
+	public Cupon createCupon(String name, Timestamp startOfValidity, Timestamp endOfValidity, CuponType cuponType) {
 		Cupon cupon = new Cupon();
 		cupon.setName(name);
 		cupon.setStartOfValidity(startOfValidity);
 		cupon.setEndOfValidity(endOfValidity);
+		cupon.setType(cuponType);
+		cupon.setUsed(false);
 		cuponRepository.save(cupon);
 		
 		return cupon;
@@ -43,6 +47,20 @@ public class CuponServiceImpl implements CuponService {
 	@Override
 	public void deleteCupon(Long id) {
 		cuponRepository.delete(id);
+	}
+
+	@Override
+	public CuponRepository getCuponRepository() {
+		return cuponRepository;
+	}
+
+	@Override
+	public List<CuponType> findAllCuponType() {
+		List<CuponType> cuponTypes = new ArrayList<CuponType>();
+		for(CuponType ct : CuponType.values()){
+			cuponTypes.add(ct);
+		}
+		return cuponTypes;
 	}
 
 }
