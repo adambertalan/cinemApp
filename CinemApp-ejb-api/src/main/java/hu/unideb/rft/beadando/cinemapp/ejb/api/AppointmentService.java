@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.AppointmentRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.GuestRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.MovieShowRepository;
@@ -14,6 +15,8 @@ import hu.unideb.rft.beadando.cinemapp.jpa.repository.SeatRepository;
 public interface AppointmentService {
 
 	public List<Appointment> findAllAppointments();
+	
+	public List<Appointment> findAppointmentsOfGuest( Guest guest );
 
 	public Appointment createAppointment(Long guestId, Long movieShowId, Long seatId);
 
