@@ -15,16 +15,38 @@
                 <b:jumbotron styleClass="content">
                     <b:container styleClass="content">
                         <h1 style="color: white;">Üdvözöl a CinemApp</h1>
-                        <b:carousel class="carousel">
-                            <c:forEach items="#{movieBean.moviesList}" var="movies">
-                                <b:carouselItem>
-                                    <div id="slide">
-                                        <h:graphicImage styleClass="slideimg" library="images" name="#{movies.movie1.movieCode}" />
-                                        <h:graphicImage styleClass="slideimg" library="images" name="#{movies.movie2.movieCode}" />
-                                    </div>
-                                </b:carouselItem>
-                            </c:forEach>
-                        </b:carousel>
+
+                        <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+
+                            <b:carousel class="carousel">
+                                <c:forEach items="#{movieBean.movies}" var="movie">
+                                    <b:carouselItem>
+                                        <div id="slide">
+                                            <h:form>
+                                                <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                                    <f:param name="movieCode" value="#{movie.movieCode}"/>
+                                                    <h:graphicImage styleClass="indexmovies" library="images" name="#{movie.movieCode}" />
+                                                </h:commandLink>
+                                            </h:form>
+                                        </div>
+                                    </b:carouselItem>
+                                </c:forEach>
+                            </b:carousel>
+
+                            <h2 style="text-align: center">Aktuális filmek</h2>
+                            <div class="indexmoviesdiv">
+                                <c:forEach items="#{movieBean.movies}" var="movie">
+                                    <h:form style="display: inline-block;">
+                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
+                                            <h:graphicImage styleClass="indexmovies" library="images" name="#{movie.movieCode}" />
+                                        </h:commandLink>
+                                    </h:form>
+                                </c:forEach>
+                            </div>
+
+                        </b:column>
+
                     </b:container>
                 </b:jumbotron>
 

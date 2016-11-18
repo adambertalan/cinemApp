@@ -18,59 +18,59 @@ import hu.unideb.rft.beadando.cinemapp.jpa.repository.MovieRepository;
 
 @Stateless
 @Transactional(value = TxType.REQUIRED)
-@Interceptors({ SpringBeanAutowiringInterceptor.class })
+@Interceptors({SpringBeanAutowiringInterceptor.class})
 public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
-    
+
     @Autowired
     private GenreRepository genreRepository;
-    
+
+    @Override
     public List<Movie> findAllMovies() {
         List<Movie> allMovie = movieRepository.findAll();
         return allMovie;
     }
 
-	@Override
-	public Movie createMovie(String movieName, String movieCode, Integer ageLimit, String description, Integer length,
-			Long genreId) {
-		Movie movie = new Movie();
-		movie.setName(movieName);
-		movie.setAgeLimit(ageLimit);
-		movie.setDescription(description);
-		movie.setLength(length);
-		movie.setMovieCode(movieCode);
-		movie.setRating(0);
-		
-		Genre genre = genreRepository.findOne(genreId);
-		
-		movie.setGenre(genre);
-		
-		movieRepository.save(movie);
-		return movie;
-	}
+    @Override
+    public Movie createMovie(String movieName, String movieCode, Integer ageLimit, String description, Integer length,
+            Long genreId) {
+        Movie movie = new Movie();
+        movie.setName(movieName);
+        movie.setAgeLimit(ageLimit);
+        movie.setDescription(description);
+        movie.setLength(length);
+        movie.setMovieCode(movieCode);
+        movie.setRating(0);
 
-	@Override
-	public void deleteMovie(Long movieId) {
-		movieRepository.delete(movieId);		
-	}
+        Genre genre = genreRepository.findOne(genreId);
 
-	@Override
-	public void editMovie(Long movideId) {
-		// TODO Auto-generated method stub
-		
-	}
+        movie.setGenre(genre);
 
-	public MovieRepository getMovieRepository() {
-		return movieRepository;
-	}
+        movieRepository.save(movie);
+        return movie;
+    }
 
-	@Override
-	public GenreRepository getGenreRepository() {
-		return genreRepository;
-	}
-	
-	
-    
+    @Override
+    public void deleteMovie(Long movieId) {
+        movieRepository.delete(movieId);
+    }
+
+    @Override
+    public void editMovie(Long movideId) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public MovieRepository getMovieRepository() {
+        return movieRepository;
+    }
+
+    @Override
+    public GenreRepository getGenreRepository() {
+        return genreRepository;
+    }
+
 }
