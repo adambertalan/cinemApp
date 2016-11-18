@@ -42,7 +42,7 @@ public class MovieServiceImpl implements MovieService {
         movie.setDescription(description);
         movie.setLength(length);
         movie.setMovieCode(movieCode);
-        movie.setRating(0);
+        movie.setRating(0.0);
 
         Genre genre = genreRepository.findOne(genreId);
 
