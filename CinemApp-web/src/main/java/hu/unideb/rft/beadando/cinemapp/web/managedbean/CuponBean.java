@@ -16,61 +16,62 @@ import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.CuponType;
 
-@ManagedBean(name = "cuponBean")
+
+@ManagedBean(name ="cuponBean")
 @ViewScoped
 public class CuponBean {
 
 	@EJB
 	private CuponService cuponsService;
-
+	
 	private List<Cupon> cupons;
-
+	
 	private Long selectedCuponId;
-
+	
 	private String startDate;
 	private String endDate;
-
+	
 	private String cuponName;
 	private Timestamp startOfValidity;
 	private Timestamp endOfValidity;
-
+	
 	private CuponType cuponType;
-
+	
 	private static Long cuponToBeEditedId = null;
-
-	private List<CuponType> cuponTypes;
-
+	
+	private List<CuponType> cuponTypes; 
+	
 	@PostConstruct
-	public void init() {
+	public void init(){
 		cupons = cuponsService.findAllCupon();
 		cuponTypes = cuponsService.findAllCuponType();
 		System.out.println("Cupons: " + cupons);
 	}
+	
+	public void calculateTime() throws ParseException{
+        System.out.println(startDate);
+        System.out.println(endDate);
+        SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy hh:mm a",Locale.US);
+        Date date = formater.parse(startDate);
+        System.out.println(date);
+        setStartOfValidity(Timestamp.from(date.toInstant()));
+        date = formater.parse(endDate);
+        System.out.println(date);
+        setEndOfValidity(Timestamp.from(date.toInstant()));
+        //setStartTime(Timestamp.from(startDate.toInstant()));
+    }
 
-	public void calculateTime() throws ParseException {
-		System.out.println(startDate);
-		System.out.println(endDate);
-		SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy hh:mm a", Locale.US);
-		Date date = formater.parse(startDate);
-		System.out.println(date);
-		setStartOfValidity(Timestamp.from(date.toInstant()));
-		date = formater.parse(endDate);
-		System.out.println(date);
-		setEndOfValidity(Timestamp.from(date.toInstant()));
-		// setStartTime(Timestamp.from(startDate.toInstant()));
-	}
-
-	public void addNewOrEditCupon() throws ParseException {
+	public void addNewOrEditCupon() throws ParseException{
 		calculateTime();
 		System.out.println(cuponName);
 		System.out.println(startOfValidity);
 		System.out.println(endOfValidity);
 		System.out.println(cuponType);
-		if (cuponToBeEditedId == null) {
+		if(cuponToBeEditedId == null){
 			addNewCupon();
-		} else {
+		}else{
 			Cupon editedCupon = cuponsService.getCuponRepository().findOne(cuponToBeEditedId);
-			if (editedCupon == null) {
+			if(editedCupon == null){
 				addNewCupon();
 				clearFields();
 				return;
@@ -83,16 +84,16 @@ public class CuponBean {
 			cupons = cuponsService.findAllCupon();
 			cuponToBeEditedId = null;
 		}
-
+		
 		clearFields();
 	}
-
-	private void addNewCupon() {
+	
+	private void addNewCupon(){
 		cuponsService.createCupon(cuponName, startOfValidity, endOfValidity, cuponType);
 		cupons = cuponsService.findAllCupon();
 	}
-
-	public void clearFields() {
+	
+	public void clearFields(){
 		this.cuponName = null;
 		this.startOfValidity = null;
 		this.endOfValidity = null;
@@ -101,25 +102,27 @@ public class CuponBean {
 		this.cuponType = CuponType.FREE_MOVIE;
 	}
 
-	public void editCupon() {
+
+	
+	public void editCupon(){
 		Cupon cupon = cuponsService.getCuponRepository().findCuponById(selectedCuponId);
-		if (cupon != null) {
+		if(cupon != null){
 			cuponName = cupon.getName();
-
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm a", Locale.US);
-
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm a",Locale.US);
+			
 			startDate = formatter.format(cupon.getStartOfValidity());
 			endDate = formatter.format(cupon.getEndOfValidity());
 			cuponType = cupon.getType();
 			cuponToBeEditedId = selectedCuponId;
 		}
 	}
-
-	public void deleteCupon() {
+	
+	public void deleteCupon(){
 		cuponsService.deleteCupon(selectedCuponId);
 		cupons = cuponsService.findAllCupon();
 	}
-
+	
 	public List<Cupon> getCupons() {
 		return cupons;
 	}
@@ -191,5 +194,7 @@ public class CuponBean {
 	public void setCuponTypes(List<CuponType> cuponTypes) {
 		this.cuponTypes = cuponTypes;
 	}
-
+	
+	
+	
 }
