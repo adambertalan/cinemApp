@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Movie extends BaseName {
    
-    private Integer rating;
+    private Double rating;
     
     private String movieCode;
     
@@ -32,11 +32,11 @@ public class Movie extends BaseName {
         this.length = length;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

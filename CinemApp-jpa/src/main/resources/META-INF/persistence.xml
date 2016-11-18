@@ -10,7 +10,6 @@
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest</class>
-        <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Rating</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Theatre</class>
         <class>hu.unideb.rft.beadando.cinemapp.jpa.entity.Genre</class>
