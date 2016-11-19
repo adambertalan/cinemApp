@@ -1,7 +1,7 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
-import java.sql.Timestamp;
-
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -15,6 +15,10 @@ public class Movie extends BaseName {
     
     private Integer ageLimit;
     
+    @Basic
+    private byte[] image;
+    
+    @Column(columnDefinition="TEXT")
     private String description;
 
     // Hossz percben
@@ -70,5 +74,13 @@ public class Movie extends BaseName {
 
 	public void setMovieCode(String movieCode) {
 		this.movieCode = movieCode;
-	}    
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 }

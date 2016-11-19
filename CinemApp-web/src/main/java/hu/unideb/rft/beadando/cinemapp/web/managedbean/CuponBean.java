@@ -99,7 +99,7 @@ public class CuponBean {
 		this.endOfValidity = null;
 		this.startDate = null;
 		this.endDate = null;
-		this.cuponType = CuponType.FREE_MOVIE;
+		this.cuponType = CuponType.FREE_ITEM;
 	}
 
 

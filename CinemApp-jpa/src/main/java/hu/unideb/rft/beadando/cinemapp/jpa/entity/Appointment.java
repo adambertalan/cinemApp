@@ -1,8 +1,11 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Appointment extends BaseId {
@@ -13,8 +16,8 @@ public class Appointment extends BaseId {
 	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private MovieShow movieShow;
 	
-	@ManyToOne(fetch=FetchType.EAGER, optional=false)
-	private Seat seat;
+	@OneToMany(fetch=FetchType.EAGER)
+	private List<Seat> seats;
 
 	public Guest getGuest() {
 		return guest;
@@ -32,11 +35,11 @@ public class Appointment extends BaseId {
 		this.movieShow = movieShow;
 	}
 
-	public Seat getSeat() {
-		return seat;
+	public List<Seat> getSeats() {
+		return seats;
 	}
 
-	public void setSeat(Seat seat) {
-		this.seat = seat;
+	public void setSeats(List<Seat> seats) {
+		this.seats = seats;
 	}
 }

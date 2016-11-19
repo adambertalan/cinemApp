@@ -22,4 +22,8 @@ public interface MovieService {
 	public MovieRepository getMovieRepository();
 	
 	public GenreRepository getGenreRepository();
+	
+	public void saveMovie( Movie movie );
+	
+	public byte[] getImageOfMovie( Long movieId );
 }

@@ -17,7 +17,7 @@ import hu.unideb.rft.beadando.cinemapp.jpa.repository.GenreRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.MovieRepository;
 
 @Stateless
-@Transactional(value = TxType.REQUIRED)
+@Transactional(TxType.REQUIRED)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class MovieServiceImpl implements MovieService {
 
@@ -72,5 +72,17 @@ public class MovieServiceImpl implements MovieService {
     public GenreRepository getGenreRepository() {
         return genreRepository;
     }
+
+	@Override
+	public byte[] getImageOfMovie(Long movieId) {
+		Movie movie = movieRepository.findOne(movieId);
+		return movie.getImage();
+	}
+
+	@Override
+	public void saveMovie(Movie movie) {
+		movieRepository.save(movie);
+		
+	}
 
 }

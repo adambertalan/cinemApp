@@ -10,36 +10,59 @@
 <body>
 	<ui:composition>
 		<h3>Vendég karbantartó</h3>
-		 <butter:table id="table"
-                 var="guest"
-                 value="#{guestBean.guests}"
-                 tableBordered="false"
-                 tableCondensed="false"
-                 tableStriped="true"
-                 ajaxDisableRenderRegionsOnRequest="true"
-                 rendered="true">
-            <!-- at this time you have to put an ajax tag to activate some features-->
-            <f:ajax render="formId:selectedRow"/>
-            <butter:column id="column1"
-                      label="Name">
+		<butter:table id="table" var="guest" value="#{guestBean.guests}"
+			tableBordered="false" tableCondensed="false" tableStriped="true"
+			singleSelectionListener="#{guestBean}"
+			ajaxDisableRenderRegionsOnRequest="true" rendered="true">
+			<f:ajax render="formId:selectedRow" />
+			<butter:column id="column1" label="Name">
                       #{guest.name}
             </butter:column>
-            <butter:column id="column2"
-                      label="Email">
+			<butter:column id="column2" label="Email">
                       #{guest.email}
             </butter:column>
-            <butter:column id="column3"
-                      label="Phone number">
+			<butter:column id="column3" label="Phone number">
                       #{guest.phoneNumber}
             </butter:column>
-            <butter:column id="column4"
-                      label="Zip code">
+			<butter:column id="column4" label="Zip code">
                       #{guest.zip}
             </butter:column>
-        </butter:table>
-		<b:well>
-			<h3>Well Header</h3>
-    		Well, that's the content of the <b:well />.
+		</butter:table>
+		<b:well id="well">
+			<h3>#{guestBean.selectedGuestName} foglalásai</h3>
+			<div id="welldiv">
+				<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
+					<b:row>
+						<b:column>
+							<h:outputLabel value="Filmcím: " />
+							<h:outputText span="10"
+								value="#{appointment.movieShow.movie.name}" />
+						</b:column>
+						<b:column>
+							<h:outputLabel value="Kezdés: " />
+							<h:outputText span="10"
+								value="#{guestBean.format(appointment.movieShow.startTime)}" />
+						</b:column>
+						<b:column>
+							<h:outputLabel value="Vége: " />
+							<h:outputText span="10"
+								value="#{guestBean.format(appointment.movieShow.endTime)}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<h:outputLabel value="Foglalt helyek: " />
+
+						<ui:repeat var="seat" value="#{appointment.seats}">
+							<h:outputLabel value="Sor:" />
+							<h:outputText span="8" value="#{seat.seatRow}" />
+							<h:outputLabel value="Oszlop:" />
+							<h:outputText span="8" value="#{seat.seatColumn}" />
+						</ui:repeat>
+
+					</b:row>
+				</ui:repeat>
+
+			</div>
 		</b:well>
 	</ui:composition>
 </body>

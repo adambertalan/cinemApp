@@ -15,7 +15,7 @@
                         <h1 style="color: white;">Filmek</h1>
                         <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
 
-                            <h:graphicImage styleClass="indexmovies" library="images" name="#{movieShowSelectorBean.selectedMovie.movieCode}"/>
+                            <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movieShowSelectorBean.selectedMovie.id}" />
 
                             <h:outputLabel value="Cím: #{movieShowSelectorBean.selectedMovie.name}"/><br/>
                             <h:outputLabel value="Műfaj: #{movieShowSelectorBean.selectedMovie.genre.name}"/><br/>

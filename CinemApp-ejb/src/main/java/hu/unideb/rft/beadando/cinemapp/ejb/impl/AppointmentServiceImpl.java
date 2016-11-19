@@ -1,5 +1,6 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -44,7 +45,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment createAppointment(Long guestId, Long movieShowId, Long seatId) {
+	public Appointment createAppointment(Long guestId, Long movieShowId, List<Long> seatIds) {
 		Appointment appointment = new Appointment();
 		
 		Guest guest = guestRepository.findGuestById(guestId);
@@ -53,8 +54,12 @@ public class AppointmentServiceImpl implements AppointmentService{
 		MovieShow movieShow = movieShowRepository.findMovieShowById(movieShowId);
 		appointment.setMovieShow(movieShow);
 		
-		Seat seat = seatRepository.findSeatById(seatId);
-		appointment.setSeat(seat);
+		List<Seat> seats = new ArrayList<>();
+		for( Long id: seatIds ){
+			Seat seat = seatRepository.findSeatById(id);
+			seats.add(seat);
+		}
+		appointment.setSeats(seats);
 		
 		appointmentRepository.save(appointment);
 		return appointment;

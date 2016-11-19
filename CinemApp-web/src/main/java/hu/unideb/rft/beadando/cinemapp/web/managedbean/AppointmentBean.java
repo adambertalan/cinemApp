@@ -1,16 +1,20 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.NotNull;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.GuestService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.SeatService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @ManagedBean(name = "appointmentBean")
 @ViewScoped
@@ -20,6 +24,10 @@ public class AppointmentBean {
 	private AppointmentService appointmentService;
 	@EJB
 	private GuestService guestService;
+	@EJB
+	private SeatService seatService;
+	
+	private List<Seat> seats;
 
 	private String appointmentGuestName;
 	private String appointmentGuestEmail;
@@ -27,7 +35,8 @@ public class AppointmentBean {
 	private Integer appointemntGuestZip;
 
 	private Long appointmentMovieShowId;
-	private Long appointmentSeatId;
+	@NotNull
+	private String appointmentSeatId = null;
 
 	private Long selectedAppointmentId;
 	
@@ -40,6 +49,7 @@ public class AppointmentBean {
 		System.out.println("called");
 		appointments = appointmentService.findAllAppointments();
 		System.out.println("Appointments :" + appointments);
+		this.seats = seatService.findAllSeat();
 	}
 
 	public void addNewOrEditAppointment() {
@@ -66,7 +76,18 @@ public class AppointmentBean {
 			editedGuest.setZip(appointemntGuestZip);
 			editedAppointment.setGuest(editedGuest);
 			editedAppointment.setMovieShow(appointmentService.getMovieShowRepository().findOne(appointmentMovieShowId));
-			editedAppointment.setSeat(appointmentService.getSeatRepository().findOne(appointmentSeatId));
+			
+			String[] ids = appointmentSeatId.split(",");
+			List<Long> longids = new ArrayList<>();
+			for( String str : ids ){
+				longids.add( Long.parseLong(str) );
+			}
+			List<Seat> seats = new ArrayList<>();
+			for( Long id : longids ){
+				Seat seat = appointmentService.getSeatRepository().findOne(id);
+				seats.add(seat);
+			}
+			editedAppointment.setSeats(seats);
 			appointmentService.getAppointmentRepository().save(editedAppointment);
 			appointmentService.getGuestRepository().save(editedGuest);
 			appointments = appointmentService.findAllAppointments();
@@ -83,7 +104,7 @@ public class AppointmentBean {
 		this.appointmentGuestPhoneNumber = null;
 		this.appointemntGuestZip = null;
 		this.appointmentMovieShowId = 1L;
-		this.appointmentSeatId = 1L;
+		this.appointmentSeatId = "";
 	}
 	
 	private void addNewAppointment(){
@@ -91,8 +112,13 @@ public class AppointmentBean {
 				appointemntGuestZip);
 		System.out.println("Guest Id: " + guest.getId());
 
+		String[] ids = appointmentSeatId.split(",");
+		List<Long> longids = new ArrayList<>();
+		for( String str : ids ){
+			longids.add( Long.parseLong(str) );
+		}
 		Appointment appointment = appointmentService.createAppointment(guest.getId(), appointmentMovieShowId,
-				appointmentSeatId);
+				longids);
 		appointments.add(appointment);
 	}
 
@@ -104,7 +130,14 @@ public class AppointmentBean {
 			appointmentGuestPhoneNumber = selectedAppointment.getGuest().getPhoneNumber();
 			appointemntGuestZip = selectedAppointment.getGuest().getZip();
 			appointmentMovieShowId = selectedAppointment.getMovieShow().getId();
-			appointmentSeatId = selectedAppointment.getSeat().getId();
+			appointmentSeatId = "";
+			List<Seat> seats = selectedAppointment.getSeats();
+			for( Seat seat: seats ) {
+				appointmentSeatId += seat.getId() + ",";
+			}
+			if( appointmentSeatId.endsWith(",") ){
+				appointmentSeatId = appointmentSeatId.substring(0, appointmentSeatId.length()-1);  
+			}
 			appointmentToBeEditedId = selectedAppointmentId;
 		}
 	}
@@ -162,11 +195,11 @@ public class AppointmentBean {
 		this.appointmentMovieShowId = appointmentMovieShowId;
 	}
 
-	public Long getAppointmentSeatId() {
+	public String getAppointmentSeatId() {
 		return appointmentSeatId;
 	}
 
-	public void setAppointmentSeatId(Long appointmentSeatId) {
+	public void setAppointmentSeatId(String appointmentSeatId) {
 		this.appointmentSeatId = appointmentSeatId;
 	}
 
@@ -184,6 +217,14 @@ public class AppointmentBean {
 
 	public void setSelectedAppointmentId(Long selectedAppointmentId) {
 		this.selectedAppointmentId = selectedAppointmentId;
+	}
+
+	public List<Seat> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(List<Seat> seats) {
+		this.seats = seats;
 	}
 
 }

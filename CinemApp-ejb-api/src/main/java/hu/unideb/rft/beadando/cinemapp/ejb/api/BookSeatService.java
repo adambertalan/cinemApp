@@ -9,7 +9,7 @@ import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 @Local
 public interface BookSeatService {
 
-	Boolean isSeatOccupied( Integer seatRow, Integer seatColumn, Long theatreId);
+//	Boolean isSeatOccupied( Integer seatRow, Integer seatColumn, Long theatreId);
 	
 	List<List<Seat>> findAllSeatsOfTheatre( Long theatreId ); 
 	

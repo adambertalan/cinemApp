@@ -17,8 +17,8 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 	
 	public Seat findSeatById(Long seatId);
 
-	@Query("select seat.occupied from Seat seat join seat.theatre theatre where seat.seatRow = ?1 and seat.seatColumn = ?2 and theatre.id = ?3")
-	public Boolean isSeatOccupied(Integer seatRow, Integer seatColumn, Long theatreId);
+//	@Query("select seat.occupied from Seat seat join seat.theatre theatre where seat.seatRow = ?1 and seat.seatColumn = ?2 and theatre.id = ?3")
+//	public Boolean isSeatOccupied(Integer seatRow, Integer seatColumn, Long theatreId);
 	
 	@Query("select seat from Seat seat join seat.theatre theatre where theatre.id = ?1 order by seat.seatRow, seat.seatColumn")
 	public LinkedList<Seat> findAllSeatsOfTheatre(Long theatreId);

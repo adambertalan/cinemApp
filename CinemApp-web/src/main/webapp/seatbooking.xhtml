@@ -10,46 +10,46 @@
     <h:head>
     </h:head>
     <h:body>
-        <h:form id="form">
-            <table>
-                <ui:repeat value="#{bookSeatBean.seats}" var="seatList"
-                           varStatus="status">
-                    <tr>
-                        <ui:repeat value="#{seatList}" var="seat">
-                            <td><b:commandButton
-                                    value="(#{seat.seatRow},#{seat.seatColumn})"
-                                    style="background-color: #{seat.occupied ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
-                                    immediate="true"
-                                    onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send();"
-                                    ajax="true" update="@form" /></td>
-                        </ui:repeat>
-                    </tr>
-                </ui:repeat>
-            </table>
-            <b:commandButton id="upbutton"
-                             value="Update"
-                             immediate="true"
-                             onclick="ajax:bookSeatBean.update()"
-                             ajax="true"
-                             style="display: none;"
-                             update="@form"
-                             />
-            <b:commandButton id="downbutton"
-                             value="Foglalások Törlése"
-                             immediate="true"
-                             onclick="ajax:bookSeatBean.delete();"
-                             ajax="true"
-                             update="@form"
-                             />
-            <b:commandButton id="accept"
-                             value="Foglalások Véglegesítése"
-                             action="#{bookSeatBean.save}"
-                             />
-        </h:form>
+<!--         <h:form id="form"> -->
+<!--             <table> -->
+<!--                 <ui:repeat value="#{bookSeatBean.seats}" var="seatList" -->
+<!--                            varStatus="status"> -->
+<!--                     <tr> -->
+<!--                         <ui:repeat value="#{seatList}" var="seat"> -->
+<!--                             <td><b:commandButton -->
+<!--                                     value="(#{seat.seatRow},#{seat.seatColumn})" -->
+<!--                                     style="background-color: #{seat.occupied ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};" -->
+<!--                                     immediate="true" -->
+<!--                                     onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send();" -->
+<!--                                     ajax="true" update="@form" /></td> -->
+<!--                         </ui:repeat> -->
+<!--                     </tr> -->
+<!--                 </ui:repeat> -->
+<!--             </table> -->
+<!--             <b:commandButton id="upbutton" -->
+<!--                              value="Update" -->
+<!--                              immediate="true" -->
+<!--                              onclick="ajax:bookSeatBean.update()" -->
+<!--                              ajax="true" -->
+<!--                              style="display: none;" -->
+<!--                              update="@form" -->
+<!--                              /> -->
+<!--             <b:commandButton id="downbutton" -->
+<!--                              value="Foglalások Törlése" -->
+<!--                              immediate="true" -->
+<!--                              onclick="ajax:bookSeatBean.delete();" -->
+<!--                              ajax="true" -->
+<!--                              update="@form" -->
+<!--                              /> -->
+<!--             <b:commandButton id="accept" -->
+<!--                              value="Foglalások Véglegesítése" -->
+<!--                              action="#{bookSeatBean.save}" -->
+<!--                              /> -->
+<!--         </h:form> -->
 
-        <!-- Script to utilise the WebSocket -->
-        <h:outputScript library="js" name="socket.js" target="body" />
-        <h:outputStylesheet library="css" name="reservation.css" />
+<!--         Script to utilise the WebSocket -->
+<!--         <h:outputScript library="js" name="socket.js" target="body" /> -->
+<!--         <h:outputStylesheet library="css" name="reservation.css" /> -->
 
     </h:body>
 </html>

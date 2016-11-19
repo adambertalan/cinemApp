@@ -28,11 +28,11 @@ public class BookSeatServiceImpl implements BookSeatService {
 	@Autowired
     private TheatreRepository theatreRepository;
 	
-	@Override
-	public Boolean isSeatOccupied(Integer seatRow, Integer seatColumn, Long theatreId) {
-		System.out.println("searching");
-		return seatRepository.isSeatOccupied(seatRow, seatColumn, theatreId);
-	}
+//	@Override
+//	public Boolean isSeatOccupied(Integer seatRow, Integer seatColumn, Long theatreId) {
+//		System.out.println("searching");
+//		return seatRepository.isSeatOccupied(seatRow, seatColumn, theatreId);
+//	}
 
 	@Override
 	public List<List<Seat>> findAllSeatsOfTheatre(Long theatreId) {

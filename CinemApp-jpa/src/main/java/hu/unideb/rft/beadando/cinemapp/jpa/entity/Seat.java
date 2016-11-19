@@ -6,8 +6,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Seat extends BaseId {
-
-    private boolean occupied;
     
     private Integer seatRow;
     
@@ -16,13 +14,13 @@ public class Seat extends BaseId {
     @ManyToOne(fetch=FetchType.LAZY, optional=false)
     private Theatre theatre;
 
-    public boolean isOccupied() {
-        return occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
-    }
+//    public boolean isOccupied() {
+//        return occupied;
+//    }
+//
+//    public void setOccupied(boolean occupied) {
+//        this.occupied = occupied;
+//    }
 
 	public Integer getSeatRow() {
 		return seatRow;

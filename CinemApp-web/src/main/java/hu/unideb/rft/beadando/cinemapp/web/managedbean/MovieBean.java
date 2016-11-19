@@ -5,21 +5,23 @@
  */
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.faces.context.FacesContext;
-
-import javax.servlet.http.Part;
 
 @ManagedBean(name = "movieBean")
 @ViewScoped
@@ -44,34 +46,11 @@ public class MovieBean {
 
     private Part file;
 
-    private String getFileNameWithPath(Part part) {
-        String extension = "";
-        for (String cd : part.getHeader("content-disposition").split(";")) {
-            if (cd.trim().startsWith("filename")) {
-                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-                extension = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1).substring(filename.lastIndexOf(".") + 1);
-            }
-        }
-        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources"+File.separator+"images");
-
-        if (movieCode.contains(".")) {
-            movieCode = movieCode.substring(0, movieCode.lastIndexOf("."));
-        } else {
-            movieCode = movieCode + "." + extension;
-        }
-
-        Movie editedMovie = movieService.getMovieRepository().findMovieById(selectedMovieId);
-        editedMovie.setMovieCode(movieCode);
-        movieService.getMovieRepository().save(editedMovie);
-
-        System.out.println(path + File.separator + movieCode);
-
-        return path + File.separator + movieCode;
-    }
-
     public String upload() throws IOException {
         Movie selectedMovie = movieService.getMovieRepository().findMovieById(selectedMovieId);
+        
         if (selectedMovie != null) {
+        	System.out.println("UPLOADING: movie found");
             movieName = selectedMovie.getName();
             movieCode = selectedMovie.getMovieCode();
             movieAgeLimit = selectedMovie.getAgeLimit();
@@ -79,9 +58,22 @@ public class MovieBean {
             movieGenreId = selectedMovie.getGenre().getId();
             movieDescription = selectedMovie.getDescription();
             movieToBeEditedID = selectedMovieId;
+            
+            
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            InputStream inputStream = file.getInputStream();
+            int c;
+            while( (c = inputStream.read()) != -1 ){
+            	out.write(c);
+            }
+            byte[] byteArray = out.toByteArray();
+            
+            selectedMovie.setImage(byteArray);
+            movieService.saveMovie(selectedMovie);
         }
 
-        file.write(getFileNameWithPath(file));
+        
+//        file.write(getFileNameWithPath(file));
         return "success";
     }
 
@@ -118,8 +110,10 @@ public class MovieBean {
         System.out.println(movieLength);
 
         if (movieToBeEditedID == null) {
+        	System.out.println("movieToBeEdited is null");
             addNewMovie();
         } else {
+        	System.out.println("movieToBeEdited is not null");
             Movie editedMovie = movieService.getMovieRepository().findMovieById(movieToBeEditedID);
             if (editedMovie == null) {
                 addNewMovie();
