@@ -46,4 +46,11 @@ public class Seat extends BaseId {
 		this.theatre = theatre;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return this.getId().equals(((Seat)obj).getId());
+	}
+	
+	
+
 }

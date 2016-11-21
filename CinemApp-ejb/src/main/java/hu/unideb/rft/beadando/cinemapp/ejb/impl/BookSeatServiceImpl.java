@@ -1,5 +1,6 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Theatre;
+import hu.unideb.rft.beadando.cinemapp.jpa.repository.AppointmentRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.SeatRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.repository.TheatreRepository;
 
@@ -27,6 +30,9 @@ public class BookSeatServiceImpl implements BookSeatService {
 
 	@Autowired
     private TheatreRepository theatreRepository;
+	
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 	
 //	@Override
 //	public Boolean isSeatOccupied(Integer seatRow, Integer seatColumn, Long theatreId) {
@@ -54,6 +60,17 @@ public class BookSeatServiceImpl implements BookSeatService {
 	public void saveReservation(List<Seat> reservedSeats) {
 		System.out.println("BookSeatServiceImpl saving reservations");
 		seatRepository.save(reservedSeats);
+	}
+
+	@Override
+	public List<Seat> findOccupiedSeatsOfMovieShow(Long movieShowId) {
+		List<Appointment> appointmentsOfMovieShow = appointmentRepository.findByMovieShowId(movieShowId);
+		
+		List<Seat> occupiedSeats = new ArrayList<>();
+		for( Appointment ap: appointmentsOfMovieShow ){
+			occupiedSeats.addAll(ap.getSeats());
+		}
+		return occupiedSeats;
 	}
 
 }

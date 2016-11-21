@@ -14,4 +14,6 @@ public interface BookSeatService {
 	List<List<Seat>> findAllSeatsOfTheatre( Long theatreId ); 
 	
 	void saveReservation( List<Seat> reservedSeats );
+	
+	List<Seat> findOccupiedSeatsOfMovieShow(Long movieShowId);
 }
