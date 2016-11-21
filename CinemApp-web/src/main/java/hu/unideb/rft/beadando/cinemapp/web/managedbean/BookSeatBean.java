@@ -2,6 +2,7 @@ package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
@@ -28,12 +28,16 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	@EJB
 	private BookSeatService bookSeatService;
+	
+	private Long movieShowId;
 
 	private List<List<Seat>> seats;
 	
 	private List<Seat> occupiedSeats;
 	
 	private List<Seat> occupiedSeatsByOthers = new ArrayList<>();
+	
+	private Map<Long, List<Seat>> selectedSeatsMap = new HashMap<>();
 	
 	private List<Seat> selectedSeats;
 
@@ -63,7 +67,8 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
 		// TODO nullkezelés!!
 		
-		occupiedSeats.addAll(selectedSeats);
+//		occupiedSeats.addAll(selectedSeats);
+		occupiedSeats.addAll(selectedSeatsMap.get(this.movieShowId));
 		occupiedSeats.addAll(occupiedSeatsByOthers);
 		
 		Ajax.updateAll();
@@ -152,8 +157,6 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 			// törölni a foglalásokat
 			this.selectedSeats.clear();
 			System.out.println("Querying after saving");
-			// frissíteni az adatbázisból
-			this.seats = bookSeatService.findAllSeatsOfTheatre(1L);
 			return "index?faces-redirect=true";
 		}
 		System.out.println("No selected seats!");
@@ -176,7 +179,9 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		Long theatreId = Long.parseLong(theatreIdString);
 		Long movieShowId = Long.parseLong(movieShowIdString);
 		
+		this.movieShowId = movieShowId;
 		
+		selectedSeatsMap.put(movieShowId, new ArrayList<Seat>());
 		
 		// lekérni az aktuális foglaltságot, ha még nem volt lekérve
 		System.out.println("Querying seats");
@@ -272,6 +277,22 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	public void setOccupiedSeats(List<Seat> occupiedSeats) {
 		this.occupiedSeats = occupiedSeats;
+	}
+
+	public Map<Long, List<Seat>> getSelectedSeatsMap() {
+		return selectedSeatsMap;
+	}
+
+	public void setSelectedSeatsMap(Map<Long, List<Seat>> selectedSeatsMap) {
+		this.selectedSeatsMap = selectedSeatsMap;
+	}
+
+	public Long getMovieShowId() {
+		return movieShowId;
+	}
+
+	public void setMovieShowId(Long movieShowId) {
+		this.movieShowId = movieShowId;
 	}
 
 }
