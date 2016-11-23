@@ -43,7 +43,7 @@ public class MovieShowBean {
 
     public void calculateStartTime() throws ParseException{
         System.out.println(startDate);
-        SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy hh:mm a",Locale.US);
+        SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yyyy hh:mm a",Locale.US);
         Date date = formater.parse(startDate);
         System.out.println(date);
         setStartTime(Timestamp.from(date.toInstant()));

@@ -51,7 +51,7 @@ public class CuponBean {
 	public void calculateTime() throws ParseException{
         System.out.println(startDate);
         System.out.println(endDate);
-        SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy hh:mm a",Locale.US);
+        SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yyyy hh:mm a",Locale.US);
         Date date = formater.parse(startDate);
         System.out.println(date);
         setStartOfValidity(Timestamp.from(date.toInstant()));

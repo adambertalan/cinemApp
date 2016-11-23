@@ -10,10 +10,13 @@ import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -45,13 +48,15 @@ public class MovieShowSelectorBean {
     private Movie selectedMovie;
     
     private List<MovieShow> movieShows;
+    private List<MovieShow> allMovieShows;
 
     public String processMovieShowSelector(){
         Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 	String movieCodeParam = params.get("movieCode");
         setMovieCode(movieCodeParam);
         selectedMovie = movieService.getMovieRepository().findByMovieCode(movieCode);
-        movieShows = movieShowService.getMovieShowRepository().findByMovieId(selectedMovie.getId());
+        allMovieShows = movieShowService.getMovieShowRepository().findByMovieId(selectedMovie.getId());
+        movieShows = allMovieShows.stream().filter(x -> x.getStartTime().after(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)))).collect(Collectors.toList());
         return "page";
     }
     
