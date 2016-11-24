@@ -11,7 +11,7 @@
     </h:head>
     <h:body style="padding-top: 60px; background-color: #add;">
         <b:container>
-            <h:form styleClass="form-signin" prependId="false">
+            <h:form styleClass="form-signin" prependId="false" rendered="#{!login.loggedIn}">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <b:inputText id="username" placeholder="username" value="#{login.username}">
                     <f:facet name="prepend">
@@ -25,9 +25,10 @@
                 </b:inputText>
                 <b:message for="password"/>
                 <b:selectBooleanCheckbox value="true" caption="remember me"/>
-                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in" rendered="#{!login.loggedIn}"/>
+                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in"/>
+            </h:form>
+            <h:form styleClass="form-signin" prependId="false" rendered="#{login.loggedIn}">
                 <b:commandButton look="primary btn-block" action="#{login.logout}" value="Sign out" icon="log-in" rendered="#{login.loggedIn}" />
-
             </h:form>
         </b:container>
     </h:body>
