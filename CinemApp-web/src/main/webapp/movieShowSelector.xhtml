@@ -15,7 +15,7 @@
                         <h1 style="color: white;">Filmek</h1>
                         <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
 
-                            <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movieShowSelectorBean.selectedMovie.id}" />
+                            <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movieShowSelectorBean.selectedMovie.id}" /><br/>
 
                             <h:outputLabel value="Cím: #{movieShowSelectorBean.selectedMovie.name}"/><br/>
                             <h:outputLabel value="Műfaj: #{movieShowSelectorBean.selectedMovie.genre.name}"/><br/>
@@ -28,6 +28,18 @@
                                 <f:selectItems value="#{movieShowSelectorBean.movieShows}" var="movieShow"
                                                itemValue="#{movieShow.id}" itemLabel="#{movieShowSelectorBean.getMovieShowName(movieShow)}" />
                             </b:selectOneMenu>
+                            
+                            <h2 style="text-align: center">Neked ajánljuk!</h2>
+                            <div class="indexmoviesdiv">
+                                <c:forEach items="#{movieShowSelectorBean.recomendedMovies}" var="movie">
+                                    <h:form style="display: inline-block;">
+                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
+                                            <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movie.id}" />
+                                        </h:commandLink>
+                                    </h:form>
+                                </c:forEach>
+                            </div>
                         </b:column>
                     </b:container>
                 </b:jumbotron>

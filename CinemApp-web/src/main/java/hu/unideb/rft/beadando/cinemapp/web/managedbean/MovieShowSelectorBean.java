@@ -49,12 +49,17 @@ public class MovieShowSelectorBean {
     
     private List<MovieShow> movieShows;
     private List<MovieShow> allMovieShows;
+    private List<Movie> recomendedMovies;
 
     public String processMovieShowSelector(){
         Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 	String movieCodeParam = params.get("movieCode");
         setMovieCode(movieCodeParam);
         selectedMovie = movieService.getMovieRepository().findByMovieCode(movieCode);
+        recomendedMovies = movieService.getMovieRepository().findAll().stream().filter(x->x.getGenre().getName().equals(selectedMovie.getGenre().getName())&&!x.getName().equals(selectedMovie.getName())).collect(Collectors.toList());
+        if(recomendedMovies.size()>3){
+            recomendedMovies = recomendedMovies.subList(0, 2);
+        }
         allMovieShows = movieShowService.getMovieShowRepository().findByMovieId(selectedMovie.getId());
         movieShows = allMovieShows.stream().filter(x -> x.getStartTime().after(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)))).collect(Collectors.toList());
         return "page";
@@ -68,6 +73,22 @@ public class MovieShowSelectorBean {
     
     @PostConstruct
     public void init() {
+    }
+
+    public List<MovieShow> getAllMovieShows() {
+        return allMovieShows;
+    }
+
+    public void setAllMovieShows(List<MovieShow> allMovieShows) {
+        this.allMovieShows = allMovieShows;
+    }
+
+    public List<Movie> getRecomendedMovies() {
+        return recomendedMovies;
+    }
+
+    public void setRecomendedMovies(List<Movie> recomendedMovies) {
+        this.recomendedMovies = recomendedMovies;
     }
     
     public String getMovieCode() {
