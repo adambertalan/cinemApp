@@ -8,44 +8,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <body>
         <ui:composition>
-            <h3>Foglalások hozzáadása/módosítása</h3>
-            <h:form>
-                <b:inputText label="Vendég neve" placeholder="Vendég neve"
-                             required="true" render-label="true" value="#{appointmentBean.appointmentGuestName}"/>
-
-                <b:inputText label="E-mail cím" placeholder="E-amil cím"
-                             required="true" render-label="true" value="#{appointmentBean.appointmentGuestEmail}"/>
-
-                <b:inputText label="Telefonszám" placeholder="Telefonszám"
-                             required="true" render-label="true" value="#{appointmentBean.appointmentGuestPhoneNumber}"/>
-
-                <b:inputText label="Irányítószám" placeholder="Irányítószám"
-                             render-label="true" value="#{appointmentBean.appointemntGuestZip}"/>
-
-
-
-                <h:outputLabel value="Vetítés" for="movieShowID" />
-                <b:selectOneMenu required="true" render-label="true"
-                                 value="#{appointmentBean.appointmentMovieShowId}" id="movieShowID">
-                    <f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
-                                   itemValue="#{movieShow.id}" itemLabel="#{movieShow.id}" />
-                </b:selectOneMenu>
-
-                <h:outputLabel value="Ülés" for="seatID" />
-                <b:selectMultiMenu value="#{appointmentBean.appointmentSeatId}"  >
-<!--                 	<c:forEach items="#{appointmentBean.seats}" var="seat"> -->
-<!--                 		<f:selectItem itemLabel="#{seat.id}" itemValue="#{seat.id}"/> -->
-<!--                 	</c:forEach> -->
-					<f:selectItem itemLabel="A" itemValue="a"/>
-					<f:selectItem itemLabel="B" itemValue="b"/>
-					<f:selectItem itemLabel="C" itemValue="c"/>
-    			</b:selectMultiMenu>
-
-                <b:commandButton update="@form reservationsForm" value="Mentés"
-                                 action="#{appointmentBean.addNewOrEditAppointment}" style="margin: 5px; background-color: #18bc9c;"/>
-            </h:form>
-
-            <h3>Foglalások szerkeztése</h3>
+            <h3>Foglalások törlése</h3>
             <h:form id="reservationsForm">
                 <h:outputLabel value="Foglalások" for="reservationID" />
                 <b:selectOneMenu value="#{appointmentBean.selectedAppointmentId}"
@@ -53,10 +16,8 @@
                     <f:selectItems value="#{appointmentBean.appointments}"
                                    var="appointment" itemValue="#{appointment.id}"
                                    itemLabel="#{appointment.id}" />
-
                 </b:selectOneMenu>
-                <b:commandButton value="Módisítás"
-                                 action="#{appointmentBean.editAppointment}" style="margin: 5px; background-color: #18bc9c;"/>
+                
                 <b:commandButton value="Törlés"
                                  action="#{appointmentBean.deleteAppointment}" update="reservationID" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
