@@ -95,6 +95,11 @@ public class AppointmentServiceImpl implements AppointmentService{
 		List<Appointment> guestAppointments = appointmentRepository.findByGuest(guest);
 		return guestAppointments;
 	}
+
+	@Override
+	public List<Appointment> findAppointmentsByMovieShow(Long movieShowId) {
+		return appointmentRepository.findByMovieShowId(movieShowId);
+	}
 	
 	
 

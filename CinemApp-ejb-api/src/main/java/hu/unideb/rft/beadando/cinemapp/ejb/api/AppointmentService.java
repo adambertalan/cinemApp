@@ -19,6 +19,8 @@ public interface AppointmentService {
 	public List<Appointment> findAppointmentsOfGuest( Guest guest );
 
 	public Appointment createAppointment(Long guestId, Long movieShowId, List<Long> seatIds);
+	
+	public List<Appointment> findAppointmentsByMovieShow( Long movieShowId );
 
 	public void deleteAppointment(Long appointmentId);
 

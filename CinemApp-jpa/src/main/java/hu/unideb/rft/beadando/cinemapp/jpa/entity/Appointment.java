@@ -18,6 +18,8 @@ public class Appointment extends BaseId {
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Seat> seats;
+	
+	private Boolean deprecated;
 
 	public Guest getGuest() {
 		return guest;
@@ -41,5 +43,13 @@ public class Appointment extends BaseId {
 
 	public void setSeats(List<Seat> seats) {
 		this.seats = seats;
+	}
+
+	public Boolean getDeprecated() {
+		return deprecated;
+	}
+
+	public void setDeprecated(Boolean deprecated) {
+		this.deprecated = deprecated;
 	}
 }

@@ -1,6 +1,12 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -9,13 +15,6 @@ import javax.faces.bean.ViewScoped;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Locale;
 
 @ManagedBean(name = "movieShowBean")
 @ViewScoped

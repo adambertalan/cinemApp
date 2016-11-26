@@ -26,4 +26,8 @@ public interface MovieShowService {
         public MovieRepository getMovieRepository();
         
         public TheatreRepository getTheatreRepository();
+        
+        public List<MovieShow> findActiveMovieShows();
+        
+        public void deprecateMovieShowAppointments( Long movieShowId );
 }
