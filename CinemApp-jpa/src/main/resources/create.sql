@@ -477,32 +477,32 @@ INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUE
 
 -- Foglalások
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (1, 1, 3);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (1, false, 1, 3);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (1, 38);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (2, 2, 6);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (2, false, 2, 6);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (2, 290);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (3, 3, 9);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (3, false, 3, 9);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (3, 80);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (4, 4, 13);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (4, false, 4, 13);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (4, 20);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (5, 5, 16);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (5, false, 5, 16);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (5, 51);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (6, 1, 15);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (6, false, 1, 15);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (6, 55);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (7, 2, 25);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (7, false, 2, 25);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (7, 4);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (8, 3, 22);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (8, false, 3, 22);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (8, 90);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (9, 4, 29);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (9, false, 4, 29);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (9, 154);
 
-INSERT INTO public.appointment(id, guest_id, movieshow_id) VALUES (10, 5, 7);
+INSERT INTO public.appointment(id, deprecated, guest_id, movieshow_id) VALUES (10, false, 5, 7);
 INSERT INTO public.appointment_seat(appointment_id, seats_id) VALUES (10, 39);

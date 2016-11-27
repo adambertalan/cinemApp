@@ -19,6 +19,7 @@ import org.omnifaces.util.Ajax;
 import org.omnifaces.util.Faces;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @ManagedBean
@@ -160,12 +161,16 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	
 	public String save() {
 		System.out.println("Saving");
+		System.out.println(this.guestName);
+		System.out.println(this.guestEmail);
+		System.out.println(this.guestPhone);
+		System.out.println(this.guestZip);
+		
 		if( selectedSeats != null && !selectedSeats.isEmpty() ){
 			// elmenteni
-			this.bookSeatService.saveReservation(selectedSeats);
+			this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
 			// törölni a foglalásokat
 			this.selectedSeats.clear();
-			System.out.println("Querying after saving");
 			return "index?faces-redirect=true";
 		}
 		System.out.println("No selected seats!");

@@ -21,9 +21,9 @@
 		<ui:define name="content">
 			<b:jumbotron styleClass="content">
 				<b:container styleClass="content">
-					<b:row styleClass="show-grid">
-						<b:column col-xs="12" col-sm="6" col-md="8">
-							<h:form id="form">
+					<h:form id="form">
+						<b:row styleClass="show-grid">
+							<b:column col-xs="12" col-sm="6" col-md="8">
 								<table>
 									<ui:repeat value="#{bookSeatBean.seats}" var="seatList"
 										varStatus="status">
@@ -48,32 +48,35 @@
 								<o:commandScript name="update" action="#{bookSeatBean.update}"
 									render="@form"></o:commandScript>
 								<o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
-							</h:form>
-						</b:column>
-						<b:column col-xs="6" col-sm="6" col-md="4">
-							<h:form>
+
+							</b:column>
+							<b:column col-xs="6" col-sm="6" col-md="4">
+
 								<b:inputText label="Név" placeholder="Név" required="true"
 									render-label="true" value="#{bookSeatBean.guestName}">
 								</b:inputText>
 
-								<b:inputText label="Telefonszám" placeholder="Telefonszám" required="true"
-									render-label="true" value="#{bookSeatBean.guestPhone}">
+								<b:inputText label="Telefonszám" placeholder="Telefonszám"
+									required="true" render-label="true"
+									value="#{bookSeatBean.guestPhone}">
 								</b:inputText>
 
 								<b:inputText label="E-mail" placeholder="E-mail" required="true"
 									render-label="true" value="#{bookSeatBean.guestEmail}">
 								</b:inputText>
 
-								<b:inputText label="Irányítószám" placeholder="Irányítószám" required="true"
-									render-label="true" value="#{bookSeatBean.guestZip}">
+								<b:inputText label="Irányítószám" placeholder="Irányítószám"
+									required="true" render-label="true"
+									value="#{bookSeatBean.guestZip}">
 								</b:inputText>
 
-								<b:commandButton id="accept"  update="@form" value="Foglalások Véglegesítése"
+								<b:commandButton id="accept" update="@form"
+									value="Foglalások Véglegesítése"
 									action="#{bookSeatBean.save}" />
-							</h:form>
-						</b:column>
-					</b:row>
 
+							</b:column>
+						</b:row>
+					</h:form>
 					<h:outputScript library="js" name="socket.js" target="body" />
 					<h:outputStylesheet library="css" name="reservation.css" />
 				</b:container>
