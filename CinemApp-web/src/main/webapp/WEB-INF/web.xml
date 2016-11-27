@@ -14,7 +14,7 @@
 <!-- 	</listener> -->
 
 	<error-page>
-    	<exception-type>500</exception-type>
+		<error-code>500</error-code>
     	<location>/errorpages/expired.xhtml</location>
 	</error-page>
 	
