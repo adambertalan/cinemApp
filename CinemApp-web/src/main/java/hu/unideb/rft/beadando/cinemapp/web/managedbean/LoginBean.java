@@ -52,7 +52,7 @@ public class LoginBean{
 	
 	@PostConstruct
 	public void init() {
-		this.loggedIn = false;		
+		this.loggedIn = false;
 	}
 
 	public String loginUser() throws IOException{
@@ -67,9 +67,9 @@ public class LoginBean{
 			System.out.println("Login Success");
 			loggedIn = true;
 			
-			externalContext.redirect(externalContext.getApplicationContextPath() + "/secured/adminpage.xhtml");
+//			externalContext.redirect(externalContext.getApplicationContextPath() + "/secured/adminpage.xhtml");
 			
-			return "";
+			return "/secured/adminpage.xhtml?faces-redirect=true";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,

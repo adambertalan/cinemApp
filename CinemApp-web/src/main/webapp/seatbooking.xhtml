@@ -1,58 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <h:head>
-    </h:head>
-    <h:body>
-        <h:form id="form">
-            <table>
-                <ui:repeat value="#{bookSeatBean.seats}" var="seatList"
-                           varStatus="status">
-                    <tr>
-                        <ui:repeat value="#{seatList}" var="seat">
-                            <td><b:commandButton
-                                    value="(#{seat.seatRow},#{seat.seatColumn})"
-                                    style="background-color: #{bookSeatBean.occupiedSeats.contains(seat) ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
-                                    immediate="true"
-                                    onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send(theatreId,movieShowId,#{seat.id}, #{!bookSeatBean.selectedSeats.contains(seat)});"
-                                    ajax="true" update="@form" /></td>
-                        </ui:repeat>
-                    </tr>
-                </ui:repeat>
-            </table>
-            <b:commandButton id="upbutton"
-                             value="Update"
-                             immediate="true"
-                             onclick="ajax:bookSeatBean.update()"
-                             ajax="true"
-                             style="display: none;"
-                             update="@form"
-                             />
-            <b:commandButton id="downbutton"
-                             value="Foglalások Törlése"
-                             immediate="true"
-                             onclick="ajax:bookSeatBean.delete();"
-                             ajax="true"
-                             update="@form"
-                             />
-            <b:commandButton id="accept"
-                             value="Foglalások Véglegesítése"
-                             action="#{bookSeatBean.save}"
-                             />
-            <o:commandScript name="update" action="#{bookSeatBean.update}" render="@form" ></o:commandScript>
-            <o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
-        </h:form>
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<table>
+			<ui:repeat value="#{bookSeatBean.seats}" var="seatList"
+				varStatus="status">
+				<tr>
+					<ui:repeat value="#{seatList}" var="seat">
+						<td><b:commandButton
+								value="(#{seat.seatRow},#{seat.seatColumn})"
+								style="background-color: #{bookSeatBean.occupiedSeats.contains(seat) ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
+								immediate="true"
+								onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send(theatreId,movieShowId,#{seat.id}, #{!bookSeatBean.selectedSeats.contains(seat)});"
+								ajax="true" update="@form" /></td>
+					</ui:repeat>
+				</tr>
+			</ui:repeat>
+		</table>
+		<b:commandButton id="upbutton" value="Update" immediate="true"
+			onclick="ajax:bookSeatBean.update()" ajax="true"
+			style="display: none;" update="@form" />
+		<b:commandButton id="downbutton" value="Foglalások Törlése"
+			immediate="true" onclick="ajax:bookSeatBean.delete();" ajax="true"
+			update="@form" />
+		<b:commandButton id="accept" value="Foglalások Véglegesítése"
+			action="#{bookSeatBean.save}" />
+		<o:commandScript name="update" action="#{bookSeatBean.update}"
+			render="@form"></o:commandScript>
+		<o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
+	</h:form>
 
-<!--         Script to utilise the WebSocket -->
-        <h:outputScript library="js" name="socket.js" target="body" />
-        <h:outputStylesheet library="css" name="reservation.css" />
+	<!--         Script to utilise the WebSocket -->
+	<h:outputScript library="js" name="socket.js" target="body" />
+	<h:outputStylesheet library="css" name="reservation.css" />
 
-    </h:body>
+</h:body>
 </html>

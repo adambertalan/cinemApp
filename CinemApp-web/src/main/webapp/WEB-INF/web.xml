@@ -12,6 +12,11 @@
 <!-- 	<listener> -->
 <!-- 		<listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class> -->
 <!-- 	</listener> -->
+
+	<error-page>
+    	<exception-type>500</exception-type>
+    	<location>/errorpages/expired.xhtml</location>
+	</error-page>
 	
 	<listener>
 		<listener-class>hu.unideb.rft.beadando.cinemapp.web.servlet.StartupContextListener</listener-class>

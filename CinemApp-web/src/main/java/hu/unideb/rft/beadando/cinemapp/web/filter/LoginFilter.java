@@ -28,16 +28,17 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		
+		HttpServletRequest req = (HttpServletRequest) request;
 
 		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("login");
         
 		if (loginBean == null || !loginBean.getLoggedIn()) {
             String contextPath = ((HttpServletRequest)request).getContextPath();
             ((HttpServletResponse)response).sendRedirect(contextPath + "/login.xhtml");
+        } else {
+        	chain.doFilter(request, response);	
         }
-		
-		chain.doFilter(request, response);
-		
 	}
 
 	

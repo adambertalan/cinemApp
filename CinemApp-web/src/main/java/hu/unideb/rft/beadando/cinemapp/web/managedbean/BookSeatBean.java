@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
@@ -62,7 +63,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		Long movieShowId = Long.parseLong(movieShowIdString);
 		Long theatreId = Long.parseLong(theatreIdString);
 		
-		System.out.println("Querying seats");
+		System.out.println("Reload: Querying seats");
 		seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
 		occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
 		// TODO nullkezelés!!
@@ -168,6 +169,10 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		System.out.println("BookseatBean INIT");
 		
 		FacesContext context = FacesContext.getCurrentInstance();
+		
+		String requestURI = ((HttpServletRequest)context.getExternalContext().getRequest()).getRequestURI();
+		System.out.println("requestURI: " + requestURI);
+		
 		Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
 		
 		String theatreIdString = requestMap.get("theatreId");

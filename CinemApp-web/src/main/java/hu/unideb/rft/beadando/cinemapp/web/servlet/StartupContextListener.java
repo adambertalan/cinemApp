@@ -74,7 +74,9 @@ public class StartupContextListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
 		try {
-			sched.shutdown();
+			if( sched != null ){
+				sched.shutdown();	
+			}
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
