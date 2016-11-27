@@ -30,6 +30,14 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	@EJB
 	private BookSeatService bookSeatService;
 	
+	private String guestName;
+
+	private String guestPhone;
+	
+	private Integer guestZip;
+	
+	private String guestEmail;
+	
 	private Long movieShowId;
 
 	private List<List<Seat>> seats;
@@ -298,6 +306,38 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	public void setMovieShowId(Long movieShowId) {
 		this.movieShowId = movieShowId;
+	}
+
+	public String getGuestName() {
+		return guestName;
+	}
+
+	public void setGuestName(String guestName) {
+		this.guestName = guestName;
+	}
+
+	public String getGuestPhone() {
+		return guestPhone;
+	}
+
+	public void setGuestPhone(String guestPhone) {
+		this.guestPhone = guestPhone;
+	}
+
+	public Integer getGuestZip() {
+		return guestZip;
+	}
+
+	public void setGuestZip(Integer guestZip) {
+		this.guestZip = guestZip;
+	}
+
+	public String getGuestEmail() {
+		return guestEmail;
+	}
+
+	public void setGuestEmail(String guestEmail) {
+		this.guestEmail = guestEmail;
 	}
 
 }

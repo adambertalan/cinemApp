@@ -22,6 +22,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -39,6 +40,7 @@ public class MovieShowSelectorBean {
     private MovieShowService movieShowService;
     
     private Long selectedMovieShowId;
+    private Long theatreId;
     
     private Timestamp startTime;
     private Timestamp endTime;
@@ -69,6 +71,20 @@ public class MovieShowSelectorBean {
         return ("Nap: "+movieShow.getStartTime().getMonth()+1)+"."+movieShow.getStartTime().getDate()+
                 " Kezdés: "+movieShow.getStartTime().getHours()+":"+movieShow.getStartTime().getMinutes()
                 +" Vége: "+movieShow.getEndTime().getHours()+":"+movieShow.getEndTime().getMinutes();
+    }
+    
+    public String continueToSeatBooking(){
+    	// ki kell keresni a teremszámot
+    	
+    	for( MovieShow ms : movieShows ){
+    		if( ms.getId().equals(selectedMovieShowId) ){
+    			this.theatreId = ms.getTheatre().getId();
+    			break;
+    		}
+    	}
+    	System.out.println("continueToSeatBooking selectedMovieShowId: " + this.selectedMovieShowId + " theatreId: " + this.theatreId );
+    	
+    	return "seatbooking.xhtml?faces-redirect=true&includeViewParams=true";
     }
     
     @PostConstruct
@@ -157,5 +173,13 @@ public class MovieShowSelectorBean {
     public void setMovieShows(List<MovieShow> movieShows) {
         this.movieShows = movieShows;
     }
+
+	public Long getTheatreId() {
+		return theatreId;
+	}
+
+	public void setTheatreId(Long theatreId) {
+		this.theatreId = theatreId;
+	}
     
 }
