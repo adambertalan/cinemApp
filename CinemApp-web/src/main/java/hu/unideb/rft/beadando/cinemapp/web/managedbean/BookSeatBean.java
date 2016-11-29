@@ -28,106 +28,106 @@ import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 @SessionScoped
 public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@EJB
-	private BookSeatService bookSeatService;
-	
-	private String guestName;
+    @EJB
+    private BookSeatService bookSeatService;
 
-	private String guestPhone;
-	
-	private Integer guestZip;
-	
-	private String guestEmail;
-	
-	private Long movieShowId;
+    private String guestName;
 
-	private List<List<Seat>> seats;
-	
-	private List<Seat> occupiedSeats;
-	
-	private List<Seat> occupiedSeatsByOthers = new ArrayList<>();
-	
-	private Map<Long, List<Seat>> selectedSeatsMap = new HashMap<>();
-	
-	private List<Seat> selectedSeats;
+    private String guestPhone;
 
-	public boolean contains( List<Seat> list, Seat seat ){
-		if( list == null ){
-			return false;
-		}
-		
-		for( Seat s : list ){
-			if( seat.getId().equals(s.getId()) ){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public void reload() {
-		
-		String movieShowIdString = Faces.getRequestParameter("movieShowId");
-		String theatreIdString = Faces.getRequestParameter("theatreId");
-		
-		Long movieShowId = Long.parseLong(movieShowIdString);
-		Long theatreId = Long.parseLong(theatreIdString);
-		
-		System.out.println("Reload: Querying seats");
-		seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
-		occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
-		// TODO nullkezelés!!
-		
+    private Integer guestZip;
+
+    private String guestEmail;
+
+    private Long movieShowId;
+
+    private List<List<Seat>> seats;
+
+    private List<Seat> occupiedSeats;
+
+    private List<Seat> occupiedSeatsByOthers = new ArrayList<>();
+
+    private Map<Long, List<Seat>> selectedSeatsMap = new HashMap<>();
+
+    private List<Seat> selectedSeats;
+
+    public boolean contains(List<Seat> list, Seat seat) {
+        if (list == null) {
+            return false;
+        }
+
+        for (Seat s : list) {
+            if (seat.getId().equals(s.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void reload() {
+
+        String movieShowIdString = Faces.getRequestParameter("movieShowId");
+        String theatreIdString = Faces.getRequestParameter("theatreId");
+
+        Long movieShowId = Long.parseLong(movieShowIdString);
+        Long theatreId = Long.parseLong(theatreIdString);
+
+        System.out.println("Reload: Querying seats");
+        seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
+        occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
+        // TODO nullkezelés!!
+
 //		occupiedSeats.addAll(selectedSeats);
-		occupiedSeats.addAll(selectedSeatsMap.get(this.movieShowId));
-		occupiedSeats.addAll(occupiedSeatsByOthers);
-		
-		Ajax.updateAll();
-	}
-	
-	public void update(){
-		System.out.println("Update called!!");
-		Long seatId = Long.parseLong(Faces.getRequestParameter("seatId"));
-		String movieShowId = Faces.getRequestParameter("movieShowId");
-		Boolean occupyOrFree = Boolean.parseBoolean(Faces.getRequestParameter("occupyOrFree"));
-		
-		System.out.println("seatId: " + seatId);
-		System.out.println("movieShowId: " + movieShowId);
-		
-		outerloop:
-		for( List<Seat> seatlist : seats) {
-			for( Seat s : seatlist ){
-				if( s.getId().equals(seatId) ){
-					if( occupyOrFree ){
-						occupiedSeats.add(s);
-						occupiedSeatsByOthers.add(s);
-						break outerloop;
-					} else {
-						occupiedSeats.remove(s);
-						occupiedSeatsByOthers.remove(s);
-						break outerloop;
-					}
-				}
-			}
-		}
-		
-		System.out.println("UPDATED");
-	}
-	
-	// törli az általam kijelölt helyeet
-	public void delete(){
-		System.out.println("OCCUPY not COMMITTED! DELETING");
-		selectedSeats.clear();
-		this.occupiedSeats.removeAll(selectedSeats);
-	}
+        occupiedSeats.addAll(selectedSeatsMap.get(this.movieShowId));
+        occupiedSeats.addAll(occupiedSeatsByOthers);
 
-	public void occupyOrFree(Integer row, Integer col) throws Exception {
-		
-		for (List<Seat> seatList : seats) {
-			for (Seat seat : seatList) {
-				if (seat.getSeatRow().equals(row) && seat.getSeatColumn().equals(col)) {
-					System.out.println("Seat found in list");
+        Ajax.updateAll();
+    }
+
+    public void update() {
+        System.out.println("Update called!!");
+        Long seatId = Long.parseLong(Faces.getRequestParameter("seatId"));
+        String movieShowId = Faces.getRequestParameter("movieShowId");
+        Boolean occupyOrFree = Boolean.parseBoolean(Faces.getRequestParameter("occupyOrFree"));
+
+        System.out.println("seatId: " + seatId);
+        System.out.println("movieShowId: " + movieShowId);
+
+        outerloop:
+        for (List<Seat> seatlist : seats) {
+            for (Seat s : seatlist) {
+                if (s.getId().equals(seatId)) {
+                    if (occupyOrFree) {
+                        occupiedSeats.add(s);
+                        occupiedSeatsByOthers.add(s);
+                        break outerloop;
+                    } else {
+                        occupiedSeats.remove(s);
+                        occupiedSeatsByOthers.remove(s);
+                        break outerloop;
+                    }
+                }
+            }
+        }
+
+        System.out.println("UPDATED");
+    }
+
+    // törli az általam kijelölt helyeet
+    public void delete() {
+        System.out.println("OCCUPY not COMMITTED! DELETING");
+        selectedSeats.clear();
+        this.occupiedSeats.removeAll(selectedSeats);
+    }
+
+    public void occupyOrFree(Integer row, Integer col) throws Exception {
+
+        for (List<Seat> seatList : seats) {
+            for (Seat seat : seatList) {
+                if (seat.getSeatRow().equals(row) && seat.getSeatColumn().equals(col)) {
+                    System.out.println("Seat found in list");
 //					if( !seat.isOccupied() ){
 					if( !occupiedSeats.contains(seat) ){
 						System.out.println("this seat is free!");
@@ -230,19 +230,17 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		System.out.println("Querying seats");
 		seats = bookSeatService.findAllSeatsOfTheatre(theatreId);			
 		
-		
 //		for( List<Seat> seatlist : seats ){
 //			for( Seat s : seatlist ){
 //				System.out.println("GOT SEAT " + s.getId());
 //			}
 //		}
-		
-		// fel kell tölteni a foglalt üléseket
-		this.occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
+        // fel kell tölteni a foglalt üléseket
+        this.occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
 //		for( Seat s : occupiedSeats){
 //			System.out.println("OCCUPIED SEAT: " + s.getId());	
 //		}
-		
+
 //		for( List<Seat> seatlist : seats ){
 //			for( Seat s : seatlist ){
 //				if( s.getId().equals(38L) ){
@@ -253,7 +251,6 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 //				}
 //			}
 //		}
-		
 //		for( List<Seat> seatList : seats ){
 //			for( Seat s : occupiedSeats) {
 //				if( seatList.contains(s) ) {
@@ -261,113 +258,111 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 //				}
 //			}
 //		}
-		
-		
-		// ha voltak korábbi foglalások, töröljük
-		if( this.selectedSeats != null ){
-			this.delete();
-		} else {
-			System.out.println("nincsenek korábbi foglalások");
-		}
-		// új foglalások
-		this.selectedSeats = new ArrayList<>();
-	}
-	
-	public void destroy() {
-		System.out.println("BookSeatBean DESTROY");
-		// ha maradt beragadt foglalása, akkor azt törölni.
-		this.delete();
-	}
+        // ha voltak korábbi foglalások, töröljük
+        if (this.selectedSeats != null) {
+            this.delete();
+        } else {
+            System.out.println("nincsenek korábbi foglalások");
+        }
+        // új foglalások
+        this.selectedSeats = new ArrayList<>();
+    }
 
-	public BookSeatService getBookSeatService() {
-		return bookSeatService;
-	}
+    public void destroy() {
+        System.out.println("BookSeatBean DESTROY");
+        // ha maradt beragadt foglalása, akkor azt törölni.
+        this.delete();
+    }
 
-	public void setBookSeatService(BookSeatService bookSeatService) {
-		this.bookSeatService = bookSeatService;
-	}
+    public BookSeatService getBookSeatService() {
+        return bookSeatService;
+    }
 
-	public List<List<Seat>> getSeats() {
-		return seats;
-	}
+    public void setBookSeatService(BookSeatService bookSeatService) {
+        this.bookSeatService = bookSeatService;
+    }
 
-	public void setSeats(List<List<Seat>> seats) {
-		this.seats = seats;
-	}
+    public List<List<Seat>> getSeats() {
+        return seats;
+    }
 
-	public List<Seat> getSelectedSeats() {
-		return selectedSeats;
-	}
+    public void setSeats(List<List<Seat>> seats) {
+        this.seats = seats;
+    }
 
-	public void setSelectedSeats(List<Seat> selectedSeats) {
-		this.selectedSeats = selectedSeats;
-	}
+    public List<Seat> getSelectedSeats() {
+        return selectedSeats;
+    }
 
-	@Override
-	public void valueBound(HttpSessionBindingEvent event) {
-		System.out.println("ValueBOUND " + this.toString());
-	}
+    public void setSelectedSeats(List<Seat> selectedSeats) {
+        this.selectedSeats = selectedSeats;
+    }
 
-	@Override
-	public void valueUnbound(HttpSessionBindingEvent event) {
-		System.out.println("Value-UN-BOUND " + this.toString());
-		this.destroy();
-	}
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+        System.out.println("ValueBOUND " + this.toString());
+    }
 
-	public List<Seat> getOccupiedSeats() {
-		return occupiedSeats;
-	}
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+        System.out.println("Value-UN-BOUND " + this.toString());
+        this.destroy();
+    }
 
-	public void setOccupiedSeats(List<Seat> occupiedSeats) {
-		this.occupiedSeats = occupiedSeats;
-	}
+    public List<Seat> getOccupiedSeats() {
+        return occupiedSeats;
+    }
 
-	public Map<Long, List<Seat>> getSelectedSeatsMap() {
-		return selectedSeatsMap;
-	}
+    public void setOccupiedSeats(List<Seat> occupiedSeats) {
+        this.occupiedSeats = occupiedSeats;
+    }
 
-	public void setSelectedSeatsMap(Map<Long, List<Seat>> selectedSeatsMap) {
-		this.selectedSeatsMap = selectedSeatsMap;
-	}
+    public Map<Long, List<Seat>> getSelectedSeatsMap() {
+        return selectedSeatsMap;
+    }
 
-	public Long getMovieShowId() {
-		return movieShowId;
-	}
+    public void setSelectedSeatsMap(Map<Long, List<Seat>> selectedSeatsMap) {
+        this.selectedSeatsMap = selectedSeatsMap;
+    }
 
-	public void setMovieShowId(Long movieShowId) {
-		this.movieShowId = movieShowId;
-	}
+    public Long getMovieShowId() {
+        return movieShowId;
+    }
 
-	public String getGuestName() {
-		return guestName;
-	}
+    public void setMovieShowId(Long movieShowId) {
+        this.movieShowId = movieShowId;
+    }
 
-	public void setGuestName(String guestName) {
-		this.guestName = guestName;
-	}
+    public String getGuestName() {
+        return guestName;
+    }
 
-	public String getGuestPhone() {
-		return guestPhone;
-	}
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
 
-	public void setGuestPhone(String guestPhone) {
-		this.guestPhone = guestPhone;
-	}
+    public String getGuestPhone() {
+        return guestPhone;
+    }
 
-	public Integer getGuestZip() {
-		return guestZip;
-	}
+    public void setGuestPhone(String guestPhone) {
+        this.guestPhone = guestPhone;
+    }
 
-	public void setGuestZip(Integer guestZip) {
-		this.guestZip = guestZip;
-	}
+    public Integer getGuestZip() {
+        return guestZip;
+    }
 
-	public String getGuestEmail() {
-		return guestEmail;
-	}
+    public void setGuestZip(Integer guestZip) {
+        this.guestZip = guestZip;
+    }
 
-	public void setGuestEmail(String guestEmail) {
-		this.guestEmail = guestEmail;
-	}
+    public String getGuestEmail() {
+        return guestEmail;
+    }
+
+    public void setGuestEmail(String guestEmail) {
+        this.guestEmail = guestEmail;
+    }
 
 }

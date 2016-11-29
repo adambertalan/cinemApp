@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
@@ -25,10 +20,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Levente
- */
 @ManagedBean
 @SessionScoped
 public class MovieShowSelectorBean {
@@ -68,9 +59,15 @@ public class MovieShowSelectorBean {
     }
     
     public String getMovieShowName(MovieShow movieShow){
-        return ("Nap: "+movieShow.getStartTime().getMonth()+1)+"."+movieShow.getStartTime().getDate()+
-                " Kezdés: "+movieShow.getStartTime().getHours()+":"+movieShow.getStartTime().getMinutes()
-                +" Vége: "+movieShow.getEndTime().getHours()+":"+movieShow.getEndTime().getMinutes();
+        LocalDateTime start = movieShow.getStartTime().toLocalDateTime();
+        LocalDateTime end = movieShow.getEndTime().toLocalDateTime();
+
+        return ("Nap: " + start.getMonth().name() + " " + start.getDayOfMonth() + 
+                ". Kezdés: " +start.getHour()+":"+start.getMinute()+
+                " Vége: "+end.getHour()+":"+end.getMinute());
+//        return ("Nap: "+movieShow.getStartTime().getMonth()+1)+"."+movieShow.getStartTime().getDate()+
+//                " Kezdés: "+movieShow.getStartTime().getHours()+":"+movieShow.getStartTime().getMinutes()
+//                +" Vége: "+movieShow.getEndTime().getHours()+":"+movieShow.getEndTime().getMinutes();
     }
     
     public String continueToSeatBooking(){

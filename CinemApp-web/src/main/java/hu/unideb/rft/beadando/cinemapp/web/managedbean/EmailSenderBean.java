@@ -2,6 +2,7 @@ package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,79 +17,62 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
 @ManagedBean(name = "emailBean")
 @ViewScoped
 public class EmailSenderBean implements Serializable {
-    
-    String text;
+
+    String qrText = "";
     String address;
-    
+
+    String guestName;
+    String guestEmail;
+    String guestSubject;
+    String guestMessage;
+
+    String typeOfTheEmail;
+
     private Pattern emailValidator = Pattern.compile("(?:(?:\\r\\n)?[ \\t])*(?:(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*)|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*:(?:(?:\\r\\n)?[ \\t])*(?:(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*)(?:,\\s*(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*))*)?;\\s*)");
-    
-    public String getText() {
-        return text;
-    }
-    
-    public void setText(String text) {
-        this.text = text;
-    }
-    
-    public String getAddress() {
-        return address;
-    }
-    
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    
+
     public void sendEmail() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String typeParam = params.get("type");
+        setTypeOfTheEmail(typeParam);
+
+        String aboveQrText = "";
+        String underQrText = "";
+        String emailType = "";
+        String footerContent = "";
+        String greeting = "";
+
         final String username = "cinemapp.fft@gmail.com";
         final String password = "ffteam1234";
-        
+
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        
+
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
-        
+
         try {
-            //QR kód legenerálása
-            QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
-            qrCodeGenerator.setQrCodeText(text);
-            qrCodeGenerator.createQRCode();
-            
+
+            Message message = new MimeMessage(session);
+
             //QR kód beszúrásának a helye a html kódban
             String contentId = "qrcodecontent";
-            
-            
-            
-            //Email címzett, tárgy beállítás
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
-            message.setSubject("CinemApp - Jegy foglalás");
-            
-            //Multipart amelybe a html Body darabkákat tesszük
-            MimeMultipart fullEmailContent = new MimeMultipart();
-            
-            //Szöveg rész
-            MimeBodyPart textPart = new MimeBodyPart();
-            textPart.setText("<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-                    + "<head>\n"
-                    + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
-                    + "  <meta name=\"viewport\" content=\"width=device-width\" />\n"
-                    + "  <title>Airmail Ping</title>\n"
-                    + "  <style type=\"text/css\">\n"
+
+            //CSS része az emailnek
+            String style = "  <style type=\"text/css\">\n"
                     + "  * {\n"
                     + "    margin:0;\n"
                     + "    padding:0;\n"
@@ -378,12 +362,19 @@ public class EmailSenderBean implements Serializable {
                     + "      padding-top: 24px;\n"
                     + "    }\n"
                     + "  }\n"
-                    + "  </style>\n"
-                    + "</head>\n"
-                    + "\n"
-                    + "<body bgcolor=\"#ffffff\">\n"
-                    + "  <div align=\"center\">\n"
-                    + "    <table class=\"head-wrap w320 full-width-gmail-android\" bgcolor=\"#f9f8f8\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n"
+                    + "  </style>\n";
+
+            //<head>
+            String head = "<head>\n"
+                    + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+                    + "  <meta name=\"viewport\" content=\"width=device-width\" />\n"
+                    + "  <title>CinemApp</title>\n"
+                    + style
+                    + "</head>\n";
+
+            //Email header része
+            String header
+                    = "    <table class=\"head-wrap w320 full-width-gmail-android\" bgcolor=\"#f9f8f8\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n"
                     + "      <tr class=\"header-background\">\n"
                     + "        <td class=\"header container\" align=\"center\">\n"
                     + "          <div class=\"content\">\n"
@@ -395,7 +386,63 @@ public class EmailSenderBean implements Serializable {
                     + "          </div>\n"
                     + "        </td>\n"
                     + "      </tr>\n"
-                    + "    </table>\n"
+                    + "    </table>\n";
+            switch (typeOfTheEmail) {
+                default:
+                    //QR kód feletti szöveg részlet.
+                    aboveQrText = "QR kód feletti szöveg részlet.\n";
+                    //QR kód alatti szöveg részlet.
+                    underQrText = "Köszönjük, hogy igénybe vette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!";
+                    //Email típusa
+                    emailType = "Jegy foglalás";
+                    //Footer szöveg
+                    footerContent = "Ez egy automatikusan küldött email, kérjük ne válaszoljon.\n";
+                    //Email tárgya
+                    message.setSubject("CinemApp - Jegy foglalás");
+                    //Megszólítás
+                    greeting = "Tisztelt "+guestName;
+                    
+                    break;
+
+                case "contacts":
+                    aboveQrText = "Név: " + guestName + "<br/>Email: " + guestEmail + "<br/>";
+                    underQrText = "";
+                    emailType = "Látogató üzenete";
+                    footerContent = "";
+                    greeting = "";
+                    address = "cinemapp.fft@gmail.com";
+                    message.setSubject("Vendég email - " + guestSubject);
+                    break;
+
+                case "afterbook":
+                    break;
+
+                case "aftermovie":
+                    break;
+
+                case "afterthreebook":
+                    break;
+
+            }
+
+            //Footer
+            String footer = "    <table class=\"footer-wrap w320 full-width-gmail-android\" bgcolor=\"#e5e5e5\">\n"
+                    + "      <tr>\n"
+                    + "        <td></td>\n"
+                    + "        <td class=\"container\">\n"
+                    + "          <div class=\"content footer-lead\">\n"
+                    + footerContent
+                    + "          </div>\n"
+                    + "        </td>\n"
+                    + "        <td></td>\n"
+                    + "      </tr>\n"
+                    + "    </table>\n";
+
+            //<body>
+            String body
+                    = "<body bgcolor=\"#ffffff\">\n"
+                    + "  <div align=\"center\">\n"
+                    + header
                     + "\n"
                     + "    <table class=\"body-wrap w320\">\n"
                     + "      <tr>\n"
@@ -407,32 +454,25 @@ public class EmailSenderBean implements Serializable {
                     + "                <td>\n"
                     + "                  <table class=\"soapbox\">\n"
                     + "                    <tr>\n"
-                    + "                      <td class=\"soapbox-title\">Jegy foglalás</td>\n"
+                    + "                      <td class=\"soapbox-title\">" + emailType + "</td>\n"
                     + "                    </tr>\n"
                     + "                  </table>\n"
                     + "                  <table class=\"body\">\n"
                     + "                    <tr>\n"
                     + "                      <td class=\"body-padding\"></td>\n"
                     + "                      <td class=\"body-padded\">\n"
-                    + "                        <div class=\"body-title\">Tisztelt címzett!</div>\n"
+                    + "                        <div class=\"body-title\">"+greeting+"</div>\n"
                     + "                        <table class=\"body-text\">\n"
                     + "                          <tr>\n"
                     + "                            <td class=\"body-text-cell\">\n"
-                    + "							  Kérjük a moziba érkezéskor mutassa be QR kódját a jegypénztárosnak.\n"
+                    + aboveQrText
                     + "                            </td>\n"
                     + "                          </tr>\n"
                     + "                        </table>\n"
                     + "                        <div>\n"
                     + "			     <img src=\"cid:" + contentId + "\" /> "
                     + "						</div>\n"
-                    + "                        <table class=\"body-signature-block\">\n"
-                    + "                          <tr>\n"
-                    + "                            <td class=\"body-signature-cell\">\n"
-                    + "                              <p>Köszönjük, hogy igénybevette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!</p>\n"
-                    + "                              <p class=\"body-signature\">FourFire Team</p>\n"
-                    + "                            </td>\n"
-                    + "                          </tr>\n"
-                    + "                        </table>\n"
+                    + underQrText
                     + "                      </td>\n"
                     + "                      <td class=\"body-padding\"></td>\n"
                     + "                    </tr>\n"
@@ -445,68 +485,131 @@ public class EmailSenderBean implements Serializable {
                     + "        <td></td>\n"
                     + "      </tr>\n"
                     + "    </table>\n"
-                    + "\n"
-                    + "    <table class=\"footer-wrap w320 full-width-gmail-android\" bgcolor=\"#e5e5e5\">\n"
-                    + "      <tr>\n"
-                    + "        <td></td>\n"
-                    + "        <td class=\"container\">\n"
-                    + "          <div class=\"content footer-lead\">\n"
-                    + "            Ez egy automatikusan küldött email, kérjük ne válaszoljon.\n"
-                    + "          </div>\n"
-                    + "        </td>\n"
-                    + "        <td></td>\n"
-                    + "      </tr>\n"
-                    + "    </table>\n"
-                    + "    <table class=\"footer-wrap w320 full-width-gmail-android\" bgcolor=\"#e5e5e5\">\n"
-                    + "      <tr>\n"
-                    + "        <td></td>\n"
-                    + "        <td class=\"container\">\n"
-                    + "          <div class=\"content\">\n"
-                    + "            <a href=\"#\">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n"
-                    + "            <span class=\"footer-group\">\n"
-                    + "              <a href=\"#\">Facebook</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n"
-                    + "              <a href=\"#\">Twitter</a>&nbsp;&nbsp;|&nbsp;&nbsp;\n"
-                    + "              <a href=\"#\">Support</a>\n"
-                    + "            </span>\n"
-                    + "          </div>\n"
-                    + "        </td>\n"
-                    + "        <td></td>\n"
-                    + "      </tr>\n"
-                    + "    </table>\n"
+                    + footer
                     + "  </div>\n"
-                    + "</body>\n"
-                    + "</html>", "UTF-8", "html");
-            
+                    + "</body>\n";
+
+            //<html>
+            String html
+                    = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+                    + head
+                    + body
+                    + "</html>";
+
+            //Email címzett, tárgy beállítás
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
+
+            //Multipart amelybe a html Body darabkákat tesszük
+            MimeMultipart fullEmailContent = new MimeMultipart();
+
+            //Szöveg rész
+            MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setText(html, "UTF-8", "html");
+
             fullEmailContent.addBodyPart(textPart);
-            
-            //QR kód beszúrása a html kódba/emailbe
-            MimeBodyPart imagePart = new MimeBodyPart();
-            imagePart.attachFile(qrCodeGenerator.image);
-            imagePart.setContentID("<" + contentId + ">");
-            imagePart.setDisposition(MimeBodyPart.INLINE);
-            
-            fullEmailContent.addBodyPart(imagePart);
-            
-          //Email cím heleyységének ellenőrzése
-            if(isValidEmail(address)){
-            	message.setContent(fullEmailContent);
-            }else{
-            	throw new MessagingException();
+
+            if (!qrText.equals("")) {
+                //QR kód legenerálása
+                QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
+                qrCodeGenerator.setQrCodeText(qrText);
+                qrCodeGenerator.createQRCode();
+
+                //QR kód beszúrása a html kódba/emailbe
+                MimeBodyPart imagePart = new MimeBodyPart();
+                imagePart.attachFile(qrCodeGenerator.image);
+                imagePart.setContentID("<" + contentId + ">");
+                imagePart.setDisposition(MimeBodyPart.INLINE);
+
+                fullEmailContent.addBodyPart(imagePart);
             }
-            
+
+            //Email cím helyeységének ellenőrzése
+            if (isValidEmail(address)) {
+                message.setContent(fullEmailContent);
+            } else {
+                throw new MessagingException();
+            }
+
             Transport.send(message);
-            
+
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         } catch (IOException ex) {
             Logger.getLogger(EmailSenderBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public boolean isValidEmail(String address){
-    	if(emailValidator.matcher(address).matches())
-    		return true;
-    	else
-    		return false;
+
+    public boolean isValidEmail(String address) {
+        if (emailValidator.matcher(address).matches()) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    public String getQrText() {
+        return qrText;
+    }
+
+    public void setQrText(String qrText) {
+        this.qrText = qrText;
+    }
+
+    public String getTypeOfTheEmail() {
+        return typeOfTheEmail;
+    }
+
+    public void setTypeOfTheEmail(String typeOfTheEmail) {
+        this.typeOfTheEmail = typeOfTheEmail;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
+
+    public String getGuestEmail() {
+        return guestEmail;
+    }
+
+    public void setGuestEmail(String guestEmail) {
+        this.guestEmail = guestEmail;
+    }
+
+    public String getGuestSubject() {
+        return guestSubject;
+    }
+
+    public void setGuestSubject(String guestSubject) {
+        this.guestSubject = guestSubject;
+    }
+
+    public String getGuestMessage() {
+        return guestMessage;
+    }
+
+    public void setGuestMessage(String guestMessage) {
+        this.guestMessage = guestMessage;
+    }
+
+    public Pattern getEmailValidator() {
+        return emailValidator;
+    }
+
+    public void setEmailValidator(Pattern emailValidator) {
+        this.emailValidator = emailValidator;
+    }
+
 }
