@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:body styleClass="bodystyle">
+        <ui:composition template="templates/masterLayout.xhtml">
+            <ui:define name="content">
+                <b:jumbotron styleClass="content">
+                    <b:container styleClass="content">
+                        <h1 style="color: white;">Foglalás összesítés</h1>
+                        <b:column
+                            style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+                            <h2>A foglalás sikeres volt!</h2>
+                            <h:form id="form">
+                                <h:outputLabel value="Név: "/>
+                                <h:outputLabel value="Email cím: "/>
+                                <h:outputLabel value="Film neve: "/>
+                                <h:outputLabel value="Film kezdete: "/>
+                                <h:outputLabel value=""/>
+                            </h:form>
+                        </b:column>
+                    </b:container>
+                </b:jumbotron>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

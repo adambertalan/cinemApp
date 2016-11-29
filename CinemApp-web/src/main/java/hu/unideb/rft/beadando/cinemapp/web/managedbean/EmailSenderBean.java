@@ -47,6 +47,7 @@ public class EmailSenderBean implements Serializable {
         String emailType = "";
         String footerContent = "";
         String greeting = "";
+        String imageContent = "";
 
         final String username = "cinemapp.fft@gmail.com";
         final String password = "ffteam1234";
@@ -56,6 +57,7 @@ public class EmailSenderBean implements Serializable {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
@@ -65,8 +67,6 @@ public class EmailSenderBean implements Serializable {
         });
 
         try {
-
-            Message message = new MimeMessage(session);
 
             //QR kód beszúrásának a helye a html kódban
             String contentId = "qrcodecontent";
@@ -397,21 +397,21 @@ public class EmailSenderBean implements Serializable {
                     emailType = "Jegy foglalás";
                     //Footer szöveg
                     footerContent = "Ez egy automatikusan küldött email, kérjük ne válaszoljon.\n";
-                    //Email tárgya
-                    message.setSubject("CinemApp - Jegy foglalás");
                     //Megszólítás
-                    greeting = "Tisztelt "+guestName;
-                    
+                    greeting = "Tisztelt " + guestName;
+                    //QR kód beszúrása. Csak akkor használhatjuk, ha adtunk meg qrText-nek valamit.
+                    imageContent = "<img src=\"cid:" + contentId + "\" /> ";
+
                     break;
 
                 case "contacts":
-                    aboveQrText = "Név: " + guestName + "<br/>Email: " + guestEmail + "<br/>";
+                    aboveQrText = "Név: " + guestName + "<br/>Email: " + guestEmail + "<br/>Üzenet:<br/>"+guestMessage;
                     underQrText = "";
                     emailType = "Látogató üzenete";
                     footerContent = "";
                     greeting = "";
                     address = "cinemapp.fft@gmail.com";
-                    message.setSubject("Vendég email - " + guestSubject);
+                    imageContent = "";
                     break;
 
                 case "afterbook":
@@ -461,7 +461,7 @@ public class EmailSenderBean implements Serializable {
                     + "                    <tr>\n"
                     + "                      <td class=\"body-padding\"></td>\n"
                     + "                      <td class=\"body-padded\">\n"
-                    + "                        <div class=\"body-title\">"+greeting+"</div>\n"
+                    + "                        <div class=\"body-title\">" + greeting + "</div>\n"
                     + "                        <table class=\"body-text\">\n"
                     + "                          <tr>\n"
                     + "                            <td class=\"body-text-cell\">\n"
@@ -470,7 +470,7 @@ public class EmailSenderBean implements Serializable {
                     + "                          </tr>\n"
                     + "                        </table>\n"
                     + "                        <div>\n"
-                    + "			     <img src=\"cid:" + contentId + "\" /> "
+                    + imageContent
                     + "						</div>\n"
                     + underQrText
                     + "                      </td>\n"
@@ -497,8 +497,29 @@ public class EmailSenderBean implements Serializable {
                     + "</html>";
 
             //Email címzett, tárgy beállítás
+            Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
+            message.setSubject("CinemApp - Jegy foglalás");
+            switch (typeOfTheEmail) {
+                default:
+
+                    break;
+
+                case "contacts":
+                    message.setSubject("Vendég email - " + guestSubject);
+                    break;
+
+                case "afterbook":
+                    break;
+
+                case "aftermovie":
+                    break;
+
+                case "afterthreebook":
+                    break;
+
+            }
 
             //Multipart amelybe a html Body darabkákat tesszük
             MimeMultipart fullEmailContent = new MimeMultipart();

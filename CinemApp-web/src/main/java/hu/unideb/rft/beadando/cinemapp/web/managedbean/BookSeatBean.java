@@ -170,7 +170,8 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
             this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
             // törölni a foglalásokat
             this.selectedSeats.clear();
-            return "index?faces-redirect=true";
+            
+            return "bookingInfo?faces-redirect=true";
         }
         System.out.println("No selected seats!");
         return null;
