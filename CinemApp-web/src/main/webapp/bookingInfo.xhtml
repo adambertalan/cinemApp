@@ -20,19 +20,44 @@
                             style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
                             <h2>A foglalás sikeres volt!</h2>
                             <h:form id="form">
-                                <h:outputLabel value="Név: #{bookInfoBean.guestName}"/><br/>
-                                <h:outputLabel value="Email cím: #{bookInfoBean.guestEmail}"/><br/>
-                                <h:outputLabel value="Telefon szám: #{bookInfoBean.guestPhone}"/><br/>
-                                <h:outputLabel value="Film neve: #{bookInfoBean.movieShow.movie.name}"/><br/>
-                                <h:outputLabel value="Film kezdete: #{bookInfoBean.startString}"/><br/>
-                                <h:outputLabel value="Film vége: #{bookInfoBean.endString}"/><br/>
-                                <h:outputLabel value="Lefoglalt jegyek száma: #{bookInfoBean.appointment.seats.size()}"/><br/>
-                                <h:outputLabel value="Lefoglalt helyek: "/><br/>
-                                <c:forEach items="#{bookInfoBean.appointment.seats}" var="seat">
-                                    <h:form style="display: block; margin-left: 10px;">
-                                        <h:outputLabel value="Sor: #{seat.seatRow} Oszlop: #{seat.seatColumn}"/>
-                                    </h:form>
-                                </c:forEach>
+                                <b:container>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Név:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.guestName}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Email cím:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.guestEmail}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Telefon szám:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.guestPhone}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Film neve:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.movieShow.movie.name}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Film kezdete:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.startString}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Film vége:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.endString}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Lefoglalt jegyek száma:"/></b:column>
+                                        <b:column span="4"><h:outputLabel value="#{bookInfoBean.appointment.seats.size()}"/></b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column span="2"><h:outputLabel value="Lefoglalt helyek:"/></b:column>
+                                    </b:row>
+                                    <c:forEach items="#{bookInfoBean.appointment.seats}" var="seat">
+                                        <b:row>
+                                            <b:column span="4" offset="2"><h:outputLabel value="Sor: #{seat.seatRow} Oszlop: #{seat.seatColumn}"/></b:column>
+                                        </b:row>
+                                    </c:forEach>
+                                </b:container>
                             </h:form>
                         </b:column>
                     </b:container>
