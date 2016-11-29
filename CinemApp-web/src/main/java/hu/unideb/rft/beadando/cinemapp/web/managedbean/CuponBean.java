@@ -109,7 +109,7 @@ public class CuponBean {
 		if(cupon != null){
 			cuponName = cupon.getName();
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm a",Locale.US);
+			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a",Locale.US);
 			
 			startDate = formatter.format(cupon.getStartOfValidity());
 			endDate = formatter.format(cupon.getEndOfValidity());
