@@ -6,10 +6,10 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<f:metadata>
-    <f:viewParam name="movieShowId" value="#{movieShowSelectorBean.selectedMovieShowId}" />
-    <f:viewParam name="theatreId" value="#{movieShowSelectorBean.theatreId}" />
-</f:metadata>
+    <f:metadata>
+        <f:viewParam name="movieShowId" value="#{movieShowSelectorBean.selectedMovieShowId}" />
+        <f:viewParam name="theatreId" value="#{movieShowSelectorBean.theatreId}" />
+    </f:metadata>
     <h:body styleClass="bodystyle">
         <ui:composition template="/templates/masterLayout.xhtml">
             <ui:define name="content">
@@ -26,27 +26,28 @@
                             <h:outputLabel value="Hossz: #{movieShowSelectorBean.selectedMovie.length} perc"/><br/>
                             <h:outputLabel value="Leírás: #{movieShowSelectorBean.selectedMovie.description}"/><br/>
 
-							<h:form>
-	                            <h:outputLabel value="Vetítések" for="movieShowID" />
-	                            <b:selectOneMenu value="#{movieShowSelectorBean.selectedMovieShowId}" id="movieShowID">
-	                                <f:selectItems value="#{movieShowSelectorBean.movieShows}" var="movieShow"
-	                                               itemValue="#{movieShow.id}" itemLabel="#{movieShowSelectorBean.getMovieShowName(movieShow)}" />
-	                            </b:selectOneMenu>
-                            
-                            	<b:commandButton value="Tovább a foglalásra" action="#{movieShowSelectorBean.continueToSeatBooking()}"></b:commandButton>
+                            <h:form>
+                                <h:outputLabel value="Vetítések" for="movieShowID" />
+                                <b:selectOneMenu value="#{movieShowSelectorBean.selectedMovieShowId}" id="movieShowID" required="true">
+                                    <f:selectItems value="#{movieShowSelectorBean.movieShows}" var="movieShow"
+                                                   itemValue="#{movieShow.id}" itemLabel="#{movieShowSelectorBean.getMovieShowName(movieShow)}"/>
+                                </b:selectOneMenu>
+
+                                <b:commandButton value="Tovább a foglalásra" action="#{movieShowSelectorBean.continueToSeatBooking()}" ></b:commandButton>
                             </h:form>
-                            
-                            <h2 style="text-align: center">Neked ajánljuk!</h2>
-                            <div class="indexmoviesdiv">
-                                <c:forEach items="#{movieShowSelectorBean.recomendedMovies}" var="movie">
-                                    <h:form style="display: inline-block;">
-                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
-                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
-                                            <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movie.id}" />
-                                        </h:commandLink>
-                                    </h:form>
-                                </c:forEach>
-                            </div>
+                            <c:if test="#{movieShowSelectorBean.recomendedMovies.size()>0}">
+                                <h2 style="text-align: center">Neked ajánljuk!</h2>
+                                <div class="indexmoviesdiv">
+                                    <c:forEach items="#{movieShowSelectorBean.recomendedMovies}" var="movie">
+                                        <h:form style="display: inline-block;">
+                                            <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                                <f:param name="movieCode" value="#{movie.movieCode}"/>
+                                                <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movie.id}" />
+                                            </h:commandLink>
+                                        </h:form>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
                         </b:column>
                     </b:container>
                 </b:jumbotron>
