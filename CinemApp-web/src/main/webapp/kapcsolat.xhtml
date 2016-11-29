@@ -47,15 +47,19 @@
                             <!--TODO - elérni, hogy validáljon valamilyen szinten mindent amit beírnak, és ha valami nincs megadva, dobjon egy alertet-->
                             <b:row style="margin-top: 30px;">
                                 <h2 style="text-align: center;">Írj Nekünk</h2>
-                                <b:column>
-                                    <b:inputTextarea rows="1" id="name" value="Név" required="true" />
-                                    <b:inputTextarea rows="1" id="email" value="Email"
-                                                     required="true" />
-                                    <b:inputTextarea rows="1" id="subject" value="Tárgy"
-                                                     required="true" />
-                                    <b:inputTextarea rows="4" id="message" value="Üzenet"
-                                                     required="true" />
-                                </b:column>
+                                <h:form id="form">
+                                    <b:column>
+                                        <b:inputTextarea rows="1" id="name" label="Név" placeholder="Név" required="true" render-label="true" value="#{emailBean.guestName}" />
+                                        <b:inputTextarea rows="1" id="email" label="Email" placeholder="Email" required="true" render-label="true" value="#{emailBean.guestEmail}" />
+                                        <b:inputTextarea rows="1" id="subject" label="Tárgy" placeholder="Tárgy" required="true" render-label="true" value="#{emailBean.guestSubject}"/>
+                                        <b:inputTextarea rows="4" id="message" label="Üzenet" placeholder="Üzenet" required="true" render-label="true" value="#{emailBean.guestMessage}"/>
+                                        <h:commandLink action="#{emailBean.sendEmail}">
+                                            <f:param name="type" value="contacts"/>
+                                            <b:commandButton id="accept" update="@form" value="Küldés"/>
+                                        </h:commandLink>
+                                        
+                                    </b:column>
+                                </h:form>
                             </b:row>
                         </b:column>
                     </b:container>
