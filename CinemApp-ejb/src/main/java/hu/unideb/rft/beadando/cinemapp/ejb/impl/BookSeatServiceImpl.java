@@ -106,6 +106,8 @@ public class BookSeatServiceImpl implements BookSeatService {
 		appointment.setSeats(reservedSeats);
 		
 		appointmentRepository.save(appointment);
+		
+		// TODO email küldés
 	}
 
 }

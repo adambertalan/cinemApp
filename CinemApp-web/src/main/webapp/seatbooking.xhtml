@@ -24,7 +24,7 @@
 					<h:form id="form">
 						<b:row styleClass="show-grid">
 							<b:column col-xs="12" col-sm="6" col-md="8">
-								<table>
+								<table id="seats">
 									<ui:repeat value="#{bookSeatBean.seats}" var="seatList"
 										varStatus="status">
 										<tr>
@@ -45,6 +45,9 @@
 								<b:commandButton id="downbutton" value="Foglalások Törlése"
 									immediate="true" onclick="ajax:bookSeatBean.delete();"
 									ajax="true" update="@form" />
+									
+								<b:messages />
+								
 								<o:commandScript name="update" action="#{bookSeatBean.update}"
 									render="@form"></o:commandScript>
 								<o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
@@ -61,9 +64,11 @@
 									value="#{bookSeatBean.guestPhone}">
 								</b:inputText>
 
-								<b:inputText label="E-mail" placeholder="E-mail" required="true"
-									render-label="true" value="#{bookSeatBean.guestEmail}">
+								<b:inputText label="E-mail" id="email" placeholder="E-mail" required="true"
+									render-label="true" value="#{bookSeatBean.guestEmail}"
+									validatorMessage="Hibás e-mail cím">
 								</b:inputText>
+								<b:message for="email" />
 
 								<b:inputText label="Irányítószám" placeholder="Irányítószám"
 									required="true" render-label="true"
