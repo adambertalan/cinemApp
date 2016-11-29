@@ -19,6 +19,7 @@ import org.omnifaces.util.Ajax;
 import org.omnifaces.util.Faces;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
@@ -50,6 +51,8 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     private Map<Long, List<Seat>> selectedSeatsMap = new HashMap<>();
 
     private List<Seat> selectedSeats;
+
+    Appointment appointment;
 
     public boolean contains(List<Seat> list, Seat seat) {
         if (list == null) {
@@ -167,11 +170,11 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
         if (selectedSeats != null && !selectedSeats.isEmpty()) {
             // elmenteni
-            this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
+            this.appointment = this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
             // törölni a foglalásokat
             this.selectedSeats.clear();
-            
-            return "bookingInfo?faces-redirect=true";
+
+            return "bookingInfo.xhtml?faces-redirect=true&includeViewParams=true";
         }
         System.out.println("No selected seats!");
         return null;
@@ -249,6 +252,14 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
         this.delete();
     }
 
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+    
     public BookSeatService getBookSeatService() {
         return bookSeatService;
     }

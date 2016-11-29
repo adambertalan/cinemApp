@@ -6,6 +6,9 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:metadata>
+        <f:viewParam name="appointmentId" value="#{bookSeatBean.appointment.id}" />
+    </f:metadata>
 
     <h:body styleClass="bodystyle">
         <ui:composition template="templates/masterLayout.xhtml">
@@ -17,11 +20,19 @@
                             style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
                             <h2>A foglalás sikeres volt!</h2>
                             <h:form id="form">
-                                <h:outputLabel value="Név: "/>
-                                <h:outputLabel value="Email cím: "/>
-                                <h:outputLabel value="Film neve: "/>
-                                <h:outputLabel value="Film kezdete: "/>
-                                <h:outputLabel value=""/>
+                                <h:outputLabel value="Név: #{bookInfoBean.guestName}"/><br/>
+                                <h:outputLabel value="Email cím: #{bookInfoBean.guestEmail}"/><br/>
+                                <h:outputLabel value="Telefon szám: #{bookInfoBean.guestPhone}"/><br/>
+                                <h:outputLabel value="Film neve: #{bookInfoBean.movieShow.movie.name}"/><br/>
+                                <h:outputLabel value="Film kezdete: #{bookInfoBean.startString}"/><br/>
+                                <h:outputLabel value="Film vége: #{bookInfoBean.endString}"/><br/>
+                                <h:outputLabel value="Lefoglalt jegyek száma: #{bookInfoBean.appointment.seats.size()}"/><br/>
+                                <h:outputLabel value="Lefoglalt helyek: "/><br/>
+                                <c:forEach items="#{bookInfoBean.appointment.seats}" var="seat">
+                                    <h:form style="display: block; margin-left: 10px;">
+                                        <h:outputLabel value="Sor: #{seat.seatRow} Oszlop: #{seat.seatColumn}"/>
+                                    </h:form>
+                                </c:forEach>
                             </h:form>
                         </b:column>
                     </b:container>

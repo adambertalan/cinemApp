@@ -23,84 +23,87 @@ import hu.unideb.rft.beadando.cinemapp.jpa.repository.SeatRepository;
 
 @Stateless
 @Transactional(value = TxType.REQUIRED)
-@Interceptors({ SpringBeanAutowiringInterceptor.class})
-public class AppointmentServiceImpl implements AppointmentService{
-	
-	@Autowired
-	private AppointmentRepository appointmentRepository;
-	
-	@Autowired
-	private GuestRepository guestRepository;
+@Interceptors({SpringBeanAutowiringInterceptor.class})
+public class AppointmentServiceImpl implements AppointmentService {
 
-	@Autowired
-	private MovieShowRepository movieShowRepository;
-	
-	@Autowired
-	private SeatRepository seatRepository; 
-	
-	@Override
-	public List<Appointment> findAllAppointments() {
-		List<Appointment> allAppointments = appointmentRepository.findAll();
-		return allAppointments;
-	}
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
-	@Override
-	public Appointment createAppointment(Long guestId, Long movieShowId, List<Long> seatIds) {
-		Appointment appointment = new Appointment();
-		
-		Guest guest = guestRepository.findGuestById(guestId);
-		appointment.setGuest(guest);
-		
-		MovieShow movieShow = movieShowRepository.findMovieShowById(movieShowId);
-		appointment.setMovieShow(movieShow);
-		
-		List<Seat> seats = new ArrayList<>();
-		for( Long id: seatIds ){
-			Seat seat = seatRepository.findSeatById(id);
-			seats.add(seat);
-		}
-		appointment.setSeats(seats);
-		
-		appointmentRepository.save(appointment);
-		return appointment;
-	}
+    @Autowired
+    private GuestRepository guestRepository;
 
-	@Override
-	public void deleteAppointment(Long appointmentId) {
-		appointmentRepository.delete(appointmentId);
-	}
+    @Autowired
+    private MovieShowRepository movieShowRepository;
 
-	@Override
-	public AppointmentRepository getAppointmentRepository() {
-		return appointmentRepository;
-	}
+    @Autowired
+    private SeatRepository seatRepository;
 
-	@Override
-	public MovieShowRepository getMovieShowRepository() {
-		return movieShowRepository;
-	}
+    @Override
+    public List<Appointment> findAllAppointments() {
+        List<Appointment> allAppointments = appointmentRepository.findAll();
+        return allAppointments;
+    }
 
-	@Override
-	public SeatRepository getSeatRepository() {
-		return seatRepository;
-	}
+    @Override
+    public Appointment createAppointment(Long guestId, Long movieShowId, List<Long> seatIds) {
+        Appointment appointment = new Appointment();
 
-	@Override
-	public GuestRepository getGuestRepository() {
-		return guestRepository;
-	}
+        Guest guest = guestRepository.findGuestById(guestId);
+        appointment.setGuest(guest);
 
-	@Override
-	public List<Appointment> findAppointmentsOfGuest(Guest guest) {
-		List<Appointment> guestAppointments = appointmentRepository.findByGuest(guest);
-		return guestAppointments;
-	}
+        MovieShow movieShow = movieShowRepository.findMovieShowById(movieShowId);
+        appointment.setMovieShow(movieShow);
 
-	@Override
-	public List<Appointment> findAppointmentsByMovieShow(Long movieShowId) {
-		return appointmentRepository.findByMovieShowId(movieShowId);
-	}
-	
-	
+        List<Seat> seats = new ArrayList<>();
+        for (Long id : seatIds) {
+            Seat seat = seatRepository.findSeatById(id);
+            seats.add(seat);
+        }
+        appointment.setSeats(seats);
+
+        appointmentRepository.save(appointment);
+        return appointment;
+    }
+
+    @Override
+    public void deleteAppointment(Long appointmentId) {
+        appointmentRepository.delete(appointmentId);
+    }
+
+    @Override
+    public AppointmentRepository getAppointmentRepository() {
+        return appointmentRepository;
+    }
+
+    @Override
+    public MovieShowRepository getMovieShowRepository() {
+        return movieShowRepository;
+    }
+
+    @Override
+    public SeatRepository getSeatRepository() {
+        return seatRepository;
+    }
+
+    @Override
+    public GuestRepository getGuestRepository() {
+        return guestRepository;
+    }
+
+    @Override
+    public List<Appointment> findAppointmentsOfGuest(Guest guest) {
+        List<Appointment> guestAppointments = appointmentRepository.findByGuest(guest);
+        return guestAppointments;
+    }
+
+    @Override
+    public List<Appointment> findAppointmentsByMovieShow(Long movieShowId) {
+        return appointmentRepository.findByMovieShowId(movieShowId);
+    }
+
+    @Override
+    public Appointment findAppointmentById(Long id) {
+        return appointmentRepository.findOne(id);
+    }
 
 }

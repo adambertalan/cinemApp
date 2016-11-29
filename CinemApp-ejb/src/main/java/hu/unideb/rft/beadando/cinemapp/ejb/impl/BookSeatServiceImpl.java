@@ -79,7 +79,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 	}
 
 	@Override
-	public void saveReservation(List<Seat> reservedSeats, String guestName, String guestEmail, String guestPhone,
+	public Appointment saveReservation(List<Seat> reservedSeats, String guestName, String guestEmail, String guestPhone,
 			Integer guestZip, Long movieShowId) {
 		System.out.println("BookSeatServiceImpl saving reservations");
 		
@@ -106,6 +106,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 		appointment.setSeats(reservedSeats);
 		
 		appointmentRepository.save(appointment);
+                return appointment;
 	}
 
 }
