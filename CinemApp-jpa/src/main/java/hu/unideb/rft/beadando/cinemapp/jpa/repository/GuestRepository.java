@@ -13,6 +13,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 	
 	public Guest findGuestByName( String guestName );
 	
+	public Guest findGuestByEmail( String email );
+	
 	public Guest findGuestById( Long guestId );
 
 }

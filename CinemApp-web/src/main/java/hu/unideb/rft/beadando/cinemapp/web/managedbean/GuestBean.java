@@ -13,6 +13,7 @@ import org.omnifaces.util.Ajax;
 
 import de.larmic.butterfaces.event.TableSingleSelectionListener;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.GuestService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
@@ -25,11 +26,15 @@ public class GuestBean implements TableSingleSelectionListener {
 	private GuestService guestService;
 	
 	@EJB
+	private CuponService cuponService;
+	
+	@EJB
 	private AppointmentService appointmentService;
 	
 	private List<Guest> guests;
 	
-	private String selectedGuestName;
+//	private String selectedGuestName;
+	private Guest selectedGuest;
 	
 	private List<Appointment> guestAppointments;
 
@@ -42,6 +47,7 @@ public class GuestBean implements TableSingleSelectionListener {
 	public String format( Timestamp ts ){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 		return sdf.format(ts);
+//		return "";
 	}
 
 	public List<Guest> getGuests() {
@@ -63,19 +69,20 @@ public class GuestBean implements TableSingleSelectionListener {
 		// TODO Auto-generated method stub
 		System.out.println("VALUE SELECED" + guest);
 		this.guestAppointments = appointmentService.findAppointmentsOfGuest((Guest)guest);
+		this.selectedGuest = (Guest)guest;
 		
-		this.selectedGuestName = ((Guest)guest).getName();
+		
 		Ajax.update("well");
-		Ajax.update("well:welldiv");
+//		Ajax.update("well:welldiv");
 	}
 
-	public String getSelectedGuestName() {
-		return selectedGuestName;
-	}
-
-	public void setSelectedGuestName(String selectedGuestName) {
-		this.selectedGuestName = selectedGuestName;
-	}
+//	public String getSelectedGuestName() {
+//		return selectedGuestName;
+//	}
+//
+//	public void setSelectedGuestName(String selectedGuestName) {
+//		this.selectedGuestName = selectedGuestName;
+//	}
 
 	public List<Appointment> getGuestAppointments() {
 		return guestAppointments;
@@ -83,5 +90,13 @@ public class GuestBean implements TableSingleSelectionListener {
 
 	public void setGuestAppointments(List<Appointment> guestAppointments) {
 		this.guestAppointments = guestAppointments;
-	}	
+	}
+
+	public Guest getSelectedGuest() {
+		return selectedGuest;
+	}
+
+	public void setSelectedGuest(Guest selectedGuest) {
+		this.selectedGuest = selectedGuest;
+	}
 }

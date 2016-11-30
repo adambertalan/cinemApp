@@ -29,40 +29,47 @@
             </butter:column>
 		</butter:table>
 		<b:well id="well">
-			<h3>#{guestBean.selectedGuestName} foglalásai</h3>
-			<div id="welldiv">
+			<h3>#{guestBean.selectedGuest.name} adatai:</h3>
+			<h:form>
 				<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
 					<b:row>
-						<b:column>
+						<b:column medium-screen="4">
 							<h:outputLabel value="Filmcím: " />
-							<h:outputText span="10"
-								value="#{appointment.movieShow.movie.name}" />
-						</b:column>
-						<b:column>
+							<h:outputText value="#{appointment.movieShow.movie.name}" />
+							<br />
 							<h:outputLabel value="Kezdés: " />
-							<h:outputText span="10"
+							<h:outputText
 								value="#{guestBean.format(appointment.movieShow.startTime)}" />
-						</b:column>
-						<b:column>
+							<br />
 							<h:outputLabel value="Vége: " />
-							<h:outputText span="10"
+							<h:outputText
 								value="#{guestBean.format(appointment.movieShow.endTime)}" />
 						</b:column>
+						<b:column medium-screen="4">
+							<h:outputLabel value="Foglalt helyek: (sor,oszlop)" />
+							<br />
+							<ui:repeat var="seat" value="#{appointment.seats}">
+								<h:outputText value="(#{seat.seatRow},#{seat.seatColumn})" />
+								<br />
+							</ui:repeat>
+						</b:column>
+						<b:column medium-screen="4">
+							<c:if test="#{guestBean.selectedGuest.cupon} != null">
+								<h:outputLabel value="Kupon:" />
+								<br />
+								<h:outputText value="#{guestBean.selectedGuest.cupon.type}" />
+								<br />
+								<h:outputText
+									value="#{guestBean.selectedGuest.cupon.used ? 'Felhasználva' : 'Felhasználható'}" />
+								<br />
+								<h:outputText
+									value="Érvényes #{guestBean.format(guestBean.selectedGuest.cupon.startOfValidity)} - #{guestBean.format(guestBean.selectedGuest.cupon.endOfValidity)}" />
+							</c:if>
+						</b:column>
 					</b:row>
-					<b:row>
-						<h:outputLabel value="Foglalt helyek: " />
-
-						<ui:repeat var="seat" value="#{appointment.seats}">
-							<h:outputLabel value="Sor:" />
-							<h:outputText span="8" value="#{seat.seatRow}" />
-							<h:outputLabel value="Oszlop:" />
-							<h:outputText span="8" value="#{seat.seatColumn}" />
-						</ui:repeat>
-
-					</b:row>
+					<br />
 				</ui:repeat>
-
-			</div>
+			</h:form>
 		</b:well>
 	</ui:composition>
 </body>

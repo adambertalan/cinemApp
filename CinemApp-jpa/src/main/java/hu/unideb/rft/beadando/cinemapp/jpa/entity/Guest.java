@@ -1,5 +1,6 @@
 package hu.unideb.rft.beadando.cinemapp.jpa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -7,13 +8,14 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Guest extends BaseName {
 
+	@Column(unique=true)
     private String email;
     
     private String phoneNumber;
     
     private Integer zip;
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     private Cupon cupon;
 
     public String getEmail() {

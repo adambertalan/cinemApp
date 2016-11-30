@@ -16,7 +16,7 @@ public class Appointment extends BaseId {
 	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private MovieShow movieShow;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Seat> seats;
 	
 	private Boolean deprecated;

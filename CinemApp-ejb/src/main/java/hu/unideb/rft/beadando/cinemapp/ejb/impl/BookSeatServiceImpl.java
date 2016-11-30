@@ -84,7 +84,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 		System.out.println("BookSeatServiceImpl saving reservations");
 		
 		// létrehozni a guest-et
-		Guest guest = guestRepository.findGuestByName(guestName);
+		Guest guest = guestRepository.findGuestByEmail(guestEmail);
 		
 		if( guest == null ){
 			guest = new Guest();
