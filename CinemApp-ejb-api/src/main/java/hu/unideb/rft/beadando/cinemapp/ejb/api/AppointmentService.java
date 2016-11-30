@@ -15,6 +15,8 @@ import hu.unideb.rft.beadando.cinemapp.jpa.repository.SeatRepository;
 public interface AppointmentService {
 
 	public List<Appointment> findAllAppointments();
+        
+        public Appointment findAppointmentById(Long id);
 	
 	public List<Appointment> findAppointmentsOfGuest( Guest guest );
 

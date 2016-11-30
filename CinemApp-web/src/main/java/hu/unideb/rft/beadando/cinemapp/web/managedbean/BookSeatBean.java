@@ -23,6 +23,8 @@ import org.omnifaces.util.Faces;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @ManagedBean
@@ -56,6 +58,8 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     
     @ManagedProperty(value="#{emailBean}")
 	private EmailSenderBean emailBean;
+
+    Appointment appointment;
 
     public boolean contains(List<Seat> list, Seat seat) {
         if (list == null) {
@@ -214,34 +218,34 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     		return false;
     }
 
-	@PostConstruct
-	public void init() {
-		System.out.println("BookseatBean INIT");
-		
-		FacesContext context = FacesContext.getCurrentInstance();
-		
-		String requestURI = ((HttpServletRequest)context.getExternalContext().getRequest()).getRequestURI();
-		System.out.println("requestURI: " + requestURI);
-		
-		Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
-		
-		String theatreIdString = requestMap.get("theatreId");
-		String movieShowIdString = requestMap.get("movieShowId");
-		
-		System.out.println("INIT: theatreId " + theatreIdString);
-		System.out.println("INIT: movieShowId " + movieShowIdString);
-		
-		Long theatreId = Long.parseLong(theatreIdString);
-		Long movieShowId = Long.parseLong(movieShowIdString);
-		
-		this.movieShowId = movieShowId;
-		
-		selectedSeatsMap.put(movieShowId, new ArrayList<Seat>());
-		
-		// lekérni az aktuális foglaltságot, ha még nem volt lekérve
-		System.out.println("Querying seats");
-		seats = bookSeatService.findAllSeatsOfTheatre(theatreId);			
-		
+    @PostConstruct
+    public void init() {
+        System.out.println("BookseatBean INIT");
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        String requestURI = ((HttpServletRequest) context.getExternalContext().getRequest()).getRequestURI();
+        System.out.println("requestURI: " + requestURI);
+
+        Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
+
+        String theatreIdString = requestMap.get("theatreId");
+        String movieShowIdString = requestMap.get("movieShowId");
+
+        System.out.println("INIT: theatreId " + theatreIdString);
+        System.out.println("INIT: movieShowId " + movieShowIdString);
+
+        Long theatreId = Long.parseLong(theatreIdString);
+        Long movieShowId = Long.parseLong(movieShowIdString);
+
+        this.movieShowId = movieShowId;
+
+        selectedSeatsMap.put(movieShowId, new ArrayList<Seat>());
+
+        // lekérni az aktuális foglaltságot, ha még nem volt lekérve
+        System.out.println("Querying seats");
+        seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
+
 //		for( List<Seat> seatlist : seats ){
 //			for( Seat s : seatlist ){
 //				System.out.println("GOT SEAT " + s.getId());
@@ -286,6 +290,14 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
         this.delete();
     }
 
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+    
     public BookSeatService getBookSeatService() {
         return bookSeatService;
     }

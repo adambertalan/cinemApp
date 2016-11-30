@@ -15,7 +15,7 @@
                                  id="reservationID">
                     <f:selectItems value="#{appointmentBean.appointments}"
                                    var="appointment" itemValue="#{appointment.id}"
-                                   itemLabel="#{appointment.id}" />
+                                   itemLabel="#{appointmentBean.getAppointmentName(appointment)}" />
                 </b:selectOneMenu>
                 
                 <b:commandButton value="Törlés"
