@@ -444,36 +444,36 @@ INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) V
 
 -- Vetítések
 
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (1, '2016-11-21 15:57:00', '2016-11-21 14:00:00', 3, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (2, '2016-11-21 20:13:00', '2016-11-21 18:00:00', 1, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (3, '2016-11-21 11:32:00', '2016-11-21 10:00:00', 4, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (4, '2016-11-21 21:28:00', '2016-11-21 20:00:00', 6, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (5, '2016-11-21 18:14:00', '2016-11-21 16:00:00', 5, 3);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (6, '2016-11-21 10:44:00', '2016-11-21 9:00:00', 2, 5);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (7, '2016-11-22 15:57:00', '2016-11-22 14:00:00', 3, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (8, '2016-11-22 20:13:00', '2016-11-22 18:00:00', 1, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (9, '2016-11-22 11:32:00', '2016-11-22 10:00:00', 4, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (10, '2016-11-22 21:28:00', '2016-11-22 20:00:00', 6, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (11, '2016-11-22 18:14:00', '2016-11-22 16:00:00', 5, 3);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (12, '2016-11-22 10:44:00', '2016-11-22 9:00:00', 2, 5);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (13, '2016-11-23 15:57:00', '2016-11-23 14:00:00', 3, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (14, '2016-11-23 20:13:00', '2016-11-23 18:00:00', 1, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (15, '2016-11-23 11:32:00', '2016-11-23 10:00:00', 4, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (16, '2016-11-23 21:28:00', '2016-11-23 20:00:00', 6, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (17, '2016-11-23 18:14:00', '2016-11-23 16:00:00', 5, 3);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (18, '2016-11-23 10:44:00', '2016-11-23 9:00:00', 2, 5);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (19, '2016-11-24 15:57:00', '2016-11-24 14:00:00', 3, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (20, '2016-11-24 20:13:00', '2016-11-24 18:00:00', 1, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (21, '2016-11-24 11:32:00', '2016-11-24 10:00:00', 4, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (22, '2016-11-24 21:28:00', '2016-11-24 20:00:00', 6, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (23, '2016-11-24 18:14:00', '2016-11-24 16:00:00', 5, 3);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (24, '2016-11-24 10:44:00', '2016-11-24 9:00:00', 2, 5);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (25, '2016-11-25 15:57:00', '2016-11-25 14:00:00', 3, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (26, '2016-11-25 20:13:00', '2016-11-25 18:00:00', 1, 1);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (27, '2016-11-25 11:32:00', '2016-11-25 10:00:00', 4, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (28, '2016-11-25 21:28:00', '2016-11-25 20:00:00', 6, 2);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (29, '2016-11-25 18:14:00', '2016-11-25 16:00:00', 5, 3);
-INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (30, '2016-11-25 10:44:00', '2016-11-25 9:00:00', 2, 5);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (1, to_timestamp(current_date || ' 15:57:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date || ' 14:00:00','YYYY-MM-DD HH24:MI:SS'), 3, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (2, to_timestamp(current_date || ' 20:13:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date || ' 18:00:00','YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (3, to_timestamp(current_date || ' 11:32:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date || ' 10:00:00','YYYY-MM-DD HH24:MI:SS'), 4, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (4, to_timestamp(current_date || ' 21:28:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date || ' 20:00:00','YYYY-MM-DD HH24:MI:SS'), 6, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (5, to_timestamp(current_date || ' 18:14:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date || ' 16:00:00','YYYY-MM-DD HH24:MI:SS'), 5, 3);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (6, to_timestamp(current_date || ' 10:44:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date || ' 9:00:00','YYYY-MM-DD HH24:MI:SS'), 2, 5);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (7, to_timestamp(current_date + 1 || ' 15:57:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 1 || ' 14:00:00','YYYY-MM-DD HH24:MI:SS'), 3, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (8, to_timestamp(current_date + 1 || ' 20:13:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 1 || ' 18:00:00','YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (9, to_timestamp(current_date + 1 || ' 11:32:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 1 || ' 10:00:00','YYYY-MM-DD HH24:MI:SS'), 4, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (10, to_timestamp(current_date + 1 || ' 21:28:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 1 || ' 20:00:00','YYYY-MM-DD HH24:MI:SS'), 6, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (11, to_timestamp(current_date + 1 || ' 18:14:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 1 || ' 16:00:00','YYYY-MM-DD HH24:MI:SS'), 5, 3);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (12, to_timestamp(current_date + 1 || ' 10:44:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 1 || ' 9:00:00','YYYY-MM-DD HH24:MI:SS'), 2, 5);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (13, to_timestamp(current_date + 2 || ' 15:57:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 2 || ' 14:00:00','YYYY-MM-DD HH24:MI:SS'), 3, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (14, to_timestamp(current_date + 2 || ' 20:13:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 2 || ' 18:00:00','YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (15, to_timestamp(current_date + 2 || ' 11:32:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 2 || ' 10:00:00','YYYY-MM-DD HH24:MI:SS'), 4, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (16, to_timestamp(current_date + 2 || ' 21:28:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 2 || ' 20:00:00','YYYY-MM-DD HH24:MI:SS'), 6, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (17, to_timestamp(current_date + 2 || ' 18:14:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 2 || ' 16:00:00','YYYY-MM-DD HH24:MI:SS'), 5, 3);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (18, to_timestamp(current_date + 2 || ' 10:44:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 2 || ' 9:00:00','YYYY-MM-DD HH24:MI:SS'), 2, 5);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (19, to_timestamp(current_date + 3 || ' 15:57:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 3 || ' 14:00:00','YYYY-MM-DD HH24:MI:SS'), 3, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (20, to_timestamp(current_date + 3 || ' 20:13:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 3 || ' 18:00:00','YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (21, to_timestamp(current_date + 3 || ' 11:32:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 3 || ' 10:00:00','YYYY-MM-DD HH24:MI:SS'), 4, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (22, to_timestamp(current_date + 3 || ' 21:28:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 3 || ' 20:00:00','YYYY-MM-DD HH24:MI:SS'), 6, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (23, to_timestamp(current_date + 3 || ' 18:14:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 3 || ' 16:00:00','YYYY-MM-DD HH24:MI:SS'), 5, 3);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (24, to_timestamp(current_date + 3 || ' 10:44:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 3 || ' 9:00:00','YYYY-MM-DD HH24:MI:SS'), 2, 5);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (25, to_timestamp(current_date + 4 || ' 15:57:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 4 || ' 14:00:00','YYYY-MM-DD HH24:MI:SS'), 3, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (26, to_timestamp(current_date + 4 || ' 20:13:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 4 || ' 18:00:00','YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (27, to_timestamp(current_date + 4 || ' 11:32:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 4 || ' 10:00:00','YYYY-MM-DD HH24:MI:SS'), 4, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (28, to_timestamp(current_date + 4 || ' 21:28:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 4 || ' 20:00:00','YYYY-MM-DD HH24:MI:SS'), 6, 2);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (29, to_timestamp(current_date + 4 || ' 18:14:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 4 || ' 16:00:00','YYYY-MM-DD HH24:MI:SS'), 5, 3);
+INSERT INTO public.movieshow(id, endtime, starttime, movie_id, theatre_id) VALUES (30, to_timestamp(current_date + 4 || ' 10:44:00','YYYY-MM-DD HH24:MI:SS'), to_timestamp(current_date + 4 || ' 9:00:00','YYYY-MM-DD HH24:MI:SS'), 2, 5);
 
 -- Foglalások
 

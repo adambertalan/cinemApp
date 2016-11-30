@@ -8,8 +8,7 @@
 </factory>
 
 	<application>
-        <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler
-        </resource-handler>
+        <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>
 <!--        <view-handler>hu.unideb.rft.beadando.cinemapp.web.filter.CustomViewHandler</view-handler> -->
     </application>
 

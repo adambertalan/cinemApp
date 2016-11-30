@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Appointment extends BaseId {
@@ -16,7 +16,7 @@ public class Appointment extends BaseId {
 	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private MovieShow movieShow;
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private List<Seat> seats;
 	
 	private Boolean deprecated;

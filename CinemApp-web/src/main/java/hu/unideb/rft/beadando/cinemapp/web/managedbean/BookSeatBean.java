@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +20,9 @@ import javax.servlet.http.HttpSessionBindingListener;
 
 import org.omnifaces.util.Ajax;
 import org.omnifaces.util.Faces;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
-import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @ManagedBean
@@ -52,6 +53,9 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     private Map<Long, List<Seat>> selectedSeatsMap = new HashMap<>();
 
     private List<Seat> selectedSeats;
+    
+    @ManagedProperty(value="#{emailBean}")
+	private EmailSenderBean emailBean;
 
     public boolean contains(List<Seat> list, Seat seat) {
         if (list == null) {
@@ -174,6 +178,14 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 				this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
 				// törölni a foglalásokat
 				this.selectedSeats.clear();
+				// e-mail kiküldése
+				
+				this.emailBean.setGuestName(guestName);
+				this.emailBean.setAddress(guestEmail);
+				this.emailBean.setTypeOfTheEmail("afterbook");
+				
+				this.emailBean.sendEmail();
+				
 				return "index?faces-redirect=true";	
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
@@ -364,5 +376,13 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     public void setGuestEmail(String guestEmail) {
         this.guestEmail = guestEmail;
     }
+
+	public EmailSenderBean getEmailBean() {
+		return emailBean;
+	}
+
+	public void setEmailBean(EmailSenderBean emailBean) {
+		this.emailBean = emailBean;
+	}
 
 }
