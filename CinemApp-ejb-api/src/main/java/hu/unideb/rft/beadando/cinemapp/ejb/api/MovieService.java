@@ -19,6 +19,8 @@ public interface MovieService {
 	
 	public void editMovie(Long movideId);
 	
+	public Movie findMovieById( Long movieId );
+	
 	public MovieRepository getMovieRepository();
 	
 	public GenreRepository getGenreRepository();

@@ -11,6 +11,8 @@ public class Movie extends BaseName {
    
     private Double rating;
     
+    private Integer rateCounter;
+    
     private String movieCode;
     
     private Integer ageLimit;
@@ -82,5 +84,13 @@ public class Movie extends BaseName {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public Integer getRateCounter() {
+		return rateCounter;
+	}
+
+	public void setRateCounter(Integer rateCounter) {
+		this.rateCounter = rateCounter;
 	}
 }
