@@ -30,4 +30,6 @@ public interface MovieShowService {
         public List<MovieShow> findActiveMovieShows();
         
         public void deprecateMovieShowAppointments( Long movieShowId );
+        
+        public MovieShow findMovieShowById(Long id);
 }

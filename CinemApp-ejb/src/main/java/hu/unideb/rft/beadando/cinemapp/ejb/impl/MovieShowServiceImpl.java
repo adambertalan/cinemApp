@@ -138,4 +138,10 @@ public class MovieShowServiceImpl implements MovieShowService {
 
 	}
 
+	@Override
+	public MovieShow findMovieShowById(Long id) {
+		
+		return movieShowRepository.findMovieShowById(id);
+	}
+
 }

@@ -1,24 +1,21 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
