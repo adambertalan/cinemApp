@@ -29,7 +29,9 @@
             </butter:column>
 		</butter:table>
 		<b:well id="well">
-			<h3>#{guestBean.selectedGuest.name} adatai:</h3>
+			<c:if test="#{guestBean.selectedGuest != null}">
+				<h3>#{guestBean.selectedGuest.name} adatai:</h3>
+			</c:if>
 			<h:form>
 				<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
 					<b:row>
@@ -54,7 +56,7 @@
 							</ui:repeat>
 						</b:column>
 						<b:column medium-screen="4">
-							<c:if test="#{guestBean.selectedGuest.cupon} != null">
+							<c:if test="#{guestBean.selectedGuest.cupon != null}">
 								<h:outputLabel value="Kupon:" />
 								<br />
 								<h:outputText value="#{guestBean.selectedGuest.cupon.type}" />

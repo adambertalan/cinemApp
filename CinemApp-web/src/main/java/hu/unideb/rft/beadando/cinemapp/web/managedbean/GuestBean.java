@@ -47,7 +47,6 @@ public class GuestBean implements TableSingleSelectionListener {
 	public String format( Timestamp ts ){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 		return sdf.format(ts);
-//		return "";
 	}
 
 	public List<Guest> getGuests() {
