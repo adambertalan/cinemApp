@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+</h:head>
+<h:body >
+	<ui:composition>
+		<h:form>
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{genreFilterBean.selectedGenreId}" id="genreID">
+				<f:selectItems value="#{genreFilterBean.genres}" var="genre"
+					itemValue="#{genre.id}" itemLabel="#{genre.name}" />
+			</b:selectOneMenu>
+			<b:commandButton ajax="true" value="Szűrés" onclick="ajax:genreFilterBean.filter()" update="filteredMoviesGenre" />
+		</h:form>
+		<h:form id="filteredMoviesGenre">
+			<ui:repeat var="movie" value="#{genreFilterBean.filteredMovieList}">
+
+				<h:commandLink>
+					<f:ajax event="click" listener="#{genreFilterBean.chooseMovie}" render="filteredMovieTimesGenre"/>
+					<f:param name="movieID" value="#{movie.id}" />
+					<h:graphicImage styleClass="indexmovies"
+						value="/ImageServlet/#{movie.id}" />
+				</h:commandLink>
+
+			</ui:repeat>
+		</h:form>
+		<h:form id="filteredMovieTimesGenre">
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{genreFilterBean.selectedMovieTime}" id="time">
+				<f:selectItems value="#{genreFilterBean.movieTimes}" var="movieTime"
+					itemValue="#{movieTime}" itemLabel="#{movieTime}" />
+			</b:selectOneMenu>
+			<b:commandButton value="Tovább a foglalásra"
+				action="#{genreFilterBean.goToSeatPicking}" />
+		</h:form>
+
+	</ui:composition>
+</h:body>
+</html>

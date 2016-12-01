@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+	<f:viewParam name="movieShowId"
+		value="#{dateFilterBean.selectedMovieShowId}" />
+	<f:viewParam name="theatreId" value="#{dateFilterBean.theatreId}" />
+	<f:viewParam name="movieShowId"
+		value="#{genreFilterBean.selectedMovieShowId}" />
+	<f:viewParam name="theatreId" value="#{genreFilterBean.theatreId}" />
+</f:metadata>
+
+<h:body styleClass="bodystyle">
+	<ui:composition template="/templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<b:jumbotron styleClass="content">
+				<b:container styleClass="content">
+					<b:tabView
+						contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
+						<b:tab title="Időpont Szűrő">
+							<ui:include src="/datefilter.xhtml" />
+						</b:tab>
+						<b:tab title="Műfaj Szűrő">
+							<ui:include src="/genrefilter.xhtml" />
+						</b:tab>
+					</b:tabView>
+				</b:container>
+			</b:jumbotron>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
