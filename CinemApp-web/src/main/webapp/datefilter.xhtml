@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:butter="http://butterfaces.org/components">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<h:form>
+			<butter:calendar style="width: 90%;"
+				value="#{dateFilterBean.filterDate}" rendered="true" required="true"
+				pickDate="true" pickTime="false"
+				placeholder="Válasszon egy napot amikor moziba szeretne menni."
+				sideBySide="true" />
+			<b:commandButton value="Szűrés" ajax="true" onclick="ajax:dateFilterBean.filter()" update="filteredMoviesDate" />
+		</h:form>
+		<h:form id="filteredMoviesDate">
+			<ui:repeat var="movie" value="#{dateFilterBean.filteredMovieList}">
+
+				<h:commandLink >
+					<f:ajax event="click" listener="#{dateFilterBean.chooseMovie}" render="movieTimesDate"/>
+					<f:param name="movieID" value="#{movie.id}" />
+					<h:graphicImage styleClass="indexmovies"
+						value="/ImageServlet/#{movie.id}" />
+				</h:commandLink>
+
+			</ui:repeat>
+		</h:form>
+		<h:form id="movieTimesDate">
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{dateFilterBean.selectedTime}" id="time">
+				<f:selectItems value="#{dateFilterBean.movieTimes}" var="movieTime"
+					itemValue="#{movieTime}" itemLabel="#{movieTime}" />
+			</b:selectOneMenu>
+			<b:commandButton value="Tovább a foglalásra"
+				action="#{dateFilterBean.goToSeatPicking}" />
+		</h:form>
+
+	</ui:composition>
+</h:body>
+</html>

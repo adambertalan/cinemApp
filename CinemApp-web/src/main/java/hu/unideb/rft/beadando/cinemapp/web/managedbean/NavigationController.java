@@ -34,4 +34,8 @@ public class NavigationController implements Serializable {
         return "page";
     }
     
+    public String processFilters(){
+    	return "page";
+    }
+    
 }

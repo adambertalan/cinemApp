@@ -27,6 +27,12 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-action>#{navigationController.processFilters}</from-action>
+            <from-outcome>page</from-outcome>
+            <to-view-id>/filters.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{navigationController.processContact}</from-action>
             <from-outcome>page</from-outcome>
             <to-view-id>/kapcsolat.xhtml</to-view-id>

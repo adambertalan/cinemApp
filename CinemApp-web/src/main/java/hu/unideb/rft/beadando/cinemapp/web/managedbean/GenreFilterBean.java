@@ -1,11 +1,9 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -14,68 +12,79 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import hu.unideb.rft.beadando.cinemapp.ejb.api.GenreService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Genre;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
 
-@ManagedBean(name = "datePickerBean")
+@ManagedBean(name="genreFilterBean")
 @ViewScoped
-public class DatePickerBean {
+public class GenreFilterBean {
 
 	@EJB
+	private GenreService genreService;
+	private List<Genre> genres;
+	
+	@EJB
 	private MovieShowService movieShowService;
-
-	private List<Movie> filteredMovieList;
 	private List<MovieShow> filteredMovieShowList;
-	private String filterDate;
+	private List<Movie> filteredMovieList;
+	
+	private Long selectedGenreId;
+	
 	private List<Timestamp> movieTimes;
-
-	private Timestamp selectedTime;
+	private Timestamp selectedMovieTime;
+	
 	private Movie selectedMovie;
+	
 	private Long selectedMovieShowId;
 	private Long theatreId;
-
+	
 	@PostConstruct
-	public void init() {
+	public void init (){
+		genres = genreService.findAllGenre();
 		filteredMovieList = new ArrayList<Movie>();
 		filteredMovieShowList = new ArrayList<MovieShow>();
 		movieTimes = new ArrayList<Timestamp>();
 	}
-
-	public void filter() throws ParseException {
-		System.out.println(filterDate);
+	
+	public void filter(){
 		filteredMovieList.clear();
 		filteredMovieShowList.clear();
-		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-		for (MovieShow movieShow : movieShowService.findAllMovieShow()) {
-			if (filterDate.equals(format.format(movieShow.getStartTime()))) {
-				if (!filteredMovieList.contains(movieShow.getMovie()))
+		System.out.println(selectedGenreId);
+		for(MovieShow movieShow : movieShowService.findAllMovieShow()){
+			if(selectedGenreId.equals(movieShow.getMovie().getGenre().getId()) && movieShow.getStartTime().after(new Date())){
+				
+				if(!filteredMovieList.contains(movieShow.getMovie())){
 					filteredMovieList.add(movieShow.getMovie());
+					
+				}
 				filteredMovieShowList.add(movieShow);
 			}
 		}
 	}
-
-	public String chooseMovie() {
+	
+	public void chooseMovie(){
 		movieTimes.clear();
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String movieID = params.get("movieID");
+		System.out.println(movieID);
 		for(Movie movie : filteredMovieList){
 			if(movie.getId().equals(Long.parseLong(movieID)))
 				selectedMovie = movie;
 		}
-		System.out.println(movieID);
 		for(MovieShow movieShow : filteredMovieShowList){
 			if(movieShow.getMovie().getId().equals(Long.parseLong(movieID))){
 				movieTimes.add(movieShow.getStartTime());
 			}
 		}
-		return "chooseMovie";
+//		return "chooseMovie";
 	}
-	
+
 	public String goToSeatPicking(){
 		for(MovieShow movieShow : filteredMovieShowList){
-			if(movieShow.getMovie().equals(selectedMovie) && movieShow.getStartTime().equals(selectedTime)){
+			if(movieShow.getMovie().equals(selectedMovie) && movieShow.getStartTime().equals(selectedMovieTime)){
 				selectedMovieShowId = movieShow.getId();
 				theatreId = movieShow.getTheatre().getId();
 				break;
@@ -83,13 +92,37 @@ public class DatePickerBean {
 		}
 		return "seatbooking.xhtml?faces-redirect=true&includeViewParams=true";
 	}
-
-	public String getFilterDate() {
-		return filterDate;
+	
+	public List<Genre> getGenres() {
+		return genres;
 	}
 
-	public void setFilterDate(String filterDate) {
-		this.filterDate = filterDate;
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public Long getSelectedGenreId() {
+		return selectedGenreId;
+	}
+
+	public void setSelectedGenreId(Long selectedGenreId) {
+		this.selectedGenreId = selectedGenreId;
+	}
+
+	public List<MovieShow> getFilteredMovieShowList() {
+		return filteredMovieShowList;
+	}
+
+	public void setFilteredMovieShowList(List<MovieShow> filteredMovieShowList) {
+		this.filteredMovieShowList = filteredMovieShowList;
+	}
+
+	public List<Movie> getFilteredMovieList() {
+		return filteredMovieList;
+	}
+
+	public void setFilteredMovieList(List<Movie> filteredMovieList) {
+		this.filteredMovieList = filteredMovieList;
 	}
 
 	public List<Timestamp> getMovieTimes() {
@@ -100,20 +133,20 @@ public class DatePickerBean {
 		this.movieTimes = movieTimes;
 	}
 
-	public Timestamp getSelectedTime() {
-		return selectedTime;
+	public Timestamp getSelectedMovieTime() {
+		return selectedMovieTime;
 	}
 
-	public void setSelectedTime(Timestamp selectedTime) {
-		this.selectedTime = selectedTime;
+	public void setSelectedMovieTime(Timestamp selectedMovieTime) {
+		this.selectedMovieTime = selectedMovieTime;
 	}
 
-	public List<Movie> getFilteredMovieList() {
-		return filteredMovieList;
+	public Movie getSelectedMovie() {
+		return selectedMovie;
 	}
 
-	public void setFilteredMovieList(List<Movie> filteredMovieList) {
-		this.filteredMovieList = filteredMovieList;
+	public void setSelectedMovie(Movie selectedMovie) {
+		this.selectedMovie = selectedMovie;
 	}
 
 	public Long getSelectedMovieShowId() {
@@ -131,6 +164,7 @@ public class DatePickerBean {
 	public void setTheatreId(Long theatreId) {
 		this.theatreId = theatreId;
 	}
-
+	
+	
 	
 }
