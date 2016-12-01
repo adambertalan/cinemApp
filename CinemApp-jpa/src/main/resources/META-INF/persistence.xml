@@ -21,7 +21,7 @@
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="hibernate.transaction.jta.platform"
                       value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.hbm2ddl.import_files" value="create.sql" />
 
         </properties>
