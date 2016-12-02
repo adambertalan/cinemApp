@@ -1,9 +1,13 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -12,51 +16,58 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import hu.unideb.rft.beadando.cinemapp.ejb.api.GenreService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
-import hu.unideb.rft.beadando.cinemapp.jpa.entity.Genre;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
 
-@ManagedBean(name="genreFilterBean")
+@ManagedBean(name = "intervalFilterBean")
 @ViewScoped
-public class GenreFilterBean {
+public class IntervalFilterBean {
 
 	@EJB
-	private GenreService genreService;
-	private List<Genre> genres;
-	
-	@EJB
 	private MovieShowService movieShowService;
+
 	private List<MovieShow> filteredMovieShowList;
 	private List<Movie> filteredMovieList;
-	
-	private Long selectedGenreId;
-	
+
 	private List<Timestamp> movieTimes;
 	private Timestamp selectedMovieTime;
+
+	private String startOfIntervalString;
+	private String endOfIntervalString;
+
+	private Timestamp startOfInterval;
+	private Timestamp endOfInterval;
 	
 	private Movie selectedMovie;
-	
 	private Long selectedMovieShowId;
 	private Long theatreId;
-	
+
 	@PostConstruct
-	public void init (){
-		genres = genreService.findAllGenre();
+	public void init() {
 		filteredMovieList = new ArrayList<Movie>();
 		filteredMovieShowList = new ArrayList<MovieShow>();
 		movieTimes = new ArrayList<Timestamp>();
 	}
-	
-	public void filter(){
+
+	private void calculateTimes() throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+		Date date = formatter.parse(startOfIntervalString);
+		startOfInterval = Timestamp.from(date.toInstant());
+		date = formatter.parse(endOfIntervalString);
+		endOfInterval = Timestamp.from(date.toInstant());
+	}
+
+	public void filter() throws ParseException {
 		filteredMovieList.clear();
 		filteredMovieShowList.clear();
-		System.out.println(selectedGenreId);
-		for(MovieShow movieShow : movieShowService.findAllMovieShow()){
-			if(selectedGenreId.equals(movieShow.getMovie().getGenre().getId()) && LocalDateTime.now().plusMinutes(30).isBefore(movieShow.getStartTime().toLocalDateTime())){
-				
-				if(!filteredMovieList.contains(movieShow.getMovie())){
+		movieTimes.clear();
+		calculateTimes();
+		for (MovieShow movieShow : movieShowService.findAllMovieShow()) {
+			if (movieShow.getStartTime().after(startOfInterval) && movieShow.getStartTime()
+					.before(Timestamp.valueOf(endOfInterval.toLocalDateTime().plusDays(1))) && LocalDateTime.now().plusMinutes(30).isBefore(movieShow.getStartTime().toLocalDateTime())) {
+				System.out.println("na");
+				if (!filteredMovieList.contains(movieShow.getMovie())){
 					filteredMovieList.add(movieShow.getMovie());
 					
 				}
@@ -72,18 +83,18 @@ public class GenreFilterBean {
 		Long id = Long.parseLong(movieID);
 		System.out.println(id);
 		for(Movie movie : filteredMovieList){
-			if(movie.getId().equals(id))
+			if(movie.getId().equals(id)){
 				selectedMovie = movie;
 				break;
+			}
 		}
 		for(MovieShow movieShow : filteredMovieShowList){
 			if(movieShow.getMovie().getId().equals(id)){
 				movieTimes.add(movieShow.getStartTime());
 			}
 		}
-//		return "chooseMovie";
 	}
-
+	
 	public String goToSeatPicking(){
 		for(MovieShow movieShow : filteredMovieShowList){
 			if(movieShow.getMovie().equals(selectedMovie) && movieShow.getStartTime().equals(selectedMovieTime)){
@@ -93,22 +104,6 @@ public class GenreFilterBean {
 			}
 		}
 		return "seatbooking.xhtml?faces-redirect=true&includeViewParams=true";
-	}
-	
-	public List<Genre> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
-	}
-
-	public Long getSelectedGenreId() {
-		return selectedGenreId;
-	}
-
-	public void setSelectedGenreId(Long selectedGenreId) {
-		this.selectedGenreId = selectedGenreId;
 	}
 
 	public List<MovieShow> getFilteredMovieShowList() {
@@ -143,6 +138,22 @@ public class GenreFilterBean {
 		this.selectedMovieTime = selectedMovieTime;
 	}
 
+	public String getStartOfIntervalString() {
+		return startOfIntervalString;
+	}
+
+	public void setStartOfIntervalString(String startOfIntervalString) {
+		this.startOfIntervalString = startOfIntervalString;
+	}
+
+	public String getEndOfIntervalString() {
+		return endOfIntervalString;
+	}
+
+	public void setEndOfIntervalString(String endOfIntervalString) {
+		this.endOfIntervalString = endOfIntervalString;
+	}
+
 	public Movie getSelectedMovie() {
 		return selectedMovie;
 	}
@@ -166,7 +177,7 @@ public class GenreFilterBean {
 	public void setTheatreId(Long theatreId) {
 		this.theatreId = theatreId;
 	}
-	
+
 	
 	
 }

@@ -8,12 +8,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
+
+	<f:viewParam name="movieShowId"
+		value="#{intervalFilterBean.selectedMovieShowId}" />
+	<f:viewParam name="theatreId" value="#{intervalFilterBean.theatreId}" />
+
 	<f:viewParam name="movieShowId"
 		value="#{dateFilterBean.selectedMovieShowId}" />
 	<f:viewParam name="theatreId" value="#{dateFilterBean.theatreId}" />
+	
 	<f:viewParam name="movieShowId"
 		value="#{genreFilterBean.selectedMovieShowId}" />
 	<f:viewParam name="theatreId" value="#{genreFilterBean.theatreId}" />
+	
+	
 </f:metadata>
 
 <h:body styleClass="bodystyle">
@@ -23,11 +31,14 @@
 				<b:container styleClass="content">
 					<b:tabView
 						contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
-						<b:tab title="Időpont Szűrő">
+						<b:tab title="Szűrés napra">
 							<ui:include src="/datefilter.xhtml" />
 						</b:tab>
-						<b:tab title="Műfaj Szűrő">
+						<b:tab title="Szűrés műfajra">
 							<ui:include src="/genrefilter.xhtml" />
+						</b:tab>
+						<b:tab title="Szűrés idő intervallumra">
+							<ui:include src="/timeintervalfilter.xhtml"/>
 						</b:tab>
 					</b:tabView>
 				</b:container>

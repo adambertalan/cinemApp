@@ -18,8 +18,7 @@
 			<butter:calendar style="width: 90%;"
 				value="#{dateFilterBean.filterDate}" rendered="true" required="true"
 				pickDate="true" pickTime="false"
-				placeholder="Válasszon egy napot amikor moziba szeretne menni."
-				sideBySide="true" />
+				placeholder="Válasszon egy napot amikor moziba szeretne menni."/>
 			<b:commandButton value="Szűrés" ajax="true" onclick="ajax:dateFilterBean.filter()" update="filteredMoviesDate" />
 		</h:form>
 		<h:form id="filteredMoviesDate">

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:butter="http://butterfaces.org/components">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<h:form>
+			<butter:calendar style="width: 45%; padding-left: 10px; float: left;"
+				label="Mettől:" value="#{intervalFilterBean.startOfIntervalString}"
+				rendered="true" required="true" pickDate="true" pickTime="false"
+				placeholder="Válasssza ki az intervallum kezdő napját."
+				sideBySide="true" />
+			<butter:calendar
+				style="width: 45%; padding-left: 10px; float: right;"
+				label="Meddig:" value="#{intervalFilterBean.endOfIntervalString}"
+				rendered="true" required="true" pickDate="true" pickTime="false"
+				placeholder="Válassza ki az intervallum utolsó napját." />
+			<div style="clear: both;"></div>
+			<b:commandButton value="Szűrés" ajax="true"
+				onclick="ajax:intervalFilterBean.filter()"
+				update="filteredMoviesInterval" />
+		</h:form>
+		<h:form id="filteredMoviesInterval">
+			<ui:repeat var="movie"
+				value="#{intervalFilterBean.filteredMovieList}">
+				<h:commandLink>
+					<f:ajax event="click" listener="#{intervalFilterBean.chooseMovie}" render="movieTimesInterval"/>
+					<f:param name="movieID" value="#{movie.id}" />
+					<h:graphicImage styleClass="indexmovies"
+						value="/ImageServlet/#{movie.id}" />
+				</h:commandLink>
+			</ui:repeat>
+		</h:form>
+		<h:form id="movieTimesInterval">
+			<b:selectOneMenu required="true" render-label="true"
+				value="#{intervalFilterBean.selectedMovieTime}" id="time">
+				<f:selectItems value="#{intervalFilterBean.movieTimes}" var="movieTime"
+					itemValue="#{movieTime}" itemLabel="#{movieTime}" />
+			</b:selectOneMenu>
+			<b:commandButton value="Tovább a foglalásra"
+				action="#{intervalFilterBean.goToSeatPicking}" />
+		</h:form>
+
+	</ui:composition>
+</h:body>
+</html>

@@ -3,8 +3,8 @@ package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class DateFilterBean {
 		filteredMovieShowList.clear();
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 		for (MovieShow movieShow : movieShowService.findAllMovieShow()) {
-			if (filterDate.equals(format.format(movieShow.getStartTime())) && movieShow.getStartTime().after(new Date())) {
+			if (filterDate.equals(format.format(movieShow.getStartTime())) && LocalDateTime.now().plusMinutes(30).isBefore(movieShow.getStartTime().toLocalDateTime())) {
 				if (!filteredMovieList.contains(movieShow.getMovie()))
 					filteredMovieList.add(movieShow.getMovie());
 				filteredMovieShowList.add(movieShow);
@@ -61,17 +61,19 @@ public class DateFilterBean {
 		movieTimes.clear();
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String movieID = params.get("movieID");
+		Long id = Long.parseLong(movieID);
+		System.out.println(id);
 		for(Movie movie : filteredMovieList){
-			if(movie.getId().equals(Long.parseLong(movieID)))
+			if(movie.getId().equals(id))
 				selectedMovie = movie;
+				break;
 		}
-		System.out.println(movieID);
+		
 		for(MovieShow movieShow : filteredMovieShowList){
-			if(movieShow.getMovie().getId().equals(Long.parseLong(movieID))){
+			if(movieShow.getMovie().getId().equals(id)){
 				movieTimes.add(movieShow.getStartTime());
 			}
 		}
-//		return "chooseMovie";
 	}
 	
 	public String goToSeatPicking(){
