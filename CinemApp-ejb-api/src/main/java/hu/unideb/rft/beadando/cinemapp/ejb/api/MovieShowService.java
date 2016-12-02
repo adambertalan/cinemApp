@@ -19,6 +19,8 @@ public interface MovieShowService {
         
         public void deleteMovieShow(Long movieShowId);
         
+        public void sendRateEmailToAppointmentGuests( Long movieShowId );
+        
         public void editMovieShow(Long moveiShowId);
         
         public MovieShowRepository getMovieShowRepository();

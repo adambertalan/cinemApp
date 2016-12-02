@@ -1,6 +1,7 @@
-package hu.unideb.rft.beadando.cinemapp.web.managedbean;
+package hu.unideb.rft.beadando.cinemapp.ejb.impl;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +12,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import java.io.Serializable;
 
 public class QRCodeGenerator implements Serializable{
+	
     public String qrCodeText;
     private String filePath = "qrcode.png";
     private String charset = "UTF-8";

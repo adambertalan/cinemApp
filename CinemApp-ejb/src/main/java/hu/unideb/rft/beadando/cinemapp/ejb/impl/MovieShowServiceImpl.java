@@ -20,9 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.EmailService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.qsjobs.SchedulerJob;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Theatre;
@@ -46,6 +48,9 @@ public class MovieShowServiceImpl implements MovieShowService {
 
 	@EJB
 	private AppointmentService appointmentService;
+	
+	@EJB
+	private EmailService emailService;
 
 	@Override
 	public List<MovieShow> findAllMovieShow() {
@@ -142,6 +147,21 @@ public class MovieShowServiceImpl implements MovieShowService {
 	public MovieShow findMovieShowById(Long id) {
 		
 		return movieShowRepository.findMovieShowById(id);
+	}
+
+	@Override
+	public void sendRateEmailToAppointmentGuests(Long movieShowId) {
+		
+		System.out.println("MovieShowServiceImpl: sendRateEmailToAppointmentGuests");
+		
+		List<Appointment> appointmentsOfMovieShow = appointmentService.findAppointmentsByMovieShow(movieShowId);
+		
+		for (Appointment appointment : appointmentsOfMovieShow) {
+			Guest guest = appointment.getGuest();
+			
+			this.emailService.sendEmail(guest.getEmail(), "aftermovie", guest.getName(), null, null, null, "");
+		}
+		
 	}
 
 }
