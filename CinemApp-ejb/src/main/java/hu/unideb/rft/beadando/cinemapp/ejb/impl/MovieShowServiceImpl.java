@@ -156,10 +156,12 @@ public class MovieShowServiceImpl implements MovieShowService {
 		
 		List<Appointment> appointmentsOfMovieShow = appointmentService.findAppointmentsByMovieShow(movieShowId);
 		
+                String link = "http://5.249.154.6:8080/CinemApp-web/rateMovie.xhtml?movieId="+findMovieShowById(movieShowId).getMovie().getId();
+                
 		for (Appointment appointment : appointmentsOfMovieShow) {
 			Guest guest = appointment.getGuest();
 			
-			this.emailService.sendEmail(guest.getEmail(), "aftermovie", guest.getName(), null, null, null, "");
+			this.emailService.sendEmail(guest.getEmail(), "aftermovie", guest.getName(), null, null, null,link);
 		}
 		
 	}

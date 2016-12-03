@@ -21,6 +21,8 @@ public class SchedulerJob implements Job {
 		System.out.println("Quartz job: get object: " + mss );
 		
 		mss.deprecateMovieShowAppointments(long1);
+                
+                mss.sendRateEmailToAppointmentGuests(long1);
 	}
 
 }
