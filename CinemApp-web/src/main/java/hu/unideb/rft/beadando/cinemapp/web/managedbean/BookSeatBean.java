@@ -186,7 +186,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
                 this.emailBean.setGuestName(guestName);
                 this.emailBean.setAddress(guestEmail);
                 this.emailBean.setTypeOfTheEmail("afterbook");
-                this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName());
+                this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest().getName()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName());
                 this.emailBean.sendEmail();
 
                 return "bookingInfo.xhtml?faces-redirect=true&includeViewParams=true";
