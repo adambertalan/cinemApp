@@ -37,23 +37,25 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     private BookSeatService bookSeatService;
 
     private String guestName;
-
     private String guestPhone;
-
     private Integer guestZip;
-
     private String guestEmail;
 
     private Long movieShowId;
 
+    // az összes ülés
     private List<List<Seat>> seats;
 
+    // az összes foglalt ülés
     private List<Seat> occupiedSeats;
-
+    
+    // azok az ülések amik mások által lettek foglalva
     private List<Seat> occupiedSeatsByOthers = new ArrayList<>();
-
+    
+    // az összes kiválasztott ülés vetítés kulccsal
     private Map<Long, List<Seat>> selectedSeatsMap = new HashMap<>();
 
+    // azok a helyek amiket én választottam ki foglalásra
     private List<Seat> selectedSeats;
     
     @ManagedProperty(value="#{emailBean}")
@@ -61,57 +63,62 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
     Appointment appointment;
 
-    public boolean contains(List<Seat> list, Seat seat) {
-        if (list == null) {
-            return false;
-        }
 
-        for (Seat s : list) {
-            if (seat.getId().equals(s.getId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // lefut, ha betöltődik az oldal
     public void reload() {
 
+    	System.out.println("BookSeatBean: reload()");
+    	
         String movieShowIdString = Faces.getRequestParameter("movieShowId");
         String theatreIdString = Faces.getRequestParameter("theatreId");
+        
+        System.out.println("BookSeatBean: movieShowId: " + movieShowIdString);
+        System.out.println("BookSeatBean: theatreId: " + theatreIdString);
 
         Long movieShowId = Long.parseLong(movieShowIdString);
         Long theatreId = Long.parseLong(theatreIdString);
 
-        System.out.println("Reload: Querying seats");
+        System.out.println("BookSeatBean: reload(): Querying seats");
+        // az összes ülés keresése
         seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
+        
+        // az összes foglalt ülés erre a filmre
         occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
+
         // TODO nullkezelés!!
 
-//		occupiedSeats.addAll(selectedSeats);
         occupiedSeats.addAll(selectedSeatsMap.get(this.movieShowId));
         occupiedSeats.addAll(occupiedSeatsByOthers);
 
+        // A képernyő lefrissül
         Ajax.updateAll();
     }
 
+    // lefut ha üzenetet kapok a websocketről
+    // ezzel a képernyő is lefrissül
     public void update() {
-        System.out.println("Update called!!");
+        System.out.println("BookSeatBean: update()");
+        
         Long seatId = Long.parseLong(Faces.getRequestParameter("seatId"));
         String movieShowId = Faces.getRequestParameter("movieShowId");
         Boolean occupyOrFree = Boolean.parseBoolean(Faces.getRequestParameter("occupyOrFree"));
 
-        System.out.println("seatId: " + seatId);
-        System.out.println("movieShowId: " + movieShowId);
+        System.out.println("BookSeatBean: update(): seatId: " + seatId);
+        System.out.println("BookSeatBean: update(): movieShowId: " + movieShowId);
+        System.out.println("BookSeatBean: update(): occupyOrFree: " + occupyOrFree);
 
         outerloop:
         for (List<Seat> seatlist : seats) {
             for (Seat s : seatlist) {
+            	// megkeresem azt az ülést amit az üzenetben kaptam
                 if (s.getId().equals(seatId)) {
                     if (occupyOrFree) {
+                    	// ha foglalás volt
                         occupiedSeats.add(s);
                         occupiedSeatsByOthers.add(s);
                         break outerloop;
                     } else {
+                    	// ha felszabadítás volt
                         occupiedSeats.remove(s);
                         occupiedSeatsByOthers.remove(s);
                         break outerloop;
@@ -119,40 +126,42 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
                 }
             }
         }
-
-        System.out.println("UPDATED");
     }
 
     // törli az általam kijelölt helyeet
     public void delete() {
-        System.out.println("OCCUPY not COMMITTED! DELETING");
-        selectedSeats.clear();
+        System.out.println("BookSeatBean: delete()");
+        
         this.occupiedSeats.removeAll(selectedSeats);
+
+        selectedSeats.clear();
     }
 
+    // egy ülésre kattintáskor lefutó metódus
     public void occupyOrFree(Integer row, Integer col) throws Exception {
 
         for (List<Seat> seatList : seats) {
             for (Seat seat : seatList) {
                 if (seat.getSeatRow().equals(row) && seat.getSeatColumn().equals(col)) {
-                    System.out.println("Seat found in list");
-//					if( !seat.isOccupied() ){
+                	// megvan az ülés
 					if( !occupiedSeats.contains(seat) ){
-						System.out.println("this seat is free!");
-						// Foglalás
+						// ha még nem foglalt
+						System.out.println("BookSeatBean: occupyOrFree(): Clicked on a free seat!");
+						
 						occupiedSeats.add(seat);
 						selectedSeats.add(seat);
-						System.out.println("Foglalás! (" + seat.getSeatRow() + "," + seat.getSeatColumn() + ")");
+						
+						System.out.println("BookSeatBean: occupyOrFree(): Foglalás! (" + seat.getSeatRow() + "," + seat.getSeatColumn() + ")");
 					} else {
-						System.out.println("this seat is occupied ...");
+						System.out.println("BookSeatBean: occupyOrFree(): Clicked on an occupied seat!");
 						// ha már eleve foglalt
 						// Általam foglalt? mert akkor szabaddá kell tenni
 						if( selectedSeats.contains(seat) ){
-							System.out.println("... by me");
+							System.out.println("BookSeatBean: occupyOrFree(): The clicked seat is mine, freeing it!");
 							// általam foglalt, szabaddá kell tenni							
 							selectedSeats.remove(seat);
 							occupiedSeats.remove(seat);
-							System.out.println("Felszabadítás! (" + seat.getSeatRow() + "," + seat.getSeatColumn() + ")");
+							System.out.println("BookSeatBean: occupyOrFree(): Felszabadítás! (" + seat.getSeatRow() + "," + seat.getSeatColumn() + ")");
 						} else {
 							System.out.println("... by someone else");
 							// más által foglalt, nem csinálunk semmit
@@ -163,40 +172,45 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		}
 		
 		
-		System.out.println("Aktuális foglalásaim: ");
+		System.out.println("BookSeatBean: occupyOrFree(): Aktuális foglalásaim: ");
 		for( Seat seat: selectedSeats ){
-			System.out.println("(" + seat.getSeatRow() + "," + seat.getSeatColumn() + ")");
+			System.out.print("(" + seat.getSeatRow() + "," + seat.getSeatColumn() + ") ");
 		}
+		System.out.println();
 	}
 	
+    // a foglalt ülések elmentésekor fut le
 	public String save() {
-		System.out.println("Saving");
-		System.out.println(this.guestName);
-		System.out.println(this.guestEmail);
-		System.out.println(this.guestPhone);
-		System.out.println(this.guestZip);
+		System.out.println("BookSeatBean: save()");
+		
+		System.out.println("BookSeatBean: guestName: " + this.guestName);
+		System.out.println("BookSeatBean: guestEmail: " + this.guestEmail);
+		System.out.println("BookSeatBean: guestPhone: " + this.guestPhone);
+		System.out.println("BookSeatBean: guestZip: " + this.guestZip);
 		
 		if( selectedSeats != null && !selectedSeats.isEmpty() ){
 			if( isValidEmail(guestEmail) ){
 				// elmenteni
-				this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
+				System.out.println("BookSeatBean: saving occupied seats!");
+				this.appointment = this.bookSeatService.saveReservation(selectedSeats, guestName, guestEmail, guestPhone, guestZip, movieShowId);
 				// törölni a foglalásokat
 				this.selectedSeats.clear();
+
 				// e-mail kiküldése
-				
 				this.emailBean.setGuestName(guestName);
 				this.emailBean.setAddress(guestEmail);
 				this.emailBean.setTypeOfTheEmail("afterbook");
 				
 				this.emailBean.sendEmail();
 				
-				return "index?faces-redirect=true";	
+				return "bookingInfo.xhtml?faces-redirect=true&includeViewParams=true";
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN,
 								"Helytelen E-mail cím formátum",
 								""));
+				System.out.println("BookSeatBean: email not valid");
 			}
 			
 		} else {
@@ -205,7 +219,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Nincs ülőhely kiválasztva",
 							"A foglalás véglegesítéséhez válasszon ülőhelyet!"));
-			System.out.println("No selected seats!");
+			System.out.println("BookSeatBean: No selected seats!");
 		}
 		return null;
 	}
@@ -220,20 +234,20 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
     @PostConstruct
     public void init() {
-        System.out.println("BookseatBean INIT");
+        System.out.println("BookseatBean: init()");
 
         FacesContext context = FacesContext.getCurrentInstance();
 
         String requestURI = ((HttpServletRequest) context.getExternalContext().getRequest()).getRequestURI();
-        System.out.println("requestURI: " + requestURI);
+        System.out.println("BookSeatBean: init(): requestURI: " + requestURI);
 
         Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
 
         String theatreIdString = requestMap.get("theatreId");
         String movieShowIdString = requestMap.get("movieShowId");
 
-        System.out.println("INIT: theatreId " + theatreIdString);
-        System.out.println("INIT: movieShowId " + movieShowIdString);
+        System.out.println("BookSeatBean: init(): theatreId: " + theatreIdString);
+        System.out.println("BookSeatBean: init(): movieShowId: " + movieShowIdString);
 
         Long theatreId = Long.parseLong(theatreIdString);
         Long movieShowId = Long.parseLong(movieShowIdString);
@@ -246,34 +260,9 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
         System.out.println("Querying seats");
         seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
 
-//		for( List<Seat> seatlist : seats ){
-//			for( Seat s : seatlist ){
-//				System.out.println("GOT SEAT " + s.getId());
-//			}
-//		}
         // fel kell tölteni a foglalt üléseket
         this.occupiedSeats = bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId);
-//		for( Seat s : occupiedSeats){
-//			System.out.println("OCCUPIED SEAT: " + s.getId());	
-//		}
 
-//		for( List<Seat> seatlist : seats ){
-//			for( Seat s : seatlist ){
-//				if( s.getId().equals(38L) ){
-//					System.out.println("got seat 38");
-//					Seat seat = occupiedSeats.get(0);
-//					System.out.println("occupied seat: " + seat.getId());
-//					System.out.println(s.getId().equals(seat.getId()));
-//				}
-//			}
-//		}
-//		for( List<Seat> seatList : seats ){
-//			for( Seat s : occupiedSeats) {
-//				if( seatList.contains(s) ) {
-//					System.out.println("The occupied seat (" + s.getId() + ") is in the seats list!");
-//				}
-//			}
-//		}
         // ha voltak korábbi foglalások, töröljük
         if (this.selectedSeats != null) {
             this.delete();
@@ -285,9 +274,20 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
     }
 
     public void destroy() {
-        System.out.println("BookSeatBean DESTROY");
+        System.out.println("BookSeatBean: destroy()");
         // ha maradt beragadt foglalása, akkor azt törölni.
         this.delete();
+    }
+    
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+        System.out.println("ValueBOUND " + this.toString());
+    }
+
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+        System.out.println("Value-UN-BOUND " + this.toString());
+        this.destroy();
     }
 
     public Appointment getAppointment() {
@@ -320,17 +320,6 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
     public void setSelectedSeats(List<Seat> selectedSeats) {
         this.selectedSeats = selectedSeats;
-    }
-
-    @Override
-    public void valueBound(HttpSessionBindingEvent event) {
-        System.out.println("ValueBOUND " + this.toString());
-    }
-
-    @Override
-    public void valueUnbound(HttpSessionBindingEvent event) {
-        System.out.println("Value-UN-BOUND " + this.toString());
-        this.destroy();
     }
 
     public List<Seat> getOccupiedSeats() {
