@@ -20,9 +20,10 @@
 		<ui:define name="content">
 			<b:jumbotron styleClass="content">
 				<b:container styleClass="content">
-					<h:form id="form">
-						<b:row styleClass="show-grid">
-							<b:column col-xs="12" col-sm="6" col-md="8">
+					<!-- 					<h:form id="form"> -->
+					<b:row styleClass="show-grid">
+						<b:column col-xs="12" col-sm="6" col-md="8">
+							<h:form id="seatform">
 								<table id="seats">
 									<ui:repeat value="#{bookSeatBean.seats}" var="seatList"
 										varStatus="status">
@@ -38,49 +39,61 @@
 										</tr>
 									</ui:repeat>
 								</table>
-								<b:commandButton id="upbutton" value="Update" immediate="true"
-									onclick="ajax:bookSeatBean.update()" ajax="true"
-									style="display: none;" update="@form" />
-								<b:commandButton id="downbutton" value="Foglalások Törlése"
-									immediate="true" onclick="ajax:bookSeatBean.delete();"
-									ajax="true" update="@form" />
-
-								<b:messages />
 
 								<o:commandScript name="update" action="#{bookSeatBean.update}"
 									render="@form"></o:commandScript>
 								<o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
-
-							</b:column>
-							<b:column col-xs="6" col-sm="6" col-md="4">
+							</h:form>
+						</b:column>
+						<b:column col-xs="6" col-sm="6" col-md="4">
+							<h:form>
 
 								<b:inputText label="Név" placeholder="Név" required="true"
-									render-label="true" value="#{bookSeatBean.guestName}">
+								id="name"
+									render-label="true" value="#{bookSeatBean.guestName}"
+									requiredMessage="Hiányzó név!">
 								</b:inputText>
+								<b:message for="name" />
 
 								<b:inputText label="Telefonszám" placeholder="Telefonszám"
 									required="true" render-label="true"
-									value="#{bookSeatBean.guestPhone}">
+									value="#{bookSeatBean.guestPhone}"
+									id="phone"
+									requiredMessage="Hiányzó telefonszám!"
+									validatorMessage="Hibás telefonszám formátum!">
+									<f:validateRegex pattern="^[0-9]+$"></f:validateRegex>
 								</b:inputText>
+								<b:message for="phone" />
 
 								<b:inputText label="E-mail" id="email" placeholder="E-mail"
 									required="true" render-label="true"
 									value="#{bookSeatBean.guestEmail}"
-									validatorMessage="Hibás e-mail cím">
+									requiredMessage="Hiányzó e-mail cím!"
+									validatorMessage="Hibás e-mail cím formátum!">
+									<f:validateRegex pattern="^[^@]+@[^@]+\.[^@]+$"></f:validateRegex>
 								</b:inputText>
 								<b:message for="email" />
 
 								<b:inputText label="Irányítószám" placeholder="Irányítószám"
 									required="true" render-label="true"
-									value="#{bookSeatBean.guestZip}">
+									id="zip"
+									maxlength="4"
+									value="#{bookSeatBean.guestZip}"
+									requiredMessage="Hiányzó irányítószám!"
+									converterMessage="Az irányítószámnak egy 4 jegyű számnak kell lennie!">
+    									<f:validateLength minimum="4" maximum="4" />
 								</b:inputText>
+								<b:message for="zip" />
 
-								<b:commandButton id="accept" update="@form"
-									value="Foglalások Véglegesítése" action="#{bookSeatBean.save}" />
+								<b:commandButton look="success" id="accept" update="@form"
+								binding="#{bookSeatBean.saveButton}"
+								iconAwesome="film"
+									value="Foglalás Véglegesítése" action="#{bookSeatBean.save}" />
 
-							</b:column>
-						</b:row>
-					</h:form>
+							</h:form>
+						</b:column>
+					</b:row>
+
 					<h:outputScript library="js" name="socket.js" target="body" />
 					<h:outputStylesheet library="css" name="reservation.css" />
 				</b:container>

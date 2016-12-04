@@ -1,8 +1,10 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
@@ -79,7 +81,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 	}
 
 	@Override
-	public Appointment saveReservation(List<Seat> reservedSeats, String guestName, String guestEmail, String guestPhone,
+	public Appointment saveReservation(Set<Seat> reservedSeats, String guestName, String guestEmail, String guestPhone,
 			Integer guestZip, Long movieShowId) {
 		System.out.println("BookSeatServiceImpl saving reservations");
 		
@@ -103,7 +105,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 		
 		appointment.setGuest(guest);
 		appointment.setMovieShow(movieShow);
-		appointment.setSeats(reservedSeats);
+		appointment.setSeats(Arrays.asList(reservedSeats.toArray(new Seat[]{})));
 		
 		appointmentRepository.save(appointment);
         

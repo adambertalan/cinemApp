@@ -48,7 +48,14 @@ public class Seat extends BaseId {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.getId().equals(((Seat)obj).getId());
+		if(obj == null)
+	        return false;
+
+	   Seat seat = (Seat) obj;
+	   if(!(getSeatRow().equals(seat.getSeatRow())) || !(getSeatColumn().equals(seat.getSeatColumn())) )
+	       return false;
+
+	   return true;
 	}
 	
 	

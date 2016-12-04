@@ -1,11 +1,11 @@
 package hu.unideb.rft.beadando.cinemapp.ejb.api;
 
-import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Local;
 
-import hu.unideb.rft.beadando.cinemapp.jpa.entity.Guest;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
 
 @Local
@@ -15,7 +15,7 @@ public interface BookSeatService {
 	
 	List<List<Seat>> findAllSeatsOfTheatre( Long theatreId ); 
 	
-	Appointment saveReservation( List<Seat> reservedSeats, String guestName, String guestEmail, String guestPhone, Integer guestZip, Long movieShowId );
+	Appointment saveReservation( Set<Seat> reservedSeats, String guestName, String guestEmail, String guestPhone, Integer guestZip, Long movieShowId );
 	
 	List<Seat> findOccupiedSeatsOfMovieShow(Long movieShowId);
 }

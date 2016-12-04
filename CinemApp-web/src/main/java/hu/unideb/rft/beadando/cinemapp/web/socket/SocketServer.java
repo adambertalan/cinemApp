@@ -30,7 +30,7 @@ public class SocketServer {
     	}
     	connections.get(parseInt).add(session);
     	
-        System.out.println(session.getId() + " has opened a connection with movieShowId: " + parseInt); 
+        System.out.println("SocketServer: " + session.getId() + " has opened a connection with movieShowId: " + parseInt); 
     }
  
     @OnMessage
