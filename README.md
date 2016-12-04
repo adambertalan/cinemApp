@@ -31,7 +31,7 @@ Alkalmazásunk **felhasználókat** megkérve értékelést készít a filmekrő
 
 ### Admin felület
 Felhaszbálók mellett nagy figyelmet fordítottunk az **Adminokra** is
-*Bejelentkezés* után egy *admin felületen* különböző műveletekre van lehetőségünk.
+*bejelentkezés* után egy *admin felületen* különböző műveletekre van lehetőségünk.
 - Film műveletek
 - Vetítés műveletek
 - Műfaj műveletek
@@ -57,8 +57,11 @@ Ez egy olyan funckió ahol lehetősége van az **adminnak** az eddigi felhaszná
 5. Elmegyünk moziba élvezni a filmet.
 
 ## Képek
+### Főöldal
 ![alt text](documentation/readme_pictures/index.png?raw=true "Főoldal")
+### Helyfoglalás
 ![alt text](documentation/readme_pictures/booking.png?raw=true "Helyfoglalás")
+### Kapcsolat
 ![alt text](documentation/readme_pictures/contact.png?raw=true "Kapcsolat")
 
 ## Build Status
