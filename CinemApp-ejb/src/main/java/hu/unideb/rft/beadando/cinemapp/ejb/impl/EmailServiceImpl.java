@@ -193,6 +193,7 @@ public class EmailServiceImpl implements EmailService {
                     // QR kód beszúrása. Csak akkor használhatjuk, ha adtunk meg
                     // qrText-nek valamit.
                     imageContent = "<img src=\"cid:" + contentId + "\" /> ";
+                    qrText="";
 
                     break;
 
@@ -207,12 +208,51 @@ public class EmailServiceImpl implements EmailService {
                     break;
 
                 case "afterbook":
+                    // QR kód feletti szöveg részlet.
+                    aboveQrText = "Foglalását megerősítettük. Jegyét a QR kód felmutatása után vásárolhatja meg a pénztárnál.\n";
+                    // QR kód alatti szöveg részlet.
+                    underQrText = "Köszönjük, hogy igénybe vette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!";
+                    // Email típusa
+                    emailType = "Jegy foglalás";
+                    // Footer szöveg
+                    footerContent = "Ez egy automatikusan küldött email, kérjük ne válaszoljon.\n";
+                    // Megszólítás
+                    greeting = "Tisztelt " + guestName;
+                    // QR kód beszúrása. Csak akkor használhatjuk, ha adtunk meg
+                    // qrText-nek valamit.
+                    imageContent = "<img src=\"cid:" + contentId + "\" /> ";
                     break;
 
                 case "aftermovie":
+                    // QR kód feletti szöveg részlet.
+                    aboveQrText = "Köszönjük, hogy minket választott! Kérjük értékelje a filmet oldalunkon a mellékelt QR kóddal, vagy a lenti linkkel!\n";
+                    // QR kód alatti szöveg részlet.
+                    underQrText = "<a href=\""+qrText+"\">Átirányítás az értékelő oldalra.</a>";
+                    // Email típusa
+                    emailType = "Film értékelése";
+                    // Footer szöveg
+                    footerContent = "Ez egy automatikusan küldött email, kérjük ne válaszoljon.\n";
+                    // Megszólítás
+                    greeting = "Tisztelt " + guestName;
+                    // QR kód beszúrása. Csak akkor használhatjuk, ha adtunk meg
+                    // qrText-nek valamit.
+                    imageContent = "<img src=\"cid:" + contentId + "\" /> ";
                     break;
 
                 case "afterthreebook":
+                    // QR kód feletti szöveg részlet.
+                    aboveQrText = "QR kód feletti szöveg részlet.\n";
+                    // QR kód alatti szöveg részlet.
+                    underQrText = "Köszönjük, hogy igénybe vette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!";
+                    // Email típusa
+                    emailType = "Jegy foglalás";
+                    // Footer szöveg
+                    footerContent = "Ez egy automatikusan küldött email, kérjük ne válaszoljon.\n";
+                    // Megszólítás
+                    greeting = "Tisztelt " + guestName;
+                    // QR kód beszúrása. Csak akkor használhatjuk, ha adtunk meg
+                    // qrText-nek valamit.
+                    imageContent = "<img src=\"cid:" + contentId + "\" /> ";
                     break;
 
             }
@@ -252,23 +292,14 @@ public class EmailServiceImpl implements EmailService {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmailAddress));
-            message.setSubject("CinemApp - Jegy foglalás");
+
             switch (type) {
                 default:
-
+                    message.setSubject("CinemApp - " + emailType);
                     break;
 
                 case "contacts":
                     message.setSubject("Vendég email - " + guestSubject);
-                    break;
-
-                case "afterbook":
-                    break;
-
-                case "aftermovie":
-                    break;
-
-                case "afterthreebook":
                     break;
 
             }

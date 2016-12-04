@@ -50,7 +50,7 @@ public class EmailSenderBean implements Serializable {
                 setAddress("cinemapp.fft@yahoo.com");
             }
         }
-
+        
         // Email cím helyeységének ellenőrzése
         if (isValidEmail(address)) {
             emailService.sendEmail(address, typeOfTheEmail, guestName, guestMessage, guestEmail, guestSubject, qrText);
