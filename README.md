@@ -65,6 +65,8 @@ Ez egy olyan funckió ahol lehetősége van az **adminnak** az eddigi felhaszná
 ![alt text](documentation/readme_pictures/rate.png?raw=true "Értékelés")
 ### Kapcsolat:
 ![alt text](documentation/readme_pictures/contact.png?raw=true "Kapcsolat")
+### Reszponzív design:
+![alt text](documentation/readme_pictures/responsive.png?raw=true "Reszponzív design")
 
 ## Build Status
 [![Build Status](https://travis-ci.org/RFT-4th-team/cinemApp.svg?branch=master)](https://travis-ci.org/RFT-4th-team/cinemApp)
