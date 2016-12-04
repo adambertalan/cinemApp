@@ -57,11 +57,13 @@ Ez egy olyan funckió ahol lehetősége van az **adminnak** az eddigi felhaszná
 5. Elmegyünk moziba élvezni a filmet.
 
 ## Képek
-### Főoldal
+### Főoldal:
 ![alt text](documentation/readme_pictures/index.png?raw=true "Főoldal")
-### Helyfoglalás
+### Helyfoglalás:
 ![alt text](documentation/readme_pictures/booking.png?raw=true "Helyfoglalás")
-### Kapcsolat
+### Értékelés:
+![alt text](documentation/readme_pictures/rate.png?raw=true "Értékelés")
+### Kapcsolat:
 ![alt text](documentation/readme_pictures/contact.png?raw=true "Kapcsolat")
 
 ## Build Status
