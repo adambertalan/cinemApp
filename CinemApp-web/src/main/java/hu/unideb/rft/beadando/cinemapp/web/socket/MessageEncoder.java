@@ -22,12 +22,12 @@ public class MessageEncoder implements Encoder.Text<SeatMessage> {
 
 	  @Override
 	  public void init(EndpointConfig ec) {
-	    System.out.println("MessageEncoder - init method called");
+//	    System.out.println("MessageEncoder - init method called");
 	  }
 
 	  @Override
 	  public void destroy() {
-	    System.out.println("MessageEncoder - destroy method called");
+//	    System.out.println("MessageEncoder - destroy method called");
 	  }
 
 	}

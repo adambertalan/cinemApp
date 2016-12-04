@@ -33,6 +33,9 @@
 
 	<jee:local-slsb id="theatreService" jndi-name="ejb.TheatreService"
 		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService" />
+		
+	<jee:local-slsb id="emailService" jndi-name="ejb.EmailService"
+		business-interface="hu.unideb.rft.beadando.cinemapp.ejb.api.EmailService" />
 
 	<tx:annotation-driven />
 	<tx:jta-transaction-manager />

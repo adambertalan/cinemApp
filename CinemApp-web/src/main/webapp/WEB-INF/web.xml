@@ -86,4 +86,8 @@
 		<ejb-ref-name>ejb.TheatreService</ejb-ref-name>
 		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService</local>
 	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb.EmailService</ejb-ref-name>
+		<local>hu.unideb.rft.beadando.cinemapp.ejb.api.EmailService</local>
+	</ejb-local-ref>
 </web-app>

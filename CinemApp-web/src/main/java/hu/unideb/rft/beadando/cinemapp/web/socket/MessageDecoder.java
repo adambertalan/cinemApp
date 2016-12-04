@@ -37,12 +37,12 @@ public class MessageDecoder implements Decoder.Text<SeatMessage> {
 
 	  @Override
 	  public void init(EndpointConfig ec) {
-	    System.out.println("MessageDecoder -init method called");
+//	    System.out.println("MessageDecoder -init method called");
 	  }
 
 	  @Override
 	  public void destroy() {
-	    System.out.println("MessageDecoder - destroy method called");
+//	    System.out.println("MessageDecoder - destroy method called");
 	  }
 
 	}
