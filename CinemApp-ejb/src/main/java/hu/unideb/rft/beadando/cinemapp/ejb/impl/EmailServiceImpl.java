@@ -231,7 +231,7 @@ public class EmailServiceImpl implements EmailService {
 
                 case "afterthreebook":
                     // QR kód feletti szöveg részlet.
-                    aboveQrText = "QR kód feletti szöveg részlet.\n";
+                    aboveQrText = "Foglalását megerősítettük. Jegyét a QR kód felmutatása után vásárolhatja meg a pénztárnál. Az alábbi QR kód tartalmaz egy kupont is, melyről a pénztárnál kérhet tájékoztatást.\n";
                     // QR kód alatti szöveg részlet.
                     underQrText = "Köszönjük, hogy igénybe vette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!";
                     // Email típusa
