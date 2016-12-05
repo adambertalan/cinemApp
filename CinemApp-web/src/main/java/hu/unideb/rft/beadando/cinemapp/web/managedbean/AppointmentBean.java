@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.NotNull;
 
+import org.omnifaces.util.Ajax;
+
 import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.GuestService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.SeatService;
@@ -46,10 +48,12 @@ public class AppointmentBean {
 
     @PostConstruct
     public void init() {
-        System.out.println("called");
+        System.out.println("AppointmentBean: init()");
         appointments = appointmentService.findAllAppointments();
         System.out.println("Appointments :" + appointments);
         this.seats = seatService.findAllSeat();
+        
+        Ajax.update("reservationsForm");
     }
 
     public void addNewOrEditAppointment() {

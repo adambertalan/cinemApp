@@ -20,6 +20,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
+import org.omnifaces.util.Ajax;
+
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
 
@@ -79,7 +81,7 @@ public class MovieBean {
 
     @PostConstruct
     public void init() {
-        System.out.println("called");
+        System.out.println("MovieBean: init()");
 //		FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
 //				.getAutowireCapableBeanFactory().autowireBean(this);
 
@@ -99,6 +101,14 @@ public class MovieBean {
 
         }
         System.out.println("Movies :" + movies);
+        // movieOperations
+        Ajax.update("movieOperationsForm");
+        Ajax.update("uploadForm");
+        Ajax.update("moviesForm");
+        
+        // movieShowOperations
+//        Ajax.update("movieShowOperationsForm");
+//        Ajax.update("movieShowsForm");
     }
 
     public void addNewOrEditMovie() throws IOException {
@@ -150,6 +160,8 @@ public class MovieBean {
     }
 
     public void editMovie() {
+    	
+    	System.out.println("EDITMOVIE");
 
         Movie selectedMovie = movieService.getMovieRepository().findMovieById(selectedMovieId);
         if (selectedMovie != null) {

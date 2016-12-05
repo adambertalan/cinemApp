@@ -10,12 +10,12 @@
     <body>
         <ui:composition>
             <h3>Műfajok hozzáadása/módosítása</h3>
-            <h:form>
+            <h:form id="genreOperationsForm">
                 <b:inputText label="Műfaj neve" placeholder="Műfaj neve"
                              required="true" render-label="true" value="#{genreBean.genreName}" />
 
 
-                <b:commandButton value="Mentés" update="@form genresForm"
+                <b:commandButton value="Mentés" update="@form genresForm" ajax="true"
                                  action="#{genreBean.addNewOrEditGenre}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
             <h3>Műfajok szerkeztése</h3>
@@ -25,8 +25,8 @@
                     <f:selectItems value="#{genreBean.genres}" var="genre"
                                    itemValue="#{genre.id}" itemLabel="#{genre.name}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módosítás" action="#{genreBean.editGenre}" style="margin: 5px; background-color: #18bc9c;"/>
-                <b:commandButton value="Törlés" update="genresForm"
+                <b:commandButton value="Módosítás" action="#{genreBean.editGenre}" update="genreOperationsForm" style="margin: 5px; background-color: #18bc9c;" ajax="true"/>
+                <b:commandButton value="Törlés" update="@form genreOperationsForm" ajax="true"
                                  action="#{genreBean.deleteGenre}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>

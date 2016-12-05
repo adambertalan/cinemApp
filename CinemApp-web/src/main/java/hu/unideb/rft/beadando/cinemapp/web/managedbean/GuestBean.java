@@ -40,8 +40,11 @@ public class GuestBean implements TableSingleSelectionListener {
 
 	@PostConstruct
 	public void init(){
+		System.out.println("GuestBean: init()");
 		guests = guestService.findAllGuest();
 		System.out.println("Guests :" + guests);
+		
+//		Ajax.update("table");
 	}
 	
 	public String format( Timestamp ts ){

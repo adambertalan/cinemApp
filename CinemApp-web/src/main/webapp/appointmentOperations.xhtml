@@ -18,7 +18,7 @@
                                    itemLabel="#{appointmentBean.getAppointmentName(appointment)}" />
                 </b:selectOneMenu>
                 
-                <b:commandButton value="Törlés"
+                <b:commandButton value="Törlés" ajax="true"
                                  action="#{appointmentBean.deleteAppointment}" update="reservationID" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>

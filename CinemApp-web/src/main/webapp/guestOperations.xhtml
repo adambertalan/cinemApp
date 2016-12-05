@@ -32,7 +32,7 @@
 			<c:if test="#{guestBean.selectedGuest != null}">
 				<h3>#{guestBean.selectedGuest.name} adatai:</h3>
 			</c:if>
-			<h:form>
+			<h:form id="guestInfoForm">
 				<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
 					<b:row>
 						<b:column medium-screen="4">

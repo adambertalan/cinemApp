@@ -24,6 +24,7 @@ public class TheatreBean {
     
     @PostConstruct
     public void init() {
+    	System.out.println("TheatreBean: init()");
         theatres = theatreService.findAllTheatres();
         System.out.println("Theatres :" + theatres);
     }
