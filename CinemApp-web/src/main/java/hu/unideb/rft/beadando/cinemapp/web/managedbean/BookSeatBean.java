@@ -144,7 +144,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		// }
 
 		// A képernyő lefrissül
-		Ajax.update("seatform");
+//		Ajax.update("seatform");
 		// Ajax.updateAll();
 	}
 

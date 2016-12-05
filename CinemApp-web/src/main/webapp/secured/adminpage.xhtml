@@ -12,7 +12,7 @@
         <ui:composition template="/templates/securedLayout.xhtml">
             <ui:define name="content">
                 <b:jumbotron styleClass="content">
-                    <b:container styleClass="content">
+                    <b:container styleClass="content" id="adminPageContainer">
                         <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
                             <b:tab title="Film műveletek">
                                 <ui:include src="/movieOperations.xhtml" />
@@ -34,7 +34,7 @@
                             </b:tab>
                         </b:tabView>
                     </b:container>
-<!--                     <o:commandScript name="initGenreOperations" action="#{genreBean.init}" /> -->
+
                 </b:jumbotron>                
             </ui:define>
         </ui:composition>

@@ -33,7 +33,6 @@ public class GuestBean implements TableSingleSelectionListener {
 	
 	private List<Guest> guests;
 	
-//	private String selectedGuestName;
 	private Guest selectedGuest;
 	
 	private List<Appointment> guestAppointments;
@@ -43,8 +42,6 @@ public class GuestBean implements TableSingleSelectionListener {
 		System.out.println("GuestBean: init()");
 		guests = guestService.findAllGuest();
 		System.out.println("Guests :" + guests);
-		
-//		Ajax.update("table");
 	}
 	
 	public String format( Timestamp ts ){

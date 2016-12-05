@@ -26,7 +26,7 @@
 				<f:selectItems value="#{cuponBean.cuponTypes}" var="cuponType"
 					itemValue="#{cuponType}" itemLabel="#{cuponType}"/>
 			</b:selectOneMenu>
-			<b:commandButton value="Mentés" update="@form cuponsForm" ajax="true"
+			<b:commandButton value="Mentés" update="adminPageContainer" ajax="true"
 				action="#{cuponBean.addNewOrEditCupon}" />
 		</h:form>
 		<h3>Kuponok szerkeztése</h3>
@@ -36,8 +36,8 @@
 				<f:selectItems value="#{cuponBean.cupons}" var="cupon"
 					itemValue="#{cupon.id}" itemLabel="#{cupon.name}" />
 			</b:selectOneMenu>
-			<b:commandButton value="Módosítás" action="#{cuponBean.editCupon}" ajax="true"/>
-			<b:commandButton value="Törlés" update="cuponsForm" ajax="true"
+			<b:commandButton value="Módosítás" action="#{cuponBean.editCupon}" ajax="true" update="adminPageContainer"/>
+			<b:commandButton value="Törlés" update="adminPageContainer" ajax="true"
 				action="#{cuponBean.deleteCupon}" />
 		</h:form>
 	</ui:composition>

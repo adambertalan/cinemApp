@@ -7,8 +7,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.omnifaces.util.Ajax;
-
 import hu.unideb.rft.beadando.cinemapp.ejb.api.GenreService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Genre;
 
@@ -30,14 +28,8 @@ public class GenreBean {
 	@PostConstruct
 	public void init() {
 		System.out.println("GenreBean: init()");
-		// FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
-		// .getAutowireCapableBeanFactory().autowireBean(this);
 		genres = genreService.findAllGenre();
 		System.out.println("Genres :" + genres);
-		
-        // genreOperations
-        Ajax.update("genreOperationsForm");
-        Ajax.update("genresForm");
 	}
 
 	public void addNewOrEditGenre() {

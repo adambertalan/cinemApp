@@ -1,15 +1,8 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
- */
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
-
-import org.omnifaces.util.Ajax;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
@@ -74,16 +64,12 @@ public class MovieBean {
             movieService.saveMovie(selectedMovie);
         }
 
-        
-//        file.write(getFileNameWithPath(file));
         return "success";
     }
 
     @PostConstruct
     public void init() {
         System.out.println("MovieBean: init()");
-//		FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
-//				.getAutowireCapableBeanFactory().autowireBean(this);
 
         movies = movieService.findAllMovies();
         int size = movies.size();
@@ -101,14 +87,6 @@ public class MovieBean {
 
         }
         System.out.println("Movies :" + movies);
-        // movieOperations
-        Ajax.update("movieOperationsForm");
-        Ajax.update("uploadForm");
-        Ajax.update("moviesForm");
-        
-        // movieShowOperations
-//        Ajax.update("movieShowOperationsForm");
-//        Ajax.update("movieShowsForm");
     }
 
     public void addNewOrEditMovie() throws IOException {

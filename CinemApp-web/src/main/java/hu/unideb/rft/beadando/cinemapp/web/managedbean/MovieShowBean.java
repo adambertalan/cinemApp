@@ -118,10 +118,6 @@ public class MovieShowBean {
 		System.out.println("MovieShowBean: init()");
 		movieShows = movieShowService.findAllMovieShow();
 		System.out.println("MovieShows :" + movieShows);
-
-		// movieShowOperations
-		Ajax.update("movieShowOperationsForm");
-		Ajax.update("movieShowsForm");
 	}
 
 	public List<MovieShow> getMovieShows() {

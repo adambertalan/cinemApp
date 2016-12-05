@@ -12,8 +12,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.omnifaces.util.Ajax;
-
 import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.CuponType;
@@ -49,9 +47,6 @@ public class CuponBean {
 		cupons = cuponsService.findAllCupon();
 		cuponTypes = cuponsService.findAllCuponType();
 		System.out.println("Cupons: " + cupons);
-		
-		Ajax.update("cuponOperationsForm");
-		Ajax.update("cuponsForm");
 	}
 	
 	public void calculateTime() throws ParseException{
