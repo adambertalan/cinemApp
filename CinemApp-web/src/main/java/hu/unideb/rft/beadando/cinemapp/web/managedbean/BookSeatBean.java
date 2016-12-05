@@ -1,5 +1,6 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
+import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +28,11 @@ import org.omnifaces.util.Ajax;
 import org.omnifaces.util.Faces;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
+import java.util.Random;
 import net.bootsfaces.utils.FacesMessages;
 
 @ManagedBean
@@ -39,6 +43,12 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	@EJB
 	private BookSeatService bookSeatService;
+        
+        @EJB
+        private AppointmentService appointmentService;
+        
+        @EJB
+        private CuponService cuponService;
 
 	private String guestName;
 	private String guestPhone;
@@ -278,8 +288,26 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 				this.emailBean.setGuestName(guestName);
 				this.emailBean.setAddress(guestEmail);
 				this.emailBean.setTypeOfTheEmail("afterbook");
-
-				this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest().getName()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName());
+                                
+                                List<Appointment> appointments = this.appointmentService.findAllAppointments();
+                                
+                                int counter=0;
+                                for(Appointment a : appointments){
+                                    if(a.getGuest().getName().equals(guestName)&&a.getGuest().getEmail().equals(guestEmail)){
+                                        counter++;
+                                    }
+                                }
+                                
+                                if(counter%3==0){
+                                    List<Cupon> cupons = this.cuponService.findAllCupon();
+                                    Cupon selectedCupon = cupons.get(new Random().nextInt(cupons.size()));
+                                    this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest().getName()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName()+"cupon:"+selectedCupon.getName());
+                                    this.emailBean.setTypeOfTheEmail("afterthreebook");
+                                }else{
+                                    this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest().getName()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName());
+                                }
+                              
+				
 				this.emailBean.sendEmail();
 
 				return "bookingInfo.xhtml?faces-redirect=true&includeViewParams=true";
