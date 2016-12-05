@@ -26,8 +26,10 @@
                 <b:message for="password"/>
                 <b:selectBooleanCheckbox value="true" caption="remember me"/>
                 <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in"/>
+                <b:commandButton value="Vissza" look ="primary btn-block" action="#{login.backToIndex}"/>
             </h:form>
             <h:form styleClass="form-signin" prependId="false" rendered="#{login.loggedIn}">
+            	
                 <b:commandButton look="primary btn-block" action="#{login.logout}" value="Sign out" icon="log-in" rendered="#{login.loggedIn}" />
             </h:form>
         </b:container>

@@ -42,30 +42,20 @@ public class EmailServiceImpl implements EmailService {
         String greeting = "";
         String imageContent = "";
 
-        final String username = "cinemapp.fft@yahoo.com";
-        final String password = "ffteam1234";
+        final String fromEmail = "cinemapp.fft@gmail.com";
+        final String username = "cinemapp.fft@gmail.com";
+        final String password = "olmmioaiuxyfcmvu";
 
         Properties props = System.getProperties();
-        props.put("mail.smtp.host", "smtp.mail.yahoo.com");
         props.put("mail.stmp.user", username);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.password", password);
         props.put("mail.debug", "false");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.ssl.trust", "smtp.mail.yahoo.com");
-
-        /*props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class",
-				"javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");*/
- /*props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");*/
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -193,7 +183,7 @@ public class EmailServiceImpl implements EmailService {
                     // QR kód beszúrása. Csak akkor használhatjuk, ha adtunk meg
                     // qrText-nek valamit.
                     imageContent = "<img src=\"cid:" + contentId + "\" /> ";
-                    qrText="";
+                    qrText = "";
 
                     break;
 
@@ -227,7 +217,7 @@ public class EmailServiceImpl implements EmailService {
                     // QR kód feletti szöveg részlet.
                     aboveQrText = "Köszönjük, hogy minket választott! Kérjük értékelje a filmet oldalunkon a mellékelt QR kóddal, vagy a lenti linkkel!\n";
                     // QR kód alatti szöveg részlet.
-                    underQrText = "<a href=\""+qrText+"\">Átirányítás az értékelő oldalra.</a>";
+                    underQrText = "<a href=\"" + qrText + "\">Átirányítás az értékelő oldalra.</a>";
                     // Email típusa
                     emailType = "Film értékelése";
                     // Footer szöveg
@@ -290,7 +280,7 @@ public class EmailServiceImpl implements EmailService {
 
             // Email címzett, tárgy beállítás
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmailAddress));
 
             switch (type) {

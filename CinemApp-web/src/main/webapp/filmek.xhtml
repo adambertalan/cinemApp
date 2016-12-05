@@ -13,21 +13,36 @@
                 <b:jumbotron styleClass="content">
                     <b:container styleClass="content">
                         <h1 style="color: white;">Filmek</h1>
-                        <b:column style=" background: #e8fff4; border: #00494c; border-radius: 5px; border-width: 5px; color: #00494c;">
+                        <b:column class="contentcontainer">
                             <div class="moviesdiv">
                                 <c:forEach items="#{movieBean.movies}" var="movie">
                                     <h:form style="display: block; text-align: center;">
-                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
-                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
-                                            <h2>#{movie.name}</h2>
-                                            <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movie.id}" />
-                                        </h:commandLink>
-                                        <p style="margin-top: 10px; text-align: justify;">#{movie.description}</p>
-                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
-                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
-                                            <b:commandButton value="Foglalás »"/>
-                                        </h:commandLink>
+                                        <table style="table-layout: auto;">
+                                            <tbody>
+                                                <tr style="display: inline-block;">
+                                                    <td style="display: inline-table;">
+                                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
+
+                                                            <h:graphicImage styleClass="moviesimage" value="/ImageServlet/#{movie.id}" />
+                                                        </h:commandLink>
+                                                    </td>
+                                                    <td style="vertical-align: top; max-width: 650px;display: inline-table;margin-left:20px;margin-right: 20px;">
+                                                        <h:commandLink action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
+                                                            <h2>#{movie.name}</h2>
+                                                        </h:commandLink>
+                                                        <p style="margin-top: 10px; text-align: justify;">#{movie.description}</p>
+                                                        <h:commandLink style="float: left" action="#{movieShowSelectorBean.processMovieShowSelector}">
+                                                            <f:param name="movieCode" value="#{movie.movieCode}"/>
+                                                            <b:commandButton value="Foglalás »"/>
+                                                        </h:commandLink>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </h:form>
+                                    <hr/>
                                 </c:forEach>
                             </div>
                         </b:column>
