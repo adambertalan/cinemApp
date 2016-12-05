@@ -94,6 +94,10 @@ public class LoginBean{
 		return "index";
 	}
 
+	public String backToIndex(){
+		return "index";
+	}
+	
 	public LoginService getLoginService() {
 		return loginService;
 	}
