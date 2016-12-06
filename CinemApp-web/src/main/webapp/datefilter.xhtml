@@ -18,31 +18,22 @@
 			<butter:calendar style="width: 90%;"
 				value="#{dateFilterBean.filterDate}" rendered="true" required="true"
 				pickDate="true" pickTime="false"
-				placeholder="Válasszon egy napot amikor moziba szeretne menni."/>
-			<b:commandButton value="Szűrés" ajax="true" onclick="ajax:dateFilterBean.filter()" update="filteredMoviesDate" />
+				placeholder="Válasszon egy napot amikor moziba szeretne menni." />
+			<b:commandButton value="Szűrés" ajax="true"
+				onclick="ajax:dateFilterBean.filter()" update="filteredMoviesDate" />
 		</h:form>
 		<h:form id="filteredMoviesDate">
 			<ui:repeat var="movie" value="#{dateFilterBean.filteredMovieList}">
 
-				<h:commandLink >
-					<f:ajax event="click" listener="#{dateFilterBean.chooseMovie}" render="movieTimesDate"/>
-					<f:param name="movieID" value="#{movie.id}" />
+				<h:commandLink
+					action="#{movieShowSelectorBean.processMovieShowSelector}">
+					<f:param name="movieCode" value="#{movie.movieCode}" />
 					<h:graphicImage styleClass="indexmovies"
 						value="/ImageServlet/#{movie.id}" />
 				</h:commandLink>
 
 			</ui:repeat>
 		</h:form>
-		<h:form id="movieTimesDate">
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{dateFilterBean.selectedTime}" id="time">
-				<f:selectItems value="#{dateFilterBean.movieTimes}" var="movieTime"
-					itemValue="#{movieTime}" itemLabel="#{movieTime}" />
-			</b:selectOneMenu>
-			<b:commandButton value="Tovább a foglalásra"
-				action="#{dateFilterBean.goToSeatPicking}" />
-		</h:form>
-
 	</ui:composition>
 </h:body>
 </html>

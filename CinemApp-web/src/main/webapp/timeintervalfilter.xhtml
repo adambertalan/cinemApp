@@ -33,24 +33,14 @@
 		<h:form id="filteredMoviesInterval">
 			<ui:repeat var="movie"
 				value="#{intervalFilterBean.filteredMovieList}">
-				<h:commandLink>
-					<f:ajax event="click" listener="#{intervalFilterBean.chooseMovie}" render="movieTimesInterval"/>
-					<f:param name="movieID" value="#{movie.id}" />
+				<h:commandLink
+					action="#{movieShowSelectorBean.processMovieShowSelector}">
+					<f:param name="movieCode" value="#{movie.movieCode}" />
 					<h:graphicImage styleClass="indexmovies"
 						value="/ImageServlet/#{movie.id}" />
 				</h:commandLink>
 			</ui:repeat>
 		</h:form>
-		<h:form id="movieTimesInterval">
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{intervalFilterBean.selectedMovieTime}" id="time">
-				<f:selectItems value="#{intervalFilterBean.movieTimes}" var="movieTime"
-					itemValue="#{movieTime}" itemLabel="#{movieTime}" />
-			</b:selectOneMenu>
-			<b:commandButton value="Tovább a foglalásra"
-				action="#{intervalFilterBean.goToSeatPicking}" />
-		</h:form>
-
 	</ui:composition>
 </h:body>
 </html>

@@ -11,7 +11,7 @@
 
 <h:head>
 </h:head>
-<h:body >
+<h:body>
 	<ui:composition>
 		<h:form>
 			<b:selectOneMenu required="true" render-label="true"
@@ -19,30 +19,21 @@
 				<f:selectItems value="#{genreFilterBean.genres}" var="genre"
 					itemValue="#{genre.id}" itemLabel="#{genre.name}" />
 			</b:selectOneMenu>
-			<b:commandButton ajax="true" value="Szűrés" onclick="ajax:genreFilterBean.filter()" update="filteredMoviesGenre" />
+			<b:commandButton ajax="true" value="Szűrés"
+				onclick="ajax:genreFilterBean.filter()" update="filteredMoviesGenre" />
 		</h:form>
 		<h:form id="filteredMoviesGenre">
 			<ui:repeat var="movie" value="#{genreFilterBean.filteredMovieList}">
 
-				<h:commandLink>
-					<f:ajax event="click" listener="#{genreFilterBean.chooseMovie}" render="filteredMovieTimesGenre"/>
-					<f:param name="movieID" value="#{movie.id}" />
+				<h:commandLink
+					action="#{movieShowSelectorBean.processMovieShowSelector}">
+					<f:param name="movieCode" value="#{movie.movieCode}" />
 					<h:graphicImage styleClass="indexmovies"
 						value="/ImageServlet/#{movie.id}" />
 				</h:commandLink>
 
 			</ui:repeat>
 		</h:form>
-		<h:form id="filteredMovieTimesGenre">
-			<b:selectOneMenu required="true" render-label="true"
-				value="#{genreFilterBean.selectedMovieTime}" id="time">
-				<f:selectItems value="#{genreFilterBean.movieTimes}" var="movieTime"
-					itemValue="#{movieTime}" itemLabel="#{movieTime}" />
-			</b:selectOneMenu>
-			<b:commandButton value="Tovább a foglalásra"
-				action="#{genreFilterBean.goToSeatPicking}" />
-		</h:form>
-
 	</ui:composition>
 </h:body>
 </html>
