@@ -18,6 +18,11 @@ var webSocket;
 			console.log("socket.js: openSocket()");
 			console.log("movieShowId: " + movieShowId + " theatreId: " + theatreId );
 			
+			if( movieShowId == 0 || theatreId == 0 ){
+				$('.modalPseudoClass').modal();
+				return;
+			}
+			
 			oldTheatreId = theatreId;
 			oldMovieShowId = movieShowId;
 			

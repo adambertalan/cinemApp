@@ -1,6 +1,9 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
+
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.NamedEntityGraph;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +33,15 @@ import org.omnifaces.util.Faces;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Seat;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Theatre;
+import hu.unideb.rft.beadando.cinemapp.jpa.repository.TheatreRepository;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Cupon;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
+
 import java.util.Random;
 import net.bootsfaces.utils.FacesMessages;
 
@@ -43,18 +53,24 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	@EJB
 	private BookSeatService bookSeatService;
-        
-        @EJB
-        private AppointmentService appointmentService;
-        
-        @EJB
-        private CuponService cuponService;
+
+	@EJB
+	private AppointmentService appointmentService;
+	
+	@EJB
+	private TheatreService theatreService;
+	
+	@EJB
+	private MovieShowService movieShowService;
+
+	@EJB
+	private CuponService cuponService;
 
 	private String guestName;
 	private String guestPhone;
 	private Integer guestZip;
 	private String guestEmail;
-	
+
 	private UIComponent saveButton;
 
 	private Long movieShowId;
@@ -93,10 +109,23 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		Long movieShowId = Long.parseLong(movieShowIdString);
 		this.movieShowId = movieShowId;
 		Long theatreId = Long.parseLong(theatreIdString);
+		
+		Theatre theatre = theatreService.findById(theatreId);
+		MovieShow movieShow = movieShowService.findMovieShowById(movieShowId);
+		if( theatre == null || movieShow == null ){
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			try {
+				externalContext.redirect(externalContext.getApplicationContextPath());
+				return;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
 
 		System.out.println("BookSeatBean: reload(): Querying seats");
 		// az összes ülés keresése
-		if( seats == null ){
+		if (seats == null) {
 			seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
 		}
 
@@ -121,10 +150,10 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 				}
 			}
 		}
-		
+
 		System.out.println("Selected seats: ");
 		for (Seat seat : selectedSeats) {
-			System.out.print("("+seat.getSeatRow()+ "," +seat.getSeatColumn()+") ");
+			System.out.print("(" + seat.getSeatRow() + "," + seat.getSeatColumn() + ") ");
 		}
 		System.out.println();
 
@@ -154,7 +183,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		// }
 
 		// A képernyő lefrissül
-//		Ajax.update("seatform");
+		// Ajax.update("seatform");
 		// Ajax.updateAll();
 	}
 
@@ -196,7 +225,7 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		System.out.println("BookSeatBean: delete()");
 		List<Seat> toRemoveSeats = new ArrayList<>();
 
-//		selectedSeatsMap.get(this.movieShowId).removeAll(occupiedSeats);
+		// selectedSeatsMap.get(this.movieShowId).removeAll(occupiedSeats);
 		for (List<Seat> seatlist : seats) {
 			for (Seat seat : seatlist) {
 				for (Seat occupiedSeat : selectedSeatsMap.get(movieShowId)) {
@@ -206,12 +235,12 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 				}
 			}
 		}
-		
+
 		selectedSeatsMap.get(this.movieShowId).removeAll(toRemoveSeats);
 
 		this.occupiedSeats.removeAll(selectedSeats);
 		selectedSeats.clear();
-		
+
 		this.occupiedSeats.removeAll(toRemoveSeats);
 	}
 
@@ -288,28 +317,31 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 				this.emailBean.setGuestName(guestName);
 				this.emailBean.setAddress(guestEmail);
 				this.emailBean.setTypeOfTheEmail("afterbook");
-                                
-                                List<Appointment> appointments = this.appointmentService.findAllAppointments();
-                                
-                                int counter=0;
-                                for(Appointment a : appointments){
-                                    if(a.getGuest().getName().equals(guestName)&&a.getGuest().getEmail().equals(guestEmail)){
-                                        counter++;
-                                    }
-                                }
-                                
-                                if(counter%3==0){
-                                    List<Cupon> cupons = this.cuponService.findAllCupon();
-                                    Cupon selectedCupon = cupons.get(new Random().nextInt(cupons.size()));
-                                    this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest().getName()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName()+"cupon:"+selectedCupon.getName());
-                                    this.emailBean.setTypeOfTheEmail("afterthreebook");
-                                }else{
-                                    this.emailBean.setQrText("id:"+appointment.getId()+"guest:"+appointment.getGuest().getName()+"movieshowid:"+appointment.getMovieShow().getId()+"movie:"+appointment.getMovieShow().getMovie().getName());
-                                }
-                              
-				
+
+				List<Appointment> appointments = this.appointmentService.findAllAppointments();
+
+				int counter = 0;
+				for (Appointment a : appointments) {
+					if (a.getGuest().getName().equals(guestName) && a.getGuest().getEmail().equals(guestEmail)) {
+						counter++;
+					}
+				}
+
+				if (counter % 3 == 0) {
+					List<Cupon> cupons = this.cuponService.findAllCupon();
+					Cupon selectedCupon = cupons.get(new Random().nextInt(cupons.size()));
+					this.emailBean.setQrText("id:" + appointment.getId() + "guest:" + appointment.getGuest().getName()
+							+ "movieshowid:" + appointment.getMovieShow().getId() + "movie:"
+							+ appointment.getMovieShow().getMovie().getName() + "cupon:" + selectedCupon.getName());
+					this.emailBean.setTypeOfTheEmail("afterthreebook");
+				} else {
+					this.emailBean.setQrText("id:" + appointment.getId() + "guest:" + appointment.getGuest().getName()
+							+ "movieshowid:" + appointment.getMovieShow().getId() + "movie:"
+							+ appointment.getMovieShow().getMovie().getName());
+				}
+
 				this.emailBean.sendEmail();
-				
+
 				this.guestName = null;
 				this.guestEmail = null;
 				this.guestPhone = null;
@@ -330,10 +362,10 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	public boolean isValidEmail(String address) {
 		Pattern p = Pattern.compile("[^@]+@[^@]+\\.[^@]+");
-		if (p.matcher(address).matches()){
+		if (p.matcher(address).matches()) {
 			return true;
 		} else {
-			return false;	
+			return false;
 		}
 	}
 
@@ -341,44 +373,49 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	public void init() {
 		System.out.println("BookseatBean: init()");
 		this.reload();
-//
-//		FacesContext context = FacesContext.getCurrentInstance();
-//
-//		String requestURI = ((HttpServletRequest) context.getExternalContext().getRequest()).getRequestURI();
-//		System.out.println("BookSeatBean: init(): requestURI: " + requestURI);
-//
-//		Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
-//
-//		String theatreIdString = requestMap.get("theatreId");
-//		String movieShowIdString = requestMap.get("movieShowId");
-//
-//		System.out.println("BookSeatBean: init(): theatreId: " + theatreIdString);
-//		System.out.println("BookSeatBean: init(): movieShowId: " + movieShowIdString);
-//
-//		Long theatreId = Long.parseLong(theatreIdString);
-//		Long movieShowId = Long.parseLong(movieShowIdString);
+		//
+		// FacesContext context = FacesContext.getCurrentInstance();
+		//
+		// String requestURI = ((HttpServletRequest)
+		// context.getExternalContext().getRequest()).getRequestURI();
+		// System.out.println("BookSeatBean: init(): requestURI: " +
+		// requestURI);
+		//
+		// Map<String, String> requestMap =
+		// context.getExternalContext().getRequestParameterMap();
+		//
+		// String theatreIdString = requestMap.get("theatreId");
+		// String movieShowIdString = requestMap.get("movieShowId");
+		//
+		// System.out.println("BookSeatBean: init(): theatreId: " +
+		// theatreIdString);
+		// System.out.println("BookSeatBean: init(): movieShowId: " +
+		// movieShowIdString);
+		//
+		// Long theatreId = Long.parseLong(theatreIdString);
+		// Long movieShowId = Long.parseLong(movieShowIdString);
 
-//		this.movieShowId = movieShowId;
+		// this.movieShowId = movieShowId;
 
 		// selectedSeatsMap.put(movieShowId, new HashSet<Seat>());
 
 		// lekérni az aktuális foglaltságot, ha még nem volt lekérve
-//		System.out.println("Querying seats");
-//		seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
-//
-//		this.reload();
+		// System.out.println("Querying seats");
+		// seats = bookSeatService.findAllSeatsOfTheatre(theatreId);
+		//
+		// this.reload();
 		// fel kell tölteni a foglalt üléseket
-//		this.occupiedSeats = new HashSet<>();
-//		this.occupiedSeats.addAll(bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId));
+		// this.occupiedSeats = new HashSet<>();
+		// this.occupiedSeats.addAll(bookSeatService.findOccupiedSeatsOfMovieShow(movieShowId));
 
 		// ha voltak korábbi foglalások, töröljük
-//		if (this.selectedSeats != null) {
-//			this.delete();
-//		} else {
-//			System.out.println("nincsenek korábbi foglalások");
-//		}
-//		// új foglalások
-//		this.selectedSeats = new HashSet<>();
+		// if (this.selectedSeats != null) {
+		// this.delete();
+		// } else {
+		// System.out.println("nincsenek korábbi foglalások");
+		// }
+		// // új foglalások
+		// this.selectedSeats = new HashSet<>();
 	}
 
 	public void destroy() {

@@ -1,106 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <f:metadata>
-        <f:viewParam name="movieShowId"
-                     value="#{movieShowSelectorBean.selectedMovieShowId}" />
-        <f:viewParam name="theatreId"
-                     value="#{movieShowSelectorBean.theatreId}" />
-    </f:metadata>
-    <h:head>
-    </h:head>
-    <h:body styleClass="bodystyle">
-        <ui:composition template="/templates/masterLayout.xhtml">
-            <ui:define name="content">
-                <b:jumbotron styleClass="content">
-                    <b:container styleClass="content">
-                        <b:column class="contentcontainer">
-                            <b:row styleClass="show-grid">
-                                <b:column style="overflow: auto;" col-xs="12" col-sm="6" col-md="8">
-                                    <h:form id="seatform">
-                                        <table id="seats">
-                                            <ui:repeat value="#{bookSeatBean.seats}" var="seatList"
-                                                       varStatus="status">
-                                                <tr>
-                                                    <ui:repeat value="#{seatList}" var="seat">
-                                                        <td><b:commandButton
-                                                                value="(#{seat.seatRow},#{seat.seatColumn})"
-                                                                style="background-color: #{bookSeatBean.occupiedSeats.contains(seat) ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
-                                                                immediate="true"
-                                                                onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send(theatreId, movieShowId,#{seat.id}, #{!bookSeatBean.selectedSeats.contains(seat)});"
-                                                                ajax="true" update="@form" /></td>
-                                                    </ui:repeat>
-                                                </tr>
-                                            </ui:repeat>
-                                        </table>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:butter="http://butterfaces.org/components"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="movieShowId"
+		value="#{movieShowSelectorBean.selectedMovieShowId}" />
+	<f:viewParam name="theatreId"
+		value="#{movieShowSelectorBean.theatreId}" />
+</f:metadata>
+<h:head>
+</h:head>
+<h:body styleClass="bodystyle">
+	<ui:composition template="/templates/masterLayout.xhtml">
+		<ui:define name="content">
+		
+			<b:modal id="amodal" title="Hiba!"
+				styleClass="modalPseudoClass" closable="false"
+				close-on-escape="false" backdrop="false">
+				<p>Valamilyen végzetes anomália miatt nem sikerült előásni a foglaláshoz szükséges adatokat!
+					A foglaláshoz ki kell választani egy filmet és csak utána következik a foglaló oldal!</p>
+				
+				<f:facet name="footer">
+					<b:button value="Irány a főoldal" dismiss="modal" outcome="index" />
+				</f:facet>
+			</b:modal>
+			
+			<b:jumbotron styleClass="content">
+				<b:container styleClass="content">
+					<b:column class="contentcontainer">
+						<b:row styleClass="show-grid">
+							<b:column style="overflow: auto;" col-xs="12" col-sm="6"
+								col-md="8">
+								<h:form id="seatform">
+									<table id="seats">
+										<ui:repeat value="#{bookSeatBean.seats}" var="seatList"
+											varStatus="status">
+											<tr>
+												<ui:repeat value="#{seatList}" var="seat">
+													<td><b:commandButton
+															value="(#{seat.seatRow},#{seat.seatColumn})"
+															style="background-color: #{bookSeatBean.occupiedSeats.contains(seat) ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
+															immediate="true"
+															onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send(theatreId, movieShowId,#{seat.id}, #{!bookSeatBean.selectedSeats.contains(seat)});"
+															ajax="true" update="@form" /></td>
+												</ui:repeat>
+											</tr>
+										</ui:repeat>
+									</table>
 
-                                        <o:commandScript name="update" action="#{bookSeatBean.update}"
-                                                         render="@form"></o:commandScript>
-                                        <o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
-                                    </h:form>
-                                </b:column>
-                                <b:column col-xs="6" col-sm="6" col-md="4">
-                                    <h:form>
+									<o:commandScript name="update" action="#{bookSeatBean.update}"
+										render="@form"></o:commandScript>
+									<o:commandScript name="reload" action="#{bookSeatBean.reload}"></o:commandScript>
+								</h:form>
+							</b:column>
+							<b:column col-xs="6" col-sm="6" col-md="4">
+								<h:form>
+									<b:inputText label="Név" placeholder="Név" required="true"
+										id="name" render-label="true"
+										value="#{bookSeatBean.guestName}"
+										requiredMessage="Hiányzó név!">
+									</b:inputText>
+									<b:message for="name" />
 
-                                        <b:inputText label="Név" placeholder="Név" required="true"
-                                                     id="name"
-                                                     render-label="true" value="#{bookSeatBean.guestName}"
-                                                     requiredMessage="Hiányzó név!">
-                                        </b:inputText>
-                                        <b:message for="name" />
+									<b:inputText label="Telefonszám" placeholder="Telefonszám"
+										required="true" render-label="true"
+										value="#{bookSeatBean.guestPhone}" id="phone"
+										requiredMessage="Hiányzó telefonszám!"
+										validatorMessage="Hibás telefonszám formátum!">
+										<f:validateRegex pattern="^[0-9]+$"></f:validateRegex>
+									</b:inputText>
+									<b:message for="phone" />
 
-                                        <b:inputText label="Telefonszám" placeholder="Telefonszám"
-                                                     required="true" render-label="true"
-                                                     value="#{bookSeatBean.guestPhone}"
-                                                     id="phone"
-                                                     requiredMessage="Hiányzó telefonszám!"
-                                                     validatorMessage="Hibás telefonszám formátum!">
-                                            <f:validateRegex pattern="^[0-9]+$"></f:validateRegex>
-                                        </b:inputText>
-                                        <b:message for="phone" />
+									<b:inputText label="E-mail" id="email" placeholder="E-mail"
+										required="true" render-label="true"
+										value="#{bookSeatBean.guestEmail}"
+										requiredMessage="Hiányzó e-mail cím!"
+										validatorMessage="Hibás e-mail cím formátum!">
+										<f:validateRegex pattern="^[^@]+@[^@]+\.[^@]+$"></f:validateRegex>
+									</b:inputText>
+									<b:message for="email" />
 
-                                        <b:inputText label="E-mail" id="email" placeholder="E-mail"
-                                                     required="true" render-label="true"
-                                                     value="#{bookSeatBean.guestEmail}"
-                                                     requiredMessage="Hiányzó e-mail cím!"
-                                                     validatorMessage="Hibás e-mail cím formátum!">
-                                            <f:validateRegex pattern="^[^@]+@[^@]+\.[^@]+$"></f:validateRegex>
-                                        </b:inputText>
-                                        <b:message for="email" />
+									<b:inputText label="Irányítószám" placeholder="Irányítószám"
+										required="true" render-label="true" id="zip" maxlength="4"
+										value="#{bookSeatBean.guestZip}"
+										requiredMessage="Hiányzó irányítószám!"
+										converterMessage="Az irányítószámnak egy 4 jegyű számnak kell lennie!">
+										<f:validateLength minimum="4" maximum="4" />
+									</b:inputText>
+									<b:message for="zip" />
 
-                                        <b:inputText label="Irányítószám" placeholder="Irányítószám"
-                                                     required="true" render-label="true"
-                                                     id="zip"
-                                                     maxlength="4"
-                                                     value="#{bookSeatBean.guestZip}"
-                                                     requiredMessage="Hiányzó irányítószám!"
-                                                     converterMessage="Az irányítószámnak egy 4 jegyű számnak kell lennie!">
-                                            <f:validateLength minimum="4" maximum="4" />
-                                        </b:inputText>
-                                        <b:message for="zip" />
+									<b:commandButton look="success" id="accept" update="@form"
+										binding="#{bookSeatBean.saveButton}" iconAwesome="film"
+										value="Foglalás Véglegesítése" action="#{bookSeatBean.save}" />
+									<b:message for="accept" />
 
-                                        <b:commandButton look="success" id="accept" update="@form"
-                                                         binding="#{bookSeatBean.saveButton}"
-                                                         iconAwesome="film"
-                                                         value="Foglalás Véglegesítése" action="#{bookSeatBean.save}" />
-											<b:message for="accept" />
+								</h:form>
+							</b:column>
+						</b:row>
 
-                                    </h:form>
-                                </b:column>
-                            </b:row>
-
-                            <h:outputScript library="js" name="socket.js" target="body" />
-                            <h:outputStylesheet library="css" name="reservation.css" />
-                        </b:column>
-                    </b:container>
-                </b:jumbotron>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+						<h:outputScript library="js" name="socket.js" target="body" />
+						<h:outputStylesheet library="css" name="reservation.css" />
+					</b:column>
+				</b:container>
+			</b:jumbotron>
+		</ui:define>
+	</ui:composition>
+</h:body>
 </html>
