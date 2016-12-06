@@ -18,19 +18,19 @@ CinemApp egy olyan webes alkalmazás melynek segítségével filmvetítésekre f
 - E-mail küldése a webalkalmazás tulajdonosainak (kapcsolatfelvétel)
 
 ### Kupon rendszer
-További a funkció az *integrált* kuponrendszer ami automatikusan e-mailben kiküld egy kupont a felhasználónak minden 3. foglalás után. Ezek a kuponok jelenthetnek
+További funkció az *integrált* kuponrendszer ami automatikusan e-mailben kiküld egy kupont a felhasználónak minden 3. foglalás után. Egy kupon lehet:
 - Ajándék
 - Ingyen termék
 - Kedvezmény
 - Felajánlás
 
-A kupont a felhasználó e-mailben kapja meg egy QR kód formájában amit majd be kell mutatnia jegy vásárlásakor a felhasználáshoz.
+A kupont a **felhasználó** e-mailben kapja meg egy *QR kód* formájában amit majd be kell mutatnia jegy vásárlásakor a felhasználáshoz.
 
 ### Értékelés
 Alkalmazásunk **felhasználókat** megkérve értékelést készít a filmekről. Miután egy felhasználó elment egy vetítésre a film végén automatikusan kap egy e-mail-t melyben megkérjük az adott film értékelésére amit természetesen nem kötelező megtennie ha nem akarja.
 
 ### Admin felület
-Felhaszbálók mellett nagy figyelmet fordítottunk az **Adminokra** is
+**Felhasználók** mellett nagy figyelmet fordítottunk az **Adminokra** is
 *bejelentkezés* után egy *admin felületen* különböző műveletekre van lehetőségünk.
 - Film műveletek
 - Vetítés műveletek
@@ -38,7 +38,7 @@ Felhaszbálók mellett nagy figyelmet fordítottunk az **Adminokra** is
 - Kupon műveletek
 - Foglalás műveletek 
 
-*Mindegyik menüben lehetőségünk van létrehozásra, módosításra valamint törlésre (kivéve foglalási műveleteknél ahol csak foglalás törölésére van lahatőségünk).*
+*Mindegyik menüben lehetőségünk van létrehozásra, módosításra valamint törlésre (kivéve foglalási műveleteknél ahol csak foglalás törölésére van lehetőségünk).*
 
 ##### Vendég karbantartó
 Ez egy olyan funckió ahol lehetősége van az **adminnak** az eddigi felhasználók foglalásait, foglalási adatait ellenőrizni.

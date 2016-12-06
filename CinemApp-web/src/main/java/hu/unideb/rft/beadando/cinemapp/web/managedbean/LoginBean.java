@@ -54,6 +54,13 @@ public class LoginBean{
 	public void init() {
 		this.loggedIn = false;
 	}
+	
+	public String redirectIfAlreadyLoggedIn(){
+		if(loggedIn)
+			return "loggedIn";
+		else
+			return "notloggedIn";
+	}
 
 	public String loginUser() throws IOException{
 		boolean valid = loginService.validate(username, password);

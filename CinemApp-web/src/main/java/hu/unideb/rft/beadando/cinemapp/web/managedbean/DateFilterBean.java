@@ -1,19 +1,16 @@
 package hu.unideb.rft.beadando.cinemapp.web.managedbean;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Movie;
@@ -29,18 +26,12 @@ public class DateFilterBean {
 	private List<Movie> filteredMovieList;
 	private List<MovieShow> filteredMovieShowList;
 	private String filterDate;
-	private List<Timestamp> movieTimes;
-
-	private Timestamp selectedTime;
-	private Movie selectedMovie;
-	private Long selectedMovieShowId;
-	private Long theatreId;
 
 	@PostConstruct
 	public void init() {
 		filteredMovieList = new ArrayList<Movie>();
 		filteredMovieShowList = new ArrayList<MovieShow>();
-		movieTimes = new ArrayList<Timestamp>();
+
 	}
 
 	public void filter() throws ParseException {
@@ -49,42 +40,13 @@ public class DateFilterBean {
 		filteredMovieShowList.clear();
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 		for (MovieShow movieShow : movieShowService.findAllMovieShow()) {
-			if (filterDate.equals(format.format(movieShow.getStartTime())) && LocalDateTime.now().plusMinutes(30).isBefore(movieShow.getStartTime().toLocalDateTime())) {
+			if (filterDate.equals(format.format(movieShow.getStartTime()))
+					&& LocalDateTime.now().plusMinutes(30).isBefore(movieShow.getStartTime().toLocalDateTime())) {
 				if (!filteredMovieList.contains(movieShow.getMovie()))
 					filteredMovieList.add(movieShow.getMovie());
 				filteredMovieShowList.add(movieShow);
 			}
 		}
-	}
-
-	public void chooseMovie() {
-		movieTimes.clear();
-		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String movieID = params.get("movieID");
-		Long id = Long.parseLong(movieID);
-		System.out.println(id);
-		for(Movie movie : filteredMovieList){
-			if(movie.getId().equals(id))
-				selectedMovie = movie;
-				break;
-		}
-		
-		for(MovieShow movieShow : filteredMovieShowList){
-			if(movieShow.getMovie().getId().equals(id)){
-				movieTimes.add(movieShow.getStartTime());
-			}
-		}
-	}
-	
-	public String goToSeatPicking(){
-		for(MovieShow movieShow : filteredMovieShowList){
-			if(movieShow.getMovie().equals(selectedMovie) && movieShow.getStartTime().equals(selectedTime)){
-				selectedMovieShowId = movieShow.getId();
-				theatreId = movieShow.getTheatre().getId();
-				break;
-			}
-		}
-		return "seatbooking.xhtml?faces-redirect=true&includeViewParams=true";
 	}
 
 	public String getFilterDate() {
@@ -95,22 +57,6 @@ public class DateFilterBean {
 		this.filterDate = filterDate;
 	}
 
-	public List<Timestamp> getMovieTimes() {
-		return movieTimes;
-	}
-
-	public void setMovieTimes(List<Timestamp> movieTimes) {
-		this.movieTimes = movieTimes;
-	}
-
-	public Timestamp getSelectedTime() {
-		return selectedTime;
-	}
-
-	public void setSelectedTime(Timestamp selectedTime) {
-		this.selectedTime = selectedTime;
-	}
-
 	public List<Movie> getFilteredMovieList() {
 		return filteredMovieList;
 	}
@@ -119,21 +65,4 @@ public class DateFilterBean {
 		this.filteredMovieList = filteredMovieList;
 	}
 
-	public Long getSelectedMovieShowId() {
-		return selectedMovieShowId;
-	}
-
-	public void setSelectedMovieShowId(Long selectedMovieShowId) {
-		this.selectedMovieShowId = selectedMovieShowId;
-	}
-
-	public Long getTheatreId() {
-		return theatreId;
-	}
-
-	public void setTheatreId(Long theatreId) {
-		this.theatreId = theatreId;
-	}
-
-	
 }

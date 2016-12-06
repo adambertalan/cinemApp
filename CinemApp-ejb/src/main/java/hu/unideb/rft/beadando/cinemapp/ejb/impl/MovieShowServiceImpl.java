@@ -166,4 +166,9 @@ public class MovieShowServiceImpl implements MovieShowService {
 		
 	}
 
+	@Override
+	public List<MovieShow> findByMovieIdOrderByStartTime(Long id) {
+		return movieShowRepository.findByMovieIdOrderByStartTime(id);
+	}
+
 }

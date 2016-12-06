@@ -23,7 +23,6 @@ public class SocketServer {
     
     @OnOpen
     public void onOpen(@PathParam("movieShowId") String movieShowId, Session session){
-    	
     	Integer parseInt = Integer.parseInt(movieShowId);
     	if( connections.get(parseInt) == null ){
     		connections.put(parseInt, new ArrayList<>());

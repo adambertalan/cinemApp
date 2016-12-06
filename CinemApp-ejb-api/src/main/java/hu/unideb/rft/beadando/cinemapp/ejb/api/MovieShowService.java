@@ -34,4 +34,6 @@ public interface MovieShowService {
         public void deprecateMovieShowAppointments( Long movieShowId );
         
         public MovieShow findMovieShowById(Long id);
+        
+        public List<MovieShow> findByMovieIdOrderByStartTime(Long id);
 }

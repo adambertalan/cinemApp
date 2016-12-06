@@ -50,7 +50,7 @@ public class MovieShowSelectorBean {
         if(recomendedMovies.size()>3){
             recomendedMovies = recomendedMovies.subList(0, 2);
         }
-        allMovieShows = movieShowService.getMovieShowRepository().findByMovieId(selectedMovie.getId());
+        allMovieShows = movieShowService.findByMovieIdOrderByStartTime(selectedMovie.getId());
         movieShows = allMovieShows.stream().filter(x -> x.getStartTime().after(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)))).collect(Collectors.toList());
         return "page";
     }
@@ -58,10 +58,14 @@ public class MovieShowSelectorBean {
     public String getMovieShowName(MovieShow movieShow){
         LocalDateTime start = movieShow.getStartTime().toLocalDateTime();
         LocalDateTime end = movieShow.getEndTime().toLocalDateTime();
-
+        String startMinute;
+        String endMinute;
+        startMinute = (start.getMinute() < 10)? "0"+start.getMinute():""+start.getMinute();
+        endMinute = (end.getMinute() < 10)? "0"+end.getMinute():""+end.getMinute();
+        System.out.println(startMinute);
         return ("Nap: " + start.getMonth().name() + " " + start.getDayOfMonth() + 
-                ". Kezdés: " +start.getHour()+":"+start.getMinute()+
-                " Vége: "+end.getHour()+":"+end.getMinute());
+                ". Kezdés: " +start.getHour()+":"+startMinute+
+                " Vége: "+end.getHour()+":"+endMinute);
 //        return ("Nap: "+movieShow.getStartTime().getMonth()+1)+"."+movieShow.getStartTime().getDate()+
 //                " Kezdés: "+movieShow.getStartTime().getHours()+":"+movieShow.getStartTime().getMinutes()
 //                +" Vége: "+movieShow.getEndTime().getHours()+":"+movieShow.getEndTime().getMinutes();
