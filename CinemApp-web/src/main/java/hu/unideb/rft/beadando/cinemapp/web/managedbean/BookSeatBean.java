@@ -309,6 +309,11 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
                               
 				
 				this.emailBean.sendEmail();
+				
+				this.guestName = null;
+				this.guestEmail = null;
+				this.guestPhone = null;
+				this.guestZip = null;
 
 				return "bookingInfo.xhtml?faces-redirect=true&includeViewParams=true";
 			} else {
