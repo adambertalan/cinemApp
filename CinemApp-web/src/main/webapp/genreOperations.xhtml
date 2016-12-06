@@ -15,18 +15,18 @@
                              required="true" render-label="true" value="#{genreBean.genreName}" />
 
 
-                <b:commandButton value="Mentés" update="adminPageContainer" ajax="true"
-                                 action="#{genreBean.addNewOrEditGenre}" style="margin: 5px; background-color: #18bc9c;"/>
+                <b:commandButton value="Mentés" update="@form genreOperationsForm movieOperationsForm genresForm" ajax="true"
+                                 action="#{genreBean.addNewOrEditGenre}"  style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
             <h3>Műfajok szerkeztése</h3>
             <h:form id="genresForm">
-                <h:outputLabel value="Filmek" for="genreID" />
+                <h:outputLabel value="Műfajok" for="genreID" />
                 <b:selectOneMenu value="#{genreBean.selectedGenreId}" id="genreID">
                     <f:selectItems value="#{genreBean.genres}" var="genre"
                                    itemValue="#{genre.id}" itemLabel="#{genre.name}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módosítás" action="#{genreBean.editGenre}" update="adminPageContainer" style="margin: 5px; background-color: #18bc9c;" ajax="true"/>
-                <b:commandButton value="Törlés" update="adminPageContainer" ajax="true"
+                <b:commandButton value="Módosítás" action="#{genreBean.editGenre}" update="genreOperationsForm" style="margin: 5px; background-color: #18bc9c;" ajax="true"/>
+                <b:commandButton value="Törlés" update="@form genreOperationsForm movieOperationsForm" ajax="true"
                                  action="#{genreBean.deleteGenre}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>

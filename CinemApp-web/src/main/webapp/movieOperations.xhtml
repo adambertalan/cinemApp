@@ -36,7 +36,7 @@
                 <b:inputTextarea label="Leírás" value="#{movieBean.movieDescription}">
                 </b:inputTextarea>
 
-                <b:commandButton update="adminPageContainer" value="Mentés" ajax="true"
+                <b:commandButton update="@form uploadForm moviesForm movieShowOperationsForm" value="Mentés" ajax="true"
                                  action="#{movieBean.addNewOrEditMovie}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
 
@@ -58,9 +58,11 @@
                     <f:selectItems value="#{movieBean.movies}" var="movie"
                                    itemValue="#{movie.id}" itemLabel="#{movie.name}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módosítás" action="#{movieBean.editMovie}" style="margin: 5px; background-color: #18bc9c;" ajax="true" update="adminPageContainer"/>
+                <b:commandButton value="Módosítás" action="#{movieBean.editMovie}" style="margin: 5px; 
+                background-color: #18bc9c;" ajax="true" 
+                update="movieOperationsForm"/>
                 <b:commandButton value="Törlés" action="#{movieBean.deleteMovie}" ajax="true"
-                                 update="adminPageContainer" style="margin: 5px; background-color: #18bc9c;"/>
+                                 update="uploadForm moviesForm movieShowOperationsForm" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>
     </body>

@@ -25,9 +25,10 @@
                                    itemValue="#{theatre.id}" itemLabel="#{theatre.theatreNumber}" />
                 </b:selectOneMenu>
 
-                <butter:calendar style="width: 90%;" value="#{movieShowBean.startDate}" rendered="true" required="true" pickDate="true" pickTime="true" placeholder="Kezdési idő" sideBySide="true"/>
+                <butter:calendar style="width: 90%;" value="#{movieShowBean.startDate}" 
+                rendered="true" required="true" pickDate="true" pickTime="true" placeholder="Kezdési idő" sideBySide="true"/>
 
-                <b:commandButton update="adminPageContainer" value="Mentés" ajax="true"
+                <b:commandButton update="@form movieShowsForm" value="Mentés" ajax="true"
                                  action="#{movieShowBean.addNewOrEditMovieShow}" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
 
@@ -38,9 +39,10 @@
                     <f:selectItems value="#{movieShowBean.movieShows}" var="movieShow"
                                    itemValue="#{movieShow.id}" itemLabel="#{movieShowBean.getMovieShowName(movieShow)}" />
                 </b:selectOneMenu>
-                <b:commandButton value="Módisítás" action="#{movieShowBean.editMovie}" style="margin: 5px; background-color: #18bc9c;" ajax="true" update="adminPageContainer"/>
+                <b:commandButton value="Módisítás" action="#{movieShowBean.editMovie}" style="margin: 5px; background-color: #18bc9c;" ajax="true"
+                 update="movieShowOperationsForm"/>
                 <b:commandButton value="Törlés" action="#{movieShowBean.deleteMovieShow}" ajax="true"
-                                 update="adminPageContainer" style="margin: 5px; background-color: #18bc9c;"/>
+                                 update="@form" style="margin: 5px; background-color: #18bc9c;"/>
             </h:form>
         </ui:composition>
     </body>

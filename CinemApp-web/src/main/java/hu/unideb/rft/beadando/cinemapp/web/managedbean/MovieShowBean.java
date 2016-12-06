@@ -13,8 +13,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.omnifaces.util.Ajax;
-
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.MovieShow;
 
@@ -29,6 +27,8 @@ public class MovieShowBean {
 
 	private String startDate;
 
+	private String startTimePrinted;
+	private String endTimePrinted;
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private Long movieId;
@@ -83,6 +83,8 @@ public class MovieShowBean {
 	}
 
 	private void clearFields() {
+		this.startTimePrinted = null;
+		this.endTimePrinted = null;
 		this.startTime = null;
 		this.endTime = null;
 		this.movieId = 1L;
@@ -98,6 +100,13 @@ public class MovieShowBean {
 
 		MovieShow selectedMovieShow = movieShowService.getMovieShowRepository().findMovieShowById(selectedMovieShowId);
 		if (selectedMovieShow != null) {
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a",Locale.US);
+			
+//			startTimePrinted = formatter.format(startTime);
+//			endTimePrinted = formatter.format(endTime);
+			
+			startDate = formatter.format(selectedMovieShow.getStartTime());
 			startTime = selectedMovieShow.getStartTime();
 			endTime = selectedMovieShow.getEndTime();
 			movieId = selectedMovieShow.getMovie().getId();
@@ -118,6 +127,7 @@ public class MovieShowBean {
 		System.out.println("MovieShowBean: init()");
 		movieShows = movieShowService.findAllMovieShow();
 		System.out.println("MovieShows :" + movieShows);
+
 	}
 
 	public List<MovieShow> getMovieShows() {
@@ -190,6 +200,22 @@ public class MovieShowBean {
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+
+	public String getStartTimePrinted() {
+		return startTimePrinted;
+	}
+
+	public void setStartTimePrinted(String startTimePrinted) {
+		this.startTimePrinted = startTimePrinted;
+	}
+
+	public String getEndTimePrinted() {
+		return endTimePrinted;
+	}
+
+	public void setEndTimePrinted(String endTimePrinted) {
+		this.endTimePrinted = endTimePrinted;
 	}
 
 }
