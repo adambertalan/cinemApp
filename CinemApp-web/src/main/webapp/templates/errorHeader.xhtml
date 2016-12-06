@@ -9,46 +9,8 @@
 
 	<body>
 		<ui:composition>
-			<b:navBar brand="CinemApp" brandHref="index.xhtml" fixed="top"
-				brandImg="../resources/images/logo.png" brandImgStyle="height: 25px"
-				style="background: #00494c;">
+			<b:navBar fixed="top" style="background: #00494c;">
 				
-				<h:form styleClass="navbar-form navbar-left" style="padding-left: 2px;padding-right: 2px;">
-					<b:commandButton look="success" value="FŐOLDAL"
-						action="#{navigationController.processHome}" />
-				</h:form>
-				<h:form styleClass="navbar-form navbar-left" style="padding-left: 2px;padding-right: 2px;">
-					<b:commandButton look="success" value="FILMEK"
-						action="#{navigationController.processMovies}" />
-				</h:form>
-				<h:form styleClass="navbar-form navbar-left" style="padding-left: 2px;padding-right: 2px;">
-					<b:commandButton look="success" value="SZŰRŐK"
-						action="#{navigationController.processFilters}" />
-				</h:form>
-				<h:form styleClass="navbar-form navbar-left" style="padding-left: 2px;padding-right: 2px;">
-					<b:commandButton look="success" value="GYIK"
-						action="#{navigationController.processGYIK}" />
-				</h:form>
-				<h:form styleClass="navbar-form navbar-left" style="padding-left: 2px;padding-right: 2px;">
-					<b:commandButton look="success" value="KAPCSOLAT"
-						action="#{navigationController.processContact}" />
-				</h:form>
-				<c:if test="#{login.loggedIn}">
-					<h:form styleClass="navbar-form navbar-left" style="padding-left: 2px;padding-right: 2px;">
-						<b:commandButton look="success" value="Admin"
-							action="#{navigationController.processAdmin}" />
-					</h:form>
-				</c:if>
-	
-				<h:form styleClass="navbar-form navbar-right" style="padding-left: 2px;padding-right: 2px;" rendered="#{!login.loggedIn}">
-					<b:commandButton action="#{navigationController.processLogin}"
-						value="Login" look="success" icon="chevron-right" iconAlign="right" />
-				</h:form>
-				<h:form styleClass="navbar-form navbar-right" style="padding-left: 2px;padding-right: 2px;"
-					rendered="#{login.loggedIn}">
-					<b:commandButton action="#{login.logout}" value="Logout"
-						look="success" icon="chevron-right" iconAlign="right" />
-				</h:form>
 			</b:navBar>
 		</ui:composition>
 	</body>
