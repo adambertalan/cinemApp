@@ -58,10 +58,14 @@ public class MovieShowSelectorBean {
     public String getMovieShowName(MovieShow movieShow){
         LocalDateTime start = movieShow.getStartTime().toLocalDateTime();
         LocalDateTime end = movieShow.getEndTime().toLocalDateTime();
-
+        String startMinute;
+        String endMinute;
+        startMinute = (start.getMinute() < 10)? "0"+start.getMinute():""+start.getMinute();
+        endMinute = (end.getMinute() < 10)? "0"+end.getMinute():""+end.getMinute();
+        System.out.println(startMinute);
         return ("Nap: " + start.getMonth().name() + " " + start.getDayOfMonth() + 
-                ". Kezdés: " +start.getHour()+":"+start.getMinute()+
-                " Vége: "+end.getHour()+":"+end.getMinute());
+                ". Kezdés: " +start.getHour()+":"+startMinute+
+                " Vége: "+end.getHour()+":"+endMinute);
 //        return ("Nap: "+movieShow.getStartTime().getMonth()+1)+"."+movieShow.getStartTime().getDate()+
 //                " Kezdés: "+movieShow.getStartTime().getHours()+":"+movieShow.getStartTime().getMinutes()
 //                +" Vége: "+movieShow.getEndTime().getHours()+":"+movieShow.getEndTime().getMinutes();
