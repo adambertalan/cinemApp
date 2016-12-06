@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Guest extends BaseName {
 
-	@Column(unique=true)
     private String email;
     
     private String phoneNumber;

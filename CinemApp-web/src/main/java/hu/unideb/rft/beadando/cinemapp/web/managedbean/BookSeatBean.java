@@ -99,12 +99,24 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 	public void reload() {
 
 		System.out.println("BookSeatBean: reload()");
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
 		String movieShowIdString = Faces.getRequestParameter("movieShowId");
 		String theatreIdString = Faces.getRequestParameter("theatreId");
 
 		System.out.println("BookSeatBean: movieShowId: " + movieShowIdString);
 		System.out.println("BookSeatBean: theatreId: " + theatreIdString);
+		
+		if( movieShowIdString == null || theatreIdString == null ){
+			try {
+				externalContext.redirect(externalContext.getApplicationContextPath());
+				return;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
 
 		Long movieShowId = Long.parseLong(movieShowIdString);
 		this.movieShowId = movieShowId;
@@ -113,7 +125,6 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 		Theatre theatre = theatreService.findById(theatreId);
 		MovieShow movieShow = movieShowService.findMovieShowById(movieShowId);
 		if( theatre == null || movieShow == null ){
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			try {
 				externalContext.redirect(externalContext.getApplicationContextPath());
 				return;
