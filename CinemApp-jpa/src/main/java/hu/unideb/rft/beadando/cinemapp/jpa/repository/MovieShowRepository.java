@@ -20,4 +20,6 @@ public interface MovieShowRepository extends JpaRepository<MovieShow, Long> {
         
         @Query("select movieShow from MovieShow movieShow where movieShow.endTime > CURRENT_TIMESTAMP")
         public List<MovieShow> findActiveMovieShows();
+        
+        public List<MovieShow> findByMovieIdOrderByStartTime(Long id);
 }

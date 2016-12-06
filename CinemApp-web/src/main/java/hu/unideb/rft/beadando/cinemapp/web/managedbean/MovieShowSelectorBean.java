@@ -50,7 +50,7 @@ public class MovieShowSelectorBean {
         if(recomendedMovies.size()>3){
             recomendedMovies = recomendedMovies.subList(0, 2);
         }
-        allMovieShows = movieShowService.getMovieShowRepository().findByMovieId(selectedMovie.getId());
+        allMovieShows = movieShowService.findByMovieIdOrderByStartTime(selectedMovie.getId());
         movieShows = allMovieShows.stream().filter(x -> x.getStartTime().after(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)))).collect(Collectors.toList());
         return "page";
     }
