@@ -34,12 +34,15 @@ public class IntervalFilterBean {
 
 	private Timestamp startOfInterval;
 	private Timestamp endOfInterval;
+	
+	private boolean hasMatch;
 
 
 	@PostConstruct
 	public void init() {
 		filteredMovieList = new ArrayList<Movie>();
 		filteredMovieShowList = new ArrayList<MovieShow>();
+		hasMatch = true;
 	}
 
 	private void calculateTimes() throws ParseException {
@@ -51,6 +54,7 @@ public class IntervalFilterBean {
 	}
 
 	public void filter() throws ParseException {
+		hasMatch = true;
 		filteredMovieList.clear();
 		filteredMovieShowList.clear();
 		calculateTimes();
@@ -65,6 +69,7 @@ public class IntervalFilterBean {
 				filteredMovieShowList.add(movieShow);
 			}
 		}
+		if(filteredMovieList.size() == 0) hasMatch = false;
 	}
 
 	public List<MovieShow> getFilteredMovieShowList() {
@@ -99,5 +104,14 @@ public class IntervalFilterBean {
 		this.endOfIntervalString = endOfIntervalString;
 	}
 
+	public boolean isHasMatch() {
+		return hasMatch;
+	}
+
+	public void setHasMatch(boolean hasMatch) {
+		this.hasMatch = hasMatch;
+	}
+
+	
 	
 }

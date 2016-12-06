@@ -33,6 +33,9 @@
 				</h:commandLink>
 
 			</ui:repeat>
+			<c:if test="#{dateFilterBean.hasMatch==false}" >
+				Nincs találat.
+			</c:if>
 		</h:form>
 	</ui:composition>
 </h:body>

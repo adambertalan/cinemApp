@@ -30,14 +30,18 @@ public class GenreFilterBean {
 
 	private Long selectedGenreId;
 
+	private boolean hasMatch;
+	
 	@PostConstruct
 	public void init() {
 		genres = genreService.findAllGenre();
 		filteredMovieList = new ArrayList<Movie>();
 		filteredMovieShowList = new ArrayList<MovieShow>();
+		hasMatch = true;
 	}
 
 	public void filter() {
+		hasMatch = true;
 		filteredMovieList.clear();
 		filteredMovieShowList.clear();
 		System.out.println(selectedGenreId);
@@ -52,6 +56,7 @@ public class GenreFilterBean {
 				filteredMovieShowList.add(movieShow);
 			}
 		}
+		if(filteredMovieList.size() == 0) hasMatch = false;
 	}
 
 	public List<Genre> getGenres() {
@@ -86,4 +91,13 @@ public class GenreFilterBean {
 		this.filteredMovieList = filteredMovieList;
 	}
 
+	public boolean isHasMatch() {
+		return hasMatch;
+	}
+
+	public void setHasMatch(boolean hasMatch) {
+		this.hasMatch = hasMatch;
+	}
+
+	
 }
