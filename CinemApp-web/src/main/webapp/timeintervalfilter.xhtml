@@ -40,6 +40,9 @@
 						value="/ImageServlet/#{movie.id}" />
 				</h:commandLink>
 			</ui:repeat>
+			<c:if test="#{intervalFilterBean.hasMatch == false}">
+				Nincs találat.
+			</c:if>
 		</h:form>
 	</ui:composition>
 </h:body>

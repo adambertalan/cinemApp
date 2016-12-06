@@ -26,15 +26,18 @@ public class DateFilterBean {
 	private List<Movie> filteredMovieList;
 	private List<MovieShow> filteredMovieShowList;
 	private String filterDate;
+	
+	private boolean hasMatch;
 
 	@PostConstruct
 	public void init() {
 		filteredMovieList = new ArrayList<Movie>();
 		filteredMovieShowList = new ArrayList<MovieShow>();
-
+		hasMatch = true;
 	}
 
 	public void filter() throws ParseException {
+		hasMatch = true;
 		System.out.println(filterDate);
 		filteredMovieList.clear();
 		filteredMovieShowList.clear();
@@ -47,6 +50,7 @@ public class DateFilterBean {
 				filteredMovieShowList.add(movieShow);
 			}
 		}
+		if(filteredMovieList.size() == 0) hasMatch = false;
 	}
 
 	public String getFilterDate() {
@@ -65,4 +69,13 @@ public class DateFilterBean {
 		this.filteredMovieList = filteredMovieList;
 	}
 
+	public boolean isHasMatch() {
+		return hasMatch;
+	}
+
+	public void setHasMatch(boolean hasMatch) {
+		this.hasMatch = hasMatch;
+	}
+
+	
 }
