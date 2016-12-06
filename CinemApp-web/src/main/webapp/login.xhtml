@@ -8,6 +8,9 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
+    <f:metadata>
+    	<f:viewAction action="#{login.redirectIfAlreadyLoggedIn}"/>
+    </f:metadata>
     </h:head>
     <h:body style="padding-top: 60px; background-color: #add;">
         <b:container>
