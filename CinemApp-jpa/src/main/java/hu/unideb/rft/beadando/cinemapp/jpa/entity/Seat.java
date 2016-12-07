@@ -52,12 +52,15 @@ public class Seat extends BaseId {
 	        return false;
 
 	   Seat seat = (Seat) obj;
-	   if(!(getSeatRow().equals(seat.getSeatRow())) || !(getSeatColumn().equals(seat.getSeatColumn())) )
+	   if( !getId().equals(seat.getId()) )
 	       return false;
 
 	   return true;
 	}
-	
-	
 
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return getId().intValue();
+	}
 }

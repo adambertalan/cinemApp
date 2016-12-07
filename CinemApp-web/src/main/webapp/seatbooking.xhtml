@@ -45,9 +45,9 @@
 												<ui:repeat value="#{seatList}" var="seat">
 													<td><b:commandButton
 															value="(#{seat.seatRow},#{seat.seatColumn})"
-															style="background-color: #{bookSeatBean.occupiedSeats.contains(seat) ? bookSeatBean.selectedSeats.contains(seat) ? 'orange' : 'red' : 'green'};"
+															style="background-color: #{bookSeatBean.occupiedSeats.contains(seat) ? bookSeatBean.mySeatSet.contains(seat) ? 'orange' : 'red' : 'green'};"
 															immediate="true"
-															onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send(theatreId, movieShowId,#{seat.id}, #{!bookSeatBean.selectedSeats.contains(seat)});"
+															onclick="ajax:bookSeatBean.occupyOrFree(seat.seatRow, seat.seatColumn);javascript:send(theatreId, movieShowId,#{seat.id}, #{!bookSeatBean.mySeatSet.contains(seat)});"
 															ajax="true" update="@form" /></td>
 												</ui:repeat>
 											</tr>

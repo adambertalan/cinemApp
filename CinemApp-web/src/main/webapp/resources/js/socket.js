@@ -3,9 +3,6 @@ var webSocket;
 		// runs openSocket() on page load
 		window.onload = openSocket;
 		
-		var oldTheatreId;
-		var oldMovieShowId;
-		
 		var movieShowId = Number(getURLParameter("movieShowId"));
 		var theatreId = Number(getURLParameter("theatreId"));
 		
@@ -22,9 +19,6 @@ var webSocket;
 				$('.modalPseudoClass').modal();
 				return;
 			}
-			
-			oldTheatreId = theatreId;
-			oldMovieShowId = movieShowId;
 			
 			// Ensures only one connection is open at a time
 			if (webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED) {
