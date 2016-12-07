@@ -15,22 +15,22 @@
                     <b:container styleClass="content" id="adminPageContainer">
                         <b:tabView contentStyle="border-right: 1px solid #ddd;border-left: 1px solid #ddd;border-bottom: 1px solid #ddd;padding:10px;background: white;">
                             <b:tab title="Film műveletek">
-                                <ui:include src="/movieOperations.xhtml" />
+                                <ui:include src="/secured/movieOperations.xhtml" />
                             </b:tab>
                             <b:tab title="Vetítés műveletek">
-                                <ui:include src="/movieShowOperations.xhtml" />
+                                <ui:include src="/secured/movieShowOperations.xhtml" />
                             </b:tab>
                             <b:tab title="Műfaj műveletek" >
-                                <ui:include src="/genreOperations.xhtml" />
+                                <ui:include src="/secured/genreOperations.xhtml" />
                             </b:tab>
                             <b:tab title="Kupon műveletek" class="tab">
-                                <ui:include src="/cuponOperations.xhtml"/>
+                                <ui:include src="/secured/cuponOperations.xhtml"/>
                             </b:tab>
                             <b:tab title="Foglalás műveletek">
-                                <ui:include src="/appointmentOperations.xhtml"/>
+                                <ui:include src="/secured/appointmentOperations.xhtml"/>
                             </b:tab>
                             <b:tab title="Vendég karbantartó">
-                                <ui:include src="/guestOperations.xhtml"/>
+                                <ui:include src="/secured/guestOperations.xhtml"/>
                             </b:tab>
                         </b:tabView>
                     </b:container>
