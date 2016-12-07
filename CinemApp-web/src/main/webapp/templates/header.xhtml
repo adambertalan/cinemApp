@@ -42,11 +42,11 @@
 	
 				<h:form styleClass="navbar-form navbar-right" style="padding-left: 2px;padding-right: 2px;" rendered="#{!login.loggedIn}">
 					<b:commandButton action="#{navigationController.processLogin}"
-						value="Login" look="success" icon="chevron-right" iconAlign="right" />
+						value="Bejelentkezés" look="success" icon="chevron-right" iconAlign="right" />
 				</h:form>
 				<h:form styleClass="navbar-form navbar-right" style="padding-left: 2px;padding-right: 2px;"
 					rendered="#{login.loggedIn}">
-					<b:commandButton action="#{login.logout}" value="Logout"
+					<b:commandButton action="#{login.logout}" value="Kijelentkezés"
 						look="success" icon="chevron-right" iconAlign="right" />
 				</h:form>
 			</b:navBar>

@@ -15,20 +15,19 @@
     <h:body style="padding-top: 60px; background-color: #add;">
         <b:container>
             <h:form styleClass="form-signin" prependId="false" rendered="#{!login.loggedIn}">
-                <h2 class="form-signin-heading">Please sign in</h2>
-                <b:inputText id="username" placeholder="username" value="#{login.username}">
+                <h2 class="form-signin-heading">Kérem jelentkezzen be</h2>
+                <b:inputText id="username" placeholder="felhasználónév" value="#{login.username}">
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
                 </b:inputText>
-                <b:inputText id="password" placeholder="password" type="password" value="#{login.password}">
+                <b:inputText id="password" placeholder="jelszó" type="password" value="#{login.password}">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>
                 </b:inputText>
                 <b:message for="password"/>
-                <b:selectBooleanCheckbox value="true" caption="remember me"/>
-                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Sign in" icon="log-in"/>
+                <b:commandButton look="primary btn-block" action="#{login.loginUser}" value="Bejelentkezés" icon="log-in"/>
                 <b:commandButton value="Vissza" look ="primary btn-block" action="#{login.backToIndex}"/>
             </h:form>
             <h:form styleClass="form-signin" prependId="false" rendered="#{login.loggedIn}">

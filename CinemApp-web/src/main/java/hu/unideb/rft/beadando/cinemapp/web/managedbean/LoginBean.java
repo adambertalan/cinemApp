@@ -86,7 +86,7 @@ public class LoginBean{
 			
 			loggedIn = false;
 			FacesContext fCtx = FacesContext.getCurrentInstance();
-			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Incorrect username or password!", "Your login skills are bad so you should feel bad..");
+			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Helytelen felhasználónév vagy jelszó", "Gyakorolj szépen és menni fog!");
 			fCtx.addMessage("password", fm);
 			return "login";
 		}
