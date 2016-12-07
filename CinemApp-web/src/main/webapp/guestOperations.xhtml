@@ -35,7 +35,7 @@
 			<h:form id="guestInfoForm">
 				<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
 					<b:row>
-						<b:column medium-screen="4">
+						<b:column style="white-space: pre;" medium-screen="4">
 							<h:outputLabel value="Filmcím: " />
 							<h:outputText value="#{appointment.movieShow.movie.name}" />
 							<br />
@@ -47,7 +47,7 @@
 							<h:outputText
 								value="#{guestBean.format(appointment.movieShow.endTime)}" />
 						</b:column>
-						<b:column medium-screen="4">
+						<b:column style="white-space: pre;" medium-screen="4">
 							<h:outputLabel value="Foglalt helyek: (sor,oszlop)" />
 							<br />
 							<ui:repeat var="seat" value="#{appointment.seats}">
@@ -55,7 +55,7 @@
 								<br />
 							</ui:repeat>
 						</b:column>
-						<b:column medium-screen="4">
+						<b:column style="white-space: pre;" medium-screen="4">
 							<c:if test="#{guestBean.selectedGuest.cupon != null}">
 								<h:outputLabel value="Kupon:" />
 								<br />
