@@ -27,8 +27,6 @@ public class MovieShowBean {
 
 	private String startDate;
 
-	private String startTimePrinted;
-	private String endTimePrinted;
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private Long movieId;
@@ -83,12 +81,11 @@ public class MovieShowBean {
 	}
 
 	private void clearFields() {
-		this.startTimePrinted = null;
-		this.endTimePrinted = null;
 		this.startTime = null;
 		this.endTime = null;
 		this.movieId = 1L;
 		this.theatreId = 1L;
+		this.startDate = null;
 	}
 
 	private void addNewMovieShow() {
@@ -200,22 +197,6 @@ public class MovieShowBean {
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
-	}
-
-	public String getStartTimePrinted() {
-		return startTimePrinted;
-	}
-
-	public void setStartTimePrinted(String startTimePrinted) {
-		this.startTimePrinted = startTimePrinted;
-	}
-
-	public String getEndTimePrinted() {
-		return endTimePrinted;
-	}
-
-	public void setEndTimePrinted(String endTimePrinted) {
-		this.endTimePrinted = endTimePrinted;
 	}
 
 }
