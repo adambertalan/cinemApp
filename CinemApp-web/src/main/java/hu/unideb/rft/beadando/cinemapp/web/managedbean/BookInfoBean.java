@@ -65,13 +65,17 @@ public class BookInfoBean {
     }
     
     public String getStartString(){
-        return start.getMonth().name() + " " + start.getDayOfMonth() + ". " + start.getHour()+":"+start.getMinute();
+        return start.getMonth().name() + " " + start.getDayOfMonth() + ". " + getMinute(start.getMinute());
     }
     
     public String getEndString(){
-        return end.getMonth().name() + " " + end.getDayOfMonth() + ". " + end.getHour()+":"+end.getMinute();
+        return end.getMonth().name() + " " + end.getDayOfMonth() + ". " + end.getHour()+":"+getMinute(end.getMinute());
     }
 
+    private String getMinute(int minute){
+    	return (minute < 10)?"0"+minute:""+minute;
+    }
+    
     public LocalDateTime getStart() {
         return start;
     }
