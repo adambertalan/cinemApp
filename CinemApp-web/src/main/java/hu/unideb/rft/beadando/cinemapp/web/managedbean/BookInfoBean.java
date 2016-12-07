@@ -65,7 +65,8 @@ public class BookInfoBean {
     }
     
     public String getStartString(){
-        return start.getMonth().name() + " " + start.getDayOfMonth() + ". " + getMinute(start.getMinute());
+    	String minute = (start.getMinute() < 10)?"0"+start.getMinute():""+start.getMinute();
+        return start.getMonth().name() + " " + start.getDayOfMonth() + ". " + start.getHour()+":"+getMinute(start.getMinute());
     }
     
     public String getEndString(){
