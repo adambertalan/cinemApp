@@ -15,16 +15,16 @@
 			singleSelectionListener="#{guestBean}"
 			ajaxDisableRenderRegionsOnRequest="true" rendered="true">
 			<f:ajax render="formId:selectedRow" />
-			<butter:column id="column1" label="Name">
+			<butter:column id="column1" label="Név">
                       #{guest.name}
             </butter:column>
 			<butter:column id="column2" label="Email">
                       #{guest.email}
             </butter:column>
-			<butter:column id="column3" label="Phone number">
+			<butter:column id="column3" label="Telefonszám">
                       #{guest.phoneNumber}
             </butter:column>
-			<butter:column id="column4" label="Zip code">
+			<butter:column id="column4" label="Irányítószám">
                       #{guest.zip}
             </butter:column>
 		</butter:table>
