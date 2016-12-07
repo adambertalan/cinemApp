@@ -57,6 +57,10 @@ public class EmailSenderBean implements Serializable {
         } else {
             System.out.println("Email not valid!");
         }
+        this.guestName = null;
+        this.guestEmail = null;
+        this.guestSubject = null;
+        this.guestMessage = null;
     }
 
     public boolean isValidEmail(String address) {
