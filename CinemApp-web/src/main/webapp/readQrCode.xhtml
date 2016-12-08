@@ -22,6 +22,7 @@
 
 					<c:if test="#{!readQRBean.valid}">
 						<h1 style="color: white;">Ismeretlen QR kód!</h1>
+						<h:graphicImage library="images" style="display: block; margin: 0 auto;" name="qr-code.png" />
 					</c:if>
 
 					<c:if test="#{readQRBean.valid}">

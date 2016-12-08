@@ -125,6 +125,7 @@ public class ReadQRBean {
 		if( !movie.getId().equals(movieId) || !guest.getId().equals(guestId) || !appointment.getId().equals(appointmentId)
 				|| !movieShow.getId().equals(movieShowId) || ( cupon != null && cuponId != null && !cupon.getId().equals(cuponId)) ){
 			valid = false;
+			System.out.println("invalid");
 			return;
 		}
 		
@@ -137,8 +138,9 @@ public class ReadQRBean {
 		Timestamp endTime = movieShow.getEndTime();
 		showEnd = sdf.format(endTime);
 		
+		System.out.println(cuponId);
 		
-		if( cupon != null ){
+		if( cupon != null && cupon.getId().equals(cuponId) ){
 			setCuponValidFrom(sdf.format(cupon.getStartOfValidity()));
 			setCuponValidTo(sdf.format(cupon.getEndOfValidity()));
 			Long now = System.currentTimeMillis();
@@ -147,6 +149,8 @@ public class ReadQRBean {
 			} else {
 				cuponUsable = false;
 			}
+		} else {
+			cupon = null;
 		}
 
 	}
