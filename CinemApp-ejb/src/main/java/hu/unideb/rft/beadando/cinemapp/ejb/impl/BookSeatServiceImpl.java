@@ -95,6 +95,7 @@ public class BookSeatServiceImpl implements BookSeatService {
 			guest.setName(guestName);
 			guest.setPhoneNumber(guestPhone);
 			guest.setZip(guestZip);
+			guest.setUsedCupon(false);
 			guestRepository.save(guest);
 		}
 		

@@ -38,7 +38,6 @@ public class CuponServiceImpl implements CuponService {
 		cupon.setStartOfValidity(startOfValidity);
 		cupon.setEndOfValidity(endOfValidity);
 		cupon.setType(cuponType);
-		cupon.setUsed(false);
 		cuponRepository.save(cupon);
 		
 		return cupon;
@@ -61,6 +60,11 @@ public class CuponServiceImpl implements CuponService {
 			cuponTypes.add(ct);
 		}
 		return cuponTypes;
+	}
+
+	@Override
+	public List<Cupon> findAllValidCupons() {
+		return cuponRepository.findAllValidCupons();
 	}
 
 }

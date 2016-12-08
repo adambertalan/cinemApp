@@ -12,8 +12,6 @@ public class Cupon extends BaseName {
 	@Enumerated(EnumType.STRING)
     private CuponType type;
     
-    private boolean used;
-    
     private Timestamp startOfValidity;
     
     private Timestamp endOfValidity;
@@ -24,14 +22,6 @@ public class Cupon extends BaseName {
 
     public void setType(CuponType type) {
         this.type = type;
-    }
-
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
     }
 
 	public Timestamp getStartOfValidity() {

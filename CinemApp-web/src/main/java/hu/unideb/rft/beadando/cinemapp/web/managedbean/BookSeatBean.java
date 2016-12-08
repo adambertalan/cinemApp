@@ -20,6 +20,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
@@ -356,22 +357,31 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 						counter++;
 					}
 				}
+				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 
-				if (counter % 3 == 0) {
-					List<Cupon> cupons = this.cuponService.findAllCupon();
+				List<Cupon> cupons = this.cuponService.findAllValidCupons();
+				System.out.println("REQUEST");
+				System.out.println(ec.getRequestServerName()+ ":" +ec.getRequestServerPort() + ec.getApplicationContextPath());
+				if (counter % 3 == 0 && (appointment.getGuest().getCupon() == null || appointment.getGuest().getUsedCupon()) && !cupons.isEmpty()) {
 					Cupon selectedCupon = cupons.get(new Random().nextInt(cupons.size()));
-					this.emailBean.setQrText("id:" + appointment.getId() + "guest:" + appointment.getGuest().getName()
-							+ "movieshowid:" + appointment.getMovieShow().getId() + "movie:"
-							+ appointment.getMovieShow().getMovie().getName() + "cupon:" + selectedCupon.getName());
+					
+					this.emailBean.setQrText("http://"+ec.getRequestServerName()+ ":" +ec.getRequestServerPort() + ec.getApplicationContextPath()+"/readQrCode.xhtml?"
+							+ "appointmentId=" + appointment.getId() 
+							+ "&guestId=" + appointment.getGuest().getId()
+							+ "&movieshowId=" + appointment.getMovieShow().getId() 
+							+ "&movieId=" + appointment.getMovieShow().getMovie().getId() 
+							+ "&cuponId=" + selectedCupon.getId());
 					this.emailBean.setTypeOfTheEmail("afterthreebook");
 					appointment.getGuest().setCupon(selectedCupon);
+					appointment.getGuest().setUsedCupon(false);
 					// save guest;
 					this.guestService.saveGuest(appointment.getGuest());
-					
 				} else {
-					this.emailBean.setQrText("id:" + appointment.getId() + "guest:" + appointment.getGuest().getName()
-							+ "movieshowid:" + appointment.getMovieShow().getId() + "movie:"
-							+ appointment.getMovieShow().getMovie().getName());
+					this.emailBean.setQrText("http://"+ec.getRequestServerName()+ ":" +ec.getRequestServerPort() + ec.getApplicationContextPath()+"/readQrCode.xhtml?" 
+							+ "appointmentId=" + appointment.getId() 
+							+ "&guestId=" + appointment.getGuest().getId()
+							+ "&movieshowId=" + appointment.getMovieShow().getId() 
+							+ "&movieId=" + appointment.getMovieShow().getMovie().getId());
 				}
 
 				this.emailBean.sendEmail();

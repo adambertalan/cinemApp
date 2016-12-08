@@ -47,7 +47,7 @@ public class EmailSenderBean implements Serializable {
         if (typeParam != null) {
             setTypeOfTheEmail(typeParam);
             if (typeParam.equals("contacts")) {
-                setAddress("cinemapp.fft@yahoo.com");
+                setAddress("cinemapp.fft@gmail.com");
             }
         }
         

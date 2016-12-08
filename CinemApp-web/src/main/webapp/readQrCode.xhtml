@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="appointmentId" value="#{readQRBean.appointmentId}" />
+	<f:viewParam name="guestId" value="#{readQRBean.guestId}" />
+	<f:viewParam name="movieshowId" value="#{readQRBean.movieShowId}" />
+	<f:viewParam name="movieId" value="#{readQRBean.movieId}" />
+	<f:viewParam name="cuponId" value="#{readQRBean.cuponId}" />
+</f:metadata>
+
+<h:body styleClass="bodystyle">
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<b:jumbotron styleClass="content">
+				<b:container styleClass="content">
+
+					<c:if test="#{!readQRBean.valid}">
+						<h1 style="color: white;">Ismeretlen QR kód!</h1>
+					</c:if>
+
+					<c:if test="#{readQRBean.valid}">
+						<h1 style="color: white;">Foglalás információk</h1>
+						<b:well>
+							<b:row>
+								<b:column mediumScreen="4">
+									<h:outputLabel value="Vendég neve:" /> #{readQRBean.guest.name} <br />
+									<h:outputLabel value="Film neve:" /> #{readQRBean.movie.name} <br />
+									<h:outputLabel value="Film kezdés időpontja:" /> #{readQRBean.showStart} <br />
+									<h:outputLabel value="Film vége:" /> #{readQRBean.showEnd} <br />
+									<h:outputLabel value="Terem szám:" /> #{readQRBean.theatre.theatreNumber} <br />
+								</b:column>
+								<b:column mediumScreen="4">
+									<h:outputLabel value="Foglalt ülőhelyek:" />
+									<br />
+									<ui:repeat var="seat" value="#{readQRBean.seats}">
+										<h:outputText value="(#{seat.seatRow},#{seat.seatColumn})" />
+										<br />
+									</ui:repeat>
+								</b:column>
+								<b:column mediumScreen="4">
+									<c:if test="#{readQRBean.cupon != null}">
+										<h:outputLabel value="Kupon:" /> #{readQRBean.cupon.name} <br />
+										<h:outputLabel value="Kupon érvényesség:" />
+										<br /> 
+										#{readQRBean.cuponValidFrom} - #{readQRBean.cuponValidTo} <br />
+										<h:outputLabel value="Felhasználható:" /> #{readQRBean.cuponUsable ? "Igen" : "Nem"} <br />
+									</c:if>
+									<c:if test="#{readQRBean.cuponUsable}">
+										<h:form>
+											<b:commandButton icon-awesome="percent"
+												value="Kupon érvényesítés!" action="#{readQRBean.useCupon}" />
+										</h:form>
+									</c:if>
+								</b:column>
+							</b:row>
+						</b:well>
+					</c:if>
+				</b:container>
+			</b:jumbotron>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+

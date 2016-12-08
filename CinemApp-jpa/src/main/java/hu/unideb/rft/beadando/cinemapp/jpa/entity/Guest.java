@@ -16,6 +16,8 @@ public class Guest extends BaseName {
     
     @ManyToOne(fetch=FetchType.EAGER)
     private Cupon cupon;
+    
+    private Boolean usedCupon;
 
     public String getEmail() {
         return email;
@@ -47,5 +49,13 @@ public class Guest extends BaseName {
 
 	public void setCupon(Cupon cupon) {
 		this.cupon = cupon;
+	}
+
+	public Boolean getUsedCupon() {
+		return usedCupon;
+	}
+
+	public void setUsedCupon(Boolean usedCupon) {
+		this.usedCupon = usedCupon;
 	}
 }

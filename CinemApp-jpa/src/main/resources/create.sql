@@ -426,21 +426,21 @@ INSERT INTO public.movie(id, name, agelimit, image, description, length, movieco
 
 -- Vendégek
 
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id) VALUES (1, 'Teszt Elek', 'teszt.elek@TSTmail.com', '06204342543', '4440', null);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id) VALUES (2, 'Lenovo Laptop', 'laptop.lenov@TST.hu', '06204332143', '4210', null);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id) VALUES (3, 'Kiss Béla', 'belavagyok@TSTmail.com', '06304344543', '1240', null);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id) VALUES (4, 'Joó Evelin', 'evelin121@TSTmail.hu', '06704242546', '3240', null);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id) VALUES (5, 'Hack Klára', 'tenminuteemail@TSTmail.net', '06203432432', '1130', null);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (1, 'Teszt Elek', 'teszt.elek@TSTmail.com', '06204342543', '4440', false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (2, 'Lenovo Laptop', 'laptop.lenov@TST.hu', '06204332143', '4210', false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (3, 'Kiss Béla', 'belavagyok@TSTmail.com', '06304344543', '1240', false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (4, 'Joó Evelin', 'evelin121@TSTmail.hu', '06704242546', '3240', false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (5, 'Hack Klára', 'tenminuteemail@TSTmail.net', '06203432432', '1130', false);
 
 -- Kuponok
 
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (1, 'Ingyen kóla', '2017-12-12', '2016-01-02', 'FREE_ITEM', false);
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (2, 'Ajándék Popcorn', '2017-12-12', '2016-01-02', 'GIFT', false);
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (3, '3 jegy esetén 1 ingyenes', '2017-12-12', '2016-01-02', 'OFFER', false);
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (4, 'Ajándék karkötő', '2017-12-12', '2016-01-02', 'GIFT', false);
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (5, 'Ingyen előadás', '2017-12-12', '2016-01-02', 'OFFER', false);
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (6, '500 Ft kedvezmény', '2017-12-12', '2016-01-02', 'DISCOUNT', false);
-INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type, used) VALUES (7, '1000 Ft kedvezmény', '2017-12-12', '2016-01-02', 'DISCOUNT', false);
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (1, 'Ingyen kóla', '2017-12-12', '2016-01-02', 'FREE_ITEM');
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (2, 'Ajándék Popcorn', '2017-12-12', '2016-01-02', 'GIFT');
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (3, '3 jegy esetén 1 ingyenes', '2017-12-12', '2016-01-02', 'OFFER');
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (4, 'Ajándék karkötő', '2017-12-12', '2016-01-02', 'GIFT');
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (5, 'Ingyen előadás', '2017-12-12', '2016-01-02', 'OFFER');
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (6, '500 Ft kedvezmény', '2017-12-12', '2016-01-02', 'DISCOUNT');
+INSERT INTO public.cupon(id, name, endofvalidity, startofvalidity, type) VALUES (7, '1000 Ft kedvezmény', '2017-12-12', '2016-01-02', 'DISCOUNT');
 
 -- Vetítések
 

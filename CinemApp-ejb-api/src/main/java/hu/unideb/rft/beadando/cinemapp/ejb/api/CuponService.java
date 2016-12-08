@@ -12,6 +12,8 @@ import hu.unideb.rft.beadando.cinemapp.jpa.repository.CuponRepository;
 @Local
 public interface CuponService {
 
+	public List<Cupon> findAllValidCupons();
+	
 	public List<Cupon> findAllCupon();
 	
 	public Cupon createCupon(String name, Timestamp startOfValidity, Timestamp endOfValidity, CuponType cuponType);
