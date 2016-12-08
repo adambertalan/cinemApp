@@ -41,4 +41,9 @@ public class GuestServiceImpl implements GuestService {
 		return guest;
 	}
 
+	@Override
+	public void saveGuest(Guest guest) {
+		this.guestRepository.save(guest);
+	}
+
 }

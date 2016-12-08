@@ -29,6 +29,7 @@ import org.omnifaces.util.Faces;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.AppointmentService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.BookSeatService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.CuponService;
+import hu.unideb.rft.beadando.cinemapp.ejb.api.GuestService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.MovieShowService;
 import hu.unideb.rft.beadando.cinemapp.ejb.api.TheatreService;
 import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
@@ -57,6 +58,9 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 
 	@EJB
 	private CuponService cuponService;
+	
+	@EJB
+	private GuestService guestService;
 
 	private String guestName;
 	private String guestPhone;
@@ -360,6 +364,10 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 							+ "movieshowid:" + appointment.getMovieShow().getId() + "movie:"
 							+ appointment.getMovieShow().getMovie().getName() + "cupon:" + selectedCupon.getName());
 					this.emailBean.setTypeOfTheEmail("afterthreebook");
+					appointment.getGuest().setCupon(selectedCupon);
+					// save guest;
+					this.guestService.saveGuest(appointment.getGuest());
+					
 				} else {
 					this.emailBean.setQrText("id:" + appointment.getId() + "guest:" + appointment.getGuest().getName()
 							+ "movieshowid:" + appointment.getMovieShow().getId() + "movie:"
