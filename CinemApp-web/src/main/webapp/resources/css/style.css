@@ -142,7 +142,7 @@ h1{
     max-height: 500px;
 }
 #customScrollUp{
-	 background-image: url("#{resource['images:scrollup.png']}");
+	 background: url("#{resource['images:scrollup.png']}") 0 0/100% 100%;
     bottom: 65px;
     right: 18px;
     width: 40px; /* width of the custom image */
