@@ -33,49 +33,40 @@
 				<h3>#{guestBean.selectedGuest.name} adatai:</h3>
 			</c:if>
 			<h:form id="guestInfoForm">
-			<b:row>
-				<b:column medium-screen="8">
-				<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
-					<b:row>
-						<b:column style="white-space: pre;" medium-screen="4">
-							<h:outputLabel value="Filmcím: " />
-							<h:outputText value="#{appointment.movieShow.movie.name}" />
+				<b:row>
+					<b:column medium-screen="8">
+						<ui:repeat var="appointment" value="#{guestBean.guestAppointments}">
+							<b:row>
+								<b:column style="white-space: pre;" medium-screen="4" >
+									<h:outputLabel value="Filmcím: " /> #{appointment.movieShow.movie.name}
+									<br />
+									<h:outputLabel value="Kezdés: " /> #{guestBean.format(appointment.movieShow.startTime)}
+									<br />
+									<h:outputLabel value="Vége: " /> #{guestBean.format(appointment.movieShow.endTime)}
+								</b:column>
+								<b:column style="white-space: pre; float: right;" medium-screen="4">
+									<h:outputLabel value="Foglalt helyek: (sor,oszlop)" /> <br />
+									<ui:repeat var="seat" value="#{appointment.seats}">
+										<h:outputText value="(#{seat.seatRow},#{seat.seatColumn})" />  <br />
+									</ui:repeat>
+								</b:column>
+							</b:row>
 							<br />
-							<h:outputLabel value="Kezdés: " />
-							<h:outputText
-								value="#{guestBean.format(appointment.movieShow.startTime)}" />
+						</ui:repeat>
+					</b:column>
+					<b:column medium-screen="4">
+
+						<c:if test="#{guestBean.selectedGuest.cupon != null}">
+							<h:outputLabel value="Kupon:" />
 							<br />
-							<h:outputLabel value="Vége: " />
-							<h:outputText
-								value="#{guestBean.format(appointment.movieShow.endTime)}" />
-						</b:column>
-						<b:column style="white-space: pre;" medium-screen="4">
-							<h:outputLabel value="Foglalt helyek: (sor,oszlop)" />
-							<br />
-							<ui:repeat var="seat" value="#{appointment.seats}">
-								<h:outputText value="(#{seat.seatRow},#{seat.seatColumn})" />
+								#{guestBean.selectedGuest.cupon.name}
 								<br />
-							</ui:repeat>
-						</b:column>
-					</b:row>
-					<br />
-				</ui:repeat>
-				</b:column>
-				<b:column medium-screen="4">
-				
-							<c:if test="#{guestBean.selectedGuest.cupon != null}">
-								<h:outputLabel value="Kupon:" />
+								#{guestBean.selectedGuest.cupon.used ? 'Felhasználva' : 'Felhasználható'}
 								<br />
-								<h:outputText value="#{guestBean.selectedGuest.cupon.name}" />
-								<br />
-								<h:outputText
-									value="#{guestBean.selectedGuest.cupon.used ? 'Felhasználva' : 'Felhasználható'}" />
-								<br />
-								<h:outputText
-									value="Érvényes #{guestBean.format(guestBean.selectedGuest.cupon.startOfValidity)} - #{guestBean.format(guestBean.selectedGuest.cupon.endOfValidity)}" />
+								Érvényes #{guestBean.format(guestBean.selectedGuest.cupon.startOfValidity)} - #{guestBean.format(guestBean.selectedGuest.cupon.endOfValidity)}
 							</c:if>
-				
-				</b:column>
+
+					</b:column>
 				</b:row>
 			</h:form>
 		</b:well>

@@ -11,7 +11,6 @@
 	<f:viewParam name="guestId" value="#{readQRBean.guestId}" />
 	<f:viewParam name="movieshowId" value="#{readQRBean.movieShowId}" />
 	<f:viewParam name="movieId" value="#{readQRBean.movieId}" />
-	<f:viewParam name="cuponId" value="#{readQRBean.cuponId}" />
 </f:metadata>
 
 <h:body styleClass="bodystyle">
@@ -51,6 +50,9 @@
 										<br /> 
 										#{readQRBean.cuponValidFrom} - #{readQRBean.cuponValidTo} <br />
 										<h:outputLabel value="Felhasználható:" /> #{readQRBean.cuponUsable ? "Igen" : "Nem"} <br />
+									</c:if>
+									<c:if test="#{readQRBean.cupon == null}">
+										<h:outputLabel value="Kupon:" /> Nincs <br />
 									</c:if>
 									<c:if test="#{readQRBean.cuponUsable}">
 										<h:form>
