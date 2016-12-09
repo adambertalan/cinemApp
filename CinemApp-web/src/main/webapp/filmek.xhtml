@@ -32,6 +32,10 @@
                                                             <f:param name="movieCode" value="#{movie.movieCode}"/>
                                                             <h2>#{movie.name}</h2>
                                                         </h:commandLink>
+                                                        <h:outputText value="Értékelés: "/>
+                                                        <h:outputText value="#{movie.rating}">
+                                                        	<f:convertNumber maxFractionDigits="1" minFractionDigits="1"/>
+                                                        </h:outputText>
                                                         <p style="margin-top: 10px; text-align: justify;">#{movie.description}</p>
                                                         <h:commandLink style="float: left" action="#{movieShowSelectorBean.processMovieShowSelector}">
                                                             <f:param name="movieCode" value="#{movie.movieCode}"/>
