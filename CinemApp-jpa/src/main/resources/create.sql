@@ -426,11 +426,11 @@ INSERT INTO public.movie(id, name, agelimit, image, description, length, movieco
 
 -- Vendégek
 
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (1, 'Teszt Elek', 'teszt.elek@TSTmail.com', '06204342543', '4440', false);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (2, 'Lenovo Laptop', 'laptop.lenov@TST.hu', '06204332143', '4210', false);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (3, 'Kiss Béla', 'belavagyok@TSTmail.com', '06304344543', '1240', false);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (4, 'Joó Evelin', 'evelin121@TSTmail.hu', '06704242546', '3240', false);
-INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (5, 'Hack Klára', 'tenminuteemail@TSTmail.net', '06203432432', '1130', false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (1, 'Teszt Elek', 'teszt.elek@TSTmail.com', '06204342543', '4440', null, false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (2, 'Lenovo Laptop', 'laptop.lenov@TST.hu', '06204332143', '4210', null, false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (3, 'Kiss Béla', 'belavagyok@TSTmail.com', '06304344543', '1240', null, false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (4, 'Joó Evelin', 'evelin121@TSTmail.hu', '06704242546', '3240', null, false);
+INSERT INTO public.guest( id, name, email, phonenumber, zip, cupon_id, usedcupon) VALUES (5, 'Hack Klára', 'tenminuteemail@TSTmail.net', '06203432432', '1130', null, false);
 
 -- Kuponok
 

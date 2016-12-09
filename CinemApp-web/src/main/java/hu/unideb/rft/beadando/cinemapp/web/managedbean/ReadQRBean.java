@@ -38,7 +38,7 @@ public class ReadQRBean {
 	private Long guestId;
 	private Long movieShowId;
 	private Long movieId;
-	private Long cuponId;
+//	private Long cuponId;
 	
 	private Movie movie;
 	private Theatre theatre;
@@ -80,14 +80,14 @@ public class ReadQRBean {
 		String movieShowIdText = Faces.getRequestParameter("movieshowId");
 		String movieIdText = Faces.getRequestParameter("movieId");
 		
-		String cuponIdText = Faces.getRequestParameter("cuponId");
+//		String cuponIdText = Faces.getRequestParameter("cuponId");
 		
 		
 		System.out.println("appointmentId " + appointmentIdText);
 		System.out.println("guestId " + guestIdText);
 		System.out.println("movieShowId " + movieShowIdText);
 		System.out.println("movieId " + movieIdText);
-		System.out.println("cuponId " + cuponIdText);
+//		System.out.println("cuponId " + cuponIdText);
 		
 		if( isNullOrNan(appointmentIdText) || isNullOrNan(guestIdText) || isNullOrNan(movieShowIdText) || isNullOrNan(movieIdText) ){
 			valid = false;
@@ -100,11 +100,11 @@ public class ReadQRBean {
 		movieShowId = Long.parseLong(movieShowIdText);
 		movieId = Long.parseLong(movieIdText);
 		
-		try {
-			cuponId = Long.parseLong(cuponIdText);	
-		} catch( NumberFormatException nfe ){
-			cuponId = null;
-		}
+//		try {
+//			cuponId = Long.parseLong(cuponIdText);	
+//		} catch( NumberFormatException nfe ){
+//			cuponId = null;
+//		}
 		
 		
 		Appointment appointment = this.appointmentService.findAppointmentById(appointmentId);
@@ -123,7 +123,7 @@ public class ReadQRBean {
 		cupon = guest.getCupon();
 		
 		if( !movie.getId().equals(movieId) || !guest.getId().equals(guestId) || !appointment.getId().equals(appointmentId)
-				|| !movieShow.getId().equals(movieShowId) || ( cupon != null && cuponId != null && !cupon.getId().equals(cuponId)) ){
+				|| !movieShow.getId().equals(movieShowId) ){
 			valid = false;
 			System.out.println("invalid");
 			return;
@@ -138,9 +138,9 @@ public class ReadQRBean {
 		Timestamp endTime = movieShow.getEndTime();
 		showEnd = sdf.format(endTime);
 		
-		System.out.println(cuponId);
+//		System.out.println(cuponId);
 		
-		if( cupon != null && cupon.getId().equals(cuponId) ){
+		if( cupon != null ){
 			setCuponValidFrom(sdf.format(cupon.getStartOfValidity()));
 			setCuponValidTo(sdf.format(cupon.getEndOfValidity()));
 			Long now = System.currentTimeMillis();
@@ -149,8 +149,6 @@ public class ReadQRBean {
 			} else {
 				cuponUsable = false;
 			}
-		} else {
-			cupon = null;
 		}
 
 	}
@@ -179,13 +177,13 @@ public class ReadQRBean {
 		this.movieId = movieId;
 	}
 
-	public Long getCuponId() {
-		return cuponId;
-	}
-
-	public void setCuponId(Long cuponId) {
-		this.cuponId = cuponId;
-	}
+//	public Long getCuponId() {
+//		return cuponId;
+//	}
+//
+//	public void setCuponId(Long cuponId) {
+//		this.cuponId = cuponId;
+//	}
 
 	public Boolean getValid() {
 		return valid;

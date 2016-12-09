@@ -369,8 +369,8 @@ public class BookSeatBean implements Serializable, HttpSessionBindingListener {
 							+ "appointmentId=" + appointment.getId() 
 							+ "&guestId=" + appointment.getGuest().getId()
 							+ "&movieshowId=" + appointment.getMovieShow().getId() 
-							+ "&movieId=" + appointment.getMovieShow().getMovie().getId() 
-							+ "&cuponId=" + selectedCupon.getId());
+							+ "&movieId=" + appointment.getMovieShow().getMovie().getId());
+//							+ "&cuponId=" + selectedCupon.getId());
 					this.emailBean.setTypeOfTheEmail("afterthreebook");
 					appointment.getGuest().setCupon(selectedCupon);
 					appointment.getGuest().setUsedCupon(false);
