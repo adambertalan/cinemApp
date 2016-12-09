@@ -11,7 +11,7 @@ public class Movie extends BaseName {
    
     private Double rating;
     
-    private Integer rateCounter;
+    private Integer rateCounter = 0;
     
     private String movieCode;
     
