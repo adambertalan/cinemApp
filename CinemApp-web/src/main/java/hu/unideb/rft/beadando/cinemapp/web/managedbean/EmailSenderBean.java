@@ -35,7 +35,7 @@ public class EmailSenderBean implements Serializable {
     String guestMessage;
 
     String typeOfTheEmail;
-    
+
     Appointment appointment;
 
     public void init() {
@@ -54,7 +54,7 @@ public class EmailSenderBean implements Serializable {
                 setAddress("cinemapp.fft@gmail.com");
             }
         }
-        
+
         // Email cím helyeységének ellenőrzése
         if (isValidEmail(address)) {
             emailService.sendEmail(address, typeOfTheEmail, guestName, guestMessage, guestEmail, guestSubject, qrText, appointment);

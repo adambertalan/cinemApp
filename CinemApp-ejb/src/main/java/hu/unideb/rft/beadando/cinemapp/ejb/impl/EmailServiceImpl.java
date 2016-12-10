@@ -21,6 +21,9 @@ import javax.transaction.Transactional.TxType;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.EmailService;
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
+
+import java.sql.Timestamp;
 
 @Stateless
 @Transactional(value = TxType.REQUIRED)
@@ -29,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendEmail(String toEmailAddress, String type, String guestName, String guestMessage, String guestEmail,
-            String guestSubject, String qrText) {
+            String guestSubject, String qrText, Appointment appointment) {
 
         if (type == null) {
             type = "";
@@ -41,6 +44,7 @@ public class EmailServiceImpl implements EmailService {
         String footerContent = "";
         String greeting = "";
         String imageContent = "";
+        String startTime = "";
 
         final String fromEmail = "cinemapp.fft@gmail.com";
         final String username = "cinemapp.fft@gmail.com";
@@ -55,7 +59,7 @@ public class EmailServiceImpl implements EmailService {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-        
+
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -198,8 +202,11 @@ public class EmailServiceImpl implements EmailService {
                     break;
 
                 case "afterbook":
+                    startTime = appointment.getMovieShow().getStartTime().toString();
+                    startTime = startTime.substring(0, startTime.length() - 1 - 5);
                     // QR kód feletti szöveg részlet.
-                    aboveQrText = "Foglalását megerősítettük. Jegyét a QR kód felmutatása után vásárolhatja meg a pénztárnál.\n";
+                    aboveQrText = "Foglalását megerősítettük. Jegyét a QR kód felmutatása után vásárolhatja meg a pénztárnál.<br/><br/>"
+                            + "<p style=\"text-align: center;\"><b>" + appointment.getMovieShow().getMovie().getName() + "</b><br/>Kezdés: " + startTime + "</p>\n";
                     // QR kód alatti szöveg részlet.
                     underQrText = "Köszönjük, hogy igénybe vette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!";
                     // Email típusa
@@ -230,8 +237,11 @@ public class EmailServiceImpl implements EmailService {
                     break;
 
                 case "afterthreebook":
+                    startTime = appointment.getMovieShow().getStartTime().toString();
+                    startTime = startTime.substring(0, startTime.length() - 1 - 5);
                     // QR kód feletti szöveg részlet.
-                    aboveQrText = "Foglalását megerősítettük. Jegyét a QR kód felmutatása után vásárolhatja meg a pénztárnál. Az alábbi QR kód tartalmaz egy kupont is, melyről a pénztárnál kérhet tájékoztatást.\n";
+                    aboveQrText = "Foglalását megerősítettük. Jegyét a QR kód felmutatása után vásárolhatja meg a pénztárnál. Az alábbi QR kód tartalmaz egy kupont is, melyről a pénztárnál kérhet tájékoztatást.<br/><br/>"
+                            + "<p style=\"text-align: center;\"><b>" + appointment.getMovieShow().getMovie().getName() + "</b><br/>Kezdés: " + startTime + "</p>\n";
                     // QR kód alatti szöveg részlet.
                     underQrText = "Köszönjük, hogy igénybe vette szolgáltatásunkat! Jó szórakozást kívánunk a filmhez!";
                     // Email típusa
