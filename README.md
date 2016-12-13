@@ -68,5 +68,19 @@ Ez egy olyan funckió ahol lehetősége van az **adminnak** az eddigi felhaszná
 ### Reszponzív design:
 ![alt text](documentation/readme_pictures/responsive.png?raw=true "Reszponzív design")
 
+## Felhasznált technológiák
+- spring-data-jpa
+- jsf
+- ejb
+- quartz-scheduler
+- bootsfaces (**JSF**)
+- omnifaces (**JSF**)
+- butterfaces (**JSF**)
+- postgresql (**adatbázis**)
+- wildfly (**alkalmazásszerver**)
+- hibernate
+- Travis (**deploy**)
+- Fittyfene, xzing (QR code)
+
 ## Build Status
 [![Build Status](https://travis-ci.org/RFT-4th-team/cinemApp.svg?branch=master)](https://travis-ci.org/RFT-4th-team/cinemApp)
