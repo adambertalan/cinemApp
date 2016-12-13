@@ -32,6 +32,17 @@
                                                             <f:param name="movieCode" value="#{movie.movieCode}"/>
                                                             <h2>#{movie.name}</h2>
                                                         </h:commandLink>
+                                                        <h:outputText value="Értékelés: "/>
+                                                        <c:choose>
+															<c:when test="#{movie.rating.doubleValue()!=0}">
+																<h:outputLabel value="#{movie.rating}">
+																	<f:convertNumber maxFractionDigits="1" minFractionDigits="1"></f:convertNumber>
+							                                    </h:outputLabel><br/>
+															</c:when>
+															<c:otherwise>
+																<h:outputLabel value="Nem érkezett még értékelés"/><br/>
+															</c:otherwise>
+														</c:choose>
                                                         <p style="margin-top: 10px; text-align: justify;">#{movie.description}</p>
                                                         <h:commandLink style="float: left" action="#{movieShowSelectorBean.processMovieShowSelector}">
                                                             <f:param name="movieCode" value="#{movie.movieCode}"/>

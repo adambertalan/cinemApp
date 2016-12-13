@@ -161,7 +161,7 @@ public class MovieShowServiceImpl implements MovieShowService {
 		for (Appointment appointment : appointmentsOfMovieShow) {
 			Guest guest = appointment.getGuest();
 			
-			this.emailService.sendEmail(guest.getEmail(), "aftermovie", guest.getName(), null, null, null,link);
+			this.emailService.sendEmail(guest.getEmail(), "aftermovie", guest.getName(), null, null, null,link,null);
 		}
 		
 	}

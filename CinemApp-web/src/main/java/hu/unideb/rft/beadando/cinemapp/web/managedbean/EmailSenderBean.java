@@ -10,6 +10,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 
+import hu.unideb.rft.beadando.cinemapp.jpa.entity.Appointment;
+
 import org.springframework.web.jsf.FacesContextUtils;
 
 import hu.unideb.rft.beadando.cinemapp.ejb.api.EmailService;
@@ -34,6 +36,8 @@ public class EmailSenderBean implements Serializable {
 
     String typeOfTheEmail;
 
+    Appointment appointment;
+
     public void init() {
         System.out.println("Autowiring emailbean");
         FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
@@ -50,10 +54,10 @@ public class EmailSenderBean implements Serializable {
                 setAddress("cinemapp.fft@gmail.com");
             }
         }
-        
+
         // Email cím helyeységének ellenőrzése
         if (isValidEmail(address)) {
-            emailService.sendEmail(address, typeOfTheEmail, guestName, guestMessage, guestEmail, guestSubject, qrText);
+            emailService.sendEmail(address, typeOfTheEmail, guestName, guestMessage, guestEmail, guestSubject, qrText, appointment);
         } else {
             System.out.println("Email not valid!");
         }
@@ -69,6 +73,14 @@ public class EmailSenderBean implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 
     public String getQrText() {

@@ -21,6 +21,17 @@
                             <h:graphicImage styleClass="indexmovies" value="/ImageServlet/#{movieShowSelectorBean.selectedMovie.id}" /><br/>
 
                             <h:outputLabel value="Cím: #{movieShowSelectorBean.selectedMovie.name}"/><br/>
+                            <h:outputLabel value="Értékelés:&#160;"/>
+                            <c:choose>
+								<c:when test="#{movieShowSelectorBean.selectedMovie.rating.doubleValue()!=0}">
+									<h:outputLabel value="#{movieShowSelectorBean.selectedMovie.rating}">
+										<f:convertNumber maxFractionDigits="1" minFractionDigits="1"></f:convertNumber>
+									</h:outputLabel><br/>
+								</c:when>
+								<c:otherwise>
+									<h:outputLabel value="Nem érkezett még értékelés"/><br/>
+								</c:otherwise>
+							</c:choose>
                             <h:outputLabel value="Műfaj: #{movieShowSelectorBean.selectedMovie.genre.name}"/><br/>
                             <h:outputLabel value="Korhatár: #{movieShowSelectorBean.selectedMovie.ageLimit}"/><br/>
                             <h:outputLabel value="Hossz: #{movieShowSelectorBean.selectedMovie.length} perc"/><br/>
